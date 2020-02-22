@@ -1,0 +1,542 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "description": "TrboNET REST API Portal",
+    "version": "1.0.0",
+    "title": "TrboPortal",
+    "termsOfService": "https://github.com/erikhubers/TrboKoppelvlak",
+    "contact": {
+      "email": "spam@beun.nl"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost",
+  "basePath": "/TrboPortal/v1",
+  "tags": [
+    {
+      "name": "pet",
+      "description": "Everything about your Pets",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    },
+    {
+      "name": "store",
+      "description": "Access to Petstore orders"
+    },
+    {
+      "name": "user",
+      "description": "Operations about user",
+      "externalDocs": {
+        "description": "Find out more about our store",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/device": {
+      "get": {
+        "tags": [
+          "devices"
+        ],
+        "summary": "List of all devices",
+        "description": "List of all devices",
+        "operationId": "getDevices",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Tags to filter by",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Device"
+              }
+            }
+          },
+          "400": {
+            "description": "Does not compute"
+          }
+        }
+      }
+    },
+    "/device/GpsMode": {
+      "put": {
+        "tags": [
+          "Device settings"
+        ],
+        "summary": "Update gps mode device settings",
+        "description": "Update gps modedevice settings",
+        "operationId": "updateGpsMode",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Tags to filter by",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Set GpsModeEnum properties of device",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GpsMode"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/gps": {
+      "get": {
+        "tags": [
+          "GPS of Devices"
+        ],
+        "summary": "Returns last known GPS position of device(s)",
+        "description": "Returns last known GPS position of device(s)",
+        "operationId": "getMostRecentGps",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Devices",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GpsMeasurement"
+              }
+            }
+          },
+          "400": {
+            "description": "Does not compute"
+          }
+        }
+      }
+    },
+    "/gps/history": {
+      "get": {
+        "tags": [
+          "GPS of Devices"
+        ],
+        "summary": "Returns last known GPS position of device(s)",
+        "description": "Returns last known GPS position of device(s)",
+        "operationId": "getGpsHistory",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Devices",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "description": "From TimeStamp for GPS measurements to get",
+            "type": "string"
+          },
+          {
+            "name": "through",
+            "in": "query",
+            "required": false,
+            "description": "Through TimeStamp for GPS measurements to get",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GpsMeasurement"
+              }
+            }
+          },
+          "400": {
+            "description": "Does not compute"
+          }
+        }
+      }
+    },
+    "/gps/update": {
+      "get": {
+        "tags": [
+          "GPS of Devices"
+        ],
+        "summary": "Request GPS opdate for device(s)",
+        "description": "Request GPS opdate for device(s)",
+        "operationId": "requestGpsUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Devices",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Does not compute"
+          }
+        }
+      }
+    },
+    "/system/queue": {
+      "get": {
+        "tags": [
+          "Message queue"
+        ],
+        "summary": "TrboNet message queue",
+        "description": "Returns a list of queued messages to be sent over TrboNet",
+        "operationId": "getMessageQueue",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Blaat",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MessageQueueItem"
+              }
+            }
+          },
+          "400": {
+            "description": "Computer says no"
+          }
+        }
+      }
+    },
+    "/system/settings": {
+      "get": {
+        "tags": [
+          "System settings"
+        ],
+        "summary": "System settings",
+        "description": "Returns a list of all system settings and values",
+        "operationId": "getSystemSettings",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "System settings to store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SystemSettings"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Blaat",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SystemSettings"
+              }
+            }
+          },
+          "400": {
+            "description": "Computer says no"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "System settings"
+        ],
+        "summary": "Update System settings",
+        "description": "Sets all changed system setting",
+        "operationId": "setSystemSettings",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated System settings",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SystemSettings"
+              }
+            }
+          },
+          "400": {
+            "description": "Computer says no"
+          }
+        }
+      }
+    },
+    "/system/logs": {
+      "get": {
+        "tags": [
+          "System logging"
+        ],
+        "summary": "System logging",
+        "description": "Returns server logging",
+        "operationId": "getLogging",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "loglevel",
+            "description": "Log level filter of logging to return",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "from",
+            "description": "DateTime From filter of logging to return",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "through",
+            "description": "DateTime Through filter of logging to return",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Blaat",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Computer says no"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Device": {
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string",
+          "example": "EHBO-1"
+        },
+        "GpsModeEnum": {
+          "$ref": "#/definitions/GpsModeEnum"
+        },
+        "requestPrio": {
+          "$ref": "#/definitions/RequestPrio"
+        }
+      },
+      "xml": {
+        "name": "Device"
+      }
+    },
+    "GpsModeEnum": {
+      "type": "string",
+      "description": "GPS polling mode",
+      "enum": [
+        "none",
+        "pull",
+        "interval"
+      ],
+      "xml": {
+        "name": "GpsModeEnum"
+      }
+    },
+    "GpsMode": {
+      "type": "object",
+      "description": "GPS polling mode",
+      "required": [
+        "GpsMode"
+      ],
+      "properties": {
+        "GpsMode": {
+          "$ref": "#/definitions/GpsMode"
+        },
+        "PollInterval": {
+          "type": "integer"
+        }
+      },
+      "xml": {
+        "name": "GpsMode"
+      }
+    },
+    "RequestPrio": {
+      "type": "string",
+      "description": "Request queuing priority",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "xml": {
+        "name": "RequestPrio"
+      }
+    },
+    "MessageQueueItem": {
+      "type": "object",
+      "required": [
+        "Timestamp",
+        "Device"
+      ],
+      "properties": {
+        "Timestamp": {
+          "type": "string"
+        },
+        "Device": {
+          "$ref": "#/definitions/Device"
+        }
+      },
+      "xml": {
+        "name": "RequestQueueItem"
+      }
+    },
+    "GpsMeasurement": {
+      "type": "object",
+      "required": [
+        "Timestamp",
+        "Latitude",
+        "Longitude"
+      ],
+      "properties": {
+        "Timestamp": {
+          "type": "string"
+        },
+        "Latitude": {
+          "type": "number"
+        },
+        "Longitude": {
+          "type": "number"
+        },
+        "Rssi": {
+          "type": "number"
+        }
+      },
+      "xml": {
+        "name": "GpsMeasurement"
+      }
+    },
+    "SystemSettings": {
+      "type": "object",
+      "properties": {
+        "MessagesPerSecond": {
+          "type": "integer"
+        },
+        "DefaultGpsMode": {
+          "$ref": "#/definitions/GpsModeEnum"
+        },
+        "DefaultInterval": {
+          "type": "integer"
+        }
+      },
+      "xml": {
+        "name": "SystemSettings"
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "TrboPortal",
+    "url": "https://github.com/erikhubers/TrboKoppelvlak"
+  }
+}
