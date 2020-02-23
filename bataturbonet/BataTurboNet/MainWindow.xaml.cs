@@ -70,9 +70,13 @@ namespace BataTurboNet
         {
             try
             {
+                if (sterf(gps))
+                {
+                    return;
+                }
                 string json = JsonConvert.SerializeObject(gps, Formatting.None);
                 logger.Info("PostGpsLocation " + json);
-
+                /*
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var result = await httpClient.PostAsync(Properties.Settings.Default.CdbUrl, content);
 
@@ -82,6 +86,7 @@ namespace BataTurboNet
                 {
                     logger.Info("Error with PostGpsLocation " + json);
                 }
+                */
             }
             catch (Exception ex)
             {
@@ -89,10 +94,25 @@ namespace BataTurboNet
             }
         }
 
+        private bool sterf(GPSLocation gps)
+        {
+            return sterf(gps.RadioID);
+        }
+
+        private bool sterf(int radioID)
+        {
+            return (filter != radioID);
+        }
+
         private async void PostDeviceLifeSign(string deviceName, int RadioID, bool online)
         {
             try
             {
+                if (sterf(RadioID))
+                {
+                    return;
+                }
+
                 DeviceLifeSign gps = new DeviceLifeSign();
                 gps.deviceName = deviceName;
                 gps.RadioID = RadioID;
@@ -109,15 +129,17 @@ namespace BataTurboNet
                 string json = JsonConvert.SerializeObject(gps, Formatting.None);
                 logger.Info("PostDeviceLifeSign " + json);
 
+                /*
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var result = await httpClient.PostAsync(Properties.Settings.Default.CdbUrl, content);
 
                 logger.Info("PostObject :" + result.StatusCode);
-
+                
                 if (result.StatusCode != System.Net.HttpStatusCode.OK)
                 {
                     logger.Info("Error with PostDeviceLifeSign " + json);
                 }
+                */
             }
             catch (Exception ex)
             {
@@ -132,7 +154,11 @@ namespace BataTurboNet
 
             m_client.Disconnect();
 
-            m_client.Connect(new NS.Shared.Network.NetworkConnectionParam(Properties.Settings.Default.TurboNetHost, Properties.Settings.Default.TurboNetPort), new UserInfo(Properties.Settings.Default.TurboNetUser, Properties.Settings.Default.TurboNetPassword), ClientInitFlags.Empty);
+            var host = Properties.Settings.Default.TurboNetHost;
+            var port = Properties.Settings.Default.TurboNetPort;
+            var user = Properties.Settings.Default.TurboNetUser;
+            var pass = Properties.Settings.Default.TurboNetPassword;
+            m_client.Connect(new NS.Shared.Network.NetworkConnectionParam(host, port), new UserInfo(user, pass), ClientInitFlags.Empty);
             if (m_client.IsStarted)
             {
                 logger.Info("Connected to turbonet server");
@@ -459,6 +485,9 @@ namespace BataTurboNet
 
         private bool Connected = false;
         private object ConnectLock = new object();
+
+        public int filter { get; private set; }
+
         private void Connect()
         {
             try
@@ -513,11 +542,13 @@ namespace BataTurboNet
 
         private void ConnectButton_Copy_Click(object sender, RoutedEventArgs e)
         {
+
             logger.Debug("Trying to query device location");
             if (!String.IsNullOrWhiteSpace(urlTextBox_Copy.Text))
             {
-                if (Int32.TryParse(urlTextBox.Text, out int deviceID))
+                if (Int32.TryParse(urlTextBox_Copy.Text, out int deviceID))
                 {
+                    filter = deviceID;
                     Device device = getDevice(deviceID);
                     if (device != null)
                     {
@@ -548,7 +579,7 @@ namespace BataTurboNet
             {
                 foreach (Device item in devices)
                 {
-                    if (deviceID == item.ID)
+                    if (deviceID == item.RadioID)
                     {
                         device = item;
                         break;

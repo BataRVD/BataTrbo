@@ -57,11 +57,194 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Audio">
-      <HintPath>Resources\Audio.dll</HintPath>
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\Audio.dll</HintPath>
     </Reference>
     <Reference Include="Costura, Version=1.6.2.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.1.6.2\lib\dotnet\Costura.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="Dart.Mail">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\Dart.Mail.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.BonusSkins.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.BonusSkins.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Charts.v15.1.Core">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Charts.v15.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.CodeParser.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.CodeParser.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Data.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.DataAccess.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.DataAccess.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.DataAccess.v15.1.UI">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.DataAccess.v15.1.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Mvvm.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Office.v15.1.Core">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Office.v15.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v15.1.Core">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Pdf.v15.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v15.1.Drawing">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Pdf.v15.1.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.PivotGrid.v15.1.Core">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.PivotGrid.v15.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v15.1.Core">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Printing.v15.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.RichEdit.v15.1.Core">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.RichEdit.v15.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Sparkline.v15.1.Core">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Sparkline.v15.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.SpellChecker.v15.1.Core">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.SpellChecker.v15.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Spreadsheet.v15.1.Core">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Spreadsheet.v15.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Utils.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v15.1.UI">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Utils.v15.1.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Web.ASPxThemes.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Web.ASPxThemes.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Web.ASPxTreeList.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Web.ASPxTreeList.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Web.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Web.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Xpf.Core.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Docking.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Xpf.Docking.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.DocumentViewer.v15.1.Core">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Xpf.DocumentViewer.v15.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Xpf.Grid.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v15.1.Core">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Xpf.Grid.v15.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Layout.v15.1.Core">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Xpf.Layout.v15.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Printing.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Xpf.Printing.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Ribbon.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Xpf.Ribbon.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpo.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.Xpo.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraBars.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraCharts.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v15.1.Extensions">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraCharts.v15.1.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v15.1.UI">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraCharts.v15.1.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v15.1.Wizard">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraCharts.v15.1.Wizard.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraEditors.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraGauges.v15.1.Core">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraGauges.v15.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraGauges.v15.1.Win">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraGauges.v15.1.Win.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraGrid.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraLayout.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraNavBar.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraNavBar.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraPdfViewer.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraPdfViewer.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraPivotGrid.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraPivotGrid.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraPrinting.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraPrinting.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraReports.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v15.1.Extensions">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraReports.v15.1.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v15.1.Web">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraReports.v15.1.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraRichEdit.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraRichEdit.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraRichEdit.v15.1.Extensions">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraRichEdit.v15.1.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraScheduler.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v15.1.Core">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraScheduler.v15.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v15.1.Extensions">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraScheduler.v15.1.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v15.1.Reporting">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraScheduler.v15.1.Reporting.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v15.1.Reporting.Extensions">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraScheduler.v15.1.Reporting.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraSpellChecker.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraSpellChecker.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraSpreadsheet.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraSpreadsheet.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraTreeList.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraVerticalGrid.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraVerticalGrid.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraWizard.v15.1">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\DevExpress.XtraWizard.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -71,14 +254,38 @@
       <HintPath>..\packages\NLog.4.4.12\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NS.Audio.Enterprise">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\NS.Audio.Enterprise.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Common">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\NS.Common.dll</HintPath>
+    </Reference>
     <Reference Include="NS.Enterprise.ClientAPI">
-      <HintPath>Resources\NS.Enterprise.ClientAPI.dll</HintPath>
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\NS.Enterprise.ClientAPI.dll</HintPath>
     </Reference>
     <Reference Include="NS.Enterprise.Objects">
-      <HintPath>Resources\NS.Enterprise.Objects.dll</HintPath>
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\NS.Enterprise.Objects.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Enterprise.Vault">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\NS.Enterprise.Vault.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.License">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\NS.License.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Localization">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\NS.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.LockManager">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\NS.LockManager.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Logger">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\NS.Logger.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Map">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\NS.Map.dll</HintPath>
     </Reference>
     <Reference Include="NS.Shared">
-      <HintPath>Resources\NS.Shared.dll</HintPath>
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\NS.Shared.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -90,6 +297,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UsbHid">
+      <HintPath>..\..\TrboPortal\TrboPortal\Resources\UsbHid.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
