@@ -85,19 +85,87 @@ namespace TrboPortal.TrboNet
 
             LoadDeviceList();
 
-            /*
-            trboNetClient.BeaconSignal += trboNetClient_BeaconSignal;
-            */
             trboNetClient.DevicesChanged += DevicesChanged;
+            //trboNetClient.DeviceLocationChanged += DeviceLocationChanged;
             /*
-            trboNetClient.DeviceLocationChanged += DeviceLocationChanged;
             trboNetClient.DeviceStateChanged += trboNetClient_DeviceStateChanged;
             trboNetClient.TransmitReceiveChanged += trboNetClient_TransmitReceiveChanged;
             trboNetClient.DeviceTelemetryChanged += trboNetClient_DeviceTelemetryChanged;
             trboNetClient.WorkflowCommandFinished += trboNetClient_WorkflowCommandFinished;
             */
         }
+        /*
+        private void DeviceLocationChanged(object sender, DeviceLocationChangedEventArgs e)
+        {
+            try
+            {
+                logger.Info("DeviceLocationChanged");
 
+                foreach (var gpsInfo in e.GPSData)
+                {
+                    Device device;
+                    devices.TryGetValue()
+                        device = devices.FirstOrDefault(r => r.ID == gpsInfo.DeviceID);
+
+                        if (device == null)
+                        {
+                            devices.Clear();
+                            devices = m_client.LoadRegisteredDevicesFromServer();
+
+                            foreach (var dev in m_client.LoadUnregisteredDevicesFromServer())
+                            {
+                                dev.Name = "Radio " + dev.RadioID;
+                                devices.Add(dev);
+                            }
+
+                            device = devices.FirstOrDefault(r => r.ID == gpsInfo.DeviceID);
+                        }
+                    
+
+                    if (device != null)
+                    {
+                        StringBuilder build = new StringBuilder();
+                        build.Append("DeviceLocationChanged");
+                        build.Append("device: " + device.Name + " ");
+                        build.Append("Altitude: " + gpsInfo.Altitude + " ");
+                        build.Append("Description: " + gpsInfo.Description + " ");
+                        build.Append("DeviceID: " + gpsInfo.DeviceID + " ");
+                        build.Append("Direction: " + gpsInfo.Direction + " ");
+                        build.Append("GpsSource: " + gpsInfo.GpsSource + " ");
+                        build.Append("InfoDate: " + gpsInfo.InfoDate.ToString() + " ");
+                        build.Append("InfoDateUtc: " + gpsInfo.InfoDateUtc.ToString() + " ");
+                        build.Append("Latitude: " + gpsInfo.Latitude.ToString() + " ");
+                        build.Append("Name: " + gpsInfo.Name + " ");
+                        build.Append("Radius: " + gpsInfo.Radius.ToString() + " ");
+                        build.Append("ReportId: " + gpsInfo.ReportId.ToString() + " ");
+                        build.Append("Rssi: " + gpsInfo.Rssi.ToString() + " ");
+                        build.Append("Speed: " + gpsInfo.Speed.ToString() + " ");
+                        build.Append("StopTime: " + gpsInfo.StopTime.ToString() + " ");
+
+                        logger.Info(build.ToString());
+
+                        if (gpsInfo.Longitude != 0 && gpsInfo.Longitude != 0)
+                        {
+                            var gpsInfo = new GPSLocation();
+                            gpsInfo.deviceName = device.Name;
+                            gpsInfo.RadioID = device.RadioID;
+                            gpsInfo.Latitude = gpsInfo.Latitude;
+                            gpsInfo.Longitude = gpsInfo.Longitude;
+                            gpsInfo.Rssi = gpsInfo.Rssi;
+
+                            PostGpsLocation(gpsInfo);
+                        }
+
+                        PostDeviceLifeSign(device.Name, device.RadioID, true);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Log(LogLevel.Error, ex);
+            }
+        }
+        */
         private void DevicesChanged(object sender, BindableCollectionEventArgs2<Device> e)
         {
             try
@@ -147,8 +215,6 @@ namespace TrboPortal.TrboNet
 
         private void LoadDeviceList()
         {
-            devices.Clear();
-
             List<Device> registeredDevices = trboNetClient.LoadRegisteredDevicesFromServer();
             // Unregistered devices cannot be polled - let's not add them at the moment
             // List<Device> unregisteredDevices = trboNetClient.LoadUnregisteredDevicesFromServer();
