@@ -1,6 +1,6 @@
 ﻿namespace TrboPortal.TrboNet
 {
-    internal class GPSLocation
+    public class GPSLocation
     { 
         public string messageType = "Location";
         public string deviceName;

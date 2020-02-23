@@ -5,11 +5,11 @@ using Device = NS.Enterprise.Objects.Devices.Device;
 
 namespace TrboPortal.TrboNet
 {
-    internal class DeviceInformation
+    public class DeviceInformation
     {
         public string deviceName { get; private set; }
         public GpsModeEnum gpsMode { get; private set; }
-        int minimumServiceInterval;
+        public int minimumServiceInterval { get; private set; }
         DateTime lastUpdate;
         ConcurrentStack<GPSLocation> gpsLocations;
         public Device device { get; private set; }

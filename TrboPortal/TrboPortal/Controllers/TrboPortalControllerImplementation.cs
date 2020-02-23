@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TrboPortal.Mappers;
+using TrboPortal.TrboNet;
 
 namespace TrboPortal.Controllers
 {
@@ -9,11 +11,14 @@ namespace TrboPortal.Controllers
     {
         public Task<ICollection<Device>> GetDevicesAsync(IEnumerable<int> id)
         {
-            return Task.FromResult<ICollection<Device>>(new List<Device>());
+            return Task.FromResult<ICollection<Device>>(TurboController.Instance.GetDevices()
+                .Select(DeviceMapper.MapToDevice)
+                .ToList());
         }
 
         public Task<ICollection<GpsMeasurement>> GetGpsHistoryAsync(IEnumerable<int> id, string from, string through)
         {
+            // return TurboController.Instancef
             throw new NotImplementedException();
         }
 
@@ -24,6 +29,7 @@ namespace TrboPortal.Controllers
 
         public Task<ICollection<MessageQueueItem>> GetMessageQueueAsync()
         {
+            // Task.FromResult(TurboController.Instance.)
             throw new NotImplementedException();
         }
 

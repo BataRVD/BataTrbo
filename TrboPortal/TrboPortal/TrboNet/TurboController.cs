@@ -22,7 +22,10 @@ namespace TrboPortal.TrboNet
         private static TurboController instance = null;
         private static readonly object lockObject = new object();
         private static Client trboNetClient = new Client();
-        private static ConcurrentDictionary<int, DeviceInformation> devices = new ConcurrentDictionary<int, DeviceInformation>();
+
+        private static ConcurrentDictionary<int, DeviceInformation> devices =
+            new ConcurrentDictionary<int, DeviceInformation>();
+
         private static LinkedList<RequestMessage> pollQueue = new LinkedList<RequestMessage>();
 
         public static TurboController Instance
@@ -34,8 +37,8 @@ namespace TrboPortal.TrboNet
                     if (instance == null)
                     {
                         instance = new TurboController();
-
                     }
+
                     return instance;
                 }
             }
@@ -43,6 +46,7 @@ namespace TrboPortal.TrboNet
 
         private bool Connected = false;
         private object ConnectLock = new object();
+
         private void Connect()
         {
             try
@@ -94,9 +98,10 @@ namespace TrboPortal.TrboNet
         private void populateQueue()
         {
             RequestMessage[] devicesToQueue = devices
-                .Where(d => d.Value.gpsMode == GpsModeEnum.Interval)    // Devices that are on interval mode
-                .Where(d => d.Value.TimeTillUpdate() < 0)           // That are due an update
-                .Where(d => pollQueue.Select(pq=>pq.DeviceId).ToList().Contains(d.Key))              // That are not already in the queue
+                .Where(d => d.Value.gpsMode == GpsModeEnum.Interval) // Devices that are on interval mode
+                .Where(d => d.Value.TimeTillUpdate() < 0) // That are due an update
+                .Where(d => pollQueue.Select(pq => pq.DeviceId).ToList()
+                    .Contains(d.Key)) // That are not already in the queue
                 .Select(d => ReturnBullshit(d.Key))
                 .ToArray();
 
@@ -142,7 +147,7 @@ namespace TrboPortal.TrboNet
                 Connect();
                 trboNetClient.QueryDeviceLocation(deviceInfo.device, "", out DeviceCommand cmd);
                 logger.Debug($"response from querydevicelocation {cmd}");
-            } 
+            }
             else
             {
                 logger.Warn($"Could not query location for device {rm.DeviceId}");
@@ -186,8 +191,17 @@ namespace TrboPortal.TrboNet
         {
             int deviceID = device.RadioID;
             devices.TryAdd(deviceID, new DeviceInformation(deviceID, device));
-            devices.AddOrUpdate(deviceID, new DeviceInformation(deviceID, device), (deviceID, oldInfo) => { oldInfo.UpdateDevice(device); return oldInfo; });
+            devices.AddOrUpdate(deviceID, new DeviceInformation(deviceID, device), (deviceID, oldInfo) =>
+            {
+                oldInfo.UpdateDevice(device);
+                return oldInfo;
+            });
         }
 
+        public List<DeviceInformation> GetDevices()
+        {
+            return devices.Select(d => d.Value
+            ).ToList();
+        }
     }
 }

@@ -436,9 +436,11 @@
           "$ref": "#/definitions/GpsModeEnum",
           "example": "interval"
         },
-        "requestPrio": {
-          "$ref": "#/definitions/RequestPrio",
-          "example": "high"
+        "requestInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description":  "GPS request interval in milliseconds", 
+          "example": "15000"
         }
       },
       "xml": {
@@ -475,18 +477,6 @@
       },
       "xml": {
         "name": "GpsMode"
-      }
-    },
-    "RequestPrio": {
-      "type": "string",
-      "description": "Request queuing priority",
-      "enum": [
-        "low",
-        "medium",
-        "high"
-      ],
-      "xml": {
-        "name": "RequestPrio"
       }
     },
     "MessageQueueItem": {
