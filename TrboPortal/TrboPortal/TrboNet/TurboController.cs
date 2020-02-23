@@ -101,12 +101,44 @@ namespace TrboPortal.TrboNet
             addToTheQueue(devicesToQueue);
         }
 
-        private void handleQueue()
+        private int peek()
+        {
+            lock (pollQueue)
+            {
+                int deviceID = pollQueue.First();
+                return deviceID;
+            }
+        }
+
+
+        private int pop()
         {
             lock (pollQueue)
             {
                 int deviceID = pollQueue.First();
                 pollQueue.RemoveFirst();
+                return deviceID;
+            }
+        }
+
+        private void handleQueue()
+        {
+            int deviceID = pop();
+            queryLocation(deviceID);
+        }
+
+        private void queryLocation(int deviceID)
+        {
+            logger.Info($"Getting location for device {deviceID}");
+            if (devices.TryGetValue(deviceID, out DeviceInformation deviceInfo))
+            {
+                Connect();
+                trboNetClient.QueryDeviceLocation(deviceInfo.device, "", out DeviceCommand cmd);
+                logger.Debug($"response from querydevicelocation {cmd}");
+            } 
+            else
+            {
+                logger.Warn($"Could not query location for device {deviceID}");
             }
         }
 
@@ -146,7 +178,7 @@ namespace TrboPortal.TrboNet
         private void AddOrUpdateDevice(Device device)
         {
             int deviceID = device.RadioID;
-            devices.TryAdd(deviceID, new DeviceInformation(deviceID));
+            devices.TryAdd(deviceID, new DeviceInformation(deviceID, device));
         }
     }
 }

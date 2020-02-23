@@ -37,7 +37,7 @@ namespace BataTurboNet.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.2.92")]
         public string TurboNetHost {
             get {
                 return ((string)(this["TurboNetHost"]));

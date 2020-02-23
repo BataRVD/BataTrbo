@@ -6,7 +6,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="TurboNetHost" Type="System.String" Scope="User">
-      <Value Profile="(Default)">127.0.0.1</Value>
+      <Value Profile="(Default)">192.168.2.92</Value>
     </Setting>
     <Setting Name="TurboNetPort" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">4021</Value>
