@@ -23,7 +23,7 @@ namespace TrboPortal.TrboNet
         private static readonly object lockObject = new object();
         private static Client trboNetClient = new Client();
         private static ConcurrentDictionary<int, DeviceInformation> devices = new ConcurrentDictionary<int, DeviceInformation>();
-        private static LinkedList<int> pollQueue = new LinkedList<int>();
+        private static LinkedList<RequestMessage> pollQueue = new LinkedList<RequestMessage>();
 
         public static TurboController Instance
         {
@@ -93,46 +93,51 @@ namespace TrboPortal.TrboNet
         /// </summary>
         private void populateQueue()
         {
-            int[] devicesToQueue = devices
+            RequestMessage[] devicesToQueue = devices
                 .Where(d => d.Value.gpsMode == GpsModeEnum.Interval)    // Devices that are on interval mode
                 .Where(d => d.Value.TimeTillUpdate() < 0)           // That are due an update
-                .Where(d => pollQueue.Contains(d.Key))              // That are not already in the queue
-                .Select(d => d.Key)
+                .Where(d => pollQueue.Select(pq=>pq.DeviceId).ToList().Contains(d.Key))              // That are not already in the queue
+                .Select(d => ReturnBullshit(d.Key))
                 .ToArray();
 
             addToTheQueue(devicesToQueue);
         }
 
-        private int peek()
+
+        private RequestMessage ReturnBullshit(int deviceId)
+        {
+            return new RequestMessage(deviceId);
+        }
+
+        private RequestMessage peek()
         {
             lock (pollQueue)
             {
-                int deviceID = pollQueue.First();
-                return deviceID;
+                return pollQueue.First();
             }
         }
 
 
-        private int pop()
+        private RequestMessage pop()
         {
             lock (pollQueue)
             {
-                int deviceID = pollQueue.First();
+                RequestMessage requestMessage = pollQueue.First();
                 pollQueue.RemoveFirst();
-                return deviceID;
+                return requestMessage;
             }
         }
 
         private void handleQueue()
         {
-            int deviceID = pop();
-            queryLocation(deviceID);
+            var requestMessage = pop();
+            queryLocation(requestMessage);
         }
 
-        private void queryLocation(int deviceID)
+        private void queryLocation(RequestMessage rm)
         {
-            logger.Info($"Getting location for device {deviceID}");
-            if (devices.TryGetValue(deviceID, out DeviceInformation deviceInfo))
+            logger.Info($"Getting location for device {rm.DeviceId}");
+            if (devices.TryGetValue(rm.DeviceId, out DeviceInformation deviceInfo))
             {
                 Connect();
                 trboNetClient.QueryDeviceLocation(deviceInfo.device, "", out DeviceCommand cmd);
@@ -140,28 +145,28 @@ namespace TrboPortal.TrboNet
             } 
             else
             {
-                logger.Warn($"Could not query location for device {deviceID}");
+                logger.Warn($"Could not query location for device {rm.DeviceId}");
             }
         }
 
-        private void jumpTheQueue(params int[] deviceIDs)
+        private void jumpTheQueue(params RequestMessage[] messages)
         {
             lock (pollQueue)
             {
-                foreach (int deviceID in deviceIDs)
+                foreach (RequestMessage m in messages)
                 {
-                    pollQueue.AddFirst(deviceID);
+                    pollQueue.AddFirst(m);
                 }
             }
         }
 
-        private void addToTheQueue(params int[] deviceIDs)
+        private void addToTheQueue(params RequestMessage[] messages)
         {
             lock (pollQueue)
             {
-                foreach (int deviceID in deviceIDs)
+                foreach (RequestMessage m in messages)
                 {
-                    pollQueue.AddLast(deviceID);
+                    pollQueue.AddLast(m);
                 }
             }
         }
@@ -183,5 +188,6 @@ namespace TrboPortal.TrboNet
             devices.TryAdd(deviceID, new DeviceInformation(deviceID, device));
             devices.AddOrUpdate(deviceID, new DeviceInformation(deviceID, device), (deviceID, oldInfo) => { oldInfo.UpdateDevice(device); return oldInfo; });
         }
+
     }
 }

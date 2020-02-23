@@ -5,13 +5,6 @@ using Device = NS.Enterprise.Objects.Devices.Device;
 
 namespace TrboPortal.TrboNet
 {
-    enum GpsMode
-    {
-        none = 0, // default value, will be used as fallback on the TryParse
-        pull = 1,
-        interval = 2
-    }
-
     internal class DeviceInformation
     {
         public string deviceName { get; private set; }
