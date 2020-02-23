@@ -27,7 +27,7 @@ namespace TrboPortal
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSwaggerDocument();
-
+            services.AddScoped<ITrboPortalController, TrboPortalControllerImplementation>();
             services.AddControllers();
         }
 
