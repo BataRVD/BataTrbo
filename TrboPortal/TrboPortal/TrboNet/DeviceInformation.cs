@@ -1,6 +1,7 @@
-﻿using NS.Enterprise.Objects.Devices;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
+using TrboPortal.Controllers;
+using Device = NS.Enterprise.Objects.Devices.Device;
 
 namespace TrboPortal.TrboNet
 {
@@ -14,7 +15,7 @@ namespace TrboPortal.TrboNet
     internal class DeviceInformation
     {
         public string deviceName { get; private set; }
-        public GpsMode gpsMode { get; private set; }
+        public GpsModeEnum gpsMode { get; private set; }
         int minimumServiceInterval;
         DateTime lastUpdate;
         ConcurrentStack<GPSLocation> gpsLocations;
@@ -26,7 +27,7 @@ namespace TrboPortal.TrboNet
             Enum.TryParse(Properties.Settings.Default.DefaultGpsMode, out GpsMode parsedGpsMode);
             gpsMode = parsedGpsMode;
             */
-            gpsMode = GpsMode.none;
+            gpsMode = GpsModeEnum.None;
             lastUpdate = DateTime.Now;
             deviceName = $"Radio {id}";
             minimumServiceInterval = 10; //Properties.Settings.Default.DefaultGpsInterval;

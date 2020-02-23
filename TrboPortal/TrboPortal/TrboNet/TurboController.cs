@@ -11,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using TrboPortal.Controllers;
+using Device = NS.Enterprise.Objects.Devices.Device;
 
 namespace TrboPortal.TrboNet
 {
@@ -92,7 +94,7 @@ namespace TrboPortal.TrboNet
         private void populateQueue()
         {
             int[] devicesToQueue = devices
-                .Where(d => d.Value.gpsMode == GpsMode.interval)    // Devices that are on interval mode
+                .Where(d => d.Value.gpsMode == GpsModeEnum.Interval)    // Devices that are on interval mode
                 .Where(d => d.Value.TimeTillUpdate() < 0)           // That are due an update
                 .Where(d => pollQueue.Contains(d.Key))              // That are not already in the queue
                 .Select(d => d.Key)
