@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BataTurboNet"
         mc:Ignorable="d"
-        Title="Bata Turbonet client" Height="140" Width="900">
+        Title="Bata Turbonet client" Height="232.97" Width="900">
     <Grid>
         <TextBox x:Name="urlTextBox" HorizontalAlignment="Left" Height="42" Margin="20,20,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="627" TextChanged="textBox_TextChanged"/>
         <Button x:Name="ConnectButton" Content="Connect" HorizontalAlignment="Left" Height="42" Margin="738,20,0,0" VerticalAlignment="Top" Width="104" Click="button_Click"/>
         <CheckBox x:Name="SimulationCheckBox" Content="Simulate" HorizontalAlignment="Left" Height="21" Margin="20,78,0,0" VerticalAlignment="Top" Width="82"/>
+        <TextBox x:Name="urlTextBox_Copy" HorizontalAlignment="Left" Height="42" Margin="20,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="627" />
+        <Button x:Name="ConnectButton_Copy" Content="QueryLocation" HorizontalAlignment="Left" Height="42" Margin="738,118,0,0" VerticalAlignment="Top" Width="104" Click="ConnectButton_Copy_Click"/>
 
     </Grid>
 </Window>

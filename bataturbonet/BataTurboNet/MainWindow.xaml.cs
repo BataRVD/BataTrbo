@@ -510,5 +510,52 @@ namespace BataTurboNet
                 Properties.Settings.Default.Save();
             }
         }
+
+        private void ConnectButton_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            if (!String.IsNullOrWhiteSpace(urlTextBox_Copy.Text))
+            {
+                if (Int32.TryParse(urlTextBox.Text, out int deviceID))
+                {
+                    Device device = getDevice(deviceID);
+                    if (device != null)
+                    {
+                        logger.Debug($"Querying location for {deviceID}");
+                        requestGPS(device);
+
+                    }
+                }
+            }
+        }
+
+        private void requestGPS(Device device)
+        {
+            try
+            {
+                // connect to turbonet?
+                m_client.QueryDeviceLocation(device, "", out DeviceCommand cmd);
+            } catch(Exception ex)
+            {
+                logger.Error(ex, "Something went wrong with querying device");
+            }
+        }
+
+        private Device getDevice(int deviceID)
+        {
+            Device device = null;
+            lock (devices)
+            {
+                foreach (Device item in devices)
+                {
+                    if (deviceID == item.ID)
+                    {
+                        device = item;
+                        break;
+                    }
+                }
+                
+                return device;
+            }
+        }
     }
 }
