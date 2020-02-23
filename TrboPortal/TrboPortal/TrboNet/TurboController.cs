@@ -28,6 +28,7 @@ namespace TrboPortal.TrboNet
 
         private static LinkedList<RequestMessage> pollQueue = new LinkedList<RequestMessage>();
 
+        #region Instance
         public static TurboController Instance
         {
             get
@@ -44,6 +45,9 @@ namespace TrboPortal.TrboNet
             }
         }
 
+        #endregion
+
+        #region Connection
         private bool Connected = false;
         private object ConnectLock = new object();
 
@@ -69,9 +73,9 @@ namespace TrboPortal.TrboNet
         private void ConnectToTurboNet()
         {
             logger.Info("Connect to turbonet server");
-
+            SystemSettings settings = new SystemSettings();
             trboNetClient.Disconnect();
-            //trboNetClient.Connect(new NS.Shared.Network.NetworkConnectionParam(Properties.Settings.Default.TurboNetHost, Properties.Settings.Default.TurboNetPort), new UserInfo(Properties.Settings.Default.TurboNetUser, Properties.Settings.Default.TurboNetPassword), ClientInitFlags.Empty);
+            trboNetClient.Connect(new NS.Shared.Network.NetworkConnectionParam(settings.Settings.Host, (int)settings.Settings.Port), new UserInfo(settings.Settings.User, settings.Settings.Password), ClientInitFlags.Empty);
             if (trboNetClient.IsStarted)
             {
                 logger.Info("Connected to turbonet server");
@@ -83,7 +87,9 @@ namespace TrboPortal.TrboNet
 
             /*
             trboNetClient.BeaconSignal += trboNetClient_BeaconSignal;
+            */
             trboNetClient.DevicesChanged += DevicesChanged;
+            /*
             trboNetClient.DeviceLocationChanged += DeviceLocationChanged;
             trboNetClient.DeviceStateChanged += trboNetClient_DeviceStateChanged;
             trboNetClient.TransmitReceiveChanged += trboNetClient_TransmitReceiveChanged;
@@ -91,6 +97,69 @@ namespace TrboPortal.TrboNet
             trboNetClient.WorkflowCommandFinished += trboNetClient_WorkflowCommandFinished;
             */
         }
+
+        private void DevicesChanged(object sender, BindableCollectionEventArgs2<Device> e)
+        {
+            try
+            {
+
+                logger.Info("DevicesChanged");
+                Device device = e.ChangedObject;
+                int radioID = e.ChangedObject.RadioID;
+                switch (e.Action)
+                    {
+                        case NS.Shared.Common.ChangeAction.Add:
+                            AddOrUpdateDevice(device);
+                            break;
+                        case NS.Shared.Common.ChangeAction.Remove:
+                            devices.Remove(radioID, out DeviceInformation removedInformation);
+                            break;
+                        case NS.Shared.Common.ChangeAction.ItemChanged:
+                        AddOrUpdateDevice(device);
+                            break;
+                        case NS.Shared.Common.ChangeAction.MuchChanges:
+                            LoadDeviceList();
+                            break;
+                        default:
+                            break;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Log(LogLevel.Error, ex);
+            }
+        }
+
+        private void queryLocation(int deviceID)
+        {
+            logger.Info($"Getting location for device {deviceID}");
+            if (devices.TryGetValue(deviceID, out DeviceInformation deviceInfo))
+            {
+                Connect();
+                trboNetClient.QueryDeviceLocation(deviceInfo.device, "", out DeviceCommand cmd);
+                logger.Debug($"response from querydevicelocation {cmd}");
+            }
+            else
+            {
+                logger.Warn($"Could not query location for device {deviceID}");
+            }
+        }
+
+        private void LoadDeviceList()
+        {
+            devices.Clear();
+
+            List<Device> registeredDevices = trboNetClient.LoadRegisteredDevicesFromServer();
+            // Unregistered devices cannot be polled - let's not add them at the moment
+            // List<Device> unregisteredDevices = trboNetClient.LoadUnregisteredDevicesFromServer();
+
+            registeredDevices.ForEach(d => AddOrUpdateDevice(d));
+            // unregisteredDevices.ForEach(d => AddOrUpdateDevice(d));
+        }
+
+        #endregion
+
+        #region Queue-shizzle
 
         /// <summary>
         /// populates the queue with devices that need an locationUpdate
@@ -176,21 +245,12 @@ namespace TrboPortal.TrboNet
             }
         }
 
-        private void LoadDeviceList()
-        {
-            devices.Clear();
+        #endregion
 
-            List<Device> registeredDevices = trboNetClient.LoadRegisteredDevicesFromServer();
-            List<Device> unregisteredDevices = trboNetClient.LoadUnregisteredDevicesFromServer();
-
-            registeredDevices.ForEach(d => AddOrUpdateDevice(d));
-            unregisteredDevices.ForEach(d => AddOrUpdateDevice(d));
-        }
 
         private void AddOrUpdateDevice(Device device)
         {
             int deviceID = device.RadioID;
-            devices.TryAdd(deviceID, new DeviceInformation(deviceID, device));
             devices.AddOrUpdate(deviceID, new DeviceInformation(deviceID, device), (deviceID, oldInfo) =>
             {
                 oldInfo.UpdateDevice(device);

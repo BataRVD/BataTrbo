@@ -568,6 +568,36 @@
         "name": "GpsMeasurement"
       }
     },
+    "TurboNetSettings": {
+      "type": "object",
+      "required": [
+        "Host",
+        "Port",
+        "User",
+        "Password"
+      ],
+      "properties": {
+        "Host": {
+          "type": "string",
+          "example": "192.168.2.92"
+        },
+        "Port": {
+          "type": "number",
+          "example": 4021
+        },
+        "User": {
+          "type": "string",
+          "example": "admin"
+        },
+        "Password": {
+          "type": "string",
+          "example": "admin"
+        }
+      },
+      "xml": {
+        "name": "TurboNetSettings"
+      }
+    },
     "SystemSettings": {
       "type": "object",
       "properties": {
@@ -582,6 +612,9 @@
         "DefaultInterval": {
           "type": "integer",
           "example": 15
+        },
+        "Settings": {
+          "$ref": "#/definitions/TurboNetSettings"
         }
       },
       "xml": {

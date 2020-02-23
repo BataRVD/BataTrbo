@@ -16,14 +16,12 @@ namespace TrboPortal.TrboNet
 
         public DeviceInformation(int id, Device device)
         {
-            /*
-            Enum.TryParse(Properties.Settings.Default.DefaultGpsMode, out GpsMode parsedGpsMode);
-            gpsMode = parsedGpsMode;
-            */
-            gpsMode = GpsModeEnum.None;
+            SystemSettings settings = new SystemSettings();
+            
+            gpsMode = settings.DefaultGpsMode?? GpsModeEnum.Interval;  
             lastUpdate = DateTime.Now;
             deviceName = $"Radio {id}";
-            minimumServiceInterval = 10; //Properties.Settings.Default.DefaultGpsInterval;
+            minimumServiceInterval = settings.DefaultInterval ?? 60; // default interval in seconds
             gpsLocations = new ConcurrentStack<GPSLocation>();
             this.device = device;
         }
