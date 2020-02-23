@@ -16,6 +16,11 @@ namespace TrboPortal.Controllers
                 .ToList());
         }
 
+        public Task UpdateDeviceSettingsAsync(IEnumerable<Device> body)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<ICollection<GpsMeasurement>> GetGpsHistoryAsync(IEnumerable<int> id, string from, string through)
         {
             // return TurboController.Instancef

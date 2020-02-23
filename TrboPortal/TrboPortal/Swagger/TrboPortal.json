@@ -82,6 +82,47 @@
             "description": "Does not compute"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Update Device settings"
+        ],
+        "summary": "Update gps mode and interval devices",
+        "description": "Update gps mode and interval device settings",
+        "operationId": "updateDeviceSettings",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Devices to update",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Device"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
       }
     },
     "/device/GpsMode": {
@@ -432,7 +473,7 @@
           "type": "string",
           "example": "EHBO-1"
         },
-        "GpsModeEnum": {
+        "GpsMode": {
           "$ref": "#/definitions/GpsModeEnum",
           "example": "interval"
         },

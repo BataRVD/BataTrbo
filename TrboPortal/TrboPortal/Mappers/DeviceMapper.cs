@@ -13,7 +13,7 @@ namespace TrboPortal.Mappers
         {
             return new Device
             {
-                GpsModeEnum = di.gpsMode,
+                GpsMode = di.gpsMode,
                 Id = di.device.ID,
                 Name = di.deviceName,
                 RequestInterval = di.minimumServiceInterval
