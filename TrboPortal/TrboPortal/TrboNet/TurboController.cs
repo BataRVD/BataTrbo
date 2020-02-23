@@ -65,8 +65,7 @@ namespace TrboPortal.TrboNet
             logger.Info("Connect to turbonet server");
 
             trboNetClient.Disconnect();
-
-            trboNetClient.Connect(new NS.Shared.Network.NetworkConnectionParam(Properties.Settings.Default.TurboNetHost, Properties.Settings.Default.TurboNetPort), new UserInfo(Properties.Settings.Default.TurboNetUser, Properties.Settings.Default.TurboNetPassword), ClientInitFlags.Empty);
+            //trboNetClient.Connect(new NS.Shared.Network.NetworkConnectionParam(Properties.Settings.Default.TurboNetHost, Properties.Settings.Default.TurboNetPort), new UserInfo(Properties.Settings.Default.TurboNetUser, Properties.Settings.Default.TurboNetPassword), ClientInitFlags.Empty);
             if (trboNetClient.IsStarted)
             {
                 logger.Info("Connected to turbonet server");
