@@ -1,35 +1,29 @@
 ﻿using NS.Enterprise.Objects.Devices;
 using System;
 using System.Collections.Concurrent;
+using TrboPortal.Controllers;
 
 namespace TrboPortal.TrboNet
 {
-    enum GpsMode
-    {
-        none = 0, // default value, will be used as fallback on the TryParse
-        pull = 1,
-        interval = 2
-    }
-
     internal class DeviceInformation
     {
         public string deviceName { get; private set; }
-        public GpsMode gpsMode { get; private set; }
+        public GpsModeEnum gpsMode { get; private set; }
         int minimumServiceInterval;
         DateTime lastUpdate;
-        ConcurrentStack<GPSLocation> gpsLocations;
+        ConcurrentStack<GpsMeasurement> gpsLocations;
 
         public DeviceInformation(int id)
         {
-            Enum.TryParse(Properties.Settings.Default.DefaultGpsMode, out GpsMode parsedGpsMode);
-            gpsMode = parsedGpsMode;
+            // Enum.TryParse(Properties.Settings.Default.DefaultGpsMode, out GpsMode parsedGpsMode);
+            gpsMode = GpsModeEnum.None;
             lastUpdate = DateTime.Now;
             deviceName = $"Radio {id}";
-            minimumServiceInterval = Properties.Settings.Default.DefaultGpsInterval;
-            gpsLocations = new ConcurrentStack<GPSLocation>();
+            // minimumServiceInterval = Properties.Settings.Default.DefaultGpsInterval;
+            gpsLocations = new ConcurrentStack<GpsMeasurement>();
         }
 
-        public void AddGpsLocation(GPSLocation gpsLocation)
+        public void AddGpsLocation(GpsMeasurement gpsLocation)
         {
             gpsLocations.Push(gpsLocation);
         }

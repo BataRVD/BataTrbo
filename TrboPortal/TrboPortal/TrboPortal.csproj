@@ -21,6 +21,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.2" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="NLog" Version="4.6.8" />
     <PackageReference Include="NSwag.ApiDescription.Client" Version="13.2.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -31,6 +32,20 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Audio">
+      <HintPath>Resources\Audio.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Enterprise.ClientAPI">
+      <HintPath>Resources\NS.Enterprise.ClientAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Enterprise.Objects">
+      <HintPath>Resources\NS.Enterprise.Objects.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Shared">
+      <HintPath>Resources\NS.Shared.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <Target Name="NSwag" BeforeTargets="PrepareForBuild" Condition="'$(GenerateCode)'=='True' ">
