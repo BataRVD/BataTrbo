@@ -1,6 +1,7 @@
 ﻿using NLog;
 using NS.Enterprise.ClientAPI;
 using NS.Enterprise.Objects;
+using NS.Enterprise.Objects.Devices;
 using NS.Enterprise.Objects.Event_args;
 using NS.Enterprise.Objects.Users;
 using System;
@@ -10,8 +11,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
-using TrboPortal.Controllers;
-using Device = NS.Enterprise.Objects.Devices.Device;
 
 namespace TrboPortal.TrboNet
 {
@@ -21,10 +20,7 @@ namespace TrboPortal.TrboNet
         private static TurboController instance = null;
         private static readonly object lockObject = new object();
         private static Client trboNetClient = new Client();
-
-        private static ConcurrentDictionary<int, DeviceInformation> devices =
-            new ConcurrentDictionary<int, DeviceInformation>();
-
+        private static ConcurrentDictionary<int, DeviceInformation> devices = new ConcurrentDictionary<int, DeviceInformation>();
         private static LinkedList<int> pollQueue = new LinkedList<int>();
 
         public static TurboController Instance
@@ -36,8 +32,8 @@ namespace TrboPortal.TrboNet
                     if (instance == null)
                     {
                         instance = new TurboController();
-                    }
 
+                    }
                     return instance;
                 }
             }
@@ -45,7 +41,6 @@ namespace TrboPortal.TrboNet
 
         private bool Connected = false;
         private object ConnectLock = new object();
-
         private void Connect()
         {
             try
@@ -71,14 +66,7 @@ namespace TrboPortal.TrboNet
 
             trboNetClient.Disconnect();
 
-            // trboNetClient.Connect(new NS.Shared.Network.NetworkConnectionParam(
-            //         Properties.Settings.Default.TurboNetHost,
-            //         Properties.Settings.Default.TurboNetPort),
-            //     new UserInfo(
-            //         Properties.Settings.Default.TurboNetUser,
-            //         Properties.Settings.Default.TurboNetPassword),
-            //     ClientInitFlags.Empty);
-
+            trboNetClient.Connect(new NS.Shared.Network.NetworkConnectionParam(Properties.Settings.Default.TurboNetHost, Properties.Settings.Default.TurboNetPort), new UserInfo(Properties.Settings.Default.TurboNetUser, Properties.Settings.Default.TurboNetPassword), ClientInitFlags.Empty);
             if (trboNetClient.IsStarted)
             {
                 logger.Info("Connected to turbonet server");
@@ -105,9 +93,9 @@ namespace TrboPortal.TrboNet
         private void populateQueue()
         {
             int[] devicesToQueue = devices
-                .Where(d => d.Value.gpsMode == GpsModeEnum.Interval) // Devices that are on interval mode
-                .Where(d => d.Value.TimeTillUpdate() < 0) // That are due an update
-                .Where(d => pollQueue.Contains(d.Key)) // That are not already in the queue
+                .Where(d => d.Value.gpsMode == GpsMode.interval)    // Devices that are on interval mode
+                .Where(d => d.Value.TimeTillUpdate() < 0)           // That are due an update
+                .Where(d => pollQueue.Contains(d.Key))              // That are not already in the queue
                 .Select(d => d.Key)
                 .ToArray();
 

@@ -9,10 +9,7 @@ namespace TrboPortal.Controllers
     {
         public Task<ICollection<Device>> GetDevicesAsync(IEnumerable<int> id)
         {
-            var bert = new List<Device>();
-            bert.Add(new Device
-                {GpsModeEnum = GpsModeEnum.Interval, Id = 9001, Name = "BlaatDevice", RequestPrio = RequestPrio.High});
-            return Task.FromResult<ICollection<Device>>(bert);
+            return Task.FromResult<ICollection<Device>>(new List<Device>());
         }
 
         public Task<ICollection<GpsMeasurement>> GetGpsHistoryAsync(IEnumerable<int> id, string from, string through)

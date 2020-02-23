@@ -415,20 +415,17 @@
       "properties": {
         "id": {
           "type": "integer",
-          "format": "int64",
-          "example" :  "1337" 
+          "format": "int64"
         },
         "name": {
           "type": "string",
           "example": "EHBO-1"
         },
         "GpsModeEnum": {
-          "$ref": "#/definitions/GpsModeEnum",
-          "example" :  "interval" 
+          "$ref": "#/definitions/GpsModeEnum"
         },
         "requestPrio": {
-          "$ref": "#/definitions/RequestPrio",
-          "example":  "high" 
+          "$ref": "#/definitions/RequestPrio"
         }
       },
       "xml": {
@@ -455,12 +452,10 @@
       ],
       "properties": {
         "GpsMode": {
-          "$ref": "#/definitions/GpsMode",
-          "example" : "interval" 
+          "$ref": "#/definitions/GpsMode"
         },
         "PollInterval": {
-          "type": "integer",
-          "example":  "15" 
+          "type": "integer"
         }
       },
       "xml": {
@@ -487,8 +482,7 @@
       ],
       "properties": {
         "Timestamp": {
-          "type": "string",
-          "example": "2020-02-23T08:49:40+00:00"
+          "type": "string"
         },
         "Device": {
           "$ref": "#/definitions/Device"
@@ -507,20 +501,16 @@
       ],
       "properties": {
         "Timestamp": {
-          "type": "string",
-          "example": "2020-02-23T08:49:40+00:00"
+          "type": "string"
         },
         "Latitude": {
-          "type": "number",
-          "example": 52.242647
+          "type": "number"
         },
         "Longitude": {
-          "type": "number",
-          "example": 6.850612
+          "type": "number"
         },
         "Rssi": {
-          "type": "number",
-          "example":  10 
+          "type": "number"
         }
       },
       "xml": {
@@ -531,16 +521,13 @@
       "type": "object",
       "properties": {
         "MessagesPerSecond": {
-          "type": "integer",
-          "example":  1 
+          "type": "integer"
         },
         "DefaultGpsMode": {
-          "$ref": "#/definitions/GpsModeEnum",
-          "example": "interval" 
+          "$ref": "#/definitions/GpsModeEnum"
         },
         "DefaultInterval": {
-          "type": "integer",
-          "example":  15
+          "type": "integer"
         }
       },
       "xml": {
