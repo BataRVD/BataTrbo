@@ -179,6 +179,7 @@ namespace TrboPortal.TrboNet
         {
             int deviceID = device.RadioID;
             devices.TryAdd(deviceID, new DeviceInformation(deviceID, device));
+            devices.AddOrUpdate(deviceID, new DeviceInformation(deviceID, device), (deviceID, oldInfo) => { oldInfo.UpdateDevice(device); return oldInfo; });
         }
     }
 }

@@ -18,7 +18,7 @@ namespace TrboPortal.TrboNet
         int minimumServiceInterval;
         DateTime lastUpdate;
         ConcurrentStack<GPSLocation> gpsLocations;
-        Device device;
+        public Device device { get; private set; }
 
         public DeviceInformation(int id, Device device)
         {
