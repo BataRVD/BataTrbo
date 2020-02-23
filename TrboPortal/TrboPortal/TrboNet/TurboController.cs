@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 
-namespace BataTurboNet
+namespace TrboPortal.TrboNet
 {
     public sealed class TurboController
     {
