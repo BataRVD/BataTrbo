@@ -513,6 +513,7 @@ namespace BataTurboNet
 
         private void ConnectButton_Copy_Click(object sender, RoutedEventArgs e)
         {
+            logger.Debug("Trying to query device location");
             if (!String.IsNullOrWhiteSpace(urlTextBox_Copy.Text))
             {
                 if (Int32.TryParse(urlTextBox.Text, out int deviceID))
