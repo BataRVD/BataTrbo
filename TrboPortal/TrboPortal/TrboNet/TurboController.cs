@@ -27,8 +27,37 @@ namespace TrboPortal.TrboNet
             new ConcurrentDictionary<int, DeviceInformation>();
 
         private static LinkedList<RequestMessage> pollQueue = new LinkedList<RequestMessage>();
+        private static Timer heartBeat;
 
         #region Instance
+        
+        public TurboController()
+        {
+            SystemSettings settings = new SystemSettings();
+            heartBeat = new Timer();
+            // lets say we want a minimum of 250 ms now
+            int serverInterval = Math.Max(250, settings.ServerInterval ?? 0);
+            heartBeat.Interval = serverInterval;
+            heartBeat.Elapsed += TheServerDidATick;
+            heartBeat.AutoReset = true;
+            heartBeat.Enabled = true;
+        }
+
+        private void TheServerDidATick(object sender, ElapsedEventArgs e)
+        {
+            try
+            {
+                logger.Debug("The server did a tick");
+                // populate the queue
+                populateQueue();
+                // Request info for next device
+                handleQueue();
+            } catch (Exception ex)
+            {
+                logger.Error(ex, "Something went horribly wrong during the ServerTick");
+            }
+        }
+
         public static TurboController Instance
         {
             get
@@ -183,7 +212,7 @@ namespace TrboPortal.TrboNet
                             devices.Remove(radioID, out DeviceInformation removedInformation);
                             break;
                         case NS.Shared.Common.ChangeAction.ItemChanged:
-                        AddOrUpdateDevice(device);
+                            AddOrUpdateDevice(device);
                             break;
                         case NS.Shared.Common.ChangeAction.MuchChanges:
                             LoadDeviceList();
@@ -236,7 +265,7 @@ namespace TrboPortal.TrboNet
                 .Where(d => d.Value.gpsMode == GpsModeEnum.Interval) // Devices that are on interval mode
                 .Where(d => d.Value.TimeTillUpdate() < 0) // That are due an update
                 .Where(d => pollQueue.Select(pq => pq.DeviceId).ToList()
-                    .Contains(d.Key)) // That are not already in the queue
+                .Contains(d.Key)) // That are not already in the queue
                 .Select(d => ReturnBullshit(d.Key))
                 .ToArray();
 

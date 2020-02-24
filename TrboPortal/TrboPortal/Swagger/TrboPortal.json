@@ -601,9 +601,9 @@
     "SystemSettings": {
       "type": "object",
       "properties": {
-        "MessagesPerSecond": {
+        "ServerInterval": {
           "type": "integer",
-          "example": 1
+          "example": 10000
         },
         "DefaultGpsMode": {
           "$ref": "#/definitions/GpsModeEnum",

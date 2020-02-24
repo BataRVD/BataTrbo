@@ -11,7 +11,7 @@ namespace TrboPortal.TrboNet
         public GpsModeEnum gpsMode { get; private set; }
         public int minimumServiceInterval { get; private set; }
         DateTime lastUpdate;
-        ConcurrentStack<GPSLocation> gpsLocations;
+        ConcurrentStack<GpsMeasurement> gpsLocations;
         public Device device { get; private set; }
 
         public DeviceInformation(int id, Device device)
@@ -22,11 +22,11 @@ namespace TrboPortal.TrboNet
             lastUpdate = DateTime.Now;
             deviceName = $"Radio {id}";
             minimumServiceInterval = settings.DefaultInterval ?? 60; // default interval in seconds
-            gpsLocations = new ConcurrentStack<GPSLocation>();
+            gpsLocations = new ConcurrentStack<GpsMeasurement>();
             this.device = device;
         }
 
-        public void AddGpsLocation(GPSLocation gpsLocation)
+        public void AddGpsLocation(GpsMeasurement gpsLocation)
         {
             gpsLocations.Push(gpsLocation);
         }
