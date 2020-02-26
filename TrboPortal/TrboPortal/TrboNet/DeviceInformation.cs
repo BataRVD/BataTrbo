@@ -7,40 +7,64 @@ namespace TrboPortal.TrboNet
 {
     public class DeviceInformation
     {
-        public string deviceName { get; private set; }
-        public GpsModeEnum gpsMode { get; private set; }
-        public int minimumServiceInterval { get; private set; }
-        DateTime lastUpdate;
-        ConcurrentStack<GpsMeasurement> gpsLocations;
-        public Device device { get; private set; }
+        public int Id { get; }
+        public string DeviceName { get; set; }
+        public GpsModeEnum GpsMode { get; set; }
+        public int MinimumServiceInterval { get; set; }
+        public DateTime LastUpdate { get; set; }
 
+        ConcurrentStack<GPSLocation> gpsLocations;
+        public Device Device { get; set; }
+
+        /// <summary>
+        /// Constructor from TrboNet
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="device"></param>
         public DeviceInformation(int id, Device device)
         {
-            SystemSettings settings = new SystemSettings();
-            
-            gpsMode = settings.DefaultGpsMode?? GpsModeEnum.Interval;  
-            lastUpdate = DateTime.Now;
-            deviceName = $"Radio {id}";
-            minimumServiceInterval = settings.DefaultInterval ?? 60; // default interval in seconds
-            gpsLocations = new ConcurrentStack<GpsMeasurement>();
-            this.device = device;
+            Id = id;
+            //TODO: What happens here? Default settings is constructed here, when are settings read?
+            var settings = new SystemSettings();
+            GpsMode = settings.DefaultGpsMode ?? GpsModeEnum.Interval;
+            DeviceName = $"Radio {id}";
+            MinimumServiceInterval = settings.DefaultInterval ?? 60; // default interval in seconds
+            gpsLocations = new ConcurrentStack<GPSLocation>();
+
+            Device = device;
+
+            //If created from Device assume it's for a measurement
+            LastUpdate = device != null ? DateTime.Now : DateTime.UnixEpoch;
         }
 
-        public void AddGpsLocation(GpsMeasurement gpsLocation)
+
+        public void AddGpsLocation(GPSLocation gpsLocation)
         {
             gpsLocations.Push(gpsLocation);
         }
 
         public void UpdateDevice(Device device)
         {
-            this.device = device;
+            Device = device;
         }
 
         public double TimeTillUpdate()
         {
-            double secondsSinceUpdate = (DateTime.Now - lastUpdate).TotalSeconds;
-            double secondsTillUpdate = minimumServiceInterval - secondsSinceUpdate;
+            var secondsSinceUpdate = (DateTime.Now - LastUpdate).TotalSeconds;
+
+            var secondsTillUpdate = MinimumServiceInterval - secondsSinceUpdate;
             return secondsTillUpdate;
+        }
+
+        /// <summary>
+        /// Updates configurable device settings (if defined) from new DeviceInformation
+        /// TODO: Maybe model device options in separate object to shove into this thing
+        /// </summary>
+        /// <param name="di"></param>
+        public void UpdateDeviceInfo(Controllers.Device di)
+        {
+            GpsMode = di.GpsMode ?? GpsMode;
+            MinimumServiceInterval = di.RequestInterval ?? MinimumServiceInterval;
         }
     }
 }

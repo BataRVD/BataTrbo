@@ -16,14 +16,16 @@ namespace TrboPortal.Controllers
                 .ToList());
         }
 
-        public Task UpdateDeviceSettingsAsync(IEnumerable<Device> body)
+        public Task UpdateDeviceSettingsAsync(IEnumerable<Device> devices)
         {
-            throw new NotImplementedException();
+            return Task.Run(() => devices?.ToList().ForEach(d =>
+            {
+                TurboController.Instance.AddOrUpdateDeviceSettings(d);
+            }));
         }
 
         public Task<ICollection<GpsMeasurement>> GetGpsHistoryAsync(IEnumerable<int> id, string from, string through)
         {
-            // return TurboController.Instancef
             throw new NotImplementedException();
         }
 
@@ -34,8 +36,8 @@ namespace TrboPortal.Controllers
 
         public Task<ICollection<MessageQueueItem>> GetMessageQueueAsync()
         {
-            // Task.FromResult(TurboController.Instance.)
-            throw new NotImplementedException();
+            return Task.FromResult<ICollection<MessageQueueItem>>(TurboController.Instance.GetRequestQueue()
+                .Select(rqi=>MessageQueueMapper.Map(rqi.Key, rqi.Value)).OrderBy(i => i.Timestamp).ToList());
         }
 
         public Task<ICollection<GpsMeasurement>> GetMostRecentGpsAsync(IEnumerable<int> id)

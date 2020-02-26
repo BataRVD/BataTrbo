@@ -2,16 +2,14 @@
 using NS.Enterprise.ClientAPI;
 using NS.Enterprise.Objects;
 using NS.Enterprise.Objects.Devices;
-using NS.Enterprise.Objects.Event_args;
 using NS.Enterprise.Objects.Users;
 using System;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 using TrboPortal.Controllers;
+using TrboPortal.Mappers;
 using Device = NS.Enterprise.Objects.Devices.Device;
 
 namespace TrboPortal.TrboNet
@@ -30,7 +28,7 @@ namespace TrboPortal.TrboNet
         private static Timer heartBeat;
 
         #region Instance
-        
+
         public TurboController()
         {
             SystemSettings settings = new SystemSettings();
@@ -49,10 +47,11 @@ namespace TrboPortal.TrboNet
             {
                 logger.Debug("The server did a tick");
                 // populate the queue
-                populateQueue();
+                PopulateQueue();
                 // Request info for next device
-                handleQueue();
-            } catch (Exception ex)
+                HandleQueue();
+            }
+            catch (Exception ex)
             {
                 logger.Error(ex, "Something went horribly wrong during the ServerTick");
             }
@@ -77,6 +76,7 @@ namespace TrboPortal.TrboNet
         #endregion
 
         #region Connection
+
         private bool Connected = false;
         private object ConnectLock = new object();
 
@@ -104,7 +104,9 @@ namespace TrboPortal.TrboNet
             logger.Info("Connect to turbonet server");
             SystemSettings settings = new SystemSettings();
             trboNetClient.Disconnect();
-            trboNetClient.Connect(new NS.Shared.Network.NetworkConnectionParam(settings.Settings.Host, (int)settings.Settings.Port), new UserInfo(settings.Settings.User, settings.Settings.Password), ClientInitFlags.Empty);
+            trboNetClient.Connect(
+                new NS.Shared.Network.NetworkConnectionParam(settings.Settings.Host, (int) settings.Settings.Port),
+                new UserInfo(settings.Settings.User, settings.Settings.Password), ClientInitFlags.Empty);
             if (trboNetClient.IsStarted)
             {
                 logger.Info("Connected to turbonet server");
@@ -123,6 +125,7 @@ namespace TrboPortal.TrboNet
             trboNetClient.WorkflowCommandFinished += trboNetClient_WorkflowCommandFinished;
             */
         }
+
         /*
         private void DeviceLocationChanged(object sender, DeviceLocationChangedEventArgs e)
         {
@@ -199,26 +202,26 @@ namespace TrboPortal.TrboNet
         {
             try
             {
-
                 logger.Info("DevicesChanged");
                 Device device = e.ChangedObject;
                 int radioID = e.ChangedObject.RadioID;
                 switch (e.Action)
-                    {
-                        case NS.Shared.Common.ChangeAction.Add:
-                            AddOrUpdateDevice(device);
-                            break;
-                        case NS.Shared.Common.ChangeAction.Remove:
-                            devices.Remove(radioID, out DeviceInformation removedInformation);
-                            break;
-                        case NS.Shared.Common.ChangeAction.ItemChanged:
-                            AddOrUpdateDevice(device);
-                            break;
-                        case NS.Shared.Common.ChangeAction.MuchChanges:
-                            LoadDeviceList();
-                            break;
-                        default:
-                            break;
+                {
+                    case NS.Shared.Common.ChangeAction.Add:
+                        AddOrUpdateDevice(device);
+                        break;
+                    case NS.Shared.Common.ChangeAction.Remove:
+                        devices.Remove(radioID, out DeviceInformation removedInformation);
+                        break;
+                    case NS.Shared.Common.ChangeAction.ItemChanged:
+                        AddOrUpdateDevice(device);
+                        break;
+                    case NS.Shared.Common.ChangeAction.MuchChanges:
+                        //TODO JV: And this one? case NS.Shared.Common.ChangeAction.SeveralChanges:
+                        LoadDeviceList();
+                        break;
+                    default:
+                        break;
                 }
             }
             catch (Exception ex)
@@ -227,13 +230,13 @@ namespace TrboPortal.TrboNet
             }
         }
 
-        private void queryLocation(int deviceID)
+        private void QueryLocation(int deviceID)
         {
             logger.Info($"Getting location for device {deviceID}");
             if (devices.TryGetValue(deviceID, out DeviceInformation deviceInfo))
             {
                 Connect();
-                trboNetClient.QueryDeviceLocation(deviceInfo.device, "", out DeviceCommand cmd);
+                trboNetClient.QueryDeviceLocation(deviceInfo.Device, "", out DeviceCommand cmd);
                 logger.Debug($"response from querydevicelocation {cmd}");
             }
             else
@@ -259,17 +262,17 @@ namespace TrboPortal.TrboNet
         /// <summary>
         /// populates the queue with devices that need an locationUpdate
         /// </summary>
-        private void populateQueue()
+        private void PopulateQueue()
         {
             RequestMessage[] devicesToQueue = devices
-                .Where(d => d.Value.gpsMode == GpsModeEnum.Interval) // Devices that are on interval mode
+                .Where(d => d.Value.GpsMode == GpsModeEnum.Interval) // Devices that are on interval mode
                 .Where(d => d.Value.TimeTillUpdate() < 0) // That are due an update
                 .Where(d => pollQueue.Select(pq => pq.DeviceId).ToList()
-                .Contains(d.Key)) // That are not already in the queue
+                    .Contains(d.Key)) // That are not already in the queue
                 .Select(d => ReturnBullshit(d.Key))
                 .ToArray();
 
-            addToTheQueue(devicesToQueue);
+            AddToTheQueue(devicesToQueue);
         }
 
 
@@ -278,7 +281,7 @@ namespace TrboPortal.TrboNet
             return new RequestMessage(deviceId);
         }
 
-        private RequestMessage peek()
+        private RequestMessage Peek()
         {
             lock (pollQueue)
             {
@@ -297,19 +300,42 @@ namespace TrboPortal.TrboNet
             }
         }
 
-        private void handleQueue()
+        public Dictionary<DeviceInformation, RequestMessage> GetRequestQueue()
         {
-            var requestMessage = pop();
-            queryLocation(requestMessage);
+            lock (pollQueue)
+            {
+                //TODO: @JV, wouldn't it be nicer to just make a queue with both DeviceInformation and RequestMessage int it, either a dictionary or new DTO
+                var queue = new Dictionary<DeviceInformation, RequestMessage>();
+                pollQueue.ToList().ForEach(pq =>
+                {
+                    if (devices.TryGetValue(pq.DeviceId, out var d))
+                    {
+                        queue.Add(d, pq);
+                    }
+                    else
+                    {
+                        logger.Error(
+                            $"Failed to resolve known DeviceInformation for RequestMessage with deviceId \"{pq.DeviceId}\"");
+                    }
+                });
+
+                return queue;
+            }
         }
 
-        private void queryLocation(RequestMessage rm)
+        private void HandleQueue()
+        {
+            var requestMessage = pop();
+            QueryLocation(requestMessage);
+        }
+
+        private void QueryLocation(RequestMessage rm)
         {
             logger.Info($"Getting location for device {rm.DeviceId}");
             if (devices.TryGetValue(rm.DeviceId, out DeviceInformation deviceInfo))
             {
                 Connect();
-                trboNetClient.QueryDeviceLocation(deviceInfo.device, "", out DeviceCommand cmd);
+                trboNetClient.QueryDeviceLocation(deviceInfo.Device, "", out DeviceCommand cmd);
                 logger.Debug($"response from querydevicelocation {cmd}");
             }
             else
@@ -318,7 +344,7 @@ namespace TrboPortal.TrboNet
             }
         }
 
-        private void jumpTheQueue(params RequestMessage[] messages)
+        private void JumpTheQueue(params RequestMessage[] messages)
         {
             lock (pollQueue)
             {
@@ -329,7 +355,7 @@ namespace TrboPortal.TrboNet
             }
         }
 
-        private void addToTheQueue(params RequestMessage[] messages)
+        private void AddToTheQueue(params RequestMessage[] messages)
         {
             lock (pollQueue)
             {
@@ -345,10 +371,25 @@ namespace TrboPortal.TrboNet
 
         private void AddOrUpdateDevice(Device device)
         {
-            int deviceID = device.RadioID;
-            devices.AddOrUpdate(deviceID, new DeviceInformation(deviceID, device), (deviceID, oldInfo) =>
+            var deviceId = device.RadioID;
+            devices.AddOrUpdate(deviceId, new DeviceInformation(deviceId, device), (deviceId, oldInfo) =>
             {
                 oldInfo.UpdateDevice(device);
+                return oldInfo;
+            });
+        }
+
+        /// <summary>
+        /// Updates configurable device settings from API object.
+        /// If Device is not yet known (aka seen in TrboNet network), creates a stub with supplied settings in case we see it later.
+        /// </summary>
+        /// <param name="d">Device from API</param>
+        public void AddOrUpdateDeviceSettings(Controllers.Device d)
+        {
+            var deviceId = d.Id;
+            devices.AddOrUpdate(deviceId, DeviceMapper.MapToDeviceInformation(d), (deviceId, oldInfo) =>
+            {
+                oldInfo.UpdateDeviceInfo(d);
                 return oldInfo;
             });
         }
