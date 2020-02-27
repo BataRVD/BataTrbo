@@ -15,10 +15,8 @@ namespace TrboPortal.Mappers
             return new MessageQueueItem
             {
                 Device = DeviceMapper.MapToDevice(rm.Device),
-                Timestamp = rm.TimeQueued.ToString("o")
+                Timestamp = DateTimeMapper.ToString(rm.TimeQueued)
             };
         }
-
-       
     }
 }

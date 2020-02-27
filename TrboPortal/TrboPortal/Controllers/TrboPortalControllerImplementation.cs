@@ -18,15 +18,16 @@ namespace TrboPortal.Controllers
 
         public Task UpdateDeviceSettingsAsync(IEnumerable<Device> devices)
         {
-            return Task.Run(() => devices?.ToList().ForEach(d =>
-            {
-                TurboController.Instance.AddOrUpdateDeviceSettings(d);
-            }));
+            return Task.Run(() => devices?.ToList().ForEach(d => { TurboController.Instance.AddOrUpdateDeviceSettings(d); }));
         }
 
         public Task<ICollection<GpsMeasurement>> GetGpsHistoryAsync(IEnumerable<int> id, string from, string through)
         {
-            throw new NotImplementedException();
+            var f = DateTimeMapper.ToDateTime(from);
+            var t = DateTimeMapper.ToDateTime(through);
+
+            //TODO What to do if from/through wasn't convertible to DateTime? Log, Return error code or continue?
+            return Task.FromResult(TrboPortalHelper.GetGpsMeasurements(id, f, t));
         }
 
         public Task<ICollection<string>> GetLoggingAsync(string loglevel, string from, string through)
@@ -37,12 +38,15 @@ namespace TrboPortal.Controllers
         public Task<ICollection<MessageQueueItem>> GetMessageQueueAsync()
         {
             return Task.FromResult<ICollection<MessageQueueItem>>(TurboController.Instance.GetRequestQueue()
-                .Select(rqi=>MessageQueueMapper.Map(rqi)).OrderBy(i => i.Timestamp).ToList());
+                .Select(rqi => MessageQueueMapper.Map(rqi))
+                .OrderBy(i => i.Timestamp)
+                .ToList()
+            );
         }
 
         public Task<ICollection<GpsMeasurement>> GetMostRecentGpsAsync(IEnumerable<int> id)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(TrboPortalHelper.GetGpsMeasurements(id, null, null));
         }
 
         public Task<ICollection<SystemSettings>> GetSystemSettingsAsync(SystemSettings body)

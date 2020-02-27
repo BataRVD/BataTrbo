@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using Microsoft.AspNetCore.Mvc;
 using TrboPortal.Controllers;
 using Device = NS.Enterprise.Objects.Devices.Device;
 
@@ -13,7 +14,7 @@ namespace TrboPortal.TrboNet
         public int MinimumServiceInterval { get; set; }
         public DateTime LastUpdate { get; set; }
 
-        ConcurrentStack<GPSLocation> gpsLocations;
+        public ConcurrentStack<GpsMeasurement> GpsLocations { get; }
         public Device Device { get; set; }
 
         /// <summary>
@@ -29,7 +30,7 @@ namespace TrboPortal.TrboNet
             GpsMode = settings.DefaultGpsMode ?? GpsModeEnum.Interval;
             DeviceName = $"Radio {id}";
             MinimumServiceInterval = settings.DefaultInterval ?? 60; // default interval in seconds
-            gpsLocations = new ConcurrentStack<GPSLocation>();
+            GpsLocations = new ConcurrentStack<GpsMeasurement>();
 
             Device = device;
 
@@ -38,9 +39,9 @@ namespace TrboPortal.TrboNet
         }
 
 
-        public void AddGpsLocation(GPSLocation gpsLocation)
+        public void AddGpsLocation(GpsMeasurement gpsLocation)
         {
-            gpsLocations.Push(gpsLocation);
+            GpsLocations.Push(gpsLocation);
         }
 
         public void UpdateDevice(Device device)

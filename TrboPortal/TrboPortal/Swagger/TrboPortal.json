@@ -191,7 +191,7 @@
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "ids",
             "in": "query",
             "description": "Devices",
             "required": false,
@@ -542,11 +542,16 @@
     "GpsMeasurement": {
       "type": "object",
       "required": [
+        "RadioID",
         "Timestamp",
         "Latitude",
         "Longitude"
       ],
       "properties": {
+        "RadioID": {
+          "type": "int",
+          "example": "1"
+        },
         "Timestamp": {
           "type": "string",
           "example": "2020-02-23T08:49:40+00:00"

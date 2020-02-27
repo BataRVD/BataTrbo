@@ -33,7 +33,7 @@ namespace TrboPortal.Mappers
         /// <returns></returns>
         public static DeviceInformation MapToDeviceInformation(Device d)
         {
-            var di =  new DeviceInformation(d.Id, null)
+            var di = new DeviceInformation(d.Id, null)
             {
                 DeviceName = d.Name,
             };
@@ -43,5 +43,6 @@ namespace TrboPortal.Mappers
 
             return di;
         }
+
     }
 }
