@@ -566,7 +566,7 @@
       ],
       "properties": {
         "RadioID": {
-          "type": "int",
+          "type": "integer",
           "example": "1"
         },
         "Timestamp": {

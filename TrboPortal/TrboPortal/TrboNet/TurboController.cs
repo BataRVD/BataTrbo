@@ -22,6 +22,7 @@ namespace TrboPortal.TrboNet
         private static TurboController instance = null;
         private static readonly object lockObject = new object();
         private static Client trboNetClient = new Client();
+        private static CiaBata.CiaBata ciaBataController;
 
         // This is a dictionary with DeviceID --> Operational info
         private static ConcurrentDictionary<int, DeviceInfo> devices = new ConcurrentDictionary<int, DeviceInfo>();
@@ -30,6 +31,7 @@ namespace TrboPortal.TrboNet
 
         private static LinkedList<RequestMessage> pollQueue = new LinkedList<RequestMessage>();
         private static Timer heartBeat;
+        private static DateTime lastLifeSign = DateTime.Now;
 
         #region Instance
 
@@ -37,6 +39,11 @@ namespace TrboPortal.TrboNet
         {
             logger.Info("Starting the Controller!");
             SystemSettings settings = new SystemSettings();
+
+            // Start CiabataControler
+            ciaBataController = new CiaBata.CiaBata("", "", ""); // Todo add settings
+
+            // Start HeartBeat
             heartBeat = new Timer();
             // lets say we want a minimum of 250 ms now
             int serverInterval = Math.Max(250, settings.ServerInterval ?? 0);
@@ -55,6 +62,13 @@ namespace TrboPortal.TrboNet
                 PopulateQueue();
                 // Request info for next device
                 HandleQueue();
+
+                // Check if we need to let know that we are still alive (every minute)
+                if ((DateTime.Now - lastLifeSign).TotalMinutes > 1)
+                {
+                    lastLifeSign = DateTime.Now;
+                    ciaBataController.PostDeviceLifeSign(0, Environment.MachineName, true);
+                }
             }
             catch (Exception ex)
             {
@@ -130,6 +144,8 @@ namespace TrboPortal.TrboNet
             trboNetClient.DeviceTelemetryChanged += trboNetClient_DeviceTelemetryChanged;
             trboNetClient.WorkflowCommandFinished += trboNetClient_WorkflowCommandFinished;
             */
+
+            ciaBataController.PostDeviceLifeSign(0, Environment.MachineName, true);
         }
 
         private void DeviceStateChanged(object sender, DeviceStateChangedEventArgs e)
@@ -141,9 +157,14 @@ namespace TrboPortal.TrboNet
                 foreach (var radio in e.Infos)
                 {
                     int deviceID = radio.DeviceId;
-                    if (GetDeviceInfoByDeviceID(deviceID, out DeviceInfo deviceInformation))
+                    if (GetDeviceInfoByDeviceID(deviceID, out DeviceInfo deviceInfo))
                     {
-                        logger.Info($"DeviceStateChanged [{deviceInformation.RadioID}]: {radio.State.ToString()}");
+                        logger.Info($"DeviceStateChanged [{deviceInfo.RadioID}]: {radio.State.ToString()}");
+                        Device device = deviceInfo?.Device;
+                        if (device != null)
+                        {
+                            ciaBataController.PostDeviceLifeSign(device.RadioID, device.Name, (radio.State & DeviceState.Active) == DeviceState.Active);
+                        }
                     }
                 }
             }
@@ -190,46 +211,58 @@ namespace TrboPortal.TrboNet
 
                 foreach (var gpsInfo in e.GPSData)
                 {
-                    int deviceID = gpsInfo.DeviceID;
-
-                    GpsMeasurement gpsMeasurement = new GpsMeasurement
+                    try
                     {
-                        Latitude = gpsInfo.Latitude,
-                        Longitude = gpsInfo.Longitude,
-                        Timestamp = gpsInfo.InfoDate.ToString(), // right formatting?
-                        Rssi = gpsInfo.Rssi
-                    };
 
-                    DeviceInfo deviceInfo;
-                    if (!GetDeviceInfoByDeviceID(deviceID, out deviceInfo))
+                        int deviceID = gpsInfo.DeviceID;
+
+                        GpsMeasurement gpsMeasurement = new GpsMeasurement
+                        {
+                            Latitude = gpsInfo.Latitude,
+                            Longitude = gpsInfo.Longitude,
+                            Timestamp = gpsInfo.InfoDate.ToString(), // right formatting?
+                            Rssi = gpsInfo.Rssi
+                        };
+
+                        DeviceInfo deviceInfo;
+                        if (!GetDeviceInfoByDeviceID(deviceID, out deviceInfo))
+                        {
+                            logger.Warn($"Could not find deviceInfo to update GPSfor device with, created it for deviceID {deviceID} ");
+                            devices.TryAdd(deviceID, new DeviceInfo(deviceID));
+                        }
+
+                        int radioID = deviceInfo.RadioID;
+                        gpsMeasurement.RadioID = radioID;
+                        deviceInfo.GpsLocations.Push(gpsMeasurement);
+
+                        // Previous existing logging magic
+                        StringBuilder build = new StringBuilder();
+                        build.Append("DeviceLocationChanged");
+                        build.Append("Altitude: " + gpsInfo.Altitude + " ");
+                        build.Append("Description: " + gpsInfo.Description + " ");
+                        build.Append("DeviceID: " + gpsInfo.DeviceID + " ");
+                        build.Append("Direction: " + gpsInfo.Direction + " ");
+                        build.Append("GpsSource: " + gpsInfo.GpsSource + " ");
+                        build.Append("InfoDate: " + gpsInfo.InfoDate.ToString() + " ");
+                        build.Append("InfoDateUtc: " + gpsInfo.InfoDateUtc.ToString() + " ");
+                        build.Append("Latitude: " + gpsInfo.Latitude.ToString() + " ");
+                        build.Append("Name: " + gpsInfo.Name + " ");
+                        build.Append("Radius: " + gpsInfo.Radius.ToString() + " ");
+                        build.Append("ReportId: " + gpsInfo.ReportId.ToString() + " ");
+                        build.Append("Rssi: " + gpsInfo.Rssi.ToString() + " ");
+                        build.Append("Speed: " + gpsInfo.Speed.ToString() + " ");
+                        build.Append("StopTime: " + gpsInfo.StopTime.ToString() + " ");
+
+                        logger.Info(build.ToString());
+
+                        // Send to CiaBata
+                        ciaBataController.PostGpsLocation(CiaBataMapper.ToGpsLocation(gpsMeasurement));
+                    }
+                    catch (Exception ex)
                     {
-                        logger.Warn($"Could not find deviceInfo to update GPSfor device with, created it for deviceID {deviceID} ");
-                        devices.TryAdd(deviceID, new DeviceInfo(deviceID));
+                        logger.Error(ex, $"Adding location failed for deviceID {gpsInfo?.DeviceID}");
                     }
 
-                    int radioID = deviceInfo.RadioID;
-                    gpsMeasurement.RadioID = radioID;
-                    deviceInfo.GpsLocations.Push(gpsMeasurement);
-
-                    // Previous existing logging magic
-                    StringBuilder build = new StringBuilder();
-                    build.Append("DeviceLocationChanged");
-                    build.Append("Altitude: " + gpsInfo.Altitude + " ");
-                    build.Append("Description: " + gpsInfo.Description + " ");
-                    build.Append("DeviceID: " + gpsInfo.DeviceID + " ");
-                    build.Append("Direction: " + gpsInfo.Direction + " ");
-                    build.Append("GpsSource: " + gpsInfo.GpsSource + " ");
-                    build.Append("InfoDate: " + gpsInfo.InfoDate.ToString() + " ");
-                    build.Append("InfoDateUtc: " + gpsInfo.InfoDateUtc.ToString() + " ");
-                    build.Append("Latitude: " + gpsInfo.Latitude.ToString() + " ");
-                    build.Append("Name: " + gpsInfo.Name + " ");
-                    build.Append("Radius: " + gpsInfo.Radius.ToString() + " ");
-                    build.Append("ReportId: " + gpsInfo.ReportId.ToString() + " ");
-                    build.Append("Rssi: " + gpsInfo.Rssi.ToString() + " ");
-                    build.Append("Speed: " + gpsInfo.Speed.ToString() + " ");
-                    build.Append("StopTime: " + gpsInfo.StopTime.ToString() + " ");
-
-                    logger.Info(build.ToString());
                 }
             }
             catch (Exception ex)
@@ -298,6 +331,8 @@ namespace TrboPortal.TrboNet
             // List<Device> unregisteredDevices = trboNetClient.LoadUnregisteredDevicesFromServer();
 
             registeredDevices.ForEach(d => AddOrUpdateDevice(d));
+            // post all devices
+            registeredDevices.ForEach(d => ciaBataController.PostDeviceLifeSign(d.RadioID, d.Name, false));
             // unregisteredDevices.ForEach(d => AddOrUpdateDevice(d));
         }
 
