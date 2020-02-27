@@ -8,7 +8,8 @@ namespace TrboPortal.TrboNet
 {
     public class DeviceInformation
     {
-        public int Id { get; }
+        public int RadioID { get; }
+        public int DeviceID { get; private set; }
         public string DeviceName { get; set; }
         public GpsModeEnum GpsMode { get; set; }
         public int MinimumServiceInterval { get; set; }
@@ -20,15 +21,15 @@ namespace TrboPortal.TrboNet
         /// <summary>
         /// Constructor from TrboNet
         /// </summary>
-        /// <param name="id"></param>
         /// <param name="device"></param>
-        public DeviceInformation(int id, Device device)
+        public DeviceInformation(Device device)
         {
-            Id = id;
+            this.RadioID = device.RadioID;
+            this.DeviceID = device.ID;
             //TODO: What happens here? Default settings is constructed here, when are settings read?
             var settings = new SystemSettings();
             GpsMode = settings.DefaultGpsMode ?? GpsModeEnum.Interval;
-            DeviceName = $"Radio {id}";
+            DeviceName = $"Radio {RadioID}";
             MinimumServiceInterval = settings.DefaultInterval ?? 60; // default interval in seconds
             GpsLocations = new ConcurrentStack<GpsMeasurement>();
 

@@ -12,14 +12,14 @@ namespace TrboPortal.TrboNet
             Gps
         }
         public DeviceInformation Device { get; private set; }
-        public RequestType Type { get; private set; } 
+        public RequestType Type { get; private set; }
         public DateTime TimeQueued { get; private set; }
 
-        public RequestMessage(DeviceInformation device)
+        public RequestMessage(DeviceInformation device, RequestType requestType)
         {
             Device = device;
             TimeQueued = DateTime.Now;
-            Type = RequestType.Gps;
+            Type = requestType;
         }
     }
 }

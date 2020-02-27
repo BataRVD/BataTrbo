@@ -20,6 +20,9 @@ namespace TrboPortal.Controllers
         /// <returns></returns>
         public static ICollection<GpsMeasurement> GetGpsMeasurements(IEnumerable<int> ids, DateTime? from, DateTime? through)
         {
+            throw new NotImplementedException();
+            /*
+
             return TurboController.Instance.GetDevices()
                 .Where(d => ids.Contains(d.Id))
                 .SelectMany(d => d.GpsLocations
@@ -27,9 +30,10 @@ namespace TrboPortal.Controllers
                                 (through == null || through > m.TimestampDateTime))
                     .ToList())
                 .ToList();
+                */
         }
 
-        
+
 
 
     }
