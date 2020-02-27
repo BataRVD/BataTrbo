@@ -357,9 +357,13 @@ namespace TrboPortal.TrboNet
                 if (GetDeviceInfoByRadioID(radioID, out DeviceInfo deviceInfo) && GetRadioByRadioID(radioID, out Radio radio))
                 {
                     GpsModeEnum gpsMode = radio?.RadioSettings?.GpsMode ?? GpsModeEnum.None;
-                    if (gpsMode == GpsModeEnum.None)
+                    if (gpsMode != GpsModeEnum.None)
                     {
-                        var requestMessage = CreateGpsRequestMessage(deviceInfo.DeviceID);
+                        int deviceID = deviceInfo.DeviceID;
+                        // Since we are going to jump the queue, remove all existing requests
+                        RemoveDeviceFromQueue(deviceID);
+                        // Jump the queue
+                        var requestMessage = CreateGpsRequestMessage(deviceID);
                         JumpTheQueue(requestMessage);
                     }
                     else
@@ -370,6 +374,23 @@ namespace TrboPortal.TrboNet
                 else
                 {
                     logger.Info($"Could not poll info for radioID {radioID} since there was no deviceInfo or RadioSettings available");
+                }
+            }
+        }
+
+        private void RemoveDeviceFromQueue(int deviceID)
+        {
+            lock (pollQueue)
+            {
+                var node = pollQueue.First;
+                while (node != null)
+                {
+                    var nextNode = node.Next;
+                    if (node.Value.deviceID == deviceID)
+                    {
+                        pollQueue.Remove(node);
+                    }
+                    node = nextNode;
                 }
             }
         }
