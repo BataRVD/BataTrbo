@@ -10,13 +10,15 @@ namespace TrboPortal.Mappers
 {
     public class MessageQueueMapper
     {
-        public static MessageQueueItem Map(DeviceInformation di, RequestMessage rm)
+        public static MessageQueueItem Map(RequestMessage rm)
         {
             return new MessageQueueItem
             {
-                Device = DeviceMapper.MapToDevice(di),
+                Device = DeviceMapper.MapToDevice(rm.Device),
                 Timestamp = rm.TimeQueued.ToString("o")
             };
         }
+
+       
     }
 }

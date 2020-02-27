@@ -37,7 +37,7 @@ namespace TrboPortal.Controllers
         public Task<ICollection<MessageQueueItem>> GetMessageQueueAsync()
         {
             return Task.FromResult<ICollection<MessageQueueItem>>(TurboController.Instance.GetRequestQueue()
-                .Select(rqi=>MessageQueueMapper.Map(rqi.Key, rqi.Value)).OrderBy(i => i.Timestamp).ToList());
+                .Select(rqi=>MessageQueueMapper.Map(rqi)).OrderBy(i => i.Timestamp).ToList());
         }
 
         public Task<ICollection<GpsMeasurement>> GetMostRecentGpsAsync(IEnumerable<int> id)

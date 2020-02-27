@@ -217,7 +217,7 @@ namespace TrboPortal.TrboNet
                         AddOrUpdateDevice(device);
                         break;
                     case NS.Shared.Common.ChangeAction.MuchChanges:
-                        //TODO JV: And this one? case NS.Shared.Common.ChangeAction.SeveralChanges:
+                    case NS.Shared.Common.ChangeAction.SeveralChanges:
                         LoadDeviceList();
                         break;
                     default:
@@ -267,18 +267,18 @@ namespace TrboPortal.TrboNet
             RequestMessage[] devicesToQueue = devices
                 .Where(d => d.Value.GpsMode == GpsModeEnum.Interval) // Devices that are on interval mode
                 .Where(d => d.Value.TimeTillUpdate() < 0) // That are due an update
-                .Where(d => pollQueue.Select(pq => pq.DeviceId).ToList()
-                    .Contains(d.Key)) // That are not already in the queue
-                .Select(d => ReturnBullshit(d.Key))
+                .Where(d => pollQueue.Select(pq => pq.Device).ToList()
+                    .Contains(d.Value)) // That are not already in the queue
+                .Select(d => ReturnBullshit(d.Value))
                 .ToArray();
 
             AddToTheQueue(devicesToQueue);
         }
 
 
-        private RequestMessage ReturnBullshit(int deviceId)
+        private RequestMessage ReturnBullshit(DeviceInformation device)
         {
-            return new RequestMessage(deviceId);
+            return new RequestMessage(device);
         }
 
         private RequestMessage Peek()
@@ -300,26 +300,11 @@ namespace TrboPortal.TrboNet
             }
         }
 
-        public Dictionary<DeviceInformation, RequestMessage> GetRequestQueue()
+        public List<RequestMessage> GetRequestQueue()
         {
             lock (pollQueue)
             {
-                //TODO: @JV, wouldn't it be nicer to just make a queue with both DeviceInformation and RequestMessage int it, either a dictionary or new DTO
-                var queue = new Dictionary<DeviceInformation, RequestMessage>();
-                pollQueue.ToList().ForEach(pq =>
-                {
-                    if (devices.TryGetValue(pq.DeviceId, out var d))
-                    {
-                        queue.Add(d, pq);
-                    }
-                    else
-                    {
-                        logger.Error(
-                            $"Failed to resolve known DeviceInformation for RequestMessage with deviceId \"{pq.DeviceId}\"");
-                    }
-                });
-
-                return queue;
+                return new List<RequestMessage>(pollQueue);
             }
         }
 
@@ -331,8 +316,8 @@ namespace TrboPortal.TrboNet
 
         private void QueryLocation(RequestMessage rm)
         {
-            logger.Info($"Getting location for device {rm.DeviceId}");
-            if (devices.TryGetValue(rm.DeviceId, out DeviceInformation deviceInfo))
+            logger.Info($"Getting location for device {rm.Device.Id}");
+            if (devices.TryGetValue(rm.Device.Id, out DeviceInformation deviceInfo))
             {
                 Connect();
                 trboNetClient.QueryDeviceLocation(deviceInfo.Device, "", out DeviceCommand cmd);
@@ -340,7 +325,7 @@ namespace TrboPortal.TrboNet
             }
             else
             {
-                logger.Warn($"Could not query location for device {rm.DeviceId}");
+                logger.Warn($"Could not query location for device {rm.Device.Id}");
             }
         }
 
