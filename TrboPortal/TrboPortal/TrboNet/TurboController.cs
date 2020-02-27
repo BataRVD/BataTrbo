@@ -35,6 +35,7 @@ namespace TrboPortal.TrboNet
 
         public TurboController()
         {
+            logger.Info("Starting the Controller!");
             SystemSettings settings = new SystemSettings();
             heartBeat = new Timer();
             // lets say we want a minimum of 250 ms now

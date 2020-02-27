@@ -13,6 +13,9 @@ namespace TrboPortal
     {
         public static void Main(string[] args)
         {
+            // Start the instance
+            TrboNet.TurboController turboController = TrboNet.TurboController.Instance;
+
             CreateHostBuilder(args).Build().Run();
         }
 
