@@ -12,6 +12,7 @@ using TrboPortal.Controllers;
 using TrboPortal.Mappers;
 using Device = NS.Enterprise.Objects.Devices.Device;
 using NS.Enterprise.Objects.Event_args;
+using System.Text;
 
 namespace TrboPortal.TrboNet
 {
@@ -118,17 +119,18 @@ namespace TrboPortal.TrboNet
             trboNetClient.GetAllWorkflowCommands();
 
             LoadDeviceList();
-            /*
+
             trboNetClient.DevicesChanged += DevicesChanged;
-            //trboNetClient.DeviceLocationChanged += DeviceLocationChanged;
+
+            trboNetClient.DeviceLocationChanged += DeviceLocationChanged;
             trboNetClient.DeviceStateChanged += DeviceStateChanged;
-            
+            /*
             trboNetClient.TransmitReceiveChanged += trboNetClient_TransmitReceiveChanged;
             trboNetClient.DeviceTelemetryChanged += trboNetClient_DeviceTelemetryChanged;
             trboNetClient.WorkflowCommandFinished += trboNetClient_WorkflowCommandFinished;
             */
         }
-        /*
+
         private void DeviceStateChanged(object sender, DeviceStateChangedEventArgs e)
         {
             try
@@ -138,7 +140,7 @@ namespace TrboPortal.TrboNet
                 foreach (var radio in e.Infos)
                 {
                     int deviceID = radio.DeviceId;
-                    if (GetDeviceInformationByDeviceID(deviceID, out DeviceInformation deviceInformation))
+                    if (GetDeviceInfoByDeviceID(deviceID, out DeviceInfo deviceInformation))
                     {
                         logger.Info($"DeviceStateChanged [{deviceInformation.RadioID}]: {radio.State.ToString()}");
                     }
@@ -149,7 +151,7 @@ namespace TrboPortal.TrboNet
                 logger.Log(LogLevel.Error, ex);
             }
         }
-        */
+
 
         private bool GetDeviceInfoByRadioID(int radioID, out DeviceInfo deviceInfo)
         {
@@ -178,7 +180,7 @@ namespace TrboPortal.TrboNet
         }
 
 
-        /*
+
         private void DeviceLocationChanged(object sender, DeviceLocationChangedEventArgs e)
         {
             try
@@ -187,65 +189,46 @@ namespace TrboPortal.TrboNet
 
                 foreach (var gpsInfo in e.GPSData)
                 {
-                    
-                    int deviceID = 
+                    int deviceID = gpsInfo.DeviceID;
 
-
-                    Device device;
-                    devices.TryGetValue()
-                        device = devices.FirstOrDefault(r => r.ID == gpsInfo.DeviceID);
-
-                        if (device == null)
-                        {
-                            devices.Clear();
-                            devices = m_client.LoadRegisteredDevicesFromServer();
-
-                            foreach (var dev in m_client.LoadUnregisteredDevicesFromServer())
-                            {
-                                dev.Name = "Radio " + dev.RadioID;
-                                devices.Add(dev);
-                            }
-
-                            device = devices.FirstOrDefault(r => r.ID == gpsInfo.DeviceID);
-                        }
-                    
-
-                    if (device != null)
+                    GpsMeasurement gpsMeasurement = new GpsMeasurement
                     {
-                        StringBuilder build = new StringBuilder();
-                        build.Append("DeviceLocationChanged");
-                        build.Append("device: " + device.Name + " ");
-                        build.Append("Altitude: " + gpsInfo.Altitude + " ");
-                        build.Append("Description: " + gpsInfo.Description + " ");
-                        build.Append("DeviceID: " + gpsInfo.DeviceID + " ");
-                        build.Append("Direction: " + gpsInfo.Direction + " ");
-                        build.Append("GpsSource: " + gpsInfo.GpsSource + " ");
-                        build.Append("InfoDate: " + gpsInfo.InfoDate.ToString() + " ");
-                        build.Append("InfoDateUtc: " + gpsInfo.InfoDateUtc.ToString() + " ");
-                        build.Append("Latitude: " + gpsInfo.Latitude.ToString() + " ");
-                        build.Append("Name: " + gpsInfo.Name + " ");
-                        build.Append("Radius: " + gpsInfo.Radius.ToString() + " ");
-                        build.Append("ReportId: " + gpsInfo.ReportId.ToString() + " ");
-                        build.Append("Rssi: " + gpsInfo.Rssi.ToString() + " ");
-                        build.Append("Speed: " + gpsInfo.Speed.ToString() + " ");
-                        build.Append("StopTime: " + gpsInfo.StopTime.ToString() + " ");
+                        Latitude = gpsInfo.Latitude,
+                        Longitude = gpsInfo.Longitude,
+                        Timestamp = gpsInfo.InfoDate.ToString(), // right formatting?
+                        Rssi = gpsInfo.Rssi
+                    };
 
-                        logger.Info(build.ToString());
-
-                        if (gpsInfo.Longitude != 0 && gpsInfo.Longitude != 0)
-                        {
-                            var gpsInfo = new GPSLocation();
-                            gpsInfo.deviceName = device.Name;
-                            gpsInfo.RadioID = device.RadioID;
-                            gpsInfo.Latitude = gpsInfo.Latitude;
-                            gpsInfo.Longitude = gpsInfo.Longitude;
-                            gpsInfo.Rssi = gpsInfo.Rssi;
-
-                            PostGpsLocation(gpsInfo);
-                        }
-
-                        PostDeviceLifeSign(device.Name, device.RadioID, true);
+                    DeviceInfo deviceInfo;
+                    if (!GetDeviceInfoByDeviceID(deviceID, out deviceInfo))
+                    {
+                        logger.Warn($"Could not find deviceInfo to update GPSfor device with, created it for deviceID {deviceID} ");
+                        devices.TryAdd(deviceID, new DeviceInfo(deviceID));
                     }
+
+                    int radioID = deviceInfo.RadioID;
+                    gpsMeasurement.RadioID = radioID;
+                    deviceInfo.GpsLocations.Push(gpsMeasurement);
+
+                    // Previous existing logging magic
+                    StringBuilder build = new StringBuilder();
+                    build.Append("DeviceLocationChanged");
+                    build.Append("Altitude: " + gpsInfo.Altitude + " ");
+                    build.Append("Description: " + gpsInfo.Description + " ");
+                    build.Append("DeviceID: " + gpsInfo.DeviceID + " ");
+                    build.Append("Direction: " + gpsInfo.Direction + " ");
+                    build.Append("GpsSource: " + gpsInfo.GpsSource + " ");
+                    build.Append("InfoDate: " + gpsInfo.InfoDate.ToString() + " ");
+                    build.Append("InfoDateUtc: " + gpsInfo.InfoDateUtc.ToString() + " ");
+                    build.Append("Latitude: " + gpsInfo.Latitude.ToString() + " ");
+                    build.Append("Name: " + gpsInfo.Name + " ");
+                    build.Append("Radius: " + gpsInfo.Radius.ToString() + " ");
+                    build.Append("ReportId: " + gpsInfo.ReportId.ToString() + " ");
+                    build.Append("Rssi: " + gpsInfo.Rssi.ToString() + " ");
+                    build.Append("Speed: " + gpsInfo.Speed.ToString() + " ");
+                    build.Append("StopTime: " + gpsInfo.StopTime.ToString() + " ");
+
+                    logger.Info(build.ToString());
                 }
             }
             catch (Exception ex)
@@ -253,7 +236,7 @@ namespace TrboPortal.TrboNet
                 logger.Log(LogLevel.Error, ex);
             }
         }
-        */
+
         private void DevicesChanged(object sender, BindableCollectionEventArgs2<Device> e)
         {
             try
