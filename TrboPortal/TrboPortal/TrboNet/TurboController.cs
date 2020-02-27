@@ -139,13 +139,64 @@ namespace TrboPortal.TrboNet
 
             trboNetClient.DeviceLocationChanged += DeviceLocationChanged;
             trboNetClient.DeviceStateChanged += DeviceStateChanged;
-            /*
-            trboNetClient.TransmitReceiveChanged += trboNetClient_TransmitReceiveChanged;
-            trboNetClient.DeviceTelemetryChanged += trboNetClient_DeviceTelemetryChanged;
-            trboNetClient.WorkflowCommandFinished += trboNetClient_WorkflowCommandFinished;
-            */
+            trboNetClient.TransmitReceiveChanged += TransmitReceiveChanged;
+            trboNetClient.DeviceTelemetryChanged += DeviceTelemetryChanged;
+            trboNetClient.WorkflowCommandFinished += WorkflowCommandFinished;
+            
 
             ciaBataController.PostDeviceLifeSign(0, Environment.MachineName, true);
+        }
+
+        private void WorkflowCommandFinished(object sender, WorkflowCommandFinishedEventArgs e)
+        {
+            try
+            {
+                int deviceID = e.DeviceId;
+                logger.Info($"WorkflowCommandFinished for deviceID {deviceID}, state: {e.RequestId.ToString()}, state: {e.Result.ToString()}");
+                if (GetDeviceInfoByDeviceID(deviceID, out DeviceInfo deviceInfo) && deviceInfo.Device != null)
+                {
+                    ciaBataController.PostDeviceLifeSign(deviceInfo.RadioID, deviceInfo.Device.Name, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "An error occured at the WorkflowCommandFinished event");
+            }
+        }
+
+        private void DeviceTelemetryChanged(object sender, DeviceTelemetryChangedEventArgs e)
+        {
+            try
+            {
+                int deviceID = e.DeviceId;
+                logger.Info($"DeviceTelemetryChanged for deviceID {deviceID}");
+                if (GetDeviceInfoByDeviceID(deviceID, out DeviceInfo deviceInfo) && deviceInfo.Device != null)
+                {
+                    ciaBataController.PostDeviceLifeSign(deviceInfo.RadioID, deviceInfo.Device.Name, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "An error occured at the DeviceTelemetryChanged event");
+            }
+        }
+
+        private void TransmitReceiveChanged(object sender, TransmitReceiveArgs e)
+        {
+            try
+            {
+                int deviceID = e.Info.TransmitDeviceID ;
+                logger.Info($"TransmitReceiveChanged for deviceID {deviceID}");
+                if (GetDeviceInfoByDeviceID(deviceID, out DeviceInfo deviceInfo) && deviceInfo.Device != null)
+                {
+                    ciaBataController.PostDeviceLifeSign(deviceInfo.RadioID, deviceInfo.Device.Name, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "An error occured at the TransmitReceiveChanged event");
+            }
+
         }
 
         private void DeviceStateChanged(object sender, DeviceStateChangedEventArgs e)
@@ -213,7 +264,6 @@ namespace TrboPortal.TrboNet
                 {
                     try
                     {
-
                         int deviceID = gpsInfo.DeviceID;
 
                         GpsMeasurement gpsMeasurement = new GpsMeasurement
