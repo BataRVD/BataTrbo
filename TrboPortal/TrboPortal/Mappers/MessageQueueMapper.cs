@@ -14,7 +14,7 @@ namespace TrboPortal.Mappers
         {
             return new MessageQueueItem
             {
-                Device = DeviceMapper.MapToDevice(rm.Device),
+                Radio = new Radio(), // TODO "maak er wat van"
                 Timestamp = DateTimeMapper.ToString(rm.TimeQueued)
             };
         }

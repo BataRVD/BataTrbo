@@ -42,14 +42,14 @@
     "http"
   ],
   "paths": {
-    "/device": {
+    "/radio": {
       "get": {
         "tags": [
-          "devices"
+          "radios"
         ],
-        "summary": "List of all devices",
-        "description": "List of all devices",
-        "operationId": "getDevices",
+        "summary": "List of all radios",
+        "description": "List of all radios",
+        "operationId": "getRadios",
         "produces": [
           "application/xml",
           "application/json"
@@ -74,7 +74,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Device"
+                "$ref": "#/definitions/Radio"
               }
             }
           },
@@ -85,11 +85,11 @@
       },
       "patch": {
         "tags": [
-          "Update Device settings"
+          "Update Radio settings"
         ],
-        "summary": "Update gps mode and interval devices",
-        "description": "Update gps mode and interval device settings",
-        "operationId": "updateDeviceSettings",
+        "summary": "Update gps mode and interval radios",
+        "description": "Update gps mode and interval radio settings",
+        "operationId": "updateRadioSettings",
         "consumes": [
           "application/json",
           "application/xml"
@@ -102,12 +102,12 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Devices to update",
+            "description": "Radios to update",
             "required": true,
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Device"
+                "$ref": "#/definitions/Radio"
               }
             }
           }
@@ -125,13 +125,13 @@
         }
       }
     },
-    "/device/GpsMode": {
+    "/radio/GpsMode": {
       "put": {
         "tags": [
-          "Device settings"
+          "Radio settings"
         ],
-        "summary": "Update gps mode device settings",
-        "description": "Update gps modedevice settings",
+        "summary": "Update gps mode radio settings",
+        "description": "Update gps moderadio settings",
         "operationId": "updateGpsMode",
         "consumes": [
           "application/json",
@@ -145,7 +145,7 @@
           {
             "name": "id",
             "in": "query",
-            "description": "Id's of devices to update",
+            "description": "Id's of radios to update",
             "required": false,
             "type": "array",
             "items": {
@@ -157,7 +157,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Set GpsModeEnum properties of device",
+            "description": "Set GpsModeEnum properties of radio",
             "required": true,
             "schema": {
               "$ref": "#/definitions/GpsMode"
@@ -180,10 +180,10 @@
     "/gps": {
       "get": {
         "tags": [
-          "GPS of Devices"
+          "GPS of Radios"
         ],
-        "summary": "Returns last known GPS position of device(s)",
-        "description": "Returns last known GPS position of device(s)",
+        "summary": "Returns last known GPS position of radio(s)",
+        "description": "Returns last known GPS position of radio(s)",
         "operationId": "getMostRecentGps",
         "produces": [
           "application/xml",
@@ -193,7 +193,7 @@
           {
             "name": "ids",
             "in": "query",
-            "description": "Devices",
+            "description": "Radios",
             "required": false,
             "type": "array",
             "items": {
@@ -222,10 +222,10 @@
     "/gps/history": {
       "get": {
         "tags": [
-          "GPS of Devices"
+          "GPS of Radios"
         ],
-        "summary": "Returns last known GPS position of device(s)",
-        "description": "Returns last known GPS position of device(s)",
+        "summary": "Returns last known GPS position of radio(s)",
+        "description": "Returns last known GPS position of radio(s)",
         "operationId": "getGpsHistory",
         "produces": [
           "application/xml",
@@ -235,7 +235,7 @@
           {
             "name": "id",
             "in": "query",
-            "description": "Devices",
+            "description": "Radios",
             "required": false,
             "type": "array",
             "items": {
@@ -280,10 +280,10 @@
     "/gps/update": {
       "get": {
         "tags": [
-          "GPS of Devices"
+          "GPS of Radios"
         ],
-        "summary": "Request GPS opdate for device(s)",
-        "description": "Request GPS opdate for device(s)",
+        "summary": "Request GPS opdate for radio(s)",
+        "description": "Request GPS opdate for radio(s)",
         "operationId": "requestGpsUpdate",
         "produces": [
           "application/json"
@@ -292,7 +292,7 @@
           {
             "name": "id",
             "in": "query",
-            "description": "Devices",
+            "description": "Radios",
             "required": false,
             "type": "array",
             "items": {
@@ -457,14 +457,14 @@
     }
   },
   "definitions": {
-    "Device": {
+    "Radio": {
       "type": "object",
       "required": [
-        "id",
+        "radioId",
         "name"
       ],
       "properties": {
-        "id": {
+        "radioId": {
           "type": "integer",
           "format": "int32",
           "example": 1
@@ -473,6 +473,23 @@
           "type": "string",
           "example": "EHBO-1"
         },
+        "RadioSettings": {
+          "$ref": "#/definitions/RadioSettings",
+          "example": "interval"
+        }
+      },
+      "xml": {
+        "name": "Radio"
+      }
+    },
+    "RadioSettings": {
+      "type": "object",
+      "properties": {
+        "radioId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1
+        },
         "GpsMode": {
           "$ref": "#/definitions/GpsModeEnum",
           "example": "interval"
@@ -480,12 +497,12 @@
         "requestInterval": {
           "type": "integer",
           "format": "int32",
-          "description":  "GPS request interval in milliseconds", 
+          "description": "GPS request interval in milliseconds",
           "example": "15000"
         }
       },
       "xml": {
-        "name": "Device"
+        "name": "Radio"
       }
     },
     "GpsModeEnum": {
@@ -524,15 +541,15 @@
       "type": "object",
       "required": [
         "Timestamp",
-        "Device"
+        "Radio"
       ],
       "properties": {
         "Timestamp": {
           "type": "string",
           "example": "2020-02-23T08:49:40+00:00"
         },
-        "Device": {
-          "$ref": "#/definitions/Device"
+        "Radio": {
+          "$ref": "#/definitions/Radio"
         }
       },
       "xml": {

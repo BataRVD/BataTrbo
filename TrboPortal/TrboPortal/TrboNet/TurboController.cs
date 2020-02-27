@@ -25,8 +25,7 @@ namespace TrboPortal.TrboNet
         // This is a dictionary with DeviceID --> Operational info
         private static ConcurrentDictionary<int, DeviceInfo> devices = new ConcurrentDictionary<int, DeviceInfo>();
         // This is a dictionary with RadioID --> Settings
-        private static ConcurrentDictionary<int, RadioInfo> radios = new ConcurrentDictionary<int, RadioInfo>();
-
+        private static ConcurrentDictionary<int, Radio> radios = new ConcurrentDictionary<int, Radio>();
 
         private static LinkedList<RequestMessage> pollQueue = new LinkedList<RequestMessage>();
         private static Timer heartBeat;
@@ -119,17 +118,17 @@ namespace TrboPortal.TrboNet
             trboNetClient.GetAllWorkflowCommands();
 
             LoadDeviceList();
-
+            /*
             trboNetClient.DevicesChanged += DevicesChanged;
             //trboNetClient.DeviceLocationChanged += DeviceLocationChanged;
             trboNetClient.DeviceStateChanged += DeviceStateChanged;
-            /*
+            
             trboNetClient.TransmitReceiveChanged += trboNetClient_TransmitReceiveChanged;
             trboNetClient.DeviceTelemetryChanged += trboNetClient_DeviceTelemetryChanged;
             trboNetClient.WorkflowCommandFinished += trboNetClient_WorkflowCommandFinished;
             */
         }
-
+        /*
         private void DeviceStateChanged(object sender, DeviceStateChangedEventArgs e)
         {
             try
@@ -150,35 +149,34 @@ namespace TrboPortal.TrboNet
                 logger.Log(LogLevel.Error, ex);
             }
         }
+        */
 
-        private bool GetDeviceInformationByDeviceID(int deviceID, out DeviceInformation deviceInformation)
+        private bool GetDeviceInfoByRadioID(int radioID, out DeviceInfo deviceInfo)
         {
-            throw new NotImplementedException();
-            /*
+            deviceInfo = devices.Where(d => d.Value.RadioID == radioID).FirstOrDefault().Value;
+            return deviceInfo != null;
+        }
 
-            bool deviceFound = devices.TryGetValue(deviceID, out deviceInformation);
+        private bool GetDeviceInfoByDeviceID(int deviceID, out DeviceInfo deviceInfo)
+        {
+            bool deviceFound = devices.TryGetValue(deviceID, out deviceInfo);
             if (!deviceFound)
             {
                 logger.Warn($"Can't find device with deviceID {deviceID}");
             }
             return deviceFound;
-            */
         }
 
-        private bool GetDeviceInformationByRadioID(int radioID, out DeviceInformation deviceInformation)
+        private bool GetRadioByRadioID(int radioID, out Radio radio)
         {
-            throw new NotImplementedException();
-            /*
-
-            /*
-            bool deviceFound = devices.TryGetValue(deviceID, out deviceInformation);
-            if (!deviceFound)
+            bool radioFound = radios.TryGetValue(radioID, out radio);
+            if (!radioFound)
             {
-                logger.Warn($"Can't find device with radioID {radioID}");
+                logger.Warn($"Can't find radio settings for radioID {radioID}");
             }
-            return deviceFound;
-            */
+            return radioFound;
         }
+
 
         /*
         private void DeviceLocationChanged(object sender, DeviceLocationChangedEventArgs e)
@@ -258,7 +256,6 @@ namespace TrboPortal.TrboNet
         */
         private void DevicesChanged(object sender, BindableCollectionEventArgs2<Device> e)
         {
-            /*
             try
             {
                 logger.Info("DevicesChanged");
@@ -270,7 +267,7 @@ namespace TrboPortal.TrboNet
                         AddOrUpdateDevice(device);
                         break;
                     case NS.Shared.Common.ChangeAction.Remove:
-                        devices.Remove(deviceID, out DeviceInformation removedInformation);
+                        RemoveDevice(deviceID);
                         break;
                     case NS.Shared.Common.ChangeAction.ItemChanged:
                         AddOrUpdateDevice(device);
@@ -287,13 +284,18 @@ namespace TrboPortal.TrboNet
             {
                 logger.Log(LogLevel.Error, ex);
             }
-            */
+        }
+
+        private void RemoveDevice(int deviceID)
+        {
+            devices.Remove(deviceID, out DeviceInfo deviceInfo);
+            logger.Info($"Remove device for deviceID {deviceID} radio {deviceInfo?.RadioID}");
         }
 
         private void QueryLocation(int radioID)
         {
             logger.Info($"Getting location for device with radioID {radioID}");
-            if (GetDeviceInformationByRadioID(radioID, out DeviceInformation deviceInfo))
+            if (GetDeviceInfoByRadioID(radioID, out DeviceInfo deviceInfo) && deviceInfo?.Device != null)
             {
                 Connect();
                 trboNetClient.QueryDeviceLocation(deviceInfo.Device, "", out DeviceCommand cmd);
@@ -324,23 +326,73 @@ namespace TrboPortal.TrboNet
         /// </summary>
         private void PopulateQueue()
         {
-            /*
-            RequestMessage[] devicesToQueue = devices
-                .Where(d => d.Value.GpsMode == GpsModeEnum.Interval) // Devices that are on interval mode
-                .Where(d => d.Value.TimeTillUpdate() < 0) // That are due an update
-                .Where(d => pollQueue.Select(pq => pq.Device.DeviceID).ToList()
-                    .Contains(d.Key)) // That are not already in the queue
-                .Select(d => CreateGpsRequestMessage(d.Value))
-                .ToArray();
+            foreach (KeyValuePair<int, DeviceInfo> device in devices)
+            {
+                int deviceID = device.Key;
+                DeviceInfo deviceInfo = device.Value;
+                if (deviceInfo == null)
+                {
+                    // We don't have deviceinfo
+                    continue;
+                }
 
-            AddToTheQueue(devicesToQueue);
-            */
+                int radioID = deviceInfo.RadioID;
+                if (!GetRadioByRadioID(radioID, out Radio radio))
+                {
+                    // We have no settings
+                    continue;
+                }
+
+                bool isInterval = radio.RadioSettings?.GpsMode == GpsModeEnum.Interval;
+                int minimumInterval = (radio.RadioSettings?.RequestInterval ?? 0);
+                bool hasValidInterval = minimumInterval > 0;
+                if (!isInterval || !hasValidInterval)
+                {
+                    // Not an interval radio
+                    continue;
+                }
+
+                double secondsSinceUpdate = (DateTime.Now - deviceInfo.LastUpdate).TotalSeconds;
+                double secondsTillUpdate = minimumInterval - secondsSinceUpdate;
+                if (secondsTillUpdate > 0)
+                {
+                    // Not ready for update
+                    continue;
+                }
+
+                var requestMessage = CreateGpsRequestMessage(deviceID);
+                AddToTheQueue(requestMessage);
+            }
+
         }
 
-
-        private RequestMessage CreateGpsRequestMessage(DeviceInformation device)
+        public void PollForGps(params int[] radioIds)
         {
-            return new RequestMessage(device, RequestMessage.RequestType.Gps);
+            foreach (int radioID in radioIds)
+            {
+                if (GetDeviceInfoByRadioID(radioID, out DeviceInfo deviceInfo) && GetRadioByRadioID(radioID, out Radio radio))
+                {
+                    GpsModeEnum gpsMode = radio?.RadioSettings?.GpsMode ?? GpsModeEnum.None;
+                    if (gpsMode == GpsModeEnum.None)
+                    {
+                        var requestMessage = CreateGpsRequestMessage(deviceInfo.DeviceID);
+                        JumpTheQueue(requestMessage);
+                    }
+                    else
+                    {
+                        logger.Info($"Could not poll info for radioID {radioID} since GpsMode is none");
+                    }
+                }
+                else
+                {
+                    logger.Info($"Could not poll info for radioID {radioID} since there was no deviceInfo or RadioSettings available");
+                }
+            }
+        }
+
+        private RequestMessage CreateGpsRequestMessage(int deviceID)
+        {
+            return new RequestMessage(deviceID, RequestMessage.RequestType.Gps);
         }
 
         private RequestMessage Peek()
@@ -378,9 +430,9 @@ namespace TrboPortal.TrboNet
 
         private void QueryLocation(RequestMessage rm)
         {
-            int deviceID = rm.Device.DeviceID;
-            logger.Info($"Getting location for device with radioID {rm.Device.RadioID}");
-            if (GetDeviceInformationByDeviceID(deviceID, out DeviceInformation deviceInfo))
+            int deviceID = rm.deviceID;
+            logger.Info($"Getting location for device with deviceID {deviceID}");
+            if (GetDeviceInfoByDeviceID(deviceID, out DeviceInfo deviceInfo) && deviceInfo?.Device != null)
             {
                 Connect();
                 trboNetClient.QueryDeviceLocation(deviceInfo.Device, "", out DeviceCommand cmd);
@@ -388,7 +440,7 @@ namespace TrboPortal.TrboNet
             }
             else
             {
-                logger.Warn($"Could not query location for device with radioID {rm.Device.RadioID}");
+                logger.Warn($"Could not query location for device with deviceID {rm.deviceID}");
             }
         }
 
@@ -409,6 +461,7 @@ namespace TrboPortal.TrboNet
             {
                 foreach (RequestMessage m in messages)
                 {
+                    logger.Debug($"Added to the queue {m.deviceID}, {m.Type.ToString()}");
                     pollQueue.AddLast(m);
                 }
             }
@@ -436,7 +489,7 @@ namespace TrboPortal.TrboNet
 
 
                 // Add settings
-                if (radios.TryAdd(radioID, new RadioInfo()))
+                if (radios.TryAdd(radioID, new Radio(radioID)))
                 {
                     logger.Info($"Created standard settings for Radio with radioID {radioID}");
                 }
@@ -452,31 +505,25 @@ namespace TrboPortal.TrboNet
         /// If Device is not yet known (aka seen in TrboNet network), creates a stub with supplied settings in case we see it later.
         /// </summary>
         /// <param name="device">Device from API</param>
-        public void AddOrUpdateDeviceSettings(Controllers.Device device)
+        public void AddOrUpdateDeviceSettings(Radio radio)
         {
-            throw new NotImplementedException();
-            /*
-
-            var radioID = device.Id;
-            if (GetDeviceInformationByRadioID(radioID, out DeviceInformation deviceInformation))
+            var radioID = radio.RadioId;
+            radios.AddOrUpdate(radioID, radio, (radioID, oldInfo) =>
             {
-                devices.AddOrUpdate(radioID, DeviceMapper.MapToDeviceInformation(device), (radioID, oldInfo) =>
-                {
-                    oldInfo.UpdateDeviceInfo(device);
-                    return oldInfo;
-                });
+                return radio;
+            });
 
-            }
-            */
         }
 
-        public List<DeviceInformation> GetDevices()
+        public List<DeviceInfo> GetDevices()
         {
-            throw new NotImplementedException();
-            /*
-            return devices.Select(d => d.Value
-            ).ToList();
-            */
+            return new List<DeviceInfo>(devices.Values);
         }
+
+        public List<Radio> GetSettings()
+        {
+            return new List<Radio>(radios.Values);
+        }
+
     }
 }

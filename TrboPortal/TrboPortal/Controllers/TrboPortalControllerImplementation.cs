@@ -9,14 +9,12 @@ namespace TrboPortal.Controllers
 {
     public class TrboPortalControllerImplementation : ITrboPortalController
     {
-        public Task<ICollection<Device>> GetDevicesAsync(IEnumerable<int> id)
+        public Task<ICollection<Radio>> GetRadiosAsync(IEnumerable<int> id)
         {
-            return Task.FromResult<ICollection<Device>>(TurboController.Instance.GetDevices()
-                .Select(DeviceMapper.MapToDevice)
-                .ToList());
+            return Task.FromResult<ICollection<Radio>>(TurboController.Instance.GetSettings());
         }
 
-        public Task UpdateDeviceSettingsAsync(IEnumerable<Device> devices)
+        public Task UpdateRadioSettingsAsync(IEnumerable<Radio> devices)
         {
             return Task.Run(() => devices?.ToList().ForEach(d => { TurboController.Instance.AddOrUpdateDeviceSettings(d); }));
         }
@@ -56,7 +54,8 @@ namespace TrboPortal.Controllers
 
         public Task RequestGpsUpdateAsync(IEnumerable<int> id)
         {
-            throw new NotImplementedException();
+            // TODO never null ?
+            return Task.Run(() => TurboController.Instance.PollForGps(id.ToArray()));
         }
 
         public Task<ICollection<SystemSettings>> SetSystemSettingsAsync()
