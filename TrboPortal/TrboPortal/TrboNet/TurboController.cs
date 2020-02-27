@@ -383,8 +383,13 @@ namespace TrboPortal.TrboNet
         {
             lock (pollQueue)
             {
-                return pollQueue.First();
+                if (pollQueue.Count > 0)
+                {
+                    return pollQueue.First();
+                }
             }
+            logger.Debug("Nothing to peek.");
+            return null;
         }
 
 
@@ -392,10 +397,15 @@ namespace TrboPortal.TrboNet
         {
             lock (pollQueue)
             {
-                RequestMessage requestMessage = pollQueue.First();
-                pollQueue.RemoveFirst();
-                return requestMessage;
+                if (pollQueue.Count > 0)
+                {
+                    RequestMessage requestMessage = pollQueue.First();
+                    pollQueue.RemoveFirst();
+                    return requestMessage;
+                }
             }
+            logger.Debug("Nothing to pop.");
+            return null;
         }
 
         public List<RequestMessage> GetRequestQueue()
@@ -409,7 +419,10 @@ namespace TrboPortal.TrboNet
         private void HandleQueue()
         {
             var requestMessage = pop();
-            QueryLocation(requestMessage);
+            if (requestMessage != null)
+            {
+                QueryLocation(requestMessage);
+            }
         }
 
         private void QueryLocation(RequestMessage rm)
