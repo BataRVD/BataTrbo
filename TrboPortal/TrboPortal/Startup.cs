@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using TrboPortal.Controllers;
+using TrboPortal.Model;
 
 namespace TrboPortal
 {
@@ -19,6 +21,12 @@ namespace TrboPortal
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            using (var client = new DatabaseContext())
+            {
+                client.Database.EnsureCreated();
+            }
+            // Start the instance
+            TrboNet.TurboController turboController = TrboNet.TurboController.Instance;
         }
 
         public IConfiguration Configuration { get; }
@@ -29,6 +37,7 @@ namespace TrboPortal
             services.AddSwaggerDocument();
             services.AddScoped<ITrboPortalController, TrboPortalControllerImplementation>();
             services.AddControllers();
+            services.AddEntityFrameworkSqlite().AddDbContext<DatabaseContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

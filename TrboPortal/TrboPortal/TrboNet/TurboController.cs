@@ -13,6 +13,7 @@ using TrboPortal.Mappers;
 using Device = NS.Enterprise.Objects.Devices.Device;
 using NS.Enterprise.Objects.Event_args;
 using System.Text;
+using TrboPortal.Model;
 
 namespace TrboPortal.TrboNet
 {
@@ -23,6 +24,7 @@ namespace TrboPortal.TrboNet
         private static readonly object lockObject = new object();
         private static Client trboNetClient = new Client();
         private static CiaBata.CiaBata ciaBataController;
+        private static readonly DatabaseContext _dbContext = new DatabaseContext();
 
         // This is a dictionary with DeviceID --> Operational info
         private static ConcurrentDictionary<int, DeviceInfo> devices = new ConcurrentDictionary<int, DeviceInfo>();
@@ -40,6 +42,8 @@ namespace TrboPortal.TrboNet
             logger.Info("Starting the Controller!");
             SystemSettings settings = new SystemSettings();
 
+            loadDb();
+
             // Start CiabataControler
             ciaBataController = new CiaBata.CiaBata("", "", ""); // Todo add settings
 
@@ -51,6 +55,12 @@ namespace TrboPortal.TrboNet
             heartBeat.Elapsed += TheServerDidATick;
             heartBeat.AutoReset = true;
             heartBeat.Enabled = true;
+        }
+
+        private void loadDb()
+        {
+            _dbContext.RadioSettings.Add(new Model.RadioSettings { Name = "hello", GpsMode = GpsModeEnum.Interval.ToString() }) ;
+            _dbContext.SaveChanges();
         }
 
         private void TheServerDidATick(object sender, ElapsedEventArgs e)
