@@ -96,7 +96,6 @@ namespace TrboPortal.TrboNet
             try
             {
                 loadRadioSettingsFromDatabase();
-                loadDevicesFromDatabase();
                 loadGenericSettingsFromDatabase();
             }
             catch (Exception ex)
@@ -138,17 +137,6 @@ namespace TrboPortal.TrboNet
             }
         }
 
-        private void loadDevicesFromDatabase()
-        {
-            try
-            {
-                
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, "Could not load the device settings from the database");
-            }
-        }
 
         private static void loadRadioSettingsFromDatabase()
         {
@@ -168,58 +156,6 @@ namespace TrboPortal.TrboNet
                 logger.Error(ex, "Could not load the radio settings from the database");
             }
         }
-
-        private void SaveSettingsToDatabase()
-        {
-            try
-            {
-                saveRadioSettingsToDatabase();
-                saveDevicesToDatabase();
-                saveGenericSettingsToDatabase();
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, "Could not save the server state to the database");
-            }
-        }
-
-
-        private void saveGenericSettingsToDatabase()
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, "Could not save the generic settings to the database");
-            }
-        }
-
-        private void saveDevicesToDatabase()
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, "Could not save the device settings to the database");
-            }
-        }
-
-        private static void saveRadioSettingsToDatabase()
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, "Could not save the radio settings to the database");
-            }
-        }
-
 
         private void TheServerDidATick(object sender, ElapsedEventArgs e)
         {
@@ -440,7 +376,8 @@ namespace TrboPortal.TrboNet
                             Latitude = gpsInfo.Latitude,
                             Longitude = gpsInfo.Longitude,
                             Timestamp = gpsInfo.InfoDate.ToString(), // right formatting?
-                            Rssi = gpsInfo.Rssi
+                            Rssi = gpsInfo.Rssi,
+                            DeviceID = deviceID,
                         };
 
                         DeviceInfo deviceInfo;
@@ -474,8 +411,7 @@ namespace TrboPortal.TrboNet
 
                         logger.Info(build.ToString());
 
-                        // Send to CiaBata
-                        ciaBataController.PostGpsLocation(CiaBataMapper.ToGpsLocation(gpsMeasurement));
+                        PostGpsLocation(gpsMeasurement);
                     }
                     catch (Exception ex)
                     {
@@ -487,6 +423,21 @@ namespace TrboPortal.TrboNet
             catch (Exception ex)
             {
                 logger.Log(LogLevel.Error, ex);
+            }
+        }
+
+        private void PostGpsLocation(GpsMeasurement gpsMeasurement)
+        {
+            try
+            {
+                // Send to CiaBata
+                ciaBataController.PostGpsLocation(CiaBataMapper.ToGpsLocation(gpsMeasurement));
+                // Save to database
+                Repository.InsertOrUpdate(DatabaseMapper.Map(gpsMeasurement));
+
+            } catch (Exception ex)
+            {
+                logger.Error("Error posting gps");
             }
         }
 

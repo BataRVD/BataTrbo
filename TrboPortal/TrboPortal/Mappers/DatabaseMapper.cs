@@ -25,6 +25,21 @@ namespace TrboPortal.Mappers
             return radioSettings;
         }
 
+        public static Model.GpsEntry Map(Controllers.GpsMeasurement gpsMeasurement)
+        {
+            Model.GpsEntry entry = new Model.GpsEntry
+            {
+                RadioId = gpsMeasurement.RadioID,
+                DeviceId = gpsMeasurement.DeviceID,
+                Latitude = gpsMeasurement.Latitude,
+                Longitude = gpsMeasurement.Longitude,
+                Rssi = gpsMeasurement.Rssi,
+                Timestamp = DateTimeMapper.ToDateTime(gpsMeasurement.Timestamp) ?? DateTime.Now,
+            };
+
+            return entry;
+        }
+
 
         public static Controllers.Radio Map(Model.Radio radioSettings)
         {
