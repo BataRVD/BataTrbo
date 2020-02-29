@@ -63,7 +63,9 @@ namespace TrboPortal.TrboNet
         {
             logger.Info("Starting the Controller!");
 
+            // fallback - load defaults
             loadDefaultSettings();
+            // overwrite with latest values
             loadSettingsFromDatabase();
 
             // Create CiabataControler
@@ -93,9 +95,9 @@ namespace TrboPortal.TrboNet
         {
             try
             {
-                loadRadioSettings();
-                loadDeviceSettings();
-                loadGenericSettings();
+                loadRadioSettingsFromDatabase();
+                loadDevicesFromDatabase();
+                loadGenericSettingsFromDatabase();
             }
             catch (Exception ex)
             {
@@ -103,7 +105,7 @@ namespace TrboPortal.TrboNet
             }
         }
 
-        private void loadGenericSettings()
+        private void loadGenericSettingsFromDatabase()
         {
             try
             {
@@ -115,7 +117,7 @@ namespace TrboPortal.TrboNet
             }
         }
 
-        private void loadDeviceSettings()
+        private void loadDevicesFromDatabase()
         {
             try
             {
@@ -127,7 +129,7 @@ namespace TrboPortal.TrboNet
             }
         }
 
-        private static void loadRadioSettings()
+        private static void loadRadioSettingsFromDatabase()
         {
             try
             {
@@ -145,6 +147,58 @@ namespace TrboPortal.TrboNet
                 logger.Error(ex, "Could not load the radio settings from the database");
             }
         }
+
+        private void SaveSettingsToDatabase()
+        {
+            try
+            {
+                saveRadioSettingsToDatabase();
+                saveDevicesToDatabase();
+                saveGenericSettingsToDatabase();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Could not save the server state to the database");
+            }
+        }
+
+
+        private void saveGenericSettingsToDatabase()
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Could not save the generic settings to the database");
+            }
+        }
+
+        private void saveDevicesToDatabase()
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Could not save the device settings to the database");
+            }
+        }
+
+        private static void saveRadioSettingsToDatabase()
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Could not save the radio settings to the database");
+            }
+        }
+
 
         private void TheServerDidATick(object sender, ElapsedEventArgs e)
         {
