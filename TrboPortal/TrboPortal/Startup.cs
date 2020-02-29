@@ -25,8 +25,6 @@ namespace TrboPortal
             {
                 client.Database.EnsureCreated();
             }
-            // Start the instance
-            TrboNet.TurboController turboController = TrboNet.TurboController.Instance;
         }
 
         public IConfiguration Configuration { get; }
@@ -38,6 +36,9 @@ namespace TrboPortal
             services.AddScoped<ITrboPortalController, TrboPortalControllerImplementation>();
             services.AddControllers();
             services.AddEntityFrameworkSqlite().AddDbContext<DatabaseContext>();
+
+            // Start the instance
+            var instance = TrboNet.TurboController.Instance;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

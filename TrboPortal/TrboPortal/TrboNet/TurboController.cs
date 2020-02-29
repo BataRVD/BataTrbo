@@ -36,7 +36,10 @@ namespace TrboPortal.TrboNet
         // Config section
         private static string ciaBataUrl;
         private static int serverInterval;
-
+        private static string turboNetUrl;
+        private static int turboNetPort;
+        private static string turboNetUser;
+        private static string turboNetPassword;
 
         // In memory state of the server
 
@@ -52,6 +55,11 @@ namespace TrboPortal.TrboNet
         #region Instance
 
         public TurboController()
+        {
+            ConfigureAndStart();
+        }
+
+        private void ConfigureAndStart()
         {
             logger.Info("Starting the Controller!");
 
@@ -75,6 +83,10 @@ namespace TrboPortal.TrboNet
             serverInterval = Math.Max(250, settings.ServerInterval ?? 0);
             ciaBataUrl = "";
 
+            turboNetUrl = settings.Settings?.Host;
+            turboNetPort = (int)(settings.Settings?.Port ?? 0);
+            turboNetUser = settings.Settings?.User;
+            turboNetPassword = settings.Settings?.Password;
         }
 
         private void loadSettingsFromDatabase()
@@ -180,6 +192,7 @@ namespace TrboPortal.TrboNet
         private bool Connected = false;
         private object ConnectLock = new object();
 
+
         private void Connect()
         {
             try
@@ -202,11 +215,11 @@ namespace TrboPortal.TrboNet
         private void ConnectToTurboNet()
         {
             logger.Info("Connect to turbonet server");
-            SystemSettings settings = new SystemSettings();
             trboNetClient.Disconnect();
             trboNetClient.Connect(
-                new NS.Shared.Network.NetworkConnectionParam(settings.Settings.Host, (int)settings.Settings.Port),
-                new UserInfo(settings.Settings.User, settings.Settings.Password), ClientInitFlags.Empty);
+                new NS.Shared.Network.NetworkConnectionParam(turboNetUrl, turboNetPort), 
+                new UserInfo(turboNetUser, turboNetPassword),
+                ClientInitFlags.Empty);
             if (trboNetClient.IsStarted)
             {
                 logger.Info("Connected to turbonet server");
