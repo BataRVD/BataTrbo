@@ -302,10 +302,7 @@
           "200": {
             "description": "Blaat",
             "schema": {
-              "type": "array",
-              "items": {
                 "$ref": "#/definitions/SystemSettings"
-              }
             }
           },
           "400": {

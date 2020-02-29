@@ -40,5 +40,10 @@ namespace TrboPortal.Model
             context.SaveChanges();
         }
 
+        internal static Model.Settings GetLatestSystemSettings()
+        {
+            using var context = new DatabaseContext();
+            return context.Settings.OrderByDescending(s => s.SettingsId).FirstOrDefault();
+        }
     }
 }

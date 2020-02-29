@@ -11,7 +11,7 @@ namespace TrboPortal.CiaBata
 {
     public class CiaBata
     {
-        private string url;
+        public string url { get; set; }
         private static Logger logger = LogManager.GetCurrentClassLogger();
         private static HttpClient httpClient = new HttpClient();
 

@@ -46,26 +46,33 @@ namespace TrboPortal.Controllers
 
         }
 
+        internal static SystemSettings GetSystemSettings()
+        {
+
+            return DatabaseMapper.Map(Repository.GetLatestSystemSettings());
+        }
+
         public static void UpdateSystemSettings(SystemSettings body)
         {
             if (body != null)
-            { 
-            var newSettings = new Settings
             {
-                DefaultGpsMode = body.DefaultGpsMode?.ToString(),
-                DefaultInterval = body.DefaultInterval ?? 60,
-                ServerInterval = body.ServerInterval ?? 15,
-                TrboNetHost = body.TurboNetSettings?.Host,
-                TrboNetPort = body.TurboNetSettings?.Port ?? 1599,
-                TrboNetPassword = body.TurboNetSettings?.Password,
-                TrboNetUser = body.TurboNetSettings?.User,
-                CiaBataHost = body.CiaBataSettings?.Host,
-            };
+                var newSettings = new Settings
+                {
+                    DefaultGpsMode = body.DefaultGpsMode?.ToString(),
+                    DefaultInterval = body.DefaultInterval ?? 60,
+                    ServerInterval = body.ServerInterval ?? 15,
+                    TrboNetHost = body.TurboNetSettings?.Host,
+                    TrboNetPort = body.TurboNetSettings?.Port ?? 1599,
+                    TrboNetPassword = body.TurboNetSettings?.Password,
+                    TrboNetUser = body.TurboNetSettings?.User,
+                    CiaBataHost = body.CiaBataSettings?.Host,
+                };
 
-            //Store the settings
-            Repository.InsertOrUpdate(newSettings);
+                //Store the settings
+                Repository.InsertOrUpdate(newSettings);
 
-            //TODO: Fire event settings changed?
+                // How is this for an "event driven" system? =)
+                TurboController.Instance.loadGenericSettingsFromDatabase();
             }
         }
     }

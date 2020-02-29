@@ -43,9 +43,9 @@ namespace TrboPortal.Controllers
             );
         }
 
-        public Task<ICollection<SystemSettings>> GetSystemSettingsAsync()
+        public Task<SystemSettings> GetSystemSettingsAsync()
         {
-            throw new NotImplementedException();
+            return Task.FromResult(TrboPortalHelper.GetSystemSettings());
         }
 
         public Task SetSystemSettingsAsync(SystemSettings body)
@@ -63,5 +63,6 @@ namespace TrboPortal.Controllers
             // TODO never null ?
             return Task.Run(() => TurboController.Instance.PollForGps(id.ToArray()));
         }
+
     }
 }

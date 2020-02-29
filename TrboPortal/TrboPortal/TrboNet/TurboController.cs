@@ -105,11 +105,32 @@ namespace TrboPortal.TrboNet
             }
         }
 
-        private void loadGenericSettingsFromDatabase()
+        public void loadGenericSettingsFromDatabase()
         {
             try
             {
-                
+                var settings = Repository.GetLatestSystemSettings();
+                if (settings != null)
+                {
+                    serverInterval = Math.Max(250, settings.ServerInterval);
+                    ciaBataUrl = settings.CiaBataHost;
+
+                    turboNetUrl = settings.TrboNetHost;
+                    turboNetPort = (int)(settings.TrboNetPort);
+                    turboNetUser = settings.TrboNetUser;
+                    turboNetPassword = settings.TrboNetPassword;
+
+                    // Invalidate connection to make TrboNet use new config
+                    Connected = false;
+                    // Update Ciabata
+                    ciaBataController.url = ciaBataUrl;
+                    // update heartbeat
+                    heartBeat.Interval = serverInterval;
+                } 
+                else
+                {
+                    logger.Info("No generic settings in the database");
+                }
             }
             catch (Exception ex)
             {
@@ -134,7 +155,7 @@ namespace TrboPortal.TrboNet
             try
             {
                 var radiosFromSettings = _dbContext.RadioSettings
-                .Select(rs => DatabaseMappercs.Map(rs))
+                .Select(rs => DatabaseMapper.Map(rs))
                 .ToDictionary(r => r.RadioId, r => r);
 
                 foreach (var radio in radiosFromSettings)

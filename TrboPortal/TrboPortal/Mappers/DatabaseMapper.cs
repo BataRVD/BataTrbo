@@ -8,7 +8,7 @@ using NLog;
 
 namespace TrboPortal.Mappers
 {
-    public static class DatabaseMappercs
+    public static class DatabaseMapper
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
@@ -46,5 +46,31 @@ namespace TrboPortal.Mappers
             return radio;
         }
 
+        internal static SystemSettings Map(Settings settings)
+        {
+            if (!Enum.TryParse(settings.DefaultGpsMode, out GpsModeEnum gpsMode))
+            {
+                gpsMode = GpsModeEnum.None;
+            }
+            Controllers.SystemSettings systemSettings = new SystemSettings
+            {
+                DefaultInterval = settings.DefaultInterval,
+                DefaultGpsMode = gpsMode,
+                ServerInterval = settings.ServerInterval,
+                CiaBataSettings = new CiaBataSettings
+                {
+                    Host = settings.CiaBataHost
+                },
+                TurboNetSettings = new TurboNetSettings
+                {
+                    Host = settings.TrboNetHost,
+                    Port = settings.TrboNetPort,
+                    User = settings.TrboNetUser,
+                    Password = settings.TrboNetPassword,
+                }
+            };
+
+            return systemSettings;
+        }
     }
 }
