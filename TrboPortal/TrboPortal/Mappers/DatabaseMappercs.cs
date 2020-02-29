@@ -18,8 +18,8 @@ namespace TrboPortal.Mappers
             {
                 Name = radio.Name,
                 RadioId = radio.RadioId,
-                GpsMode = radio.RadioSettings.GpsMode.ToString(),
-                RequestInterval = radio.RadioSettings.RequestInterval ?? 0
+                GpsMode = radio.GpsMode.ToString(),
+                RequestInterval = radio.RequestInterval ?? 0
             };
 
             return radioSettings;
@@ -38,12 +38,9 @@ namespace TrboPortal.Mappers
             {
                 Name = radioSettings.Name,
                 RadioId = radioSettings.RadioId,
-                RadioSettings = new Controllers.RadioSettings
-                {
-                    GpsMode = gpsMode,
-                    RadioId = radioSettings.RadioId,
-                    RequestInterval = radioSettings.RequestInterval
-                }
+                GpsMode = gpsMode,
+                RequestInterval = radioSettings.RequestInterval
+                
             };
 
             return radio;

@@ -26,20 +26,21 @@ namespace TrboPortal.Controllers
         {
             using var context = new DatabaseContext();
             return context.GpsEntries
-                .Where(g => ids.Contains(g.RadioId) &&
+                .Where(g => g.RadioId.HasValue &&
+                            ids.Contains(g.RadioId.Value) &&
                             (from == null || from < g.Timestamp) &&
                             (through == null || through > g.Timestamp))
                 .Select(g => new GpsMeasurement(g))
                 .ToList();
         }
 
-        public static void UpdateRadioSettings(IEnumerable<RadioSettings> radioSettings)
+        public static void UpdateRadioSettings(IEnumerable<Radio> radioSettings)
         {
             //Store the settings
             Repository.InsertOrUpdate(radioSettings.ToList().Select(RadioMapper.MapRadioSettings).ToList());
 
             //TODO JV: Dit gaat dus niet meer werken, sowieso is die methode een noop geworden sinds 134fa25a 
-             radioSettings?.ToList().ForEach(d => { TurboController.Instance.AddOrUpdateDeviceSettings(d); });
+             //radioSettings?.ToList().ForEach(d => { TurboController.Instance.AddOrUpdateDeviceSettings(d); });
 
             //TODO Fire settings changed event?
 
@@ -47,21 +48,25 @@ namespace TrboPortal.Controllers
 
         public static void UpdateSystemSettings(SystemSettings body)
         {
+            if (body != null)
+            { 
             var newSettings = new Settings
             {
                 DefaultGpsMode = body.DefaultGpsMode?.ToString(),
                 DefaultInterval = body.DefaultInterval ?? 60,
                 ServerInterval = body.ServerInterval ?? 15,
-                TrboNetHost = body.Settings?.Host,
-                TrboNetPort = body.Settings?.Port ?? 1599,
-                TrboNetPassword = body.Settings?.Password,
-                TrboNetUser = body.Settings?.User
+                TrboNetHost = body.TurboNetSettings?.Host,
+                TrboNetPort = body.TurboNetSettings?.Port ?? 1599,
+                TrboNetPassword = body.TurboNetSettings?.Password,
+                TrboNetUser = body.TurboNetSettings?.User,
+                CiaBataHost = body.CiaBataSettings?.Host,
             };
 
             //Store the settings
             Repository.InsertOrUpdate(newSettings);
 
             //TODO: Fire event settings changed?
+            }
         }
     }
 }

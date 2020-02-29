@@ -15,7 +15,7 @@ namespace TrboPortal.Controllers
             return Task.FromResult<ICollection<Radio>>(TurboController.Instance.GetSettings());
         }
 
-        public Task UpdateRadioSettingsAsync(IEnumerable<RadioSettings> radioSettings)
+        public Task UpdateRadioSettingsAsync(IEnumerable<Radio> radioSettings)
         {
             return Task.Run(() => TrboPortalHelper.UpdateRadioSettings(radioSettings));
         }
@@ -62,11 +62,6 @@ namespace TrboPortal.Controllers
         {
             // TODO never null ?
             return Task.Run(() => TurboController.Instance.PollForGps(id.ToArray()));
-        }
-
-        public Task UpdateGpsModeAsync(IEnumerable<int> id, GpsMode body)
-        {
-            throw new NotImplementedException();
         }
     }
 }

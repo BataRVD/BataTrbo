@@ -107,60 +107,8 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/RadioSettings"
+                "$ref": "#/definitions/Radio"
               }
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Pet not found"
-          },
-          "405": {
-            "description": "Validation exception"
-          }
-        }
-      }
-    },
-    "/radio/GpsMode": {
-      "put": {
-        "tags": [
-          "Radio settings"
-        ],
-        "summary": "Update gps mode radio settings",
-        "description": "Update gps moderadio settings",
-        "operationId": "updateGpsMode",
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "description": "Id's of radios to update",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "integer"
-            },
-            "example": "1,2,3",
-            "collectionFormat": "csv"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Set GpsModeEnum properties of radio",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GpsMode"
             }
           }
         ],
@@ -378,7 +326,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "body",
+            "name": "settings",
             "description": "System settings to store",
             "required": true,
             "schema": {
@@ -473,23 +421,6 @@
           "type": "string",
           "example": "EHBO-1"
         },
-        "RadioSettings": {
-          "$ref": "#/definitions/RadioSettings",
-          "example": "interval"
-        }
-      },
-      "xml": {
-        "name": "Radio"
-      }
-    },
-    "RadioSettings": {
-      "type": "object",
-      "properties": {
-        "radioId": {
-          "type": "integer",
-          "format": "int32",
-          "example": 1
-        },
         "GpsMode": {
           "$ref": "#/definitions/GpsModeEnum",
           "example": "interval"
@@ -505,6 +436,7 @@
         "name": "Radio"
       }
     },
+
     "GpsModeEnum": {
       "type": "string",
       "description": "GPS polling mode",
@@ -517,43 +449,25 @@
         "name": "GpsModeEnum"
       }
     },
-    "GpsMode": {
-      "type": "object",
-      "description": "GPS polling mode",
-      "required": [
-        "GpsMode"
-      ],
-      "properties": {
-        "GpsMode": {
-          "$ref": "#/definitions/GpsMode",
-          "example": "interval"
-        },
-        "PollInterval": {
-          "type": "integer",
-          "example": "15"
-        }
-      },
-      "xml": {
-        "name": "GpsMode"
-      }
-    },
+
     "MessageQueueItem": {
       "type": "object",
       "required": [
         "Timestamp",
-        "Radio"
+        "RadioId"
       ],
       "properties": {
         "Timestamp": {
           "type": "string",
           "example": "2020-02-23T08:49:40+00:00"
         },
-        "Radio": {
-          "$ref": "#/definitions/Radio"
+        "RadioID": {
+          "type": "integer",
+          "example": "1"
         }
       },
       "xml": {
-        "name": "RequestQueueItem"
+        "name": "MessageQueueItem"
       }
     },
     "GpsMeasurement": {
@@ -566,6 +480,10 @@
       ],
       "properties": {
         "RadioID": {
+          "type": "integer",
+          "example": "1"
+        },
+        "DeviceID": {
           "type": "integer",
           "example": "1"
         },
@@ -620,6 +538,21 @@
         "name": "TurboNetSettings"
       }
     },
+    "CiaBataSettings": {
+      "type": "object",
+      "required": [
+        "Host"
+      ],
+      "properties": {
+        "Host": {
+          "type": "string",
+          "example": "192.168.2.92"
+        }
+      },
+      "xml": {
+        "name": "CiaBataSettings"
+      }
+    },
     "SystemSettings": {
       "type": "object",
       "properties": {
@@ -635,8 +568,11 @@
           "type": "integer",
           "example": 15
         },
-        "Settings": {
+        "TurboNetSettings": {
           "$ref": "#/definitions/TurboNetSettings"
+        },
+        "CiaBataSettings": {
+          "$ref": "#/definitions/CiaBataSettings"
         }
       },
       "xml": {

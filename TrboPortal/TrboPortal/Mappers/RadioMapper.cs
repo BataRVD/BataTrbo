@@ -4,7 +4,7 @@ namespace TrboPortal.Mappers
 {
     public class RadioMapper
     {
-        public static Model.Radio MapRadioSettings(RadioSettings rs)
+        public static Model.Radio MapRadioSettings(Controllers.Radio rs)
         {
             return new Model.Radio
             {

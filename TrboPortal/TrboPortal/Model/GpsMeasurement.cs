@@ -18,7 +18,8 @@ namespace TrboPortal.Controllers
 
         public GpsMeasurement(GpsEntry g)
         {
-            RadioID = g.RadioId;
+            //TODO JV
+            RadioID = g.RadioId ?? 99;
             Timestamp = DateTimeMapper.ToString(g.Timestamp);
             Latitude = g.Latitude;
             Longitude = g.Longitude;

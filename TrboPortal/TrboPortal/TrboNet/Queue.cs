@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace TrboPortal.TrboNet
@@ -17,31 +18,44 @@ namespace TrboPortal.TrboNet
         /// </summary>
         /// <param name="device"></param>
         /// <returns></returns>
-        private bool Remove(T device)
+        public bool Remove(T device)
         {
-            bool removed = false;
-            lock (queue)
-            {
-                var node = queue.First;
-                while (node != null)
-                {
-                    var nextNode = node.Next;
-                    if (EqualityComparer<T>.Default.Equals(node.Value, device))
-                    {
-                        queue.Remove(node);
-                        removed = true;
-                    }
-                    node = nextNode;
-                }
-            }
-            return removed;
+            return Remove(device, (a, b) => { return EqualityComparer<T>.Default.Equals(a, b); });
         }
 
+
         /// <summary>
-        /// See the first item of the queue
+        /// Remove all occurences of device from the queue, matched by the compare function
         /// </summary>
+        /// <param name="device"></param>
+        /// <param name="comperator"></param>
         /// <returns></returns>
-        private T Peek()
+        public bool Remove(T device, Func<T,T,bool> comperator)
+        {
+                bool removed = false;
+                lock (queue)
+                {
+                    var node = queue.First;
+                    while (node != null)
+                    {
+                        var nextNode = node.Next;
+                        if (comperator(node.Value,device))
+                        {
+                            queue.Remove(node);
+                            removed = true;
+                        }
+                        node = nextNode;
+                    }
+                }
+                return removed;
+            }
+
+
+            /// <summary>
+            /// See the first item of the queue
+            /// </summary>
+            /// <returns></returns>
+            public T Peek()
         {
             lock (queue)
             {
@@ -58,7 +72,7 @@ namespace TrboPortal.TrboNet
         /// Check if the queue is empty
         /// </summary>
         /// <returns></returns>
-        private bool IsEmpty()
+        public bool IsEmpty()
         {
             return (queue.Count == 0);
         }
@@ -67,7 +81,7 @@ namespace TrboPortal.TrboNet
         /// Takes and returns the first value from the queue
         /// </summary>
         /// <returns></returns>
-        private T Pop()
+        public T Pop()
         {
             lock (queue)
             {
@@ -97,7 +111,7 @@ namespace TrboPortal.TrboNet
         /// Jump the queue, and add the entries to the beginning
         /// </summary>
         /// <param name="entries"></param>
-        private void Jump(params T[] entries)
+        public void Jump(params T[] entries)
         {
             lock (queue)
             {
@@ -112,7 +126,7 @@ namespace TrboPortal.TrboNet
         /// Add the entries to the end of the queue
         /// </summary>
         /// <param name="entries"></param>
-        private void Add(params T[] entries)
+        public void Add(params T[] entries)
         {
             lock (queue)
             {

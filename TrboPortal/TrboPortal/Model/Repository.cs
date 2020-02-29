@@ -14,7 +14,6 @@ namespace TrboPortal.Model
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="entity"></param>
-        /// <param name="db"></param>
         public static void InsertOrUpdate<T>(T entity) where T : class
         {
             using var db = new DatabaseContext();

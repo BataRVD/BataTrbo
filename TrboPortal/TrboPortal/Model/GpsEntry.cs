@@ -14,7 +14,8 @@ namespace TrboPortal.Model
     public class GpsEntry
     {
         [Key] public int GpsEntryId { get; set; }
-        [ForeignKey("RadioId")] public int RadioId { get; set; }
+        [ForeignKey("RadioId")] public int? RadioId { get; set; }
+        public int? DeviceId { get; set; }
         public DateTime Timestamp { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }

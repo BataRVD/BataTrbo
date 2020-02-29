@@ -83,12 +83,12 @@ namespace TrboPortal.TrboNet
         {
             SystemSettings settings = new SystemSettings();
             serverInterval = Math.Max(250, settings.ServerInterval ?? 0);
-            ciaBataUrl = "";
+            ciaBataUrl = settings.CiaBataSettings?.Host; ;
 
-            turboNetUrl = settings.Settings?.Host;
-            turboNetPort = (int)(settings.Settings?.Port ?? 0);
-            turboNetUser = settings.Settings?.User;
-            turboNetPassword = settings.Settings?.Password;
+            turboNetUrl = settings.TurboNetSettings?.Host;
+            turboNetPort = (int)(settings.TurboNetSettings?.Port ?? 0);
+            turboNetUser = settings.TurboNetSettings?.User;
+            turboNetPassword = settings.TurboNetSettings?.Password;
         }
 
         private void loadSettingsFromDatabase()
@@ -560,8 +560,8 @@ namespace TrboPortal.TrboNet
                     continue;
                 }
 
-                bool isInterval = radio.RadioSettings?.GpsMode == GpsModeEnum.Interval;
-                int minimumInterval = (radio.RadioSettings?.RequestInterval ?? 0);
+                bool isInterval = radio.GpsMode == GpsModeEnum.Interval;
+                int minimumInterval = (radio.RequestInterval ?? 0);
                 bool hasValidInterval = minimumInterval > 0;
                 if (!isInterval || !hasValidInterval)
                 {
@@ -589,7 +589,7 @@ namespace TrboPortal.TrboNet
             {
                 if (GetDeviceInfoByRadioID(radioID, out DeviceInfo deviceInfo) && GetRadioByRadioID(radioID, out Controllers.Radio radio))
                 {
-                    GpsModeEnum gpsMode = radio?.RadioSettings?.GpsMode ?? GpsModeEnum.None;
+                    GpsModeEnum gpsMode = radio?.GpsMode ?? GpsModeEnum.None;
                     if (gpsMode != GpsModeEnum.None)
                     {
                         int deviceID = deviceInfo.DeviceID;

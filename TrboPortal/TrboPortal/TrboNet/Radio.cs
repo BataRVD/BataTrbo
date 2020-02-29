@@ -10,11 +10,7 @@
         {
             this.Name = $"Radio {radioID}";
             this.RadioId = radioID;
-            this.RadioSettings = new RadioSettings
-            {
-                RadioId = radioID,
-                GpsMode = GpsModeEnum.None
-            };
+            GpsMode = GpsModeEnum.None;
         }
 
         public Radio()
