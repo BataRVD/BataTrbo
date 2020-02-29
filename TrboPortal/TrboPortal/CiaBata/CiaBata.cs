@@ -12,21 +12,26 @@ namespace TrboPortal.CiaBata
     public class CiaBata
     {
         private string url;
-        private string user;
-        private string password;
         private static Logger logger = LogManager.GetCurrentClassLogger();
         private static HttpClient httpClient = new HttpClient();
 
 
-        public CiaBata(string url, string user, string password)
+        public CiaBata(string url)
         {
             this.url = url;
-            this.user = user;
-            this.password = password;
         }
 
+        /// <summary>
+        /// Post the current location to ciabata
+        /// </summary>
+        /// <param name="gps"></param>
         public async void PostGpsLocation(GPSLocation gps)
         {
+            if (string.IsNullOrEmpty(url))
+            {
+                logger.Warn("Ciabata is not configured, won't send data");
+                return;
+            }
             try
             {
                 string json = JsonConvert.SerializeObject(gps, Formatting.None);
@@ -49,14 +54,24 @@ namespace TrboPortal.CiaBata
             }
         }
 
-
-        public async void PostDeviceLifeSign(int RadioID, string deviceName, bool online)
+        /// <summary>
+        /// Post a livesign to the server, for example for a radio or the server
+        /// </summary>
+        /// <param name="referenceID"></param>
+        /// <param name="name"></param>
+        /// <param name="online"></param>
+        public async void PostDeviceLifeSign(int referenceID, string name, bool online)
         {
+            if (string.IsNullOrEmpty(url))
+            {
+                logger.Warn("Ciabata is not configured, won't send data");
+                return;
+            }
             try
             {
                 DeviceLifeSign gps = new DeviceLifeSign();
-                gps.deviceName = deviceName;
-                gps.RadioID = RadioID;
+                gps.deviceName = name;
+                gps.RadioID = referenceID;
 
                 if (online)
                 {
@@ -82,7 +97,7 @@ namespace TrboPortal.CiaBata
             }
             catch (Exception ex)
             {
-                logger.Error(ex, $"Could not post device livesign for radioID {RadioID}");
+                logger.Error(ex, $"Could not post livesign for '{name}' with referenceID {referenceID}");
             }
         }
 

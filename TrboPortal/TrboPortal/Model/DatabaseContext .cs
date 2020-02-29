@@ -9,7 +9,7 @@ namespace TrboPortal.Model
 {
     public class DatabaseContext: DbContext
     {
-        public DbSet<RadioSettings> RadioSettings { get; set; }
+        public DbSet<Radio> RadioSettings { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

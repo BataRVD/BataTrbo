@@ -20,18 +20,32 @@ namespace TrboPortal.TrboNet
     public sealed partial class TurboController
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
+        
+        // instance specific 
         private static TurboController instance = null;
         private static readonly object lockObject = new object();
+
+        // some clients
         private static Client trboNetClient = new Client();
         private static CiaBata.CiaBata ciaBataController;
+
+        // database
         private static readonly DatabaseContext _dbContext = new DatabaseContext();
 
+
+        // Config section
+        private static string ciaBataUrl;
+        private static int serverInterval;
+
+
+        // In memory state of the server
+
+        private static LinkedList<RequestMessage> pollQueue = new LinkedList<RequestMessage>();
         // This is a dictionary with DeviceID --> Operational info
         private static ConcurrentDictionary<int, DeviceInfo> devices = new ConcurrentDictionary<int, DeviceInfo>();
         // This is a dictionary with RadioID --> Settings
-        private static ConcurrentDictionary<int, Radio> radios = new ConcurrentDictionary<int, Radio>();
-
-        private static LinkedList<RequestMessage> pollQueue = new LinkedList<RequestMessage>();
+        private static ConcurrentDictionary<int, Controllers.Radio> radios = new ConcurrentDictionary<int, Controllers.Radio>();
+           
         private static Timer heartBeat;
         private static DateTime lastLifeSign = DateTime.Now;
 
@@ -40,27 +54,84 @@ namespace TrboPortal.TrboNet
         public TurboController()
         {
             logger.Info("Starting the Controller!");
-            SystemSettings settings = new SystemSettings();
 
-            loadDb();
+            loadDefaultSettings();
+            loadSettingsFromDatabase();
 
-            // Start CiabataControler
-            ciaBataController = new CiaBata.CiaBata("", "", ""); // Todo add settings
+            // Create CiabataControler
+            ciaBataController = new CiaBata.CiaBata(ciaBataUrl); // Todo add settings            
 
             // Start HeartBeat
             heartBeat = new Timer();
-            // lets say we want a minimum of 250 ms now
-            int serverInterval = Math.Max(250, settings.ServerInterval ?? 0);
             heartBeat.Interval = serverInterval;
             heartBeat.Elapsed += TheServerDidATick;
             heartBeat.AutoReset = true;
             heartBeat.Enabled = true;
         }
 
-        private void loadDb()
+        private void loadDefaultSettings()
         {
-            _dbContext.RadioSettings.Add(new Model.RadioSettings { Name = "hello", GpsMode = GpsModeEnum.Interval.ToString() }) ;
-            _dbContext.SaveChanges();
+            SystemSettings settings = new SystemSettings();
+            serverInterval = Math.Max(250, settings.ServerInterval ?? 0);
+            ciaBataUrl = "";
+
+        }
+
+        private void loadSettingsFromDatabase()
+        {
+            try
+            {
+                loadRadioSettings();
+                loadDeviceSettings();
+                loadGenericSettings();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Could not load the settings from the database");
+            }
+        }
+
+        private void loadGenericSettings()
+        {
+            try
+            {
+                
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Could not load the generic settings from the database");
+            }
+        }
+
+        private void loadDeviceSettings()
+        {
+            try
+            {
+                
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Could not load the device settings from the database");
+            }
+        }
+
+        private static void loadRadioSettings()
+        {
+            try
+            {
+                var radiosFromSettings = _dbContext.RadioSettings
+                .Select(rs => DatabaseMappercs.Map(rs))
+                .ToDictionary(r => r.RadioId, r => r);
+
+                foreach (var radio in radiosFromSettings)
+                {
+                    radios.AddOrUpdate(radio.Key, radio.Value, (rid, oldvalue) => { return oldvalue; });
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Could not load the radio settings from the database");
+            }
         }
 
         private void TheServerDidATick(object sender, ElapsedEventArgs e)
@@ -252,7 +323,7 @@ namespace TrboPortal.TrboNet
             return deviceFound;
         }
 
-        private bool GetRadioByRadioID(int radioID, out Radio radio)
+        private bool GetRadioByRadioID(int radioID, out Controllers.Radio radio)
         {
             bool radioFound = radios.TryGetValue(radioID, out radio);
             if (!radioFound)
@@ -416,7 +487,7 @@ namespace TrboPortal.TrboNet
                 }
 
                 int radioID = deviceInfo.RadioID;
-                if (!GetRadioByRadioID(radioID, out Radio radio))
+                if (!GetRadioByRadioID(radioID, out Controllers.Radio radio))
                 {
                     // We have no settings
                     continue;
@@ -449,7 +520,7 @@ namespace TrboPortal.TrboNet
         {
             foreach (int radioID in radioIds)
             {
-                if (GetDeviceInfoByRadioID(radioID, out DeviceInfo deviceInfo) && GetRadioByRadioID(radioID, out Radio radio))
+                if (GetDeviceInfoByRadioID(radioID, out DeviceInfo deviceInfo) && GetRadioByRadioID(radioID, out Controllers.Radio radio))
                 {
                     GpsModeEnum gpsMode = radio?.RadioSettings?.GpsMode ?? GpsModeEnum.None;
                     if (gpsMode != GpsModeEnum.None)
@@ -602,7 +673,7 @@ namespace TrboPortal.TrboNet
 
 
                 // Add settings
-                if (radios.TryAdd(radioID, new Radio(radioID)))
+                if (radios.TryAdd(radioID, new Controllers.Radio(radioID)))
                 {
                     logger.Info($"Created standard settings for Radio with radioID {radioID}");
                 }
@@ -618,7 +689,7 @@ namespace TrboPortal.TrboNet
         /// If Device is not yet known (aka seen in TrboNet network), creates a stub with supplied settings in case we see it later.
         /// </summary>
         /// <param name="device">Device from API</param>
-        public void AddOrUpdateDeviceSettings(Radio radio)
+        public void AddOrUpdateDeviceSettings(Controllers.Radio radio)
         {
             var radioID = radio.RadioId;
             radios.AddOrUpdate(radioID, radio, (radioID, oldInfo) =>
@@ -633,9 +704,9 @@ namespace TrboPortal.TrboNet
             return new List<DeviceInfo>(devices.Values);
         }
 
-        public List<Radio> GetSettings()
+        public List<Controllers.Radio> GetSettings()
         {
-            return new List<Radio>(radios.Values);
+            return new List<Controllers.Radio>(radios.Values);
         }
 
     }
