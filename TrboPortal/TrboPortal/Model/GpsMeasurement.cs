@@ -3,28 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using NLog;
+using TrboPortal.Mappers;
+using TrboPortal.Model;
 using Exception = System.Exception;
 
 namespace TrboPortal.Controllers
 {
     public partial class GpsMeasurement
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
-
-        public DateTime? TimestampDateTime
+        public GpsMeasurement()
         {
-            get
-            {
-                try
-                {
-                    return DateTime.Parse(Timestamp, null, System.Globalization.DateTimeStyles.RoundtripKind);
-                }
-                catch (Exception e)
-                {
-                    logger.Error(e, $"Unable to parse GpsMeasurement Timestamp \"{Timestamp}\" of  Radio {RadioID}");
-                    return null;
-                }
-            }
+            //Default constructor
         }
+
+        public GpsMeasurement(GpsEntry g)
+        {
+            RadioID = g.RadioId;
+            Timestamp = DateTimeMapper.ToString(g.Timestamp);
+            Latitude = g.Latitude;
+            Longitude = g.Longitude;
+            Rssi = g.Rssi;
+        }
+        
     }
 }

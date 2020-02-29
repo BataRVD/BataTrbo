@@ -12,6 +12,8 @@ namespace TrboPortal.Model
         public DbSet<Radio> RadioSettings { get; set; }
         public DbSet<GpsEntry> GpsEntries { get; set; }
 
+        public DbSet<Settings> Settings { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

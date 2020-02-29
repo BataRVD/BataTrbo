@@ -107,7 +107,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Radio"
+                "$ref": "#/definitions/RadioSettings"
               }
             }
           }
@@ -350,17 +350,6 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "System settings to store",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SystemSettings"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Blaat",
@@ -386,8 +375,19 @@
         "produces": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "System settings to store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SystemSettings"
+            }
+          }
+        ],
         "responses": {
-          "200": {
+          /*"200": {
             "description": "Updated System settings",
             "schema": {
               "type": "array",
@@ -395,7 +395,7 @@
                 "$ref": "#/definitions/SystemSettings"
               }
             }
-          },
+          },*/
           "400": {
             "description": "Computer says no"
           }
@@ -604,7 +604,7 @@
           "example": "192.168.2.92"
         },
         "Port": {
-          "type": "number",
+          "type": "integer",
           "example": 4021
         },
         "User": {
