@@ -63,6 +63,10 @@ namespace TrboPortal.Mappers
 
         internal static SystemSettings Map(Settings settings)
         {
+            if (settings == null)
+            {
+                return null;
+            }
             if (!Enum.TryParse(settings.DefaultGpsMode, out GpsModeEnum gpsMode))
             {
                 gpsMode = GpsModeEnum.None;

@@ -46,7 +46,7 @@ namespace TrboPortal.Controllers
 
         internal static SystemSettings GetSystemSettings()
         {
-
+            // TODO: Latest from DB not the cached in the server? If we are running on default, it will return null...
             return DatabaseMapper.Map(Repository.GetLatestSystemSettings());
         }
 
