@@ -1971,3 +1971,40 @@
 2020-03-01 17:00:35.9369|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Open
 2020-03-01 17:00:36.0946|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Open
 2020-03-01 17:00:36.8769|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Open
+2020-03-01 17:00:37.1142|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Open
+2020-03-01 17:00:39.4184|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 17:00:39.4184|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:59:29
+2020-03-01 17:00:39.4564|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 17:00:40.0777|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 17:00:40.2246|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Close
+2020-03-01 17:00:40.2246|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished Test01-Mar-20 16:59:29
+2020-03-01 17:00:49.4288|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 17:00:49.4288|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:59:29
+2020-03-01 17:00:49.4687|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 17:00:59.0792|DEBUG|proveofconceptturbo.WebApiApplication|DeviceLocationChanged 52.2431002976373
+2020-03-01 17:00:59.2211|DEBUG|proveofconceptturbo.WebApiApplication|DeviceLocationChanged 52.2431002976373
+2020-03-01 17:00:59.4216|DEBUG|proveofconceptturbo.WebApiApplication|DeviceLocationChanged 52.2431002976373
+2020-03-01 17:00:59.4216|DEBUG|proveofconceptturbo.WebApiApplication|M_client_DeviceStateChanged 
+2020-03-01 17:00:59.4316|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 17:00:59.4316|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:59:29
+2020-03-01 17:00:59.4726|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 17:01:00.3553|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished Test01-Mar-20 16:59:29
+2020-03-01 17:01:02.1553|DEBUG|proveofconceptturbo.WebApiApplication|DeviceLocationChanged 52.2431002976373
+2020-03-01 17:01:02.2220|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished Test01-Mar-20 16:59:29
+2020-03-01 17:01:02.2220|DEBUG|proveofconceptturbo.WebApiApplication|DeviceLocationChanged 52.2431002976373
+2020-03-01 17:01:04.3961|DEBUG|proveofconceptturbo.WebApiApplication|DeviceLocationChanged 52.2431002976373
+2020-03-01 17:01:09.4703|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 17:01:09.4703|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:59:29
+2020-03-01 17:01:09.5105|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 17:01:10.4765|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished Test01-Mar-20 16:59:29
+2020-03-01 17:01:19.4794|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 17:01:19.4794|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:59:29
+2020-03-01 17:01:19.5294|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 17:01:20.7164|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished Test01-Mar-20 16:59:29
+2020-03-01 17:01:25.5163|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Open
+2020-03-01 17:01:25.6365|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 17:01:25.8397|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Open
+2020-03-01 17:01:29.0558|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Close
+2020-03-01 17:01:29.4584|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 17:01:29.4584|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:59:29
+2020-03-01 17:01:29.4974|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 

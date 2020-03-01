@@ -1,0 +1,36 @@
+2020-03-01 17:07:14.1655|INFO|TrboPortalv3.WebApiApplication|HEllo
+2020-03-01 17:07:14.1744|DEBUG|TrboPortalv3.WebApiApplication|Hai Test01-Mar-20 17:07:14
+2020-03-01 17:07:14.2134|DEBUG|TrboPortalv3.WebApiApplication|DevicesChanged 
+2020-03-01 17:07:24.1829|INFO|TrboPortalv3.WebApiApplication|HEllo
+2020-03-01 17:07:24.1829|DEBUG|TrboPortalv3.WebApiApplication|Hai Test01-Mar-20 17:07:14
+2020-03-01 17:07:24.2231|DEBUG|TrboPortalv3.WebApiApplication|DevicesChanged 
+2020-03-01 17:07:34.1730|INFO|TrboPortalv3.WebApiApplication|HEllo
+2020-03-01 17:07:34.1730|DEBUG|TrboPortalv3.WebApiApplication|Hai Test01-Mar-20 17:07:14
+2020-03-01 17:07:34.2325|DEBUG|TrboPortalv3.WebApiApplication|DevicesChanged 
+2020-03-01 17:07:44.1913|INFO|TrboPortalv3.WebApiApplication|HEllo
+2020-03-01 17:07:44.1913|DEBUG|TrboPortalv3.WebApiApplication|Hai Test01-Mar-20 17:07:14
+2020-03-01 17:07:44.2443|DEBUG|TrboPortalv3.WebApiApplication|DevicesChanged 
+2020-03-01 17:07:54.1833|INFO|TrboPortalv3.WebApiApplication|HEllo
+2020-03-01 17:07:54.1833|DEBUG|TrboPortalv3.WebApiApplication|Hai Test01-Mar-20 17:07:14
+2020-03-01 17:07:54.2589|DEBUG|TrboPortalv3.WebApiApplication|DevicesChanged 
+2020-03-01 17:08:02.0443|DEBUG|TrboPortalv3.WebApiApplication|M_client_TransmitReceiveChanged Open
+2020-03-01 17:08:02.3739|DEBUG|TrboPortalv3.WebApiApplication|M_client_TransmitReceiveChanged Open
+2020-03-01 17:08:04.2031|INFO|TrboPortalv3.WebApiApplication|HEllo
+2020-03-01 17:08:04.2031|DEBUG|TrboPortalv3.WebApiApplication|Hai Test01-Mar-20 17:07:14
+2020-03-01 17:08:04.2442|DEBUG|TrboPortalv3.WebApiApplication|DevicesChanged 
+2020-03-01 17:08:05.5091|DEBUG|TrboPortalv3.WebApiApplication|M_client_TransmitReceiveChanged Close
+2020-03-01 17:08:09.2417|DEBUG|TrboPortalv3.WebApiApplication|DevicesChanged 
+2020-03-01 17:08:14.1941|INFO|TrboPortalv3.WebApiApplication|HEllo
+2020-03-01 17:08:14.1941|DEBUG|TrboPortalv3.WebApiApplication|Hai Test01-Mar-20 17:07:14
+2020-03-01 17:08:14.2331|DEBUG|TrboPortalv3.WebApiApplication|DevicesChanged 
+2020-03-01 17:08:15.7504|DEBUG|TrboPortalv3.WebApiApplication|M_client_WorkflowCommandFinished Test01-Mar-20 17:07:14
+2020-03-01 17:08:24.2014|INFO|TrboPortalv3.WebApiApplication|HEllo
+2020-03-01 17:08:24.2014|DEBUG|TrboPortalv3.WebApiApplication|Hai Test01-Mar-20 17:07:14
+2020-03-01 17:08:24.2473|DEBUG|TrboPortalv3.WebApiApplication|DevicesChanged 
+2020-03-01 17:08:25.6803|DEBUG|TrboPortalv3.WebApiApplication|M_client_WorkflowCommandFinished Test01-Mar-20 17:07:14
+2020-03-01 17:08:29.1893|DEBUG|TrboPortalv3.WebApiApplication|DeviceLocationChanged 52.2431778721511
+2020-03-01 17:08:29.1893|DEBUG|TrboPortalv3.WebApiApplication|M_client_WorkflowCommandFinished Test01-Mar-20 17:07:14
+2020-03-01 17:08:29.1893|DEBUG|TrboPortalv3.WebApiApplication|DeviceLocationChanged 52.2431778721511
+2020-03-01 17:08:29.8311|DEBUG|TrboPortalv3.WebApiApplication|M_client_DeviceStateChanged 
+2020-03-01 17:08:32.0682|DEBUG|TrboPortalv3.WebApiApplication|DeviceLocationChanged 52.2431778721511
+2020-03-01 17:08:32.1900|DEBUG|TrboPortalv3.WebApiApplication|DeviceLocationChanged 52.2431778721511
