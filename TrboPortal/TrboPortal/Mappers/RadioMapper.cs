@@ -9,6 +9,7 @@ namespace TrboPortal.Mappers
             return new Model.Radio
             {
                 RadioId = (int)rs.RadioId,
+                Name = rs.Name,
                 GpsMode = rs.GpsMode?.ToString(), //TODO: Valued enum?
                 RequestInterval = (int)rs.RequestInterval
             };
