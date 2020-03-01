@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Swashbuckle.Application;
+using TrboPortal.Controllers;
 
 namespace TrboPortalv3
 {
@@ -19,6 +21,8 @@ namespace TrboPortalv3
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // config.EnableSwagger(c => c.SingleApiVersion("v13", "A title for your API")).EnableSwaggerUi();
         }
     }
 }

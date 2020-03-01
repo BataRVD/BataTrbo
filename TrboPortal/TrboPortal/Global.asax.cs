@@ -17,6 +17,7 @@ using NS.Enterprise.Objects.Event_args;
 using NS.Enterprise.Objects.Users;
 using System.Linq;
 using System.Timers;
+using Swashbuckle.Application;
 
 
 namespace TrboPortalv3
@@ -31,10 +32,12 @@ namespace TrboPortalv3
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            SwaggerConfig.Register();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            
             // trboTest();
         }
 
