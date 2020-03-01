@@ -39,10 +39,8 @@ namespace TrboPortal.Controllers
             //Store the settings
             Repository.InsertOrUpdate(radioSettings.ToList().Select(RadioMapper.MapRadioSettings).ToList());
 
-            //TODO JV: Dit gaat dus niet meer werken, sowieso is die methode een noop geworden sinds 134fa25a 
-             //radioSettings?.ToList().ForEach(d => { TurboController.Instance.AddOrUpdateDeviceSettings(d); });
-
-            //TODO Fire settings changed event?
+            // How is this for an "event driven" system? =)
+            TurboController.Instance.loadRadioSettingsFromDatabase();
 
         }
 

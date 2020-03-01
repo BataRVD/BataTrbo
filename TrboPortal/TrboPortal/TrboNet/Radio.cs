@@ -6,11 +6,12 @@
     public partial class Radio
     {
         // TODO standard settings in constructor ?
-        public Radio(int radioID)
+        public Radio(int radioID, GpsModeEnum defaultGpsMode, int defaultInterval)
         {
             this.Name = $"Radio {radioID}";
             this.RadioId = radioID;
-            GpsMode = GpsModeEnum.None;
+            GpsMode = defaultGpsMode;
+            RequestInterval = defaultInterval;
         }
 
         public Radio()

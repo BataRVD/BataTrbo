@@ -40,6 +40,8 @@ namespace TrboPortal.TrboNet
         private static int turboNetPort;
         private static string turboNetUser;
         private static string turboNetPassword;
+        private static GpsModeEnum defaultGpsMode;
+        private static int defaultRequestInterval;
 
         // In memory state of the server
 
@@ -89,6 +91,9 @@ namespace TrboPortal.TrboNet
             turboNetPort = (int)(settings.TurboNetSettings?.Port ?? 0);
             turboNetUser = settings.TurboNetSettings?.User;
             turboNetPassword = settings.TurboNetSettings?.Password;
+
+            defaultGpsMode = GpsModeEnum.None;
+            defaultRequestInterval = 60;
         }
 
         private void loadSettingsFromDatabase()
@@ -125,6 +130,12 @@ namespace TrboPortal.TrboNet
                     ciaBataController.url = ciaBataUrl;
                     // update heartbeat
                     heartBeat.Interval = serverInterval;
+
+                    if (!Enum.TryParse(settings.DefaultGpsMode, out defaultGpsMode))
+                    {
+                        defaultGpsMode = GpsModeEnum.None;
+                    }
+                    defaultRequestInterval = settings.DefaultInterval;
                 } 
                 else
                 {
@@ -138,7 +149,7 @@ namespace TrboPortal.TrboNet
         }
 
 
-        private static void loadRadioSettingsFromDatabase()
+        public void loadRadioSettingsFromDatabase()
         {
             try
             {
@@ -712,7 +723,7 @@ namespace TrboPortal.TrboNet
 
 
                 // Add settings
-                if (radios.TryAdd(radioID, new Controllers.Radio(radioID)))
+                if (radios.TryAdd(radioID, new Controllers.Radio(radioID, defaultGpsMode, defaultRequestInterval)))
                 {
                     logger.Info($"Created standard settings for Radio with radioID {radioID}");
                 }
