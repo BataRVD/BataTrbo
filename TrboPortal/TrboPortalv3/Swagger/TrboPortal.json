@@ -1,0 +1,584 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "description": "TrboNET REST API Portal",
+    "version": "1.0.0",
+    "title": "TrboPortal",
+    "termsOfService": "https://github.com/erikhubers/TrboKoppelvlak",
+    "contact": {
+      "email": "spam@beun.nl"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost",
+  "basePath": "/TrboPortal/v1",
+  "tags": [
+    {
+      "name": "pet",
+      "description": "Everything about your Pets",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    },
+    {
+      "name": "store",
+      "description": "Access to Petstore orders"
+    },
+    {
+      "name": "user",
+      "description": "Operations about user",
+      "externalDocs": {
+        "description": "Find out more about our store",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/radio": {
+      "get": {
+        "tags": [
+          "radios"
+        ],
+        "summary": "List of all radios",
+        "description": "List of all radios",
+        "operationId": "getRadios",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Tags to filter by",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "example": "1,2,3",
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Radio"
+              }
+            }
+          },
+          "400": {
+            "description": "Does not compute"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Update Radio settings"
+        ],
+        "summary": "Update gps mode and interval radios",
+        "description": "Update gps mode and interval radio settings",
+        "operationId": "updateRadioSettings",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Radios to update",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Radio"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/gps": {
+      "get": {
+        "tags": [
+          "GPS of Radios"
+        ],
+        "summary": "Returns last known GPS position of radio(s)",
+        "description": "Returns last known GPS position of radio(s)",
+        "operationId": "getMostRecentGps",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "Radios",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "example": "1,2,3",
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GpsMeasurement"
+              }
+            }
+          },
+          "400": {
+            "description": "Does not compute"
+          }
+        }
+      }
+    },
+    "/gps/history": {
+      "get": {
+        "tags": [
+          "GPS of Radios"
+        ],
+        "summary": "Returns last known GPS position of radio(s)",
+        "description": "Returns last known GPS position of radio(s)",
+        "operationId": "getGpsHistory",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Radios",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "collectionFormat": "csv",
+            "example": 1
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "description": "From TimeStamp for GPS measurements to get",
+            "type": "string",
+            "example": "2020-02-20T08:49:40+00:00"
+          },
+          {
+            "name": "through",
+            "in": "query",
+            "required": false,
+            "description": "Through TimeStamp for GPS measurements to get",
+            "type": "string",
+            "example": "2020-02-23T08:49:40+00:00"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GpsMeasurement"
+              }
+            }
+          },
+          "400": {
+            "description": "Does not compute"
+          }
+        }
+      }
+    },
+    "/gps/update": {
+      "get": {
+        "tags": [
+          "GPS of Radios"
+        ],
+        "summary": "Request GPS opdate for radio(s)",
+        "description": "Request GPS opdate for radio(s)",
+        "operationId": "requestGpsUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Radios",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "example": "1,2,3",
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Does not compute"
+          }
+        }
+      }
+    },
+    "/system/queue": {
+      "get": {
+        "tags": [
+          "Message queue"
+        ],
+        "summary": "TrboNet message queue",
+        "description": "Returns a list of queued messages to be sent over TrboNet",
+        "operationId": "getMessageQueue",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Messages in TrboNet queue",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MessageQueueItem"
+              }
+            }
+          },
+          "400": {
+            "description": "Computer says no"
+          }
+        }
+      }
+    },
+    "/system/settings": {
+      "get": {
+        "tags": [
+          "System settings"
+        ],
+        "summary": "System settings",
+        "description": "Returns a list of all system settings and values",
+        "operationId": "getSystemSettings",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Blaat",
+            "schema": {
+                "$ref": "#/definitions/SystemSettings"
+            }
+          },
+          "400": {
+            "description": "Computer says no"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "System settings"
+        ],
+        "summary": "Update System settings",
+        "description": "Sets all changed system setting",
+        "operationId": "setSystemSettings",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "settings",
+            "description": "System settings to store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SystemSettings"
+            }
+          }
+        ],
+        "responses": {
+          /*"200": {
+            "description": "Updated System settings",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SystemSettings"
+              }
+            }
+          },*/
+          "400": {
+            "description": "Computer says no"
+          }
+        }
+      }
+    },
+    "/system/logs": {
+      "get": {
+        "tags": [
+          "System logging"
+        ],
+        "summary": "System logging",
+        "description": "Returns server logging",
+        "operationId": "getLogging",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "loglevel",
+            "description": "Log level filter of logging to return",
+            "required": true,
+            "type": "string",
+            "example": "Error"
+          },
+          {
+            "in": "query",
+            "name": "from",
+            "description": "DateTime From filter of logging to return",
+            "required": false,
+            "type": "string",
+            "example": "2020-02-20T08:49:40+00:00"
+          },
+          {
+            "in": "query",
+            "name": "through",
+            "description": "DateTime Through filter of logging to return",
+            "required": false,
+            "type": "string",
+            "example": "2020-02-23T08:49:40+00:00"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Blaat",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Computer says no"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Radio": {
+      "type": "object",
+      "required": [
+        "radioId",
+        "name"
+      ],
+      "properties": {
+        "radioId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1
+        },
+        "name": {
+          "type": "string",
+          "example": "EHBO-1"
+        },
+        "GpsMode": {
+          "$ref": "#/definitions/GpsModeEnum",
+          "example": "interval"
+        },
+        "requestInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "GPS request interval in milliseconds",
+          "example": "15000"
+        }
+      },
+      "xml": {
+        "name": "Radio"
+      }
+    },
+
+    "GpsModeEnum": {
+      "type": "string",
+      "description": "GPS polling mode",
+      "enum": [
+        "none",
+        "pull",
+        "interval"
+      ],
+      "xml": {
+        "name": "GpsModeEnum"
+      }
+    },
+
+    "MessageQueueItem": {
+      "type": "object",
+      "required": [
+        "Timestamp",
+        "RadioId"
+      ],
+      "properties": {
+        "Timestamp": {
+          "type": "string",
+          "example": "2020-02-23T08:49:40+00:00"
+        },
+        "RadioID": {
+          "type": "integer",
+          "example": "1"
+        }
+      },
+      "xml": {
+        "name": "MessageQueueItem"
+      }
+    },
+    "GpsMeasurement": {
+      "type": "object",
+      "required": [
+        "RadioID",
+        "Timestamp",
+        "Latitude",
+        "Longitude"
+      ],
+      "properties": {
+        "RadioID": {
+          "type": "integer",
+          "example": "1"
+        },
+        "DeviceID": {
+          "type": "integer",
+          "example": "1"
+        },
+        "Timestamp": {
+          "type": "string",
+          "example": "2020-02-23T08:49:40+00:00"
+        },
+        "Latitude": {
+          "type": "number",
+          "example": 52.242647
+        },
+        "Longitude": {
+          "type": "number",
+          "example": 6.850612
+        },
+        "Rssi": {
+          "type": "number",
+          "example": 10
+        }
+      },
+      "xml": {
+        "name": "GpsMeasurement"
+      }
+    },
+    "TurboNetSettings": {
+      "type": "object",
+      "required": [
+        "Host",
+        "Port",
+        "User",
+        "Password"
+      ],
+      "properties": {
+        "Host": {
+          "type": "string",
+          "example": "192.168.2.92"
+        },
+        "Port": {
+          "type": "integer",
+          "example": 4021
+        },
+        "User": {
+          "type": "string",
+          "example": "admin"
+        },
+        "Password": {
+          "type": "string",
+          "example": "admin"
+        }
+      },
+      "xml": {
+        "name": "TurboNetSettings"
+      }
+    },
+    "CiaBataSettings": {
+      "type": "object",
+      "required": [
+        "Host"
+      ],
+      "properties": {
+        "Host": {
+          "type": "string",
+          "example": "192.168.2.92"
+        }
+      },
+      "xml": {
+        "name": "CiaBataSettings"
+      }
+    },
+    "SystemSettings": {
+      "type": "object",
+      "properties": {
+        "ServerInterval": {
+          "type": "integer",
+          "example": 10000
+        },
+        "DefaultGpsMode": {
+          "$ref": "#/definitions/GpsModeEnum",
+          "example": "interval"
+        },
+        "DefaultInterval": {
+          "type": "integer",
+          "example": 15
+        },
+        "TurboNetSettings": {
+          "$ref": "#/definitions/TurboNetSettings"
+        },
+        "CiaBataSettings": {
+          "$ref": "#/definitions/CiaBataSettings"
+        }
+      },
+      "xml": {
+        "name": "SystemSettings"
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "TrboPortal",
+    "url": "https://github.com/erikhubers/TrboKoppelvlak"
+  }
+}
