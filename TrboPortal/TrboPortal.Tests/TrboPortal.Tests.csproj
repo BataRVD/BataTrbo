@@ -109,9 +109,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TrboPortalv3\TrboPortalv3.csproj">
+    <ProjectReference Include="..\TrboPortal\TrboPortal.csproj">
       <Project>{BE0A2A07-E1FB-475A-8DE6-06AAEEFE12CE}</Project>
-      <Name>TrboPortalv3</Name>
+      <Name>TrboPortal</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

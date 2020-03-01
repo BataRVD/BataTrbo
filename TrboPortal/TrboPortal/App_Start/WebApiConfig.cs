@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace Blaat
+namespace TrboPortalv3
 {
     public static class WebApiConfig
     {
@@ -13,7 +13,7 @@ namespace Blaat
 
             // Web API routes
             config.MapHttpAttributeRoutes();
-            
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

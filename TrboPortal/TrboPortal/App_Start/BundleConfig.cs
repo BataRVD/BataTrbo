@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace Blaat
+namespace TrboPortalv3
 {
     public class BundleConfig
     {
