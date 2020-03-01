@@ -489,7 +489,12 @@ namespace TrboPortal.TrboNet
 
         private void RemoveDevice(int deviceID)
         {
-            devices.Remove(deviceID, out DeviceInfo deviceInfo);
+            if (!devices.TryRemove(deviceID, out DeviceInfo deviceInfo))
+            {
+                //TODO
+                logger.Error("PANIEK!");
+                return;
+            }
             logger.Info($"Remove device for deviceID {deviceID} radio {deviceInfo?.RadioID}");
         }
 
@@ -715,7 +720,8 @@ namespace TrboPortal.TrboNet
                 int radioID = device.RadioID;
 
                 logger.Info($"AddOrUpdate deviceinfo for device with deviceID {deviceID} and radioID {radioID}");
-
+                //TODO
+                /*
                 // Add device
                 devices.AddOrUpdate(deviceID, new DeviceInfo(device), (deviceID, oldInfo) =>
                 {
@@ -723,7 +729,7 @@ namespace TrboPortal.TrboNet
                     oldInfo.UpdateDevice(device);
                     return oldInfo;
                 });
-
+                */
 
                 // Add settings
                 if (radios.TryAdd(radioID, new Controllers.Radio(radioID, defaultGpsMode, defaultRequestInterval)))
@@ -745,10 +751,16 @@ namespace TrboPortal.TrboNet
         public void AddOrUpdateDeviceSettings(Controllers.Radio radio)
         {
             var radioID = radio.RadioId;
+            /*
+
             radios.AddOrUpdate(radioID, radio, (radioID, oldInfo) =>
             {
                 return radio;
             });
+
+    //TODO
+
+    */
 
         }
 

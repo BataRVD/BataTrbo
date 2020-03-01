@@ -26,7 +26,7 @@ namespace TrboPortal.TrboNet
             this.DeviceID = device.ID;
             this.RadioID = device.RadioID;
             GpsLocations = new ConcurrentStack<GpsMeasurement>();
-            LastUpdate = device != null ? DateTime.Now : DateTime.UnixEpoch;
+            LastUpdate = device != null ? DateTime.Now : DateTime.MinValue;
         }
 
         public DeviceInfo(int deviceID)

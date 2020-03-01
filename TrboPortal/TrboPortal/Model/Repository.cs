@@ -16,13 +16,15 @@ namespace TrboPortal.Model
         /// <param name="entity"></param>
         public static void InsertOrUpdate<T>(T entity) where T : class
         {
-            using var db = new DatabaseContext();
-            if (db.Entry(entity).State == EntityState.Detached)
-                db.Set<T>().Add(entity);
+            using (var db = new DatabaseContext())
+            {
+                if (db.Entry(entity).State == EntityState.Detached)
+                    db.Set<T>().Add(entity);
 
-            // If an immediate save is needed, can be slow though
-            // if iterating through many entities:
-            db.SaveChanges();
+                // If an immediate save is needed, can be slow though
+                // if iterating through many entities:
+                db.SaveChanges();
+            }
         }
 
         /// <summary>
@@ -31,20 +33,26 @@ namespace TrboPortal.Model
         /// <param name="settings"></param>
         public static void InsertOrUpdate(List<Radio> settings)
         {
-            using var context = new DatabaseContext();
-            foreach (var s in settings)
+            using (var context = new DatabaseContext())
             {
-                bool radioExists = context.RadioSettings.Any(r => r.RadioId == s.RadioId); // used to be: s.RadioId == 0
-                context.Entry(s).State = radioExists ? EntityState.Modified : EntityState.Added;
-            }
+                foreach (var s in settings)
+                {
+                    bool radioExists =
+                        context.RadioSettings.Any(r => r.RadioId == s.RadioId); // used to be: s.RadioId == 0
+                    context.Entry(s).State = radioExists ? EntityState.Modified : EntityState.Added;
+                }
 
-            context.SaveChanges();
+
+                context.SaveChanges();
+            }
         }
 
         internal static Model.Settings GetLatestSystemSettings()
         {
-            using var context = new DatabaseContext();
-            return context.Settings.OrderByDescending(s => s.SettingsId).FirstOrDefault();
+            using (var context = new DatabaseContext())
+            {
+                return context.Settings.OrderByDescending(s => s.SettingsId).FirstOrDefault();
+            }
         }
     }
 }
