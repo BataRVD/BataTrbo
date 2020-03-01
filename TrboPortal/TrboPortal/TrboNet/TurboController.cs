@@ -13,6 +13,7 @@ using TrboPortal.Mappers;
 using Device = NS.Enterprise.Objects.Devices.Device;
 using NS.Enterprise.Objects.Event_args;
 using System.Text;
+using NS.Shared.Network;
 using TrboPortal.Model;
 
 namespace TrboPortal.TrboNet
@@ -65,20 +66,22 @@ namespace TrboPortal.TrboNet
         {
             logger.Info("Starting the Controller!");
 
-            // fallback - load defaults
-            loadDefaultSettings();
-            // overwrite with latest values
-            loadSettingsFromDatabase();
-
             // Create CiabataControler
             ciaBataController = new CiaBata.CiaBata(ciaBataUrl); // Todo add settings            
-
+            // fallback - load defaults
+            loadDefaultSettings();
             // Start HeartBeat
             heartBeat = new Timer();
             heartBeat.Interval = serverInterval;
             heartBeat.Elapsed += TheServerDidATick;
             heartBeat.AutoReset = true;
             heartBeat.Enabled = true;
+
+           
+            // overwrite with latest values
+            loadSettingsFromDatabase();
+
+            Connect();
         }
 
         private void loadDefaultSettings()
@@ -242,6 +245,7 @@ namespace TrboPortal.TrboNet
                 new NS.Shared.Network.NetworkConnectionParam(turboNetUrl, turboNetPort), 
                 new UserInfo(turboNetUser, turboNetPassword),
                 ClientInitFlags.Empty);
+
             if (trboNetClient.IsStarted)
             {
                 logger.Info("Connected to turbonet server");
@@ -441,7 +445,7 @@ namespace TrboPortal.TrboNet
         {
             try
             {
-                // Send to CiaBata
+                // Send to CiaBatac
                 ciaBataController.PostGpsLocation(CiaBataMapper.ToGpsLocation(gpsMeasurement));
                 // Save to database
                 Repository.InsertOrUpdate(DatabaseMapper.Map(gpsMeasurement));
@@ -471,7 +475,6 @@ namespace TrboPortal.TrboNet
                         AddOrUpdateDevice(device);
                         break;
                     case NS.Shared.Common.ChangeAction.MuchChanges:
-                    case NS.Shared.Common.ChangeAction.SeveralChanges:
                         LoadDeviceList();
                         break;
                     default:
