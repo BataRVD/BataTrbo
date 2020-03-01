@@ -8,9 +8,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrboPortal", "TrboPortalv3\TrboPortal.csproj", "{BE0A2A07-E1FB-475A-8DE6-06AAEEFE12CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrboPortal", "TrboPortal\TrboPortal.csproj", "{BE0A2A07-E1FB-475A-8DE6-06AAEEFE12CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrboPortal.Tests", "TrboPortalv3.Tests\TrboPortal.Tests.csproj", "{DEDB6CF9-4968-48A3-B636-AE59194CAD8D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrboPortal.Tests", "TrboPortal.Tests\TrboPortal.Tests.csproj", "{DEDB6CF9-4968-48A3-B636-AE59194CAD8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
