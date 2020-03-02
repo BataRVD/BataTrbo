@@ -453,7 +453,7 @@ namespace TrboPortal.TrboNet
 
             } catch (Exception ex)
             {
-                logger.Error("Error posting gps");
+                logger.Error(ex, "Error posting gps");
             }
         }
 
