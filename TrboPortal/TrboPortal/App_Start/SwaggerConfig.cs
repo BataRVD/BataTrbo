@@ -1,9 +1,9 @@
 using System.Web.Http;
 using WebActivatorEx;
-using TrboPortalv3;
+using TrboPortal;
 using Swashbuckle.Application;
 
-namespace TrboPortalv3
+namespace TrboPortal
 {
     public class SwaggerConfig
     {
@@ -30,7 +30,7 @@ namespace TrboPortalv3
                         // hold additional metadata for an API. Version and title are required but you can also provide
                         // additional fields by chaining methods off SingleApiVersion.
                         //
-                        c.SingleApiVersion("v1", "TrboPortalv3");
+                        c.SingleApiVersion("v1", "TrboPortal");
 
                         // If you want the output Swagger docs to be indented properly, enable the "PrettyPrint" option.
                         //

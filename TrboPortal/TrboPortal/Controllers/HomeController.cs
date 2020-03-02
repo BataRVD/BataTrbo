@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace TrboPortalv3.Controllers
+namespace TrboPortal.Controllers
 {
     public class HomeController : Controller
     {

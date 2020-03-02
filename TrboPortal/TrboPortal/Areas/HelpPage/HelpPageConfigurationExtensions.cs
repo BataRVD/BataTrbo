@@ -11,10 +11,10 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using TrboPortalv3.Areas.HelpPage.ModelDescriptions;
-using TrboPortalv3.Areas.HelpPage.Models;
+using TrboPortal.Areas.HelpPage.ModelDescriptions;
+using TrboPortal.Areas.HelpPage.Models;
 
-namespace TrboPortalv3.Areas.HelpPage
+namespace TrboPortal.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using System.Xml.XPath;
-using TrboPortalv3.Areas.HelpPage.ModelDescriptions;
+using TrboPortal.Areas.HelpPage.ModelDescriptions;
 
-namespace TrboPortalv3.Areas.HelpPage
+namespace TrboPortal.Areas.HelpPage
 {
     /// <summary>
     /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.

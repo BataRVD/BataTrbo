@@ -5,7 +5,7 @@ using System.Web.Http;
 using Swashbuckle.Application;
 using TrboPortal.Controllers;
 
-namespace TrboPortalv3
+namespace TrboPortal
 {
     public static class WebApiConfig
     {

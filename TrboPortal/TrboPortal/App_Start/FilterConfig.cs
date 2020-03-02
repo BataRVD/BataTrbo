@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace TrboPortalv3
+namespace TrboPortal
 {
     public class FilterConfig
     {

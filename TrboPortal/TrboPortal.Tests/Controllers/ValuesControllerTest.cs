@@ -5,10 +5,10 @@ using System.Net.Http;
 using System.Text;
 using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TrboPortalv3;
-using TrboPortalv3.Controllers;
+using TrboPortal;
+using TrboPortal.Controllers;
 
-namespace TrboPortalv3.Tests.Controllers
+namespace TrboPortal.Tests.Controllers
 {
     [TestClass]
     public class ValuesControllerTest

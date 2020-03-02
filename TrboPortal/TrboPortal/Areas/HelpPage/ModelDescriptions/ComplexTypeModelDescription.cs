@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace TrboPortalv3.Areas.HelpPage.ModelDescriptions
+namespace TrboPortal.Areas.HelpPage.ModelDescriptions
 {
     public class ComplexTypeModelDescription : ModelDescription
     {

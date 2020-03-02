@@ -1,6 +1,6 @@
 using System;
 
-namespace TrboPortalv3.Areas.HelpPage.ModelDescriptions
+namespace TrboPortal.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>
     /// Describes a type model.

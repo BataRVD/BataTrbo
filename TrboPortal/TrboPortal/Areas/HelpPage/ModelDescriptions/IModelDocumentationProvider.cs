@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace TrboPortalv3.Areas.HelpPage.ModelDescriptions
+namespace TrboPortal.Areas.HelpPage.ModelDescriptions
 {
     public interface IModelDocumentationProvider
     {

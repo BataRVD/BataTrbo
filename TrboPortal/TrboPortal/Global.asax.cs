@@ -20,7 +20,7 @@ using System.Timers;
 using Swashbuckle.Application;
 
 
-namespace TrboPortalv3
+namespace TrboPortal
 {
     public class WebApiApplication : System.Web.HttpApplication
     {

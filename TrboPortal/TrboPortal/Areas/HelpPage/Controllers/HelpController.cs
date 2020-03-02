@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using TrboPortalv3.Areas.HelpPage.ModelDescriptions;
-using TrboPortalv3.Areas.HelpPage.Models;
+using TrboPortal.Areas.HelpPage.ModelDescriptions;
+using TrboPortal.Areas.HelpPage.Models;
 
-namespace TrboPortalv3.Areas.HelpPage.Controllers
+namespace TrboPortal.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

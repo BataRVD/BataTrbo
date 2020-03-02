@@ -1,9 +1,9 @@
 ﻿using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TrboPortalv3;
-using TrboPortalv3.Controllers;
+using TrboPortal;
+using TrboPortal.Controllers;
 
-namespace TrboPortalv3.Tests.Controllers
+namespace TrboPortal.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest

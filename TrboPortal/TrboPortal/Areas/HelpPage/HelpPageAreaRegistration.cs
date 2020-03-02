@@ -1,7 +1,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace TrboPortalv3.Areas.HelpPage
+namespace TrboPortal.Areas.HelpPage
 {
     public class HelpPageAreaRegistration : AreaRegistration
     {
