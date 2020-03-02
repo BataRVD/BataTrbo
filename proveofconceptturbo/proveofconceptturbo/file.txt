@@ -1,0 +1,2010 @@
+2020-03-01 16:35:59.0923|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": 4,
+    "StateDescription": "",
+    "TransmitType": 2,
+    "Priority": 2,
+    "Interruptable": true,
+    "Terminatable": true,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": false,
+    "OpenChannelMode": false,
+    "InitDeviceID": 77,
+    "InitDeviceName": "Radio 251",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 77,
+    "TransmitDeviceName": "Radio 251",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": true,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 1978042926,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "35_51_870_087.wav"
+  }
+}
+2020-03-01 16:35:59.1013|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": 4,
+    "StateDescription": "",
+    "TransmitType": 2,
+    "Priority": 2,
+    "Interruptable": false,
+    "Terminatable": false,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": null,
+    "OpenChannelMode": false,
+    "InitDeviceID": 77,
+    "InitDeviceName": "Radio 251",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 0,
+    "TransmitDeviceName": "",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": false,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 0,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "35_51_870_087.wav"
+  }
+}
+2020-03-01 16:35:59.1013|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": false,
+    "State": 5,
+    "StateDescription": "",
+    "TransmitType": 0,
+    "Priority": 2,
+    "Interruptable": false,
+    "Terminatable": false,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": null,
+    "OpenChannelMode": false,
+    "InitDeviceID": 0,
+    "InitDeviceName": "",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 0,
+    "ActiveGroupName": "",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 0,
+    "TransmitDeviceName": "",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": false,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 0,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": ""
+  }
+}
+2020-03-01 16:36:33.8877|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": 4,
+    "StateDescription": "",
+    "TransmitType": 2,
+    "Priority": 2,
+    "Interruptable": true,
+    "Terminatable": true,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": false,
+    "OpenChannelMode": false,
+    "InitDeviceID": 77,
+    "InitDeviceName": "Radio 251",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 77,
+    "TransmitDeviceName": "Radio 251",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": true,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 1978042926,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "36_13_501_088.wav"
+  }
+}
+2020-03-01 16:36:33.8877|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": 4,
+    "StateDescription": "",
+    "TransmitType": 2,
+    "Priority": 2,
+    "Interruptable": false,
+    "Terminatable": false,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": null,
+    "OpenChannelMode": false,
+    "InitDeviceID": 77,
+    "InitDeviceName": "Radio 251",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 0,
+    "TransmitDeviceName": "",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": false,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 0,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "36_13_501_088.wav"
+  }
+}
+2020-03-01 16:36:33.8877|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": 4,
+    "StateDescription": "",
+    "TransmitType": 2,
+    "Priority": 2,
+    "Interruptable": true,
+    "Terminatable": true,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": false,
+    "OpenChannelMode": false,
+    "InitDeviceID": 77,
+    "InitDeviceName": "Radio 251",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 77,
+    "TransmitDeviceName": "Radio 251",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": true,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 1978042926,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "36_13_501_088.wav"
+  }
+}
+2020-03-01 16:36:33.8877|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": 4,
+    "StateDescription": "",
+    "TransmitType": 2,
+    "Priority": 2,
+    "Interruptable": false,
+    "Terminatable": false,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": null,
+    "OpenChannelMode": false,
+    "InitDeviceID": 77,
+    "InitDeviceName": "Radio 251",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 0,
+    "TransmitDeviceName": "",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": false,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 0,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "36_13_501_088.wav"
+  }
+}
+2020-03-01 16:36:33.8877|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": 4,
+    "StateDescription": "",
+    "TransmitType": 2,
+    "Priority": 2,
+    "Interruptable": true,
+    "Terminatable": true,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": false,
+    "OpenChannelMode": false,
+    "InitDeviceID": 77,
+    "InitDeviceName": "Radio 251",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 77,
+    "TransmitDeviceName": "Radio 251",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": true,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 1978042926,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "36_13_501_088.wav"
+  }
+}
+2020-03-01 16:36:33.8877|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": 4,
+    "StateDescription": "",
+    "TransmitType": 2,
+    "Priority": 2,
+    "Interruptable": false,
+    "Terminatable": false,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": null,
+    "OpenChannelMode": false,
+    "InitDeviceID": 77,
+    "InitDeviceName": "Radio 251",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 0,
+    "TransmitDeviceName": "",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": false,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 0,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "36_13_501_088.wav"
+  }
+}
+2020-03-01 16:38:48.5898|DEBUG|proveofconceptturbo.WebApiApplication|
+2020-03-01 16:38:48.6227|DEBUG|proveofconceptturbo.WebApiApplication|NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:39:45.8086|DEBUG|proveofconceptturbo.WebApiApplication|NS.Enterprise.Objects.Event_args.TransmitReceiveArgs
+2020-03-01 16:39:49.4951|DEBUG|proveofconceptturbo.WebApiApplication|NS.Enterprise.Objects.Event_args.TransmitReceiveArgs
+2020-03-01 16:39:49.4951|DEBUG|proveofconceptturbo.WebApiApplication|NS.Enterprise.Objects.Event_args.TransmitReceiveArgs
+2020-03-01 16:39:49.4951|DEBUG|proveofconceptturbo.WebApiApplication|NS.Enterprise.Objects.Event_args.TransmitReceiveArgs
+2020-03-01 16:39:49.5031|DEBUG|proveofconceptturbo.WebApiApplication|NS.Enterprise.Objects.Event_args.TransmitReceiveArgs
+2020-03-01 16:39:49.5031|DEBUG|proveofconceptturbo.WebApiApplication|NS.Enterprise.Objects.Event_args.DeviceStateChangedEventArgs
+2020-03-01 16:39:50.2807|DEBUG|proveofconceptturbo.WebApiApplication|NS.Enterprise.Objects.Event_args.WorkflowCommandFinishedEventArgs
+2020-03-01 16:39:50.8048|DEBUG|proveofconceptturbo.WebApiApplication|NS.Enterprise.Objects.Event_args.TransmitReceiveArgs
+2020-03-01 16:40:09.8087|DEBUG|proveofconceptturbo.WebApiApplication|NS.Enterprise.Objects.Event_args.TransmitReceiveArgs
+2020-03-01 16:40:09.8587|DEBUG|proveofconceptturbo.WebApiApplication|NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:40:10.0446|DEBUG|proveofconceptturbo.WebApiApplication|NS.Enterprise.Objects.Event_args.TransmitReceiveArgs
+2020-03-01 16:40:13.3200|DEBUG|proveofconceptturbo.WebApiApplication|NS.Enterprise.Objects.Event_args.TransmitReceiveArgs
+2020-03-01 16:40:21.1137|DEBUG|proveofconceptturbo.WebApiApplication|NS.Enterprise.Objects.Event_args.DeviceLocationChangedEventArgs
+2020-03-01 16:40:21.2402|DEBUG|proveofconceptturbo.WebApiApplication|NS.Enterprise.Objects.Event_args.DeviceLocationChangedEventArgs
+2020-03-01 16:40:21.4407|DEBUG|proveofconceptturbo.WebApiApplication|NS.Enterprise.Objects.Event_args.DeviceStateChangedEventArgs
+2020-03-01 16:40:24.5194|DEBUG|proveofconceptturbo.WebApiApplication|NS.Enterprise.Objects.Event_args.DeviceLocationChangedEventArgs
+2020-03-01 16:40:55.6458|DEBUG|proveofconceptturbo.WebApiApplication|NS.Enterprise.Objects.Event_args.DeviceStateChangedEventArgs
+2020-03-01 16:41:12.0594|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": "Open",
+    "StateDescription": "",
+    "TransmitType": "GroupCall",
+    "Priority": "Normal",
+    "Interruptable": true,
+    "Terminatable": true,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": false,
+    "OpenChannelMode": false,
+    "InitDeviceID": 77,
+    "InitDeviceName": "Radio 251",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 77,
+    "TransmitDeviceName": "Radio 251",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": true,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 1978042926,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "41_11_014_097.wav"
+  }
+}
+2020-03-01 16:41:12.3111|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": "Open",
+    "StateDescription": "",
+    "TransmitType": "GroupCall",
+    "Priority": "Normal",
+    "Interruptable": false,
+    "Terminatable": false,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": null,
+    "OpenChannelMode": false,
+    "InitDeviceID": 77,
+    "InitDeviceName": "Radio 251",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 0,
+    "TransmitDeviceName": "",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": false,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 0,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "41_11_014_097.wav"
+  }
+}
+2020-03-01 16:41:46.9157|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": false,
+    "State": "Close",
+    "StateDescription": "",
+    "TransmitType": "None",
+    "Priority": "Normal",
+    "Interruptable": false,
+    "Terminatable": false,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": null,
+    "OpenChannelMode": false,
+    "InitDeviceID": 0,
+    "InitDeviceName": "",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 0,
+    "ActiveGroupName": "",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 0,
+    "TransmitDeviceName": "",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": false,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 0,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": ""
+  }
+}
+2020-03-01 16:42:05.2577|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "Infos": [
+    {
+      "DeviceId": 77,
+      "State": "Active, GpsActive",
+      "ActiveMasterId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+      "EmergencyGroupId": 0,
+      "ActiveGroups": [],
+      "DynamicGroupId": 0,
+      "HasTms": true,
+      "HasJts": true,
+      "HasGps": true,
+      "GpsStartDate": "0001-01-01T00:00:00",
+      "GpsResetDate": "2020-03-01T14:59:28.22",
+      "GpsErrorText": ""
+    }
+  ]
+}
+2020-03-01 16:48:06.7514|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:12.5236|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:14.3564|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "Infos": [
+    {
+      "DeviceId": 77,
+      "State": "Active",
+      "ActiveMasterId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+      "EmergencyGroupId": 0,
+      "ActiveGroups": [],
+      "DynamicGroupId": 0,
+      "HasTms": true,
+      "HasJts": true,
+      "HasGps": true,
+      "GpsStartDate": "0001-01-01T00:00:00",
+      "GpsResetDate": "2020-03-01T14:59:28.22",
+      "GpsErrorText": ""
+    }
+  ]
+}
+2020-03-01 16:48:22.2066|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:22.3955|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:23.2831|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:24.3058|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:25.2934|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:26.3104|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:26.3318|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": "Open",
+    "StateDescription": "",
+    "TransmitType": "GroupCall",
+    "Priority": "Normal",
+    "Interruptable": true,
+    "Terminatable": true,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": false,
+    "OpenChannelMode": false,
+    "InitDeviceID": 78,
+    "InitDeviceName": "Radio 252",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 78,
+    "TransmitDeviceName": "Radio 252",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": true,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 1978042926,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "48_25_131_104.wav"
+  }
+}
+2020-03-01 16:48:27.3006|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:28.3113|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:29.3109|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:30.0460|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": "Open",
+    "StateDescription": "",
+    "TransmitType": "GroupCall",
+    "Priority": "Normal",
+    "Interruptable": false,
+    "Terminatable": false,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": null,
+    "OpenChannelMode": false,
+    "InitDeviceID": 78,
+    "InitDeviceName": "Radio 252",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 0,
+    "TransmitDeviceName": "",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": false,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 0,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "48_25_131_104.wav"
+  }
+}
+2020-03-01 16:48:30.3293|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:31.3310|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:32.3529|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:33.1821|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": false,
+    "State": "Close",
+    "StateDescription": "",
+    "TransmitType": "None",
+    "Priority": "Normal",
+    "Interruptable": false,
+    "Terminatable": false,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": null,
+    "OpenChannelMode": false,
+    "InitDeviceID": 0,
+    "InitDeviceName": "",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 0,
+    "ActiveGroupName": "",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 0,
+    "TransmitDeviceName": "",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": false,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 0,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": ""
+  }
+}
+2020-03-01 16:48:33.3531|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:34.3610|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:35.3709|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:36.3931|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:37.3899|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:38.4017|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:39.4034|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:40.4009|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:41.4008|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:42.4219|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:43.4230|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:44.4123|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:44.5989|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "Infos": [
+    {
+      "DeviceId": 77,
+      "State": "Active, GpsActive",
+      "ActiveMasterId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+      "EmergencyGroupId": 0,
+      "ActiveGroups": [],
+      "DynamicGroupId": 0,
+      "HasTms": true,
+      "HasJts": true,
+      "HasGps": true,
+      "GpsStartDate": "0001-01-01T00:00:00",
+      "GpsResetDate": "2020-03-01T14:59:28.22",
+      "GpsErrorText": ""
+    }
+  ]
+}
+2020-03-01 16:48:45.4322|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:46.4415|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:47.4225|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:48.4210|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:49.4386|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:50.4198|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:51.4407|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:52.4507|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:53.4532|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:54.4517|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:55.4641|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:56.4835|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:57.4722|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:58.4817|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:48:59.4803|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:00.4807|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:01.4916|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:02.4920|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:03.5232|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:04.5321|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:05.5546|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:06.5628|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:07.5736|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:08.5712|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:09.5604|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:10.5883|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:11.5901|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:12.6008|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:13.6396|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:14.6511|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:15.6403|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:16.6907|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:17.6726|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:18.6704|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:19.6812|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:20.6801|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:21.7175|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:22.7215|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:23.7145|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:24.7307|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:49:51.9236|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:50:01.9205|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:50:11.9215|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:50:16.4288|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": "Open",
+    "StateDescription": "",
+    "TransmitType": "GroupCall",
+    "Priority": "Normal",
+    "Interruptable": true,
+    "Terminatable": true,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": false,
+    "OpenChannelMode": false,
+    "InitDeviceID": 78,
+    "InitDeviceName": "Radio 252",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 78,
+    "TransmitDeviceName": "Radio 252",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": true,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 1978042926,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "50_15_147_105.wav"
+  }
+}
+2020-03-01 16:50:20.2644|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": "Open",
+    "StateDescription": "",
+    "TransmitType": "GroupCall",
+    "Priority": "Normal",
+    "Interruptable": false,
+    "Terminatable": false,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": null,
+    "OpenChannelMode": false,
+    "InitDeviceID": 78,
+    "InitDeviceName": "Radio 252",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 0,
+    "TransmitDeviceName": "",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": false,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 0,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "50_15_147_105.wav"
+  }
+}
+2020-03-01 16:50:21.9216|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:50:23.4372|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": false,
+    "State": "Close",
+    "StateDescription": "",
+    "TransmitType": "None",
+    "Priority": "Normal",
+    "Interruptable": false,
+    "Terminatable": false,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": null,
+    "OpenChannelMode": false,
+    "InitDeviceID": 0,
+    "InitDeviceName": "",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 0,
+    "ActiveGroupName": "",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 0,
+    "TransmitDeviceName": "",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": false,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 0,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": ""
+  }
+}
+2020-03-01 16:51:04.2333|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:51:06.6522|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "Infos": [
+    {
+      "DeviceId": 77,
+      "State": "Active, GpsActive",
+      "ActiveMasterId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+      "EmergencyGroupId": 0,
+      "ActiveGroups": [],
+      "DynamicGroupId": 0,
+      "HasTms": true,
+      "HasJts": true,
+      "HasGps": true,
+      "GpsStartDate": "0001-01-01T00:00:00",
+      "GpsResetDate": "2020-03-01T14:59:28.22",
+      "GpsErrorText": ""
+    }
+  ]
+}
+2020-03-01 16:51:14.2384|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:51:24.2590|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:51:34.2496|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:51:40.8847|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "Infos": [
+    {
+      "DeviceId": 77,
+      "State": "Active",
+      "ActiveMasterId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+      "EmergencyGroupId": 0,
+      "ActiveGroups": [],
+      "DynamicGroupId": 0,
+      "HasTms": true,
+      "HasJts": true,
+      "HasGps": true,
+      "GpsStartDate": "0001-01-01T00:00:00",
+      "GpsResetDate": "2020-03-01T14:59:28.22",
+      "GpsErrorText": ""
+    }
+  ]
+}
+2020-03-01 16:51:44.2617|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:51:54.2694|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:52:04.2884|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:52:14.2813|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:52:16.1186|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "Infos": [
+    {
+      "DeviceId": 77,
+      "State": "Active, GpsActive",
+      "ActiveMasterId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+      "EmergencyGroupId": 0,
+      "ActiveGroups": [],
+      "DynamicGroupId": 0,
+      "HasTms": true,
+      "HasJts": true,
+      "HasGps": true,
+      "GpsStartDate": "0001-01-01T00:00:00",
+      "GpsResetDate": "2020-03-01T14:59:28.22",
+      "GpsErrorText": ""
+    }
+  ]
+}
+2020-03-01 16:52:24.3068|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:52:26.0326|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": "Open",
+    "StateDescription": "",
+    "TransmitType": "GroupCall",
+    "Priority": "Normal",
+    "Interruptable": true,
+    "Terminatable": true,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": false,
+    "OpenChannelMode": false,
+    "InitDeviceID": 78,
+    "InitDeviceName": "Radio 252",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 78,
+    "TransmitDeviceName": "Radio 252",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": true,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 1978042926,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "52_24_813_106.wav"
+  }
+}
+2020-03-01 16:52:28.4307|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": "Open",
+    "StateDescription": "",
+    "TransmitType": "GroupCall",
+    "Priority": "Normal",
+    "Interruptable": false,
+    "Terminatable": false,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": null,
+    "OpenChannelMode": false,
+    "InitDeviceID": 78,
+    "InitDeviceName": "Radio 252",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 0,
+    "TransmitDeviceName": "",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": false,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 0,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "52_24_813_106.wav"
+  }
+}
+2020-03-01 16:52:31.5292|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": false,
+    "State": "Close",
+    "StateDescription": "",
+    "TransmitType": "None",
+    "Priority": "Normal",
+    "Interruptable": false,
+    "Terminatable": false,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": null,
+    "OpenChannelMode": false,
+    "InitDeviceID": 0,
+    "InitDeviceName": "",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 0,
+    "ActiveGroupName": "",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 0,
+    "TransmitDeviceName": "",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": false,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 0,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": ""
+  }
+}
+2020-03-01 16:52:34.3097|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:52:44.3100|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:52:51.6050|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "Infos": [
+    {
+      "DeviceId": 77,
+      "State": "Active",
+      "ActiveMasterId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+      "EmergencyGroupId": 0,
+      "ActiveGroups": [],
+      "DynamicGroupId": 0,
+      "HasTms": true,
+      "HasJts": true,
+      "HasGps": true,
+      "GpsStartDate": "0001-01-01T00:00:00",
+      "GpsResetDate": "2020-03-01T14:59:28.22",
+      "GpsErrorText": ""
+    }
+  ]
+}
+2020-03-01 16:52:54.3085|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:53:04.2964|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:53:14.3072|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:53:24.3922|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:53:26.8421|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "Infos": [
+    {
+      "DeviceId": 77,
+      "State": "Active, GpsActive",
+      "ActiveMasterId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+      "EmergencyGroupId": 0,
+      "ActiveGroups": [],
+      "DynamicGroupId": 0,
+      "HasTms": true,
+      "HasJts": true,
+      "HasGps": true,
+      "GpsStartDate": "0001-01-01T00:00:00",
+      "GpsResetDate": "2020-03-01T14:59:28.22",
+      "GpsErrorText": ""
+    }
+  ]
+}
+2020-03-01 16:53:34.3270|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:53:44.3272|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:53:45.3224|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": "Open",
+    "StateDescription": "",
+    "TransmitType": "GroupCall",
+    "Priority": "Normal",
+    "Interruptable": true,
+    "Terminatable": true,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": false,
+    "OpenChannelMode": false,
+    "InitDeviceID": 78,
+    "InitDeviceName": "Radio 252",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 78,
+    "TransmitDeviceName": "Radio 252",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": true,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 1978042926,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "53_44_306_107.wav"
+  }
+}
+2020-03-01 16:53:49.7848|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": "Open",
+    "StateDescription": "",
+    "TransmitType": "GroupCall",
+    "Priority": "Normal",
+    "Interruptable": false,
+    "Terminatable": false,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": null,
+    "OpenChannelMode": false,
+    "InitDeviceID": 78,
+    "InitDeviceName": "Radio 252",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 0,
+    "TransmitDeviceName": "",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": false,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 0,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "53_44_306_107.wav"
+  }
+}
+2020-03-01 16:53:53.0438|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": false,
+    "State": "Close",
+    "StateDescription": "",
+    "TransmitType": "None",
+    "Priority": "Normal",
+    "Interruptable": false,
+    "Terminatable": false,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": null,
+    "OpenChannelMode": false,
+    "InitDeviceID": 0,
+    "InitDeviceName": "",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 0,
+    "ActiveGroupName": "",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 0,
+    "TransmitDeviceName": "",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": false,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 0,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": ""
+  }
+}
+2020-03-01 16:53:54.3255|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:54:04.3262|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:54:14.3340|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:54:24.3466|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:54:29.1625|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": "Open",
+    "StateDescription": "",
+    "TransmitType": "GroupCall",
+    "Priority": "Normal",
+    "Interruptable": true,
+    "Terminatable": true,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": false,
+    "OpenChannelMode": false,
+    "InitDeviceID": 78,
+    "InitDeviceName": "Radio 252",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 78,
+    "TransmitDeviceName": "Radio 252",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": true,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 1978042926,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "54_28_186_108.wav"
+  }
+}
+2020-03-01 16:54:34.3457|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:54:34.9026|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": "Open",
+    "StateDescription": "",
+    "TransmitType": "GroupCall",
+    "Priority": "Normal",
+    "Interruptable": false,
+    "Terminatable": false,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": null,
+    "OpenChannelMode": false,
+    "InitDeviceID": 78,
+    "InitDeviceName": "Radio 252",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 0,
+    "TransmitDeviceName": "",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": false,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 0,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "54_28_186_108.wav"
+  }
+}
+2020-03-01 16:54:38.1623|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": false,
+    "State": "Close",
+    "StateDescription": "",
+    "TransmitType": "None",
+    "Priority": "Normal",
+    "Interruptable": false,
+    "Terminatable": false,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": null,
+    "OpenChannelMode": false,
+    "InitDeviceID": 0,
+    "InitDeviceName": "",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 0,
+    "ActiveGroupName": "",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 0,
+    "TransmitDeviceName": "",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": false,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 0,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": ""
+  }
+}
+2020-03-01 16:54:44.3563|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:54:54.3668|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:55:02.8017|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "Infos": [
+    {
+      "DeviceId": 77,
+      "State": "Active",
+      "ActiveMasterId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+      "EmergencyGroupId": 0,
+      "ActiveGroups": [],
+      "DynamicGroupId": 0,
+      "HasTms": true,
+      "HasJts": true,
+      "HasGps": true,
+      "GpsStartDate": "0001-01-01T00:00:00",
+      "GpsResetDate": "2020-03-01T14:59:28.22",
+      "GpsErrorText": ""
+    }
+  ]
+}
+2020-03-01 16:55:04.3626|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:55:07.9224|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": "Open",
+    "StateDescription": "",
+    "TransmitType": "GroupCall",
+    "Priority": "Normal",
+    "Interruptable": true,
+    "Terminatable": true,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": false,
+    "OpenChannelMode": false,
+    "InitDeviceID": 78,
+    "InitDeviceName": "Radio 252",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 78,
+    "TransmitDeviceName": "Radio 252",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": true,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 1978042926,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "55_06_914_109.wav"
+  }
+}
+2020-03-01 16:55:13.1863|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": true,
+    "State": "Open",
+    "StateDescription": "",
+    "TransmitType": "GroupCall",
+    "Priority": "Normal",
+    "Interruptable": false,
+    "Terminatable": false,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": null,
+    "OpenChannelMode": false,
+    "InitDeviceID": 78,
+    "InitDeviceName": "Radio 252",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 3,
+    "ActiveGroupName": "Route",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 0,
+    "TransmitDeviceName": "",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": false,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 0,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": "55_06_914_109.wav"
+  }
+}
+2020-03-01 16:55:14.3955|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:55:16.1986|DEBUG|proveofconceptturbo.WebApiApplication|{
+  "RequestId": 0,
+  "Info": {
+    "ID": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "ServiceId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "SessionId": "324210a5-ae73-4ca3-b604-8b626d60472e",
+    "IsStatic": true,
+    "OwnerID": "00000000-0000-0000-0000-000000000000",
+    "Active": false,
+    "State": "Close",
+    "StateDescription": "",
+    "TransmitType": "None",
+    "Priority": "Normal",
+    "Interruptable": false,
+    "Terminatable": false,
+    "IsConference": false,
+    "ConferenceClients": null,
+    "RedirectClient": "00000000-0000-0000-0000-000000000000",
+    "Encrypted": null,
+    "OpenChannelMode": false,
+    "InitDeviceID": 0,
+    "InitDeviceName": "",
+    "InitClientID": 0,
+    "InitClientCaption": "",
+    "InitClientName": "",
+    "TargetMember": null,
+    "ActiveDeviceID": 0,
+    "ActiveDeviceName": "",
+    "ActiveGroupID": 0,
+    "ActiveGroupName": "",
+    "ActiveClientID": 0,
+    "ActiveClientName": "",
+    "ActiveClientsID": null,
+    "ActiveUserID": 0,
+    "ActiveUserName": "",
+    "ActiveUserGroupID": 0,
+    "ActiveUserGroupName": "",
+    "TransmitDeviceID": 0,
+    "TransmitDeviceName": "",
+    "TransmitClientID": 0,
+    "TransmitClientName": "",
+    "MicrophoneActive": false,
+    "SpeakerActive": false,
+    "PlaybackMode": false,
+    "TransmitInternal": false,
+    "TransmitSSRC": 0,
+    "TransmitSSRC2": 0,
+    "PhoneAddress": null,
+    "PhoneOwner": "",
+    "AudioRecordID": ""
+  }
+}
+2020-03-01 16:55:24.3955|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:55:49.5245|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:55:49.5245|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:55:49.5245|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:55:49.5245|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:55:49.5245|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:55:49.5245|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:55:49.5245|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:55:49.5245|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:55:50.8030|DEBUG|proveofconceptturbo.WebApiApplication|DeviceLocationChanged NS.Enterprise.Objects.Event_args.DeviceLocationChangedEventArgs
+2020-03-01 16:55:50.8551|DEBUG|proveofconceptturbo.WebApiApplication|DeviceLocationChanged NS.Enterprise.Objects.Event_args.DeviceLocationChangedEventArgs
+2020-03-01 16:55:51.0509|DEBUG|proveofconceptturbo.WebApiApplication|M_client_DeviceStateChanged NS.Enterprise.Objects.Event_args.DeviceStateChangedEventArgs
+2020-03-01 16:55:52.0807|DEBUG|proveofconceptturbo.WebApiApplication|DeviceLocationChanged NS.Enterprise.Objects.Event_args.DeviceLocationChangedEventArgs
+2020-03-01 16:55:55.3648|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:55:55.3648|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:55:55
+2020-03-01 16:55:55.4048|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:56:05.3857|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:56:05.3857|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:55:55
+2020-03-01 16:56:05.4247|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:56:05.7624|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished NS.Enterprise.Objects.Event_args.WorkflowCommandFinishedEventArgs
+2020-03-01 16:56:15.3956|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:56:15.3956|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:55:55
+2020-03-01 16:56:15.4445|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:56:23.4405|DEBUG|proveofconceptturbo.WebApiApplication|M_client_DeviceStateChanged NS.Enterprise.Objects.Event_args.DeviceStateChangedEventArgs
+2020-03-01 16:56:25.3944|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:56:25.3944|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:55:55
+2020-03-01 16:56:25.4344|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:56:35.4046|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:56:35.4046|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:55:55
+2020-03-01 16:56:35.4456|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:56:45.4038|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:56:45.4038|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:55:55
+2020-03-01 16:56:45.4448|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:56:55.4145|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:56:55.4145|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:55:55
+2020-03-01 16:56:55.4545|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:56:57.0401|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished NS.Enterprise.Objects.Event_args.WorkflowCommandFinishedEventArgs
+2020-03-01 16:57:05.4043|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:57:05.4043|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:55:55
+2020-03-01 16:57:05.4433|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:57:06.6410|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished NS.Enterprise.Objects.Event_args.WorkflowCommandFinishedEventArgs
+2020-03-01 16:57:15.4339|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:57:15.4339|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:55:55
+2020-03-01 16:57:15.4739|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:57:16.8791|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished NS.Enterprise.Objects.Event_args.WorkflowCommandFinishedEventArgs
+2020-03-01 16:57:19.3506|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:57:19.5156|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:57:25.4260|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:57:25.4260|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:55:55
+2020-03-01 16:57:25.4720|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:57:26.7994|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished NS.Enterprise.Objects.Event_args.WorkflowCommandFinishedEventArgs
+2020-03-01 16:57:35.4244|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:57:35.4244|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:55:55
+2020-03-01 16:57:35.4644|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:57:37.0388|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished NS.Enterprise.Objects.Event_args.WorkflowCommandFinishedEventArgs
+2020-03-01 16:57:45.4539|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:57:45.4539|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:55:55
+2020-03-01 16:57:45.4935|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:57:46.9459|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished NS.Enterprise.Objects.Event_args.WorkflowCommandFinishedEventArgs
+2020-03-01 16:57:55.4534|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:57:55.4544|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:55:55
+2020-03-01 16:57:55.4934|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:58:05.4428|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:58:05.4428|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:55:55
+2020-03-01 16:58:05.4878|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:58:06.1604|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished NS.Enterprise.Objects.Event_args.WorkflowCommandFinishedEventArgs
+2020-03-01 16:58:06.8184|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished NS.Enterprise.Objects.Event_args.WorkflowCommandFinishedEventArgs
+2020-03-01 16:58:15.4617|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:58:15.4617|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:55:55
+2020-03-01 16:58:15.5017|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:58:19.5995|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:58:19.5995|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:58:19.5995|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:58:19.5995|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:58:19.5995|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:58:19.5995|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:58:19.5995|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:58:25.4637|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:58:25.4637|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:55:55
+2020-03-01 16:58:25.5027|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:58:26.2520|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished NS.Enterprise.Objects.Event_args.WorkflowCommandFinishedEventArgs
+2020-03-01 16:58:28.5582|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished NS.Enterprise.Objects.Event_args.WorkflowCommandFinishedEventArgs
+2020-03-01 16:58:35.4712|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:58:35.4712|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:55:55
+2020-03-01 16:58:35.5062|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:58:36.5347|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished NS.Enterprise.Objects.Event_args.WorkflowCommandFinishedEventArgs
+2020-03-01 16:58:36.8881|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished NS.Enterprise.Objects.Event_args.WorkflowCommandFinishedEventArgs
+2020-03-01 16:58:45.4704|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:58:45.4704|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:55:55
+2020-03-01 16:58:45.5133|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:58:46.4774|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished NS.Enterprise.Objects.Event_args.WorkflowCommandFinishedEventArgs
+2020-03-01 16:58:55.4829|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:58:55.4829|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:55:55
+2020-03-01 16:58:55.5199|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:58:56.6255|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished NS.Enterprise.Objects.Event_args.WorkflowCommandFinishedEventArgs
+2020-03-01 16:59:05.4827|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:59:05.4827|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:55:55
+2020-03-01 16:59:05.5207|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged NS.Enterprise.Objects.BindableCollectionEventArgs2`1[NS.Enterprise.Objects.Devices.Device]
+2020-03-01 16:59:29.3935|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:59:29.3935|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:59:29
+2020-03-01 16:59:29.4426|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 16:59:39.4096|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:59:39.4096|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:59:29
+2020-03-01 16:59:39.4636|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 16:59:44.3385|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Open
+2020-03-01 16:59:44.6150|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Open
+2020-03-01 16:59:47.9174|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Close
+2020-03-01 16:59:49.4160|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:59:49.4160|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:59:29
+2020-03-01 16:59:49.4679|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 16:59:50.8020|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished Test01-Mar-20 16:59:29
+2020-03-01 16:59:59.4405|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 16:59:59.4405|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:59:29
+2020-03-01 16:59:59.4925|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 17:00:09.4205|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 17:00:09.4205|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:59:29
+2020-03-01 17:00:09.4604|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 17:00:19.4303|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 17:00:19.4303|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:59:29
+2020-03-01 17:00:19.4723|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 17:00:28.5605|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Open
+2020-03-01 17:00:28.8222|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Open
+2020-03-01 17:00:28.8222|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 17:00:29.4322|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 17:00:29.4322|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:59:29
+2020-03-01 17:00:29.4698|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 17:00:30.0075|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished Test01-Mar-20 16:59:29
+2020-03-01 17:00:30.8141|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Open
+2020-03-01 17:00:31.0237|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Open
+2020-03-01 17:00:31.2201|DEBUG|proveofconceptturbo.WebApiApplication|M_client_DeviceStateChanged 
+2020-03-01 17:00:34.0140|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Close
+2020-03-01 17:00:34.0140|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Open
+2020-03-01 17:00:34.3533|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Open
+2020-03-01 17:00:35.9369|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Open
+2020-03-01 17:00:36.0946|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Open
+2020-03-01 17:00:36.8769|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Open
+2020-03-01 17:00:37.1142|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Open
+2020-03-01 17:00:39.4184|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 17:00:39.4184|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:59:29
+2020-03-01 17:00:39.4564|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 17:00:40.0777|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 17:00:40.2246|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Close
+2020-03-01 17:00:40.2246|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished Test01-Mar-20 16:59:29
+2020-03-01 17:00:49.4288|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 17:00:49.4288|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:59:29
+2020-03-01 17:00:49.4687|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 17:00:59.0792|DEBUG|proveofconceptturbo.WebApiApplication|DeviceLocationChanged 52.2431002976373
+2020-03-01 17:00:59.2211|DEBUG|proveofconceptturbo.WebApiApplication|DeviceLocationChanged 52.2431002976373
+2020-03-01 17:00:59.4216|DEBUG|proveofconceptturbo.WebApiApplication|DeviceLocationChanged 52.2431002976373
+2020-03-01 17:00:59.4216|DEBUG|proveofconceptturbo.WebApiApplication|M_client_DeviceStateChanged 
+2020-03-01 17:00:59.4316|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 17:00:59.4316|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:59:29
+2020-03-01 17:00:59.4726|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 17:01:00.3553|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished Test01-Mar-20 16:59:29
+2020-03-01 17:01:02.1553|DEBUG|proveofconceptturbo.WebApiApplication|DeviceLocationChanged 52.2431002976373
+2020-03-01 17:01:02.2220|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished Test01-Mar-20 16:59:29
+2020-03-01 17:01:02.2220|DEBUG|proveofconceptturbo.WebApiApplication|DeviceLocationChanged 52.2431002976373
+2020-03-01 17:01:04.3961|DEBUG|proveofconceptturbo.WebApiApplication|DeviceLocationChanged 52.2431002976373
+2020-03-01 17:01:09.4703|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 17:01:09.4703|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:59:29
+2020-03-01 17:01:09.5105|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 17:01:10.4765|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished Test01-Mar-20 16:59:29
+2020-03-01 17:01:19.4794|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 17:01:19.4794|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:59:29
+2020-03-01 17:01:19.5294|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 17:01:20.7164|DEBUG|proveofconceptturbo.WebApiApplication|M_client_WorkflowCommandFinished Test01-Mar-20 16:59:29
+2020-03-01 17:01:25.5163|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Open
+2020-03-01 17:01:25.6365|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 
+2020-03-01 17:01:25.8397|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Open
+2020-03-01 17:01:29.0558|DEBUG|proveofconceptturbo.WebApiApplication|M_client_TransmitReceiveChanged Close
+2020-03-01 17:01:29.4584|INFO|proveofconceptturbo.WebApiApplication|HEllo
+2020-03-01 17:01:29.4584|DEBUG|proveofconceptturbo.WebApiApplication|Hai Test01-Mar-20 16:59:29
+2020-03-01 17:01:29.4974|DEBUG|proveofconceptturbo.WebApiApplication|DevicesChanged 

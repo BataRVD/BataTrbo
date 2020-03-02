@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TrboPortal.Model;
-using TrboPortal.Controllers;
 using NLog;
+using TrboPortal.Model.Api;
+using TrboPortal.Model.Db;
+using GpsMeasurement = TrboPortal.Model.Api.GpsMeasurement;
+using Radio = TrboPortal.Model.Api.Radio;
 
 namespace TrboPortal.Mappers
 {
@@ -12,9 +11,9 @@ namespace TrboPortal.Mappers
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        public static Model.Radio Map(Controllers.Radio radio)
+        public static Model.Db.Radio Map(Radio radio)
         {
-            Model.Radio radioSettings = new Model.Radio
+            Model.Db.Radio radioSettings = new Model.Db.Radio
             {
                 Name = radio.Name,
                 RadioId = radio.RadioId,
@@ -25,9 +24,9 @@ namespace TrboPortal.Mappers
             return radioSettings;
         }
 
-        public static Model.GpsEntry Map(Controllers.GpsMeasurement gpsMeasurement)
+        public static GpsEntry Map(GpsMeasurement gpsMeasurement)
         {
-            Model.GpsEntry entry = new Model.GpsEntry
+            GpsEntry entry = new GpsEntry
             {
                 RadioId = gpsMeasurement.RadioID,
                 DeviceId = gpsMeasurement.DeviceID,
@@ -41,7 +40,7 @@ namespace TrboPortal.Mappers
         }
 
 
-        public static Controllers.Radio Map(Model.Radio radioSettings)
+        public static Radio Map(Model.Db.Radio radioSettings)
         {
             if (!Enum.TryParse(radioSettings.GpsMode, true, out GpsModeEnum gpsMode))
             {
@@ -49,7 +48,7 @@ namespace TrboPortal.Mappers
                 logger.Warn($"Could not parse GpsEnum value '{radioSettings.GpsMode}', defaulted to {gpsMode.ToString()}");
             }
 
-            Controllers.Radio radio = new Controllers.Radio
+            Radio radio = new Radio
             {
                 Name = radioSettings.Name,
                 RadioId = radioSettings.RadioId,
@@ -71,7 +70,7 @@ namespace TrboPortal.Mappers
             {
                 gpsMode = GpsModeEnum.None;
             }
-            Controllers.SystemSettings systemSettings = new SystemSettings
+            SystemSettings systemSettings = new SystemSettings
             {
                 DefaultInterval = settings.DefaultInterval,
                 DefaultGpsMode = gpsMode,

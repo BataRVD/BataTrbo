@@ -1,12 +1,12 @@
-﻿using TrboPortal.Controllers;
+﻿using Radio = TrboPortal.Model.Api.Radio;
 
 namespace TrboPortal.Mappers
 {
     public class RadioMapper
     {
-        public static Model.Radio MapRadioSettings(Controllers.Radio rs)
+        public static Model.Db.Radio MapRadioSettings(Radio rs)
         {
-            return new Model.Radio
+            return new Model.Db.Radio
             {
                 RadioId = (int)rs.RadioId,
                 Name = rs.Name,

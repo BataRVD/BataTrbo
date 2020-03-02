@@ -1,4 +1,4 @@
-﻿namespace TrboPortal.Controllers
+﻿namespace TrboPortal.Model.Api
 {
     /// <summary>
     /// Class with (only) settings regarding this radio

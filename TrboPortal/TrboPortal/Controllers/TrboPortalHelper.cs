@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using NLog;
 using TrboPortal.Mappers;
-using TrboPortal.Model;
+using TrboPortal.Model.Api;
+using TrboPortal.Model.Db;
 using TrboPortal.TrboNet;
+using GpsMeasurement = TrboPortal.Model.Api.GpsMeasurement;
 
 namespace TrboPortal.Controllers
 {
@@ -24,17 +24,19 @@ namespace TrboPortal.Controllers
         public static ICollection<GpsMeasurement> GetGpsMeasurements(IEnumerable<int> ids,
             DateTime? from, DateTime? through)
         {
-            using var context = new DatabaseContext();
-            return context.GpsEntries
-                .Where(g => g.RadioId.HasValue &&
-                            ((ids.Count() == 0) || ids.Contains(g.RadioId.Value)) &&
-                            (from == null || from < g.Timestamp) &&
-                            (through == null || through > g.Timestamp))
-                .Select(g => new GpsMeasurement(g))
-                .ToList();
+            using (var context = new DatabaseContext())
+            {
+                return context.GpsEntries
+                    .Where(g => g.RadioId.HasValue &&
+                                ((ids.Count() == 0) || ids.Contains(g.RadioId.Value)) &&
+                                (from == null || from < g.Timestamp) &&
+                                (through == null || through > g.Timestamp))
+                    .Select(g => new GpsMeasurement(g))
+                    .ToList();
+            }
         }
 
-        public static void UpdateRadioSettings(IEnumerable<Radio> radioSettings)
+        public static void UpdateRadioSettings(IEnumerable<Model.Api.Radio> radioSettings)
         {
             //Store the settings
             Repository.InsertOrUpdate(radioSettings.ToList().Select(RadioMapper.MapRadioSettings).ToList());

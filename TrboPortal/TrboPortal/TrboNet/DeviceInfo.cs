@@ -1,8 +1,7 @@
-﻿using NS.Enterprise.Objects.Devices;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
-using TrboPortal.Controllers;
 using Device = NS.Enterprise.Objects.Devices.Device;
+using GpsMeasurement = TrboPortal.Model.Api.GpsMeasurement;
 
 namespace TrboPortal.TrboNet
 {
@@ -26,7 +25,7 @@ namespace TrboPortal.TrboNet
             this.DeviceID = device.ID;
             this.RadioID = device.RadioID;
             GpsLocations = new ConcurrentStack<GpsMeasurement>();
-            LastUpdate = device != null ? DateTime.Now : DateTime.UnixEpoch;
+            LastUpdate = device != null ? DateTime.Now : DateTime.MinValue;
         }
 
         public DeviceInfo(int deviceID)
