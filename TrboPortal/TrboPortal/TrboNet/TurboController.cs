@@ -8,13 +8,14 @@ using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Timers;
-using TrboPortal.Controllers;
 using TrboPortal.Mappers;
 using Device = NS.Enterprise.Objects.Devices.Device;
 using NS.Enterprise.Objects.Event_args;
 using System.Text;
-using NS.Shared.Network;
-using TrboPortal.Model;
+using TrboPortal.Model.Api;
+using TrboPortal.Model.Db;
+using GpsMeasurement = TrboPortal.Model.Api.GpsMeasurement;
+using Radio = TrboPortal.Model.Api.Radio;
 
 namespace TrboPortal.TrboNet
 {
@@ -50,7 +51,7 @@ namespace TrboPortal.TrboNet
         // This is a dictionary with DeviceID --> Operational info
         private static ConcurrentDictionary<int, DeviceInfo> devices = new ConcurrentDictionary<int, DeviceInfo>();
         // This is a dictionary with RadioID --> Settings
-        private static ConcurrentDictionary<int, Controllers.Radio> radios = new ConcurrentDictionary<int, Controllers.Radio>();
+        private static ConcurrentDictionary<int, Radio> radios = new ConcurrentDictionary<int, Radio>();
            
         private static Timer heartBeat;
         private static DateTime lastLifeSign = DateTime.Now;
@@ -362,7 +363,7 @@ namespace TrboPortal.TrboNet
             return deviceFound;
         }
 
-        private bool GetRadioByRadioID(int radioID, out Controllers.Radio radio)
+        private bool GetRadioByRadioID(int radioID, out Radio radio)
         {
             bool radioFound = radios.TryGetValue(radioID, out radio);
             if (!radioFound)
@@ -545,7 +546,7 @@ namespace TrboPortal.TrboNet
                 }
 
                 int radioID = deviceInfo.RadioID;
-                if (!GetRadioByRadioID(radioID, out Controllers.Radio radio))
+                if (!GetRadioByRadioID(radioID, out Radio radio))
                 {
                     // We have no settings
                     continue;
@@ -578,7 +579,7 @@ namespace TrboPortal.TrboNet
         {
             foreach (int radioID in radioIds)
             {
-                if (GetDeviceInfoByRadioID(radioID, out DeviceInfo deviceInfo) && GetRadioByRadioID(radioID, out Controllers.Radio radio))
+                if (GetDeviceInfoByRadioID(radioID, out DeviceInfo deviceInfo) && GetRadioByRadioID(radioID, out Radio radio))
                 {
                     GpsModeEnum gpsMode = radio?.GpsMode ?? GpsModeEnum.None;
                     if (gpsMode != GpsModeEnum.None)
@@ -732,7 +733,7 @@ namespace TrboPortal.TrboNet
                 */
 
                 // Add settings
-                if (radios.TryAdd(radioID, new Controllers.Radio(radioID, defaultGpsMode, defaultRequestInterval)))
+                if (radios.TryAdd(radioID, new Radio(radioID, defaultGpsMode, defaultRequestInterval)))
                 {
                     logger.Info($"Created standard settings for Radio with radioID {radioID}");
                 }
@@ -748,7 +749,7 @@ namespace TrboPortal.TrboNet
         /// If Device is not yet known (aka seen in TrboNet network), creates a stub with supplied settings in case we see it later.
         /// </summary>
         /// <param name="device">Device from API</param>
-        public void AddOrUpdateDeviceSettings(Controllers.Radio radio)
+        public void AddOrUpdateDeviceSettings(Radio radio)
         {
             var radioID = radio.RadioId;
             /*
@@ -769,9 +770,9 @@ namespace TrboPortal.TrboNet
             return new List<DeviceInfo>(devices.Values);
         }
 
-        public List<Controllers.Radio> GetSettings()
+        public List<Radio> GetSettings()
         {
-            return new List<Controllers.Radio>(radios.Values);
+            return new List<Radio>(radios.Values);
         }
 
     }

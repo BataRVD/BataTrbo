@@ -318,10 +318,16 @@
     <Compile Include="CiaBata\CiaBata.cs" />
     <Compile Include="CiaBata\DeviceLifeSign.cs" />
     <Compile Include="CiaBata\GPSLocation.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\TrboPortalController.generated.cs" />
-    <Compile Include="Controllers\TrboPortalControllerImplementation.cs" />
+    <Compile Include="Model\Api\CiaBataSettings.cs" />
+    <Compile Include="Model\Api\GpsMeasurement.cs" />
+    <Compile Include="Model\Api\GpsModeEnum.cs" />
+    <Compile Include="Model\Api\HomeController.cs" />
+    <Compile Include="Model\Api\MessageQueueItem.cs" />
+    <Compile Include="Model\Api\Radio.cs" />
+    <Compile Include="Model\Api\SystemSettings.cs" />
+    <Compile Include="Controllers\TrboPortalController.cs" />
     <Compile Include="Controllers\TrboPortalHelper.cs" />
+    <Compile Include="Model\Api\TurboNetSettings.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -331,12 +337,12 @@
     <Compile Include="Mappers\DateTimeMapper.cs" />
     <Compile Include="Mappers\MessageQueueMapper.cs" />
     <Compile Include="Mappers\RadioMapper.cs" />
-    <Compile Include="Model\DatabaseContext .cs" />
-    <Compile Include="Model\GpsEntry.cs" />
-    <Compile Include="Model\GpsMeasurement.cs" />
-    <Compile Include="Model\Radio.cs" />
-    <Compile Include="Model\Repository.cs" />
-    <Compile Include="Model\Settings.cs" />
+    <Compile Include="Model\Db\DatabaseContext .cs" />
+    <Compile Include="Model\Db\GpsEntry.cs" />
+    <Compile Include="Model\Db\GpsMeasurement.cs" />
+    <Compile Include="Model\Db\Radio.cs" />
+    <Compile Include="Model\Db\Repository.cs" />
+    <Compile Include="Model\Db\Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TrboNet\DeviceInfo.cs" />
     <Compile Include="TrboNet\Queue.cs" />
@@ -417,7 +423,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -484,9 +489,9 @@
     <!-- <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" /> -->
     <!-- <Error Condition="!Exists('..\packages\NSwag.MSBuild.13.2.3\build\NSwag.MSBuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NSwag.MSBuild.13.2.3\build\NSwag.MSBuild.props'))" /> -->
   </Target>
-  <Target Name="NSwag" BeforeTargets="PrepareForBuild">
-    <Exec Command="$(NSwagExe) openapi2cscontroller /input:Swagger\TrboPortal.json /ControllerTarget:AspNet /classname:TrboPortal /namespace:TrboPortal.Controllers /output:Controllers/TrboPortalController.generated.cs /UseLiquidTemplates:true /AspNetNamespace:&quot;System.Web.Http&quot; /ControllerBaseClass:&quot;System.Web.Http.ApiController&quot;" />
-  </Target>
+  <!-- <Target Name="NSwag" BeforeTargets="PrepareForBuild"> -->
+  <!--   <Exec Command="$(NSwagExe) openapi2cscontroller /input:Swagger\TrboPortal.json /ControllerTarget:AspNet /classname:TrboPortal /namespace:TrboPortal.Controllers /output:Controllers/TrboPortalController.generated.cs /UseLiquidTemplates:true /AspNetNamespace:&quot;System.Web.Http&quot; /ControllerBaseClass:&quot;System.Web.Http.ApiController&quot;" /> -->
+  <!-- </Target> -->
   <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.2.0.2\build\net461\SQLitePCLRaw.lib.e_sqlite3.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.2.0.2\build\net461\SQLitePCLRaw.lib.e_sqlite3.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

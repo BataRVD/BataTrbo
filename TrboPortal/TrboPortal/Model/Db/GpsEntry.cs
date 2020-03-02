@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
-namespace TrboPortal.Model
+namespace TrboPortal.Model.Db
 {
     /// <summary>
     /// Model used for database storage, when changing please look into the default migration options of entityframework

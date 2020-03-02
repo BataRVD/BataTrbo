@@ -34,3 +34,10 @@
 2020-03-01 17:08:29.8311|DEBUG|TrboPortal.WebApiApplication|M_client_DeviceStateChanged 
 2020-03-01 17:08:32.0682|DEBUG|TrboPortal.WebApiApplication|DeviceLocationChanged 52.2431778721511
 2020-03-01 17:08:32.1900|DEBUG|TrboPortal.WebApiApplication|DeviceLocationChanged 52.2431778721511
+2020-03-02 22:47:49.2447|INFO|TrboPortal.TrboNet.TurboController|Starting the Controller!
+2020-03-02 22:47:49.5181|DEBUG|TrboPortal.TrboNet.TurboController|The server did a tick
+2020-03-02 22:47:49.5181|DEBUG|TrboPortal.TrboNet.TurboController|Nothing to pop.
+2020-03-02 22:47:49.7778|DEBUG|TrboPortal.TrboNet.TurboController|The server did a tick
+2020-03-02 22:47:49.7778|DEBUG|TrboPortal.TrboNet.TurboController|Nothing to pop.
+2020-03-02 22:47:50.0424|DEBUG|TrboPortal.TrboNet.TurboController|The server did a tick
+2020-03-02 22:47:50.0424|DEBUG|TrboPortal.TrboNet.TurboController|Nothing to pop.

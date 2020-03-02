@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -11,13 +10,10 @@ using System.Web.Routing;
 using NLog;
 using NS.Enterprise.ClientAPI;
 using NS.Enterprise.Objects;
-using NS.Enterprise.Objects.Beacons;
 using NS.Enterprise.Objects.Devices;
 using NS.Enterprise.Objects.Event_args;
 using NS.Enterprise.Objects.Users;
-using System.Linq;
 using System.Timers;
-using Swashbuckle.Application;
 
 
 namespace TrboPortal

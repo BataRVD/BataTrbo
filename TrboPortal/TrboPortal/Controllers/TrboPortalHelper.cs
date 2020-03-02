@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using NLog;
 using TrboPortal.Mappers;
-using TrboPortal.Model;
+using TrboPortal.Model.Api;
+using TrboPortal.Model.Db;
 using TrboPortal.TrboNet;
+using GpsMeasurement = TrboPortal.Model.Api.GpsMeasurement;
 
 namespace TrboPortal.Controllers
 {
@@ -36,7 +36,7 @@ namespace TrboPortal.Controllers
             }
         }
 
-        public static void UpdateRadioSettings(IEnumerable<Radio> radioSettings)
+        public static void UpdateRadioSettings(IEnumerable<Model.Api.Radio> radioSettings)
         {
             //Store the settings
             Repository.InsertOrUpdate(radioSettings.ToList().Select(RadioMapper.MapRadioSettings).ToList());

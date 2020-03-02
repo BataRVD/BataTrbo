@@ -1,6 +1,4 @@
 using System.Web.Http;
-using WebActivatorEx;
-using TrboPortal;
 using Swashbuckle.Application;
 
 namespace TrboPortal

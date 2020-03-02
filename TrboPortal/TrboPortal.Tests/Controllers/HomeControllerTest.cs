@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TrboPortal;
-using TrboPortal.Controllers;
+using TrboPortal.Model.Api;
 
 namespace TrboPortal.Tests.Controllers
 {

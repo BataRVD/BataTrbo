@@ -1,8 +1,7 @@
-﻿using NS.Enterprise.Objects.Devices;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
-using TrboPortal.Controllers;
 using Device = NS.Enterprise.Objects.Devices.Device;
+using GpsMeasurement = TrboPortal.Model.Api.GpsMeasurement;
 
 namespace TrboPortal.TrboNet
 {

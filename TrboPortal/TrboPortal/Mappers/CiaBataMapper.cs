@@ -1,10 +1,6 @@
 ﻿using NLog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TrboPortal.CiaBata;
-using TrboPortal.Controllers;
+using GpsMeasurement = TrboPortal.Model.Api.GpsMeasurement;
 
 namespace TrboPortal.Mappers
 {

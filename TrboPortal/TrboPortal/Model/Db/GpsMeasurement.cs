@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using NLog;
-using TrboPortal.Mappers;
-using TrboPortal.Model;
-using Exception = System.Exception;
+﻿using TrboPortal.Mappers;
+using TrboPortal.Model.Db;
 
-namespace TrboPortal.Controllers
+namespace TrboPortal.Model.Api
 {
+    //TODO This shouldn't be a partial class of Model.Api
     public partial class GpsMeasurement
     {
         public GpsMeasurement()
