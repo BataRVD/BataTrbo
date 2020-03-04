@@ -12,6 +12,7 @@
 *.user
 *.sln.docstates
 *.generated.cs
+*.db
 
 # Build results
 [Dd]ebug/

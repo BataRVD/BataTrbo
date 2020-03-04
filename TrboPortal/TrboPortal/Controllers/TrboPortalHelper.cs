@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NLog;
 using TrboPortal.Mappers;
+using TrboPortal.Model;
 using TrboPortal.Model.Api;
 using TrboPortal.Model.Db;
 using TrboPortal.TrboNet;

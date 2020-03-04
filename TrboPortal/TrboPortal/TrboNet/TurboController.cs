@@ -12,6 +12,7 @@ using TrboPortal.Mappers;
 using Device = NS.Enterprise.Objects.Devices.Device;
 using NS.Enterprise.Objects.Event_args;
 using System.Text;
+using TrboPortal.Model;
 using TrboPortal.Model.Api;
 using TrboPortal.Model.Db;
 using GpsMeasurement = TrboPortal.Model.Api.GpsMeasurement;
