@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace TrboPortal.Model.Db
 {
@@ -12,7 +13,7 @@ namespace TrboPortal.Model.Db
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="entity"></param>
-        public static void InsertOrUpdate<T>(T entity) where T : class
+        public static async Task InsertOrUpdateAsync<T>(T entity) where T : class
         {
             using (var db = new DatabaseContext())
             {
@@ -21,7 +22,7 @@ namespace TrboPortal.Model.Db
 
                 // If an immediate save is needed, can be slow though
                 // if iterating through many entities:
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
         }
 
@@ -46,24 +47,24 @@ namespace TrboPortal.Model.Db
             }
         }
 
-        internal static Settings GetLatestSystemSettings()
+        internal static async Task<Settings> GetLatestSystemSettingsAsync()
         {
             using (var context = new DatabaseContext())
             {
-                return context.Settings.OrderByDescending(s => s.SettingsId).FirstOrDefault();
+                return await context.Settings.OrderByDescending(s => s.SettingsId).FirstOrDefaultAsync();
             }
         }
 
-        public static List<LogEntry> GetLogging(string logLevel, long? from, long? through)
+        public static async  Task<List<LogEntry>> GetLogging(string logLevel, long? from, long? through)
         {
             using (var context = new DatabaseContext())
             {
-                return context.LogEntries
+                return await context.LogEntries
                     .Where(l => logLevel.Equals(l.LogLevel, StringComparison.InvariantCultureIgnoreCase)
-//                                && from == null || from < l.Timestamp
-//                                && through == null || through > l.Timestamp
+                        && from == null || from < l.Timestamp
+                        && through == null || through > l.Timestamp
                     )
-                    .ToList();
+                    .ToListAsync();
             }
         }
     }

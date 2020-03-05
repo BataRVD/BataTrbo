@@ -13,6 +13,7 @@
 *.sln.docstates
 *.generated.cs
 *.db
+*.db-*
 TrboPortal.log
 # Build results
 [Dd]ebug/

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using NLog;
 using TrboPortal.Mappers;
 using TrboPortal.Model;
@@ -22,39 +24,40 @@ namespace TrboPortal.Controllers
         /// <param name="from">Optional from filter</param>
         /// <param name="through">Optional through filter</param>
         /// <returns></returns>
-        public static ICollection<GpsMeasurement> GetGpsMeasurements(IEnumerable<int> ids,
+        public static async Task<ICollection<GpsMeasurement>> GetGpsMeasurementsAsync(IEnumerable<int> ids,
             DateTime? from, DateTime? through)
         {
-            bool hasNoIds = (ids == null || ids.Count() == 0);
+            var hasNoIds = (ids == null || !ids.Any());
             using (var context = new DatabaseContext())
             {
-                return context.GpsEntries
+                var dbResults = await context.GpsEntries
                     .Where(g => g.RadioId.HasValue &&
                                 (hasNoIds || ids.Contains(g.RadioId.Value)) &&
                                 (from == null || from < g.Timestamp) &&
                                 (through == null || through > g.Timestamp))
-                    .ToList() // Execute the query
-                    .Select(g => new GpsMeasurement(g))
-                    .ToList();
+                    .ToListAsync();
+
+                return dbResults.Select(g => new GpsMeasurement(g)).ToList();
             }
         }
 
-        public static void UpdateRadioSettings(IEnumerable<Model.Api.Radio> radioSettings)
+        public static async Task UpdateRadioSettingsAsync(IEnumerable<Model.Api.Radio> radioSettings)
         {
             //Store the settings
-            Repository.InsertOrUpdate(radioSettings.ToList().Select(RadioMapper.MapRadioSettings).ToList());
+            await Repository.InsertOrUpdateAsync(radioSettings.ToList().Select(RadioMapper.MapRadioSettings).ToList());
 
             // How is this for an "event driven" system? =)
-            TurboController.Instance.loadRadioSettingsFromDatabase();
+            await TurboController.Instance.LoadRadioSettingsFromDatabaseAsync();
         }
 
-        internal static SystemSettings GetSystemSettings()
+        internal static async Task<SystemSettings> GetSystemSettings()
         {
             // TODO: Latest from DB not the cached in the server? If we are running on default, it will return null...
-            return DatabaseMapper.Map(Repository.GetLatestSystemSettings());
+            var result = await Repository.GetLatestSystemSettingsAsync();
+            return DatabaseMapper.Map(result);
         }
 
-        public static void UpdateSystemSettings(SystemSettings body)
+        public static async Task UpdateSystemSettingsAsync(SystemSettings body)
         {
             if (body != null)
             {
@@ -71,19 +74,19 @@ namespace TrboPortal.Controllers
                 };
 
                 //Store the settings
-                Repository.InsertOrUpdate(newSettings);
+                await Repository.InsertOrUpdateAsync(newSettings);
 
                 // How is this for an "event driven" system? =)
-                TurboController.Instance.loadGenericSettingsFromDatabase();
+                await TurboController.Instance.LoadGenericSettingsFromDatabaseAsync();
             }
         }
 
-        public static ICollection<LogMessage> GetLogging(string loglevel, string from, string through)
+        public static async Task<ICollection<LogMessage>> GetLoggingAsync(string loglevel, string from, string through)
         {
             var fromUnixMs = DateTimeMapper.ToUnixMs(from);
             var throughUnixMs = DateTimeMapper.ToUnixMs(through);
-            var result = Repository.GetLogging(loglevel, fromUnixMs, throughUnixMs).Select(l => new LogMessage(l)).ToList();
-            return result;
+            var result = await Repository.GetLogging(loglevel, fromUnixMs, throughUnixMs);
+            return result.Select(l => new LogMessage(l)).ToList();
         }
     }
 }

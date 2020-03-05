@@ -1,7 +1,7 @@
 ﻿using NLog;
 using NS.Enterprise.Objects.Devices;
 using System;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Timers;
 using TrboPortal.Mappers;
 using TrboPortal.Model.Db;
@@ -17,8 +17,8 @@ namespace TrboPortal.TrboNet
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         // instance specific 
-        private static TurboController instance = null;
-        private static readonly object lockObject = new object();
+        private static TurboController instance;
+        private static readonly object LockObject = new object();
 
         // some clients
         private static CiaBata.CiaBata ciaBataController;
@@ -40,7 +40,7 @@ namespace TrboPortal.TrboNet
             CreateTrboClient();
 
             // fallback - load defaults
-            loadDefaultSettings();
+            LoadDefaultSettings();
             ciaBataController = new CiaBata.CiaBata(ciaBataUrl);
             // Start HeartBeat
             heartBeat = new Timer();
@@ -51,7 +51,7 @@ namespace TrboPortal.TrboNet
 
 
             // overwrite with latest values
-            loadSettingsFromDatabase();
+            LoadSettingsFromDatabaseAsync().Wait();
 
             // Create CiabataControler
             Connect();
@@ -97,7 +97,7 @@ namespace TrboPortal.TrboNet
         {
             get
             {
-                lock (lockObject)
+                lock (LockObject)
                 {
                     if (instance == null)
                     {
@@ -111,14 +111,14 @@ namespace TrboPortal.TrboNet
 
         #endregion
 
-        private void PostGpsLocation(GpsMeasurement gpsMeasurement)
+        private async Task PostGpsLocation(GpsMeasurement gpsMeasurement)
         {
             try
             {
                 // Send to CiaBatac
-                ciaBataController.PostGpsLocation(CiaBataMapper.ToGpsLocation(gpsMeasurement));
+                await ciaBataController.PostGpsLocation(CiaBataMapper.ToGpsLocation(gpsMeasurement));
                 // Save to database
-                Repository.InsertOrUpdate(DatabaseMapper.Map(gpsMeasurement));
+                await Repository.InsertOrUpdateAsync(DatabaseMapper.Map(gpsMeasurement));
 
             }
             catch (Exception ex)

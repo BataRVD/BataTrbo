@@ -27,15 +27,15 @@ namespace TrboPortal.Controllers
         /// <summary>Update gps mode and interval radios</summary>
         /// <param name="radioSettings">Radios to update</param>
         [HttpPatch, Route("radio")]
-        public Task UpdateRadioSettings([FromBody] [Required] IEnumerable<Model.Api.Radio> radioSettings)
+        public Task UpdateRadioSettings([FromBody] [Required] IEnumerable<Radio> radioSettings)
         {
-            if (radioSettings == null || radioSettings.Count() == 0)
+            if (radioSettings == null || !radioSettings.Any())
             {
                 var message = "RadioSettings need to be supplied";
                 throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, message));
             }
 
-            return Task.Run(() => TrboPortalHelper.UpdateRadioSettings(radioSettings));
+            return TrboPortalHelper.UpdateRadioSettingsAsync(radioSettings);
         }
 
         /// <summary>Returns last known GPS position of radio(s)</summary>
@@ -44,7 +44,7 @@ namespace TrboPortal.Controllers
         [HttpGet, Route("gps")]
         public Task<ICollection<GpsMeasurement>> GetMostRecentGps([FromUri] IEnumerable<int> ids)
         {
-            return Task.FromResult(TrboPortalHelper.GetGpsMeasurements(ids, null, null));
+            return TrboPortalHelper.GetGpsMeasurementsAsync(ids, null, null);
         }
 
         /// <summary>Returns last known GPS position of radio(s)</summary>
@@ -64,7 +64,7 @@ namespace TrboPortal.Controllers
             }
 
 
-            return Task.FromResult(TrboPortalHelper.GetGpsMeasurements(id, f, t));
+            return TrboPortalHelper.GetGpsMeasurementsAsync(id, f, t);
         }
 
         /// <summary>Request GPS opdate for radio(s)</summary>
@@ -109,7 +109,7 @@ namespace TrboPortal.Controllers
         [HttpGet, Route("system/settings")]
         public Task<SystemSettings> GetSystemSettings()
         {
-            return Task.FromResult(TrboPortalHelper.GetSystemSettings());
+            return TrboPortalHelper.GetSystemSettings();
         }
 
         /// <summary>Update System settings</summary>
@@ -123,7 +123,7 @@ namespace TrboPortal.Controllers
                 throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, message));
             }
 
-            return Task.Run(() => TrboPortalHelper.UpdateSystemSettings(settings));
+            return TrboPortalHelper.UpdateSystemSettingsAsync(settings);
         }
 
         /// <summary>System logging</summary>
@@ -139,7 +139,7 @@ namespace TrboPortal.Controllers
                 throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Should supply loglevel value"));
             }
 
-            return Task.FromResult(TrboPortalHelper.GetLogging(loglevel, from, through));
+            return TrboPortalHelper.GetLoggingAsync(loglevel, from, through);
         }
     }
 }

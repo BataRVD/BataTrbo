@@ -3,6 +3,7 @@ using NLog;
 using System;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace TrboPortal.CiaBata
 {
@@ -22,7 +23,7 @@ namespace TrboPortal.CiaBata
         /// Post the current location to ciabata
         /// </summary>
         /// <param name="gps"></param>
-        public async void PostGpsLocation(GPSLocation gps)
+        public async Task PostGpsLocation(GPSLocation gps)
         {
             if (string.IsNullOrEmpty(url))
             {

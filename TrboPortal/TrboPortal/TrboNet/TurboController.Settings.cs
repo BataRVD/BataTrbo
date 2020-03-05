@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using TrboPortal.Mappers;
 using TrboPortal.Model;
 using TrboPortal.Model.Api;
@@ -16,7 +18,7 @@ namespace TrboPortal.TrboNet
     public sealed partial class TurboController
     {
         // database
-        private static readonly DatabaseContext _dbContext = new DatabaseContext();
+        private static readonly DatabaseContext DbContext = new DatabaseContext();
 
         // Config section
         private static string ciaBataUrl;
@@ -32,14 +34,14 @@ namespace TrboPortal.TrboNet
         // This is a dictionary with RadioID --> Settings
         private static ConcurrentDictionary<int, Radio> radios = new ConcurrentDictionary<int, Radio>();
 
-        private void loadDefaultSettings()
+        private static void LoadDefaultSettings()
         {
-            SystemSettings settings = new SystemSettings();
+            var settings = new SystemSettings();
             serverInterval = Math.Max(250, settings.ServerInterval ?? 0);
-            ciaBataUrl = settings.CiaBataSettings?.Host; ;
+            ciaBataUrl = settings.CiaBataSettings?.Host;
 
             turboNetUrl = settings.TurboNetSettings?.Host;
-            turboNetPort = (int)(settings.TurboNetSettings?.Port ?? 0);
+            turboNetPort = settings.TurboNetSettings?.Port ?? 0;
             turboNetUser = settings.TurboNetSettings?.User;
             turboNetPassword = settings.TurboNetSettings?.Password;
 
@@ -47,12 +49,12 @@ namespace TrboPortal.TrboNet
             defaultRequestInterval = 60;
         }
 
-        private void loadSettingsFromDatabase()
+        private async Task LoadSettingsFromDatabaseAsync()
         {
             try
             {
-                loadRadioSettingsFromDatabase();
-                loadGenericSettingsFromDatabase();
+                await LoadRadioSettingsFromDatabaseAsync();
+                await LoadGenericSettingsFromDatabaseAsync();
             }
             catch (Exception ex)
             {
@@ -60,18 +62,18 @@ namespace TrboPortal.TrboNet
             }
         }
 
-        public void loadGenericSettingsFromDatabase()
+        public async Task LoadGenericSettingsFromDatabaseAsync()
         {
             try
             {
-                var settings = Repository.GetLatestSystemSettings();
+                var settings = await Repository.GetLatestSystemSettingsAsync();
                 if (settings != null)
                 {
                     serverInterval = Math.Max(250, settings.ServerInterval);
                     ciaBataUrl = settings.CiaBataHost;
 
                     turboNetUrl = settings.TrboNetHost;
-                    turboNetPort = (int)(settings.TrboNetPort);
+                    turboNetPort = settings.TrboNetPort;
                     turboNetUser = settings.TrboNetUser;
                     turboNetPassword = settings.TrboNetPassword;
 
@@ -87,6 +89,7 @@ namespace TrboPortal.TrboNet
                     {
                         defaultGpsMode = GpsModeEnum.None;
                     }
+
                     defaultRequestInterval = settings.DefaultInterval;
                 }
                 else
@@ -101,14 +104,15 @@ namespace TrboPortal.TrboNet
         }
 
 
-        public void loadRadioSettingsFromDatabase()
+        public async Task LoadRadioSettingsFromDatabaseAsync()
         {
             try
             {
-                var radiosFromSettings = _dbContext.RadioSettings
-                .ToList() // Execute query
-                .Select(rs => DatabaseMapper.Map(rs))
-                .ToDictionary(r => r.RadioId, r => r);
+                var dbSettings = await DbContext.RadioSettings.ToListAsync(); // Execute query
+
+                var radiosFromSettings = dbSettings
+                    .Select(rs => DatabaseMapper.Map(rs))
+                    .ToDictionary(r => r.RadioId, r => r);
 
                 foreach (var radio in radiosFromSettings)
                 {
@@ -128,14 +132,15 @@ namespace TrboPortal.TrboNet
             {
                 logger.Warn($"Can't find radio settings for radioID {radioID}");
             }
+
             return radioFound;
         }
 
         public List<Radio> GetRadioSettings(IEnumerable<int> radioIds)
         {
-            var selectedRadios = radios.Values.Where(r => (radioIds == null || !radioIds.Any()) || radioIds.Contains(r.RadioId));
+            var selectedRadios =
+                radios.Values.Where(r => (radioIds == null || !radioIds.Any()) || radioIds.Contains(r.RadioId));
             return new List<Radio>(selectedRadios);
         }
-
     }
 }
