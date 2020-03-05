@@ -26,24 +26,21 @@ namespace TrboPortal.Model.Db
             }
         }
 
-
         /// <summary>
         /// Insert or update Radio (based on key)
         /// </summary>
         /// <param name="settings"></param>
-        public static void InsertOrUpdate(List<Radio> settings)
+        public static async Task InsertOrUpdateAsync(List<Radio> settings)
         {
             using (var context = new DatabaseContext())
             {
                 foreach (var s in settings)
                 {
-                    bool radioExists =
-                        context.RadioSettings.Any(r => r.RadioId == s.RadioId); 
-
+                    var radioExists = await context.RadioSettings.AnyAsync(r => r.RadioId == s.RadioId);
                     context.Entry(s).State = radioExists ? EntityState.Modified : EntityState.Added;
                 }
 
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
 
@@ -55,7 +52,7 @@ namespace TrboPortal.Model.Db
             }
         }
 
-        public static async  Task<List<LogEntry>> GetLogging(string logLevel, long? from, long? through)
+        public static async Task<List<LogEntry>> GetLogging(string logLevel, long? from, long? through)
         {
             using (var context = new DatabaseContext())
             {
