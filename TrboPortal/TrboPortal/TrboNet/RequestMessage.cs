@@ -18,5 +18,10 @@ namespace TrboPortal.TrboNet
             TimeQueued = DateTime.Now;
             Type = requestType;
         }
+
+        public override string ToString()
+        {
+            return $"[{deviceID}] {Type.ToString()} - {TimeQueued.ToString()}";
+        }
     }
 }

@@ -33,8 +33,9 @@ namespace TrboPortal
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            
-            // trboTest();
+
+            // Make sure we start the controller
+            var controller = TrboNet.TurboController.Instance;
         }
 
 

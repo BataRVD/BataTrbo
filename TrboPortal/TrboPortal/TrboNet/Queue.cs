@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,7 +7,10 @@ namespace TrboPortal.TrboNet
 {
     public class Queue<T>
     {
-        private LinkedList<T> queue;
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private readonly LinkedList<T> queue;
+
+        public int Count { get { return queue.Count; } }
 
         public Queue()
         {
@@ -30,41 +34,45 @@ namespace TrboPortal.TrboNet
         /// <param name="device"></param>
         /// <param name="comperator"></param>
         /// <returns></returns>
-        public bool Remove(T device, Func<T,T,bool> comperator)
+        public bool Remove(T device, Func<T, T, bool> comperator)
         {
-                bool removed = false;
-                lock (queue)
+            bool removed = false;
+            lock (queue)
+            {
+                var node = queue.First;
+                while (node != null)
                 {
-                    var node = queue.First;
-                    while (node != null)
+                    var nextNode = node.Next;
+                    if (comperator(node.Value, device))
                     {
-                        var nextNode = node.Next;
-                        if (comperator(node.Value,device))
-                        {
-                            queue.Remove(node);
-                            removed = true;
-                        }
-                        node = nextNode;
+                        queue.Remove(node);
+                        logger.Debug($"Removed from queue {node.Value}");
+                        removed = true;
                     }
+                    node = nextNode;
                 }
-                return removed;
             }
+            return removed;
+        }
 
 
-            /// <summary>
-            /// See the first item of the queue
-            /// </summary>
-            /// <returns></returns>
-            public T Peek()
+        /// <summary>
+        /// See the first item of the queue
+        /// </summary>
+        /// <returns></returns>
+        public T Peek()
         {
             lock (queue)
             {
                 if (!IsEmpty())
                 {
-                    return queue.First();
+                    T peeked = queue.First();
+                    logger.Debug($"Peeked, returning {peeked}");
+                    return peeked;
                 }
             }
 
+            logger.Debug($"Queue is empty, nothing to peek");
             return default(T);
         }
 
@@ -74,7 +82,8 @@ namespace TrboPortal.TrboNet
         /// <returns></returns>
         public bool IsEmpty()
         {
-            return (queue.Count == 0);
+            logger.Debug($"Queue count: {Count}");
+            return (Count == 0);
         }
 
         /// <summary>
@@ -87,11 +96,14 @@ namespace TrboPortal.TrboNet
             {
                 if (!IsEmpty())
                 {
-                    T entry = queue.First();
+                    T popped = queue.First();
                     queue.RemoveFirst();
-                    return entry;
+                    logger.Debug($"Popped queue {popped}");
+                    return popped;
                 }
             }
+
+            logger.Debug($"Nothing to pop");
             return default(T);
         }
 
@@ -103,6 +115,7 @@ namespace TrboPortal.TrboNet
         {
             lock (queue)
             {
+                logger.Debug("Returning copy of the queue");
                 return new List<T>(queue);
             }
         }
@@ -118,6 +131,7 @@ namespace TrboPortal.TrboNet
                 foreach (T entry in entries)
                 {
                     queue.AddFirst(entry);
+                    logger.Debug($"Added to the front of the queue {entry}");
                 }
             }
         }
@@ -133,6 +147,7 @@ namespace TrboPortal.TrboNet
                 foreach (T entry in entries)
                 {
                     queue.AddLast(entry);
+                    logger.Debug($"Added to the end of the queue {entry}");
                 }
             }
         }

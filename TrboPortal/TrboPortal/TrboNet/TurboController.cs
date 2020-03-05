@@ -23,7 +23,7 @@ namespace TrboPortal.TrboNet
     public sealed partial class TurboController
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
-        
+
         // instance specific 
         private static TurboController instance = null;
         private static readonly object lockObject = new object();
@@ -47,13 +47,12 @@ namespace TrboPortal.TrboNet
         private static int defaultRequestInterval;
 
         // In memory state of the server
-
-        private static LinkedList<RequestMessage> pollQueue = new LinkedList<RequestMessage>();
+        private static Queue<RequestMessage> pollQueue = new Queue<RequestMessage>();
         // This is a dictionary with DeviceID --> Operational info
         private static ConcurrentDictionary<int, DeviceInfo> devices = new ConcurrentDictionary<int, DeviceInfo>();
         // This is a dictionary with RadioID --> Settings
         private static ConcurrentDictionary<int, Radio> radios = new ConcurrentDictionary<int, Radio>();
-           
+
         private static Timer heartBeat;
         private static DateTime lastLifeSign = DateTime.Now;
 
@@ -79,7 +78,7 @@ namespace TrboPortal.TrboNet
             heartBeat.AutoReset = true;
             heartBeat.Enabled = true;
 
-           
+
             // overwrite with latest values
             loadSettingsFromDatabase();
 
@@ -141,7 +140,7 @@ namespace TrboPortal.TrboNet
                         defaultGpsMode = GpsModeEnum.None;
                     }
                     defaultRequestInterval = settings.DefaultInterval;
-                } 
+                }
                 else
                 {
                     logger.Info("No generic settings in the database");
@@ -244,7 +243,7 @@ namespace TrboPortal.TrboNet
             logger.Info("Connect to turbonet server");
             trboNetClient.Disconnect();
             trboNetClient.Connect(
-                new NS.Shared.Network.NetworkConnectionParam(turboNetUrl, turboNetPort), 
+                new NS.Shared.Network.NetworkConnectionParam(turboNetUrl, turboNetPort),
                 new UserInfo(turboNetUser, turboNetPassword),
                 ClientInitFlags.Empty);
 
@@ -264,7 +263,7 @@ namespace TrboPortal.TrboNet
             trboNetClient.TransmitReceiveChanged += TransmitReceiveChanged;
             trboNetClient.DeviceTelemetryChanged += DeviceTelemetryChanged;
             trboNetClient.WorkflowCommandFinished += WorkflowCommandFinished;
-            
+
 
             ciaBataController.PostDeviceLifeSign(0, Environment.MachineName, true);
         }
@@ -307,7 +306,7 @@ namespace TrboPortal.TrboNet
         {
             try
             {
-                int deviceID = e.Info.TransmitDeviceID ;
+                int deviceID = e.Info.TransmitDeviceID;
                 logger.Info($"TransmitReceiveChanged for deviceID {deviceID}");
                 if (GetDeviceInfoByDeviceID(deviceID, out DeviceInfo deviceInfo) && deviceInfo.Device != null)
                 {
@@ -452,7 +451,8 @@ namespace TrboPortal.TrboNet
                 // Save to database
                 Repository.InsertOrUpdate(DatabaseMapper.Map(gpsMeasurement));
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 logger.Error(ex, "Error posting gps");
             }
@@ -571,7 +571,7 @@ namespace TrboPortal.TrboNet
                 }
 
                 var requestMessage = CreateGpsRequestMessage(deviceID);
-                AddToTheQueue(requestMessage);
+                pollQueue.Add(requestMessage);
             }
 
         }
@@ -587,10 +587,10 @@ namespace TrboPortal.TrboNet
                     {
                         int deviceID = deviceInfo.DeviceID;
                         // Since we are going to jump the queue, remove all existing requests
-                        RemoveDeviceFromQueue(deviceID);
+                        RemoveDeviceFromQueueByDeviceID(deviceID);
                         // Jump the queue
                         var requestMessage = CreateGpsRequestMessage(deviceID);
-                        JumpTheQueue(requestMessage);
+                        pollQueue.Jump(requestMessage);
                     }
                     else
                     {
@@ -604,21 +604,9 @@ namespace TrboPortal.TrboNet
             }
         }
 
-        private void RemoveDeviceFromQueue(int deviceID)
+        private void RemoveDeviceFromQueueByDeviceID(int deviceID)
         {
-            lock (pollQueue)
-            {
-                var node = pollQueue.First;
-                while (node != null)
-                {
-                    var nextNode = node.Next;
-                    if (node.Value.deviceID == deviceID)
-                    {
-                        pollQueue.Remove(node);
-                    }
-                    node = nextNode;
-                }
-            }
+            pollQueue.Remove(new RequestMessage(deviceID, RequestMessage.RequestType.Gps), (deviceA, deviceB) => { return (deviceA?.deviceID == deviceB?.deviceID); });
         }
 
         private RequestMessage CreateGpsRequestMessage(int deviceID)
@@ -626,46 +614,14 @@ namespace TrboPortal.TrboNet
             return new RequestMessage(deviceID, RequestMessage.RequestType.Gps);
         }
 
-        private RequestMessage Peek()
-        {
-            lock (pollQueue)
-            {
-                if (pollQueue.Count > 0)
-                {
-                    return pollQueue.First();
-                }
-            }
-            logger.Debug("Nothing to peek.");
-            return null;
-        }
-
-
-        private RequestMessage pop()
-        {
-            lock (pollQueue)
-            {
-                if (pollQueue.Count > 0)
-                {
-                    RequestMessage requestMessage = pollQueue.First();
-                    pollQueue.RemoveFirst();
-                    return requestMessage;
-                }
-            }
-            logger.Debug("Nothing to pop.");
-            return null;
-        }
-
         public List<RequestMessage> GetRequestQueue()
         {
-            lock (pollQueue)
-            {
-                return new List<RequestMessage>(pollQueue);
-            }
+            return pollQueue.GetQueue();
         }
 
         private void HandleQueue()
         {
-            var requestMessage = pop();
+            var requestMessage = pollQueue.Pop();
             if (requestMessage != null)
             {
                 QueryLocation(requestMessage);
@@ -685,29 +641,6 @@ namespace TrboPortal.TrboNet
             else
             {
                 logger.Warn($"Could not query location for device with deviceID {rm.deviceID}");
-            }
-        }
-
-        private void JumpTheQueue(params RequestMessage[] messages)
-        {
-            lock (pollQueue)
-            {
-                foreach (RequestMessage m in messages)
-                {
-                    pollQueue.AddFirst(m);
-                }
-            }
-        }
-
-        private void AddToTheQueue(params RequestMessage[] messages)
-        {
-            lock (pollQueue)
-            {
-                foreach (RequestMessage m in messages)
-                {
-                    logger.Debug($"Added to the queue {m.deviceID}, {m.Type.ToString()}");
-                    pollQueue.AddLast(m);
-                }
             }
         }
 
