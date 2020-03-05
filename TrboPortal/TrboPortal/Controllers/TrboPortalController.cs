@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using TrboPortal.Mappers;
@@ -28,6 +30,11 @@ namespace TrboPortal.Controllers
         [HttpPatch, Route("radio")]
         public Task UpdateRadioSettings([FromBody] [Required] IEnumerable<Model.Api.Radio> radioSettings)
         {
+            if (radioSettings == null || radioSettings.Count() == 0)
+            {
+                var message = "RadioSettings need to be supplied";
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, message));
+            }
             return Task.Run(() => TrboPortalHelper.UpdateRadioSettings(radioSettings));
         }
 
@@ -48,8 +55,22 @@ namespace TrboPortal.Controllers
         [HttpGet, Route("gps/history")]
         public Task<ICollection<GpsMeasurement>> GetGpsHistory([FromUri] IEnumerable<int> id, [FromUri] string from, [FromUri] string through)
         {
-            var f = from == null ? null : DateTimeMapper.ToDateTime(from);
-            var t = through == null ? null : DateTimeMapper.ToDateTime(through);
+            /*
+            if (from == null)
+            {
+                var message = "From and through need to be set";
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, message));
+            }
+            */
+            var f = DateTimeMapper.ToDateTime(from);
+            var t = DateTimeMapper.ToDateTime(through);
+            if (f.HasValue && t.HasValue && f > t)
+            {
+                var message = "From need to be before through";
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, message));
+
+            }
+
 
             return Task.FromResult(TrboPortalHelper.GetGpsMeasurements(id, f, t));
         }
@@ -58,9 +79,14 @@ namespace TrboPortal.Controllers
         /// <param name="id">Radios</param>
         /// <returns>successful operation</returns>
         [HttpGet, Route("gps/update")]
-        public Task RequestGpsUpdate([FromUri] IEnumerable<int> id)
+        public Task RequestGpsUpdate([FromUri] IEnumerable<int> radioIds)
         {
-            return Task.Run(() => TurboController.Instance.PollForGps(id));
+            if (radioIds == null || radioIds.Count() == 0)
+            {
+                var message = "RadioIds are required";
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, message));
+            }
+            return Task.Run(() => TurboController.Instance.PollForGps(radioIds));
         }
 
         /// <summary>TrboNet message queue</summary>
@@ -98,6 +124,11 @@ namespace TrboPortal.Controllers
         [HttpPatch, Route("system/settings")]
         public Task SetSystemSettings([FromBody] [Required] SystemSettings settings)
         {
+            if (settings == null)
+            {
+                var message = "Settings need to be supplied";
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, message));
+            }
             return Task.Run(() => TrboPortalHelper.UpdateSystemSettings(settings));
         }
 

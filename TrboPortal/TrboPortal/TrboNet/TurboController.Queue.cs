@@ -81,12 +81,6 @@ namespace TrboPortal.TrboNet
 
         public void PollForGps(IEnumerable<int> radioIds)
         {
-            if (radioIds == null)
-            {
-                // Make this return a 400?
-                logger.Warn($"You need to explicitly state which radios you want to poll");
-                return;
-            }
             foreach (int radioID in radioIds)
             {
                 if (GetDeviceInfoByRadioID(radioID, out DeviceInfo deviceInfo) && GetRadioByRadioID(radioID, out Radio radio))

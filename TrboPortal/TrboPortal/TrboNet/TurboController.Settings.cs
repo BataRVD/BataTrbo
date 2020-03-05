@@ -106,7 +106,7 @@ namespace TrboPortal.TrboNet
             try
             {
                 var radiosFromSettings = _dbContext.RadioSettings
-                .ToList() // Add to list, so we can map
+                .ToList() // Execute query
                 .Select(rs => DatabaseMapper.Map(rs))
                 .ToDictionary(r => r.RadioId, r => r);
 

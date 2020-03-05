@@ -25,13 +25,15 @@ namespace TrboPortal.Controllers
         public static ICollection<GpsMeasurement> GetGpsMeasurements(IEnumerable<int> ids,
             DateTime? from, DateTime? through)
         {
+            bool hasNoIds = (ids == null || ids.Count() == 0);
             using (var context = new DatabaseContext())
             {
                 return context.GpsEntries
                     .Where(g => g.RadioId.HasValue &&
-                                ((ids == null || ids.Count() == 0) || ids.Contains(g.RadioId.Value)) &&
+                                (hasNoIds || ids.Contains(g.RadioId.Value)) &&
                                 (from == null || from < g.Timestamp) &&
                                 (through == null || through > g.Timestamp))
+                    .ToList() // Execute the query
                     .Select(g => new GpsMeasurement(g))
                     .ToList();
             }
