@@ -37,6 +37,8 @@ namespace TrboPortal.TrboNet
         {
             logger.Info("Starting the Controller!");
 
+            CreateTrboClient();
+
             // fallback - load defaults
             loadDefaultSettings();
             ciaBataController = new CiaBata.CiaBata(ciaBataUrl);
@@ -53,6 +55,19 @@ namespace TrboPortal.TrboNet
 
             // Create CiabataControler
             Connect();
+        }
+
+        private void CreateTrboClient()
+        {
+            trboNetClient = new NS.Enterprise.ClientAPI.Client();
+
+            trboNetClient.DevicesChanged += DevicesChanged;
+            trboNetClient.DeviceLocationChanged += DeviceLocationChanged;
+            trboNetClient.DeviceStateChanged += DeviceStateChanged;
+            trboNetClient.TransmitReceiveChanged += TransmitReceiveChanged;
+            trboNetClient.DeviceTelemetryChanged += DeviceTelemetryChanged;
+            trboNetClient.WorkflowCommandFinished += WorkflowCommandFinished;
+
         }
 
         private void TheServerDidATick(object sender, ElapsedEventArgs e)

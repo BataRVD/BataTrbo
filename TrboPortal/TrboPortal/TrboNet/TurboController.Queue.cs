@@ -61,9 +61,9 @@ namespace TrboPortal.TrboNet
 
         }
 
-        internal void ClearRequestQueue(params int[] radioIds)
+        internal void ClearRequestQueue(IEnumerable<int> radioIds)
         {
-            if (radioIds == null || radioIds.Length == 0)
+            if (radioIds == null || radioIds.Count() == 0)
             {
                 // Remove all
                 pollQueue.Remove(null, (deviceA, deviceB) => { return true; });
@@ -79,8 +79,14 @@ namespace TrboPortal.TrboNet
             }
         }
 
-        public void PollForGps(params int[] radioIds)
+        public void PollForGps(IEnumerable<int> radioIds)
         {
+            if (radioIds == null)
+            {
+                // Make this return a 400?
+                logger.Warn($"You need to explicitly state which radios you want to poll");
+                return;
+            }
             foreach (int radioID in radioIds)
             {
                 if (GetDeviceInfoByRadioID(radioID, out DeviceInfo deviceInfo) && GetRadioByRadioID(radioID, out Radio radio))

@@ -48,8 +48,8 @@ namespace TrboPortal.Controllers
         [HttpGet, Route("gps/history")]
         public Task<ICollection<GpsMeasurement>> GetGpsHistory([FromUri] IEnumerable<int> id, [FromUri] string from, [FromUri] string through)
         {
-            var f = DateTimeMapper.ToDateTime(from);
-            var t = DateTimeMapper.ToDateTime(through);
+            var f = from == null ? null : DateTimeMapper.ToDateTime(from);
+            var t = through == null ? null : DateTimeMapper.ToDateTime(through);
 
             return Task.FromResult(TrboPortalHelper.GetGpsMeasurements(id, f, t));
         }
@@ -60,8 +60,7 @@ namespace TrboPortal.Controllers
         [HttpGet, Route("gps/update")]
         public Task RequestGpsUpdate([FromUri] IEnumerable<int> id)
         {
-            // TODO never null ?
-            return Task.Run(() => TurboController.Instance.PollForGps(id.ToArray()));
+            return Task.Run(() => TurboController.Instance.PollForGps(id));
         }
 
         /// <summary>TrboNet message queue</summary>
@@ -82,7 +81,7 @@ namespace TrboPortal.Controllers
         [HttpGet, Route("system/clearQueue")]
         public Task ClearMessageQueue([FromUri] IEnumerable<int> id)
         {
-            return Task.Run(() => TurboController.Instance.ClearRequestQueue(id.ToArray()));
+            return Task.Run(() => TurboController.Instance.ClearRequestQueue(id));
         }
 
 

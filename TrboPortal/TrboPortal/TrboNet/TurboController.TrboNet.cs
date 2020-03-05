@@ -21,7 +21,7 @@ namespace TrboPortal.TrboNet
     public sealed partial class TurboController
     {
         // some clients
-        private static Client trboNetClient = new Client();
+        private static Client trboNetClient;
 
         // This is a dictionary with DeviceID --> Operational info
         private static ConcurrentDictionary<int, DeviceInfo> devices = new ConcurrentDictionary<int, DeviceInfo>();
@@ -68,15 +68,6 @@ namespace TrboPortal.TrboNet
                     trboNetClient.GetAllWorkflowCommands();
 
                     ReLoadDeviceList();
-
-                    // Does this mean that it gets added again after each connect?
-                    trboNetClient.DevicesChanged += DevicesChanged;
-
-                    trboNetClient.DeviceLocationChanged += DeviceLocationChanged;
-                    trboNetClient.DeviceStateChanged += DeviceStateChanged;
-                    trboNetClient.TransmitReceiveChanged += TransmitReceiveChanged;
-                    trboNetClient.DeviceTelemetryChanged += DeviceTelemetryChanged;
-                    trboNetClient.WorkflowCommandFinished += WorkflowCommandFinished;
                 }
                 else
                 {

@@ -29,7 +29,7 @@ namespace TrboPortal.Controllers
             {
                 return context.GpsEntries
                     .Where(g => g.RadioId.HasValue &&
-                                ((ids.Count() == 0) || ids.Contains(g.RadioId.Value)) &&
+                                ((ids == null || ids.Count() == 0) || ids.Contains(g.RadioId.Value)) &&
                                 (from == null || from < g.Timestamp) &&
                                 (through == null || through > g.Timestamp))
                     .Select(g => new GpsMeasurement(g))
