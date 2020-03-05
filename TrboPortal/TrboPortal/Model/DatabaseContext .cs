@@ -10,6 +10,7 @@ namespace TrboPortal.Model
         public DbSet<Radio> RadioSettings { get; set; }
         public DbSet<GpsEntry> GpsEntries { get; set; }
         public DbSet<Settings> Settings { get; set; }
+        public DbSet<LogEntry> LogEntries { get; set; }
 
         public DatabaseContext(SQLiteConnection conn) : base(conn, true)
         {
@@ -41,6 +42,7 @@ namespace TrboPortal.Model
             mb.Entity<GpsEntry>().ToTable("GpsEntry");
             mb.Entity<Radio>().ToTable("Radio");
             mb.Entity<Settings>().ToTable("Settings");
+            mb.Entity<LogEntry>().ToTable("LogEntry");
         }
     }
 }

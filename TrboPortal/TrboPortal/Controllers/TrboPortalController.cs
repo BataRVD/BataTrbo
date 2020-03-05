@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
@@ -35,6 +34,7 @@ namespace TrboPortal.Controllers
                 var message = "RadioSettings need to be supplied";
                 throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, message));
             }
+
             return Task.Run(() => TrboPortalHelper.UpdateRadioSettings(radioSettings));
         }
 
@@ -61,7 +61,6 @@ namespace TrboPortal.Controllers
             {
                 var message = "From need to be before through";
                 throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, message));
-
             }
 
 
@@ -79,6 +78,7 @@ namespace TrboPortal.Controllers
                 var message = "RadioIds are required";
                 throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, message));
             }
+
             return Task.Run(() => TurboController.Instance.PollForGps(radioIds));
         }
 
@@ -122,6 +122,7 @@ namespace TrboPortal.Controllers
                 var message = "Settings need to be supplied";
                 throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, message));
             }
+
             return Task.Run(() => TrboPortalHelper.UpdateSystemSettings(settings));
         }
 
@@ -131,10 +132,14 @@ namespace TrboPortal.Controllers
         /// <param name="through">DateTime Through filter of logging to return</param>
         /// <returns>Blaat</returns>
         [HttpGet, Route("system/logs")]
-        public Task<ICollection<string>> GetLogging([Required] string loglevel, [FromUri] string from, [FromUri] string through)
+        public Task<ICollection<LogMessage>> GetLogging([Required] string loglevel, [FromUri] string from = null, [FromUri] string through = null)
         {
-            throw new NotImplementedException();
-        }
+            if (string.IsNullOrEmpty(loglevel))
+            {
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Should supply loglevel value"));
+            }
 
+            return Task.FromResult(TrboPortalHelper.GetLogging(loglevel, from, through));
+        }
     }
 }

@@ -46,7 +46,6 @@ namespace TrboPortal.Controllers
 
             // How is this for an "event driven" system? =)
             TurboController.Instance.loadRadioSettingsFromDatabase();
-
         }
 
         internal static SystemSettings GetSystemSettings()
@@ -77,6 +76,14 @@ namespace TrboPortal.Controllers
                 // How is this for an "event driven" system? =)
                 TurboController.Instance.loadGenericSettingsFromDatabase();
             }
+        }
+
+        public static ICollection<LogMessage> GetLogging(string loglevel, string from, string through)
+        {
+            var fromUnixMs = DateTimeMapper.ToUnixMs(from);
+            var throughUnixMs = DateTimeMapper.ToUnixMs(through);
+            var result = Repository.GetLogging(loglevel, fromUnixMs, throughUnixMs).Select(l => new LogMessage(l)).ToList();
+            return result;
         }
     }
 }

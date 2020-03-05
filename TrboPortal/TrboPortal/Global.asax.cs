@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-
-
 using NLog;
 using NS.Enterprise.ClientAPI;
 using NS.Enterprise.Objects;
@@ -14,6 +13,8 @@ using NS.Enterprise.Objects.Devices;
 using NS.Enterprise.Objects.Event_args;
 using NS.Enterprise.Objects.Users;
 using System.Timers;
+using NLog.Config;
+using NLog.LayoutRenderers;
 
 
 namespace TrboPortal
@@ -27,6 +28,7 @@ namespace TrboPortal
 
         protected void Application_Start()
         {
+            InitializeNLog();
             AreaRegistration.RegisterAllAreas();
             SwaggerConfig.Register();
             GlobalConfiguration.Configure(WebApiConfig.Register);
@@ -38,6 +40,14 @@ namespace TrboPortal
             var controller = TrboNet.TurboController.Instance;
         }
 
+        private static void InitializeNLog()
+        {
+//            LogManager.ThrowExceptions = true;
+//            LogManager.ThrowConfigExceptions = true;
+            LayoutRenderer.Register("unixtimestamp", (logEvent) => (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds);
+            LogManager.Configuration = LogManager.Configuration.Reload();
+            LogManager.ReconfigExistingLoggers();
+        }
 
         private void trboTest()
         {
@@ -62,9 +72,6 @@ namespace TrboPortal
                 watchdogTimer.Elapsed += doeHenk;
                 watchdogTimer.Start();
             }
-
-
-
         }
 
         private void doeHenk(object sender, ElapsedEventArgs e)
@@ -83,7 +90,6 @@ namespace TrboPortal
                 }
             }
         }
-
 
 
         private void M_client_DeviceStateChanged(object sender, DeviceStateChangedEventArgs e)
@@ -115,6 +121,5 @@ namespace TrboPortal
         {
             logger.Debug($"DevicesChanged ");
         }
-
     }
 }

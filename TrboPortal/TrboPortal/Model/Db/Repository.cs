@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
@@ -50,6 +51,19 @@ namespace TrboPortal.Model.Db
             using (var context = new DatabaseContext())
             {
                 return context.Settings.OrderByDescending(s => s.SettingsId).FirstOrDefault();
+            }
+        }
+
+        public static List<LogEntry> GetLogging(string logLevel, long? from, long? through)
+        {
+            using (var context = new DatabaseContext())
+            {
+                return context.LogEntries
+                    .Where(l => logLevel.Equals(l.LogLevel, StringComparison.InvariantCultureIgnoreCase)
+//                                && from == null || from < l.Timestamp
+//                                && through == null || through > l.Timestamp
+                    )
+                    .ToList();
             }
         }
     }
