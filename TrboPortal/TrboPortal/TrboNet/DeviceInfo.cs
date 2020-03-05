@@ -14,7 +14,7 @@ namespace TrboPortal.TrboNet
          */
 
         public int RadioID { get; private set; }
-        public DateTime LastUpdate { get; set; }
+        public DateTime LastUpdateRequest { get; set; }
         public ConcurrentStack<GpsMeasurement> GpsLocations { get; }
         public Device Device { get; set; }
         public int DeviceID { get; internal set; }
@@ -25,7 +25,7 @@ namespace TrboPortal.TrboNet
             this.DeviceID = device.ID;
             this.RadioID = device.RadioID;
             GpsLocations = new ConcurrentStack<GpsMeasurement>();
-            LastUpdate = device != null ? DateTime.Now : DateTime.MinValue;
+            LastUpdateRequest = device != null ? DateTime.Now : DateTime.MinValue;
         }
 
         public DeviceInfo(int deviceID)
@@ -33,7 +33,7 @@ namespace TrboPortal.TrboNet
             DeviceID = deviceID;
             RadioID = -1; //???
             GpsLocations = new ConcurrentStack<GpsMeasurement>();
-            LastUpdate = DateTime.Now;
+            LastUpdateRequest = DateTime.Now;
         }
 
         internal void UpdateDevice(Device device)

@@ -20,7 +20,7 @@ namespace TrboPortal.Controllers
         [HttpGet, Route("radio")]
         public Task<ICollection<Model.Api.Radio>> GetRadios([FromUri] IEnumerable<int> id)
         {
-            return Task.FromResult<ICollection<Model.Api.Radio>>(TurboController.Instance.GetSettings());
+            return Task.FromResult<ICollection<Model.Api.Radio>>(TurboController.Instance.GetRadioSettings());
         }
 
         /// <summary>Update gps mode and interval radios</summary>
@@ -75,6 +75,16 @@ namespace TrboPortal.Controllers
                 .ToList()
             );
         }
+
+        /// <summary>List of all radios</summary>
+        /// <param name="id">Tags to filter by</param>
+        /// <returns>successful operation</returns>
+        [HttpGet, Route("system/clearQueue")]
+        public Task ClearMessageQueue([FromUri] IEnumerable<int> id)
+        {
+            return Task.Run(() => TurboController.Instance.ClearRequestQueue(id.ToArray()));
+        }
+
 
         /// <summary>System settings</summary>
         /// <returns>Blaat</returns>

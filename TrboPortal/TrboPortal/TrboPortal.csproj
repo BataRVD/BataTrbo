@@ -338,10 +338,13 @@
     <Compile Include="Model\Db\Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TrboNet\DeviceInfo.cs" />
-    <Compile Include="TrboNet\Queue.cs" />
+    <Compile Include="Queueing\Queue.cs" />
     <Compile Include="TrboNet\Radio.cs" />
     <Compile Include="TrboNet\RequestMessage.cs" />
     <Compile Include="TrboNet\TrboNetInterface.cs" />
+    <Compile Include="TrboNet\TurboController.Settings.cs" />
+    <Compile Include="TrboNet\TurboController.TrboNet.cs" />
+    <Compile Include="TrboNet\TurboController.Queue.cs" />
     <Compile Include="TrboNet\TurboController.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -410,9 +413,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Swagger\TrboPortal.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
