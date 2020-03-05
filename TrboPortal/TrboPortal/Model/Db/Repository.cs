@@ -36,7 +36,7 @@ namespace TrboPortal.Model.Db
                 foreach (var s in settings)
                 {
                     bool radioExists =
-                        context.RadioSettings.Any(r => r.RadioId == s.RadioId); // used to be: s.RadioId == 0
+                        context.RadioSettings.Any(r => r.RadioId == s.RadioId); 
 
                     context.Entry(s).State = radioExists ? EntityState.Modified : EntityState.Added;
                 }

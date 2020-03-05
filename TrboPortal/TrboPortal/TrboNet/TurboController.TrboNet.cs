@@ -21,7 +21,7 @@ namespace TrboPortal.TrboNet
     public sealed partial class TurboController
     {
         // some clients
-        private static Client trboNetClient;
+        private static Client.ITrboClient trboNetClient;
 
         // This is a dictionary with DeviceID --> Operational info
         private static ConcurrentDictionary<int, DeviceInfo> devices = new ConcurrentDictionary<int, DeviceInfo>();

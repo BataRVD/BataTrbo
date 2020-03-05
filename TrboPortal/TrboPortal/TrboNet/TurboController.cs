@@ -59,14 +59,14 @@ namespace TrboPortal.TrboNet
 
         private void CreateTrboClient()
         {
-            trboNetClient = new NS.Enterprise.ClientAPI.Client();
+            trboNetClient = new Client.TrboClient();
 
-            trboNetClient.DevicesChanged += DevicesChanged;
-            trboNetClient.DeviceLocationChanged += DeviceLocationChanged;
-            trboNetClient.DeviceStateChanged += DeviceStateChanged;
-            trboNetClient.TransmitReceiveChanged += TransmitReceiveChanged;
-            trboNetClient.DeviceTelemetryChanged += DeviceTelemetryChanged;
-            trboNetClient.WorkflowCommandFinished += WorkflowCommandFinished;
+            trboNetClient.DevicesChanged(DevicesChanged);
+            trboNetClient.DeviceLocationChanged(DeviceLocationChanged);
+            trboNetClient.DeviceStateChanged(DeviceStateChanged);
+            trboNetClient.TransmitReceiveChanged(TransmitReceiveChanged);
+            trboNetClient.DeviceTelemetryChanged(DeviceTelemetryChanged);
+            trboNetClient.WorkflowCommandFinished(WorkflowCommandFinished);
 
         }
 
