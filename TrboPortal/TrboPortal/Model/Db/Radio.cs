@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TrboPortal.Model.Db
 {
@@ -8,6 +9,7 @@ namespace TrboPortal.Model.Db
     public class Radio
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int RadioId { get; set; }
         public string Name { get; set; }
         public string GpsMode { get; set; }

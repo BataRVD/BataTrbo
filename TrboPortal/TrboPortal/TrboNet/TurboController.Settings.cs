@@ -112,7 +112,7 @@ namespace TrboPortal.TrboNet
 
                 foreach (var radio in radiosFromSettings)
                 {
-                    radios.AddOrUpdate(radio.Key, radio.Value, (rid, oldvalue) => { return oldvalue; });
+                    radios.AddOrUpdate(radio.Key, radio.Value, (rid, oldvalue) => { return radio.Value; });
                 }
             }
             catch (Exception ex)
@@ -131,9 +131,10 @@ namespace TrboPortal.TrboNet
             return radioFound;
         }
 
-        public List<Radio> GetRadioSettings()
+        public List<Radio> GetRadioSettings(IEnumerable<int> radioIds)
         {
-            return new List<Radio>(radios.Values);
+            var selectedRadios = radios.Values.Where(r => (radioIds == null || !radioIds.Any()) || radioIds.Contains(r.RadioId));
+            return new List<Radio>(selectedRadios);
         }
 
     }

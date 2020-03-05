@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using TrboPortal.Model.Api;
-using System.Data.SQLite;
-using System.Runtime.CompilerServices;
 
 namespace TrboPortal.Model.Db
 {
@@ -18,8 +15,6 @@ namespace TrboPortal.Model.Db
         {
             using (var db = new DatabaseContext())
             {
-                // db.Set<T>().Add(entity);
-                //
                 if (db.Entry(entity).State == EntityState.Detached)
                     db.Set<T>().Add(entity);
 
@@ -42,9 +37,9 @@ namespace TrboPortal.Model.Db
                 {
                     bool radioExists =
                         context.RadioSettings.Any(r => r.RadioId == s.RadioId); // used to be: s.RadioId == 0
+
                     context.Entry(s).State = radioExists ? EntityState.Modified : EntityState.Added;
                 }
-
 
                 context.SaveChanges();
             }

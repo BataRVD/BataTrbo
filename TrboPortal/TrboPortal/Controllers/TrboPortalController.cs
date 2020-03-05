@@ -17,12 +17,12 @@ namespace TrboPortal.Controllers
     public class TrboPortalController : ApiController
     {
         /// <summary>List of all radios</summary>
-        /// <param name="id">Tags to filter by</param>
+        /// <param name="radioIds">Tags to filter by</param>
         /// <returns>successful operation</returns>
         [HttpGet, Route("radio")]
-        public Task<ICollection<Model.Api.Radio>> GetRadios([FromUri] IEnumerable<int> id)
+        public Task<ICollection<Model.Api.Radio>> GetRadios([FromUri] IEnumerable<int> radioIds)
         {
-            return Task.FromResult<ICollection<Model.Api.Radio>>(TurboController.Instance.GetRadioSettings());
+            return Task.FromResult<ICollection<Model.Api.Radio>>(TurboController.Instance.GetRadioSettings(radioIds));
         }
 
         /// <summary>Update gps mode and interval radios</summary>
@@ -55,13 +55,6 @@ namespace TrboPortal.Controllers
         [HttpGet, Route("gps/history")]
         public Task<ICollection<GpsMeasurement>> GetGpsHistory([FromUri] IEnumerable<int> id, [FromUri] string from, [FromUri] string through)
         {
-            /*
-            if (from == null)
-            {
-                var message = "From and through need to be set";
-                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, message));
-            }
-            */
             var f = DateTimeMapper.ToDateTime(from);
             var t = DateTimeMapper.ToDateTime(through);
             if (f.HasValue && t.HasValue && f > t)
