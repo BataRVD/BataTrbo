@@ -55,6 +55,8 @@ namespace TrboPortal.TrboNet
                 }
 
                 var requestMessage = CreateGpsRequestMessage(deviceID);
+                // if device in queue --> continue
+
                 deviceInfo.LastUpdateRequest = DateTime.Now;
                 pollQueue.Add(requestMessage);
             }
@@ -95,6 +97,7 @@ namespace TrboPortal.TrboNet
                         var requestMessage = CreateGpsRequestMessage(deviceID);
                         deviceInfo.LastUpdateRequest = DateTime.Now;
                         pollQueue.Jump(requestMessage);
+                        // also remove all other requests for this device from the queue, you jumped, you didn'magically duplicate yourself, what are you a gremlin?
                     }
                     else
                     {
