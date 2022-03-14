@@ -202,10 +202,10 @@ namespace TrboPortal.TrboNet
                         };
 
                         DeviceInfo deviceInfo;
-                        if (!GetDeviceInfoByDeviceID(deviceID, out deviceInfo))
-                        {
+                        if (!GetDeviceInfoByDeviceID(deviceID, out deviceInfo)) {
                             logger.Warn($"Could not find deviceInfo to update GPSfor device with, created it for deviceID {deviceID} ");
-                            devices.TryAdd(deviceID, new DeviceInfo(deviceID));
+                            deviceInfo = new DeviceInfo(deviceID);
+                            devices.TryAdd(deviceID, deviceInfo);
                         }
 
                         int radioID = deviceInfo.RadioID;
@@ -221,7 +221,6 @@ namespace TrboPortal.TrboNet
                         build.Append("Direction: " + gpsInfo.Direction + " ");
                         build.Append("GpsSource: " + gpsInfo.GpsSource + " ");
                         build.Append("InfoDate: " + gpsInfo.InfoDate.ToString() + " ");
-                        build.Append("InfoDateUtc: " + gpsInfo.InfoDateUtc.ToString() + " ");
                         build.Append("Latitude: " + gpsInfo.Latitude.ToString() + " ");
                         build.Append("Name: " + gpsInfo.Name + " ");
                         build.Append("Radius: " + gpsInfo.Radius.ToString() + " ");
