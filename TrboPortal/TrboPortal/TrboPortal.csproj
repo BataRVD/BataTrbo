@@ -278,6 +278,9 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="NS.Time">
+      <HintPath>Resources\NS.Time.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="NS.Audio.Enterprise, Version=5.4.0.2220, Culture=neutral, PublicKeyToken=5fc871ad184a138c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
