@@ -17,9 +17,6 @@ namespace TrboPortal.TrboNet
     /// </summary>
     public sealed partial class TurboController
     {
-        // database
-        private static readonly DatabaseContext DbContext = new DatabaseContext();
-
         // Config section
         private static string ciaBataUrl;
         private static int serverInterval;
@@ -108,12 +105,14 @@ namespace TrboPortal.TrboNet
         {
             try
             {
-                var dbSettings = await DbContext.RadioSettings.ToListAsync(); // Execute query
-
-                var radiosFromSettings = dbSettings
-                    .Select(rs => DatabaseMapper.Map(rs))
-                    .ToDictionary(r => r.RadioId, r => r);
-
+                Dictionary<int, Radio> radiosFromSettings;
+                using (var context = new DatabaseContext())
+                {
+                    var dbSettings = await context.RadioSettings.ToListAsync(); // Execute query
+                    radiosFromSettings = dbSettings
+                        .Select(rs => DatabaseMapper.Map(rs))
+                        .ToDictionary(r => r.RadioId, r => r);
+                }
                 foreach (var radio in radiosFromSettings)
                 {
                     radios.AddOrUpdate(radio.Key, radio.Value, (rid, oldvalue) => { return radio.Value; });
