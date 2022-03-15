@@ -1,0 +1,42 @@
+name: .NET
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.2
+      
+    - name: Navigate to Workspace
+      run: cd $GITHUB_WORKSPACE
+
+    - name: Create Build Directory
+      run: mkdir _build
+      
+    - name: Restore Packages
+      run: nuget restore TrboPortal.sln
+
+    - name: Build Solution
+      run: |
+        msbuild TrboPortal\TrboPortal\TrboPortal.csproj /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: TrboPortal
+        path: TrboPortal\\TrboPortal\\bin\\app.publish\
+    
+    - name: Publish to IIS
+      run: xcopy /Y /s TrboPortal\TrboPortal\bin\app.publish\* C:\inetpub\wwwroot\
