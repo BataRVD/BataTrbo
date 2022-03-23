@@ -8,9 +8,7 @@ on:
 
 jobs:
   build:
-    # runs-on: windows-latest
-    runs-on: xis-bata
-
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
     
@@ -40,6 +38,16 @@ jobs:
       with:
         name: TrboPortal
         path: TrboPortal\\TrboPortal\\bin\\app.publish\
-    
-    - name: Publish to IIS
-      run: xcopy /Y /s TrboPortal\TrboPortal\bin\app.publish\* C:\inetpub\wwwroot\
+  
+  deploy:
+    runs-on: xis-bata
+    steps:
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v3.0.0
+        with:
+          name: TrboPortal
+          path: ${{ env.RUNNER_TEMP }}\TrboPortal
+      - name: Publish to IIS
+        run: xcopy /Y /s  ${{ env.RUNNER_TEMP }}\TrboPortal\* C:\inetpub\wwwroot\
+      
+      
