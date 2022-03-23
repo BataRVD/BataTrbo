@@ -8,7 +8,8 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    # runs-on: windows-latest
+    runs-on: xis-bata
 
     steps:
     - uses: actions/checkout@v2
