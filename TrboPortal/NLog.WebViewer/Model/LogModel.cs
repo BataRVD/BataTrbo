@@ -57,6 +57,7 @@ namespace NLog.WebViewer
                 return;
             }
 
+            List<string> logItem = null;
             int referenceLevelOrd;
             try
             {
