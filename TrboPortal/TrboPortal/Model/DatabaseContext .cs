@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Data.SQLite;
+using System.IO;
 using SQLite.CodeFirst;
 using TrboPortal.Model.Db;
 
@@ -19,7 +20,7 @@ namespace TrboPortal.Model
             Configure();
         }
 
-        public DatabaseContext() : this(new SQLiteConnection("Data Source=|DataDirectory|TrboNet.db"))
+        public DatabaseContext() : this(new SQLiteConnection($@"Data Source={Directory.GetCurrentDirectory()}\TrboNet.db"))
         {
             //Nothing to do
         }
