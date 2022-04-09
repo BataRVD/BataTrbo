@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -141,5 +142,9 @@ namespace TrboPortal.Controllers
 
             return TrboPortalHelper.GetLoggingAsync(loglevel, from, through);
         }
+
+        /// <summary>Returns the current working directory</summary>
+        [HttpGet, Route("system/working_directory")]
+        public string GetWorkingDirectory() => Directory.GetCurrentDirectory();
     }
 }
