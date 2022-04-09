@@ -76,32 +76,43 @@ namespace TrboPortal.TrboNet
 
         private void TheServerDidATick(object sender, ElapsedEventArgs e)
         {
-            if (Monitor.TryEnter(locki))
+            bool lockTaken = false;
+            try
             {
-
-                try
+                Monitor.TryEnter(locki, ref lockTaken);
+                if (lockTaken)
                 {
-                    logger.Debug("The server did a tick");
-                    // populate the queue
-                    PopulateQueue();
-                    // Request info for next device
-                    HandleQueue();
-
-                    // Check if we need to let know that we are still alive (every minute)
-                    if ((DateTime.Now - lastLifeSign).TotalMinutes > 1)
+                    try
                     {
-                        lastLifeSign = DateTime.Now;
-                        ciaBataController.PostDeviceLifeSign(0, Environment.MachineName, true);
+                        logger.Debug("The server did a tick");
+                        // populate the queue
+                        PopulateQueue();
+                        // Request info for next device
+                        HandleQueue();
+
+                        // Check if we need to let know that we are still alive (every minute)
+                        if ((DateTime.Now - lastLifeSign).TotalMinutes > 1)
+                        {
+                            lastLifeSign = DateTime.Now;
+                            ciaBataController.PostDeviceLifeSign(0, Environment.MachineName, true);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error(ex, "Something went horribly wrong during the ServerTick");
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    logger.Error(ex, "Something went horribly wrong during the ServerTick");
+                    logger.Warn("OMG! CPR! Server skipped a beat...");
                 }
             }
-            else
+            finally
             {
-                logger.Warn("OMG! CPR! Server skipped a beat...");
+                if (lockTaken)
+                {
+                    Monitor.Exit(locki);
+                }
             }
         }
 
