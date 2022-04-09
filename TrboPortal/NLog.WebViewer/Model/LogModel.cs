@@ -57,7 +57,15 @@ namespace NLog.WebViewer
                 return;
             }
 
-            List<string> logItem = null;
+            int referenceLevelOrd;
+            try
+            {
+                referenceLevelOrd = NLog.LogLevel.FromString(level).Ordinal;
+            }
+            catch
+            {
+                referenceLevelOrd = NLog.LogLevel.Info.Ordinal;
+            }
 
             using (FileStream file = new FileStream(logFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
@@ -80,7 +88,6 @@ namespace NLog.WebViewer
                             {
                                 var itemLevel = _levelIndex >= 0 ? items[_levelIndex] : string.Empty;
                                 var itemLevelOrd = NLog.LogLevel.FromString(itemLevel).Ordinal;
-                                var referenceLevelOrd = NLog.LogLevel.FromString(level).Ordinal;
                                 matchingLoglevel = (itemLevelOrd >= referenceLevelOrd);
                             } catch 
                             {
@@ -173,9 +180,20 @@ namespace NLog.WebViewer
             string[] logLevels = new string[] {"TRACE","DEBUG","INFO","WARNING","ERROR","CRITICAL"};
             builder.Append("<label for='logLevel'>Loglevel</label>" +
                     "<select name='logLevel' onchange='location = this.value;'>");
+
+            LogLevel selectedLevel;
+            try
+            {
+                selectedLevel = LogLevel.FromString(logLevel);
+            }
+            catch
+            {
+                selectedLevel = LogLevel.Info;
+            }
+
             foreach (var level in NLog.LogLevel.AllLoggingLevels)
             {
-                string selected = (string.Equals(logLevel, level.Name, StringComparison.OrdinalIgnoreCase)) ? " selected " : string.Empty;
+                string selected = (selectedLevel.Equals(level)) ? " selected " : String.Empty;
                 builder.AppendFormat("<option {3} value='{0}{1}{2}'>{2}</option>", pathWithDate, logLevelPrefix, level.Name, selected);
             }
             builder.Append("</select>");
