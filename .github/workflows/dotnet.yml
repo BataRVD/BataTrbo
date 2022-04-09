@@ -27,7 +27,7 @@ jobs:
       run: mkdir _build
       
     - name: Restore Packages
-      run: nuget restore TrboPortal\TrboPortal\TrboPortal.csproj
+      run: nuget restore TrboPortal\\TrboPortal.sln
 
     - name: Build Solution
       run: |
