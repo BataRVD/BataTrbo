@@ -1,124 +1,123 @@
-﻿<div class="jumbotron">
-    <h1>Settings</h1>
+﻿<div class="container">
+    <div class="jumbotron">
+        <h1>Settings</h1>
+    </div>
+    <form>
+        <div class="form-group row">
+            <label for="ServerInterval" class="col-4 col-form-label">Server Interval</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                    </div>
+                    <input id="ServerInterval" name="ServerInterval" placeholder="0" type="text" class="form-control" aria-describedby="ServerIntervalHelpBlock" required="required">
+                </div>
+                <span id="ServerIntervalHelpBlock" class="form-text text-muted">Server Ticker Interval used for global ratelimitinig</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="DefaultGpsMode" class="col-4 col-form-label">Default GPS Mode</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-location-arrow"></i>
+                        </div>
+                    </div>
+                    <input id="DefaultGpsMode" name="DefaultGpsMode" placeholder="none" type="text" aria-describedby="DefaultGpsModeHelpBlock" required="required" class="form-control">
+                </div>
+                <span id="DefaultGpsModeHelpBlock" class="form-text text-muted">GPS Mode for newly added devices. (none, pull, interval)</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="DefaultInterval" class="col-4 col-form-label">Default GPS Interval</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                    </div>
+                    <input id="DefaultInterval" name="DefaultInterval" placeholder="60" type="text" aria-describedby="DefaultIntervalHelpBlock" required="required" class="form-control">
+                </div>
+                <span id="DefaultIntervalHelpBlock" class="form-text text-muted">Default GPS interval (in seconds) when using GPS Mode 'interval'</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="TurboNetSettings-Host" class="col-4 col-form-label">Host</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-server"></i>
+                        </div>
+                    </div>
+                    <input id="TurboNetSettings-Host" name="TurboNetSettings-Host" placeholder="0.0.0.0" type="text" class="form-control" aria-describedby="TurboNetSettings-HostHelpBlock" required="required">
+                </div>
+                <span id="TurboNetSettings-HostHelpBlock" class="form-text text-muted">TrboNet host address</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="TurboNetSettings-Port" class="col-4 col-form-label">Port</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-sort-numeric-asc"></i>
+                        </div>
+                    </div>
+                    <input id="TurboNetSettings-Port" name="TurboNetSettings-Port" placeholder="4021" type="text" class="form-control" aria-describedby="TurboNetSettings-PortHelpBlock" required="required">
+                </div>
+                <span id="TurboNetSettings-PortHelpBlock" class="form-text text-muted">Trbonet Host port number</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="TurboNetSettings-User" class="col-4 col-form-label">User</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-user-circle"></i>
+                        </div>
+                    </div>
+                    <input id="TurboNetSettings-User" name="TurboNetSettings-User" placeholder="admin" type="text" class="form-control" aria-describedby="TurboNetSettings-UserHelpBlock" required="required">
+                </div>
+                <span id="TurboNetSettings-UserHelpBlock" class="form-text text-muted">TrboNet Host username</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="TurboNetSettings-Password" class="col-4 col-form-label">Password</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-key"></i>
+                        </div>
+                    </div>
+                    <input id="TurboNetSettings-Password" name="TurboNetSettings-Password" placeholder="xxx" type="text" class="form-control" aria-describedby="TurboNetSettings-PasswordHelpBlock" required="required">
+                </div>
+                <span id="TurboNetSettings-PasswordHelpBlock" class="form-text text-muted">TrboNet Host password</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="CiaBataSettings-Host" class="col-4 col-form-label">CiaBata host</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-map-signs"></i>
+                        </div>
+                    </div>
+                    <input id="CiaBataSettings-Host" name="CiaBataSettings-Host" type="text" class="form-control" required="required">
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="offset-4 col-8">
+                <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
 </div>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<form>
-    <div class="form-group row">
-        <label for="ServerInterval" class="col-4 col-form-label">Server Interval</label>
-        <div class="col-8">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <i class="fa fa-clock-o"></i>
-                    </div>
-                </div>
-                <input id="ServerInterval" name="ServerInterval" placeholder="0" type="text" class="form-control" aria-describedby="ServerIntervalHelpBlock" required="required">
-            </div>
-            <span id="ServerIntervalHelpBlock" class="form-text text-muted">Server Ticker Interval used for global ratelimitinig</span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="DefaultGpsMode" class="col-4 col-form-label">Default GPS Mode</label>
-        <div class="col-8">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <i class="fa fa-location-arrow"></i>
-                    </div>
-                </div>
-                <input id="DefaultGpsMode" name="DefaultGpsMode" placeholder="none" type="text" aria-describedby="DefaultGpsModeHelpBlock" required="required" class="form-control">
-            </div>
-            <span id="DefaultGpsModeHelpBlock" class="form-text text-muted">GPS Mode for newly added devices. (none, pull, interval)</span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="DefaultInterval" class="col-4 col-form-label">Default GPS Interval</label>
-        <div class="col-8">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <i class="fa fa-clock-o"></i>
-                    </div>
-                </div>
-                <input id="DefaultInterval" name="DefaultInterval" placeholder="60" type="text" aria-describedby="DefaultIntervalHelpBlock" required="required" class="form-control">
-            </div>
-            <span id="DefaultIntervalHelpBlock" class="form-text text-muted">Default GPS interval (in seconds) when using GPS Mode 'interval'</span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="TurboNetSettings-Host" class="col-4 col-form-label">Host</label>
-        <div class="col-8">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <i class="fa fa-server"></i>
-                    </div>
-                </div>
-                <input id="TurboNetSettings-Host" name="TurboNetSettings-Host" placeholder="0.0.0.0" type="text" class="form-control" aria-describedby="TurboNetSettings-HostHelpBlock" required="required">
-            </div>
-            <span id="TurboNetSettings-HostHelpBlock" class="form-text text-muted">TrboNet host address</span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="TurboNetSettings-Port" class="col-4 col-form-label">Port</label>
-        <div class="col-8">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <i class="fa fa-sort-numeric-asc"></i>
-                    </div>
-                </div>
-                <input id="TurboNetSettings-Port" name="TurboNetSettings-Port" placeholder="4021" type="text" class="form-control" aria-describedby="TurboNetSettings-PortHelpBlock" required="required">
-            </div>
-            <span id="TurboNetSettings-PortHelpBlock" class="form-text text-muted">Trbonet Host port number</span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="TurboNetSettings-User" class="col-4 col-form-label">User</label>
-        <div class="col-8">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <i class="fa fa-user-circle"></i>
-                    </div>
-                </div>
-                <input id="TurboNetSettings-User" name="TurboNetSettings-User" placeholder="admin" type="text" class="form-control" aria-describedby="TurboNetSettings-UserHelpBlock" required="required">
-            </div>
-            <span id="TurboNetSettings-UserHelpBlock" class="form-text text-muted">TrboNet Host username</span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="TurboNetSettings-Password" class="col-4 col-form-label">Password</label>
-        <div class="col-8">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <i class="fa fa-key"></i>
-                    </div>
-                </div>
-                <input id="TurboNetSettings-Password" name="TurboNetSettings-Password" placeholder="xxx" type="text" class="form-control" aria-describedby="TurboNetSettings-PasswordHelpBlock" required="required">
-            </div>
-            <span id="TurboNetSettings-PasswordHelpBlock" class="form-text text-muted">TrboNet Host password</span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="CiaBataSettings-Host" class="col-4 col-form-label">CiaBata host</label>
-        <div class="col-8">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <i class="fa fa-map-signs"></i>
-                    </div>
-                </div>
-                <input id="CiaBataSettings-Host" name="CiaBataSettings-Host" type="text" class="form-control" required="required">
-            </div>
-        </div>
-    </div>
-    <div class="form-group row">
-        <div class="offset-4 col-8">
-            <button name="submit" type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </div>
-</form>
