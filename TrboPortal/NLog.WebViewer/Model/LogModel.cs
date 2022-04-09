@@ -23,9 +23,9 @@ namespace NLog.WebViewer
             _levelIndex = _fields.Select(item => !string.IsNullOrEmpty(item) ? item.ToLowerInvariant() : string.Empty).ToList().IndexOf("level");
         }
 
-        public LogModel(string logsPath, DateTime date, int minId = 0) : this()
+        public LogModel(string logsPath, DateTime date, string level, int minId = 0) : this()
         {
-            Initialize(logsPath, date, minId);
+            Initialize(logsPath, date, level, minId);
         }
 
         public int Num { get; private set; }
@@ -44,7 +44,7 @@ namespace NLog.WebViewer
 
         public List<List<string>> Items { get; private set; }
 
-        public void Initialize(string logsPath, DateTime date, long minId = 0)
+        public void Initialize(string logsPath, DateTime date, string level, long minId = 0)
         {
             Items = new List<List<string>>();
             LastId = 0;
@@ -75,9 +75,22 @@ namespace NLog.WebViewer
 
                         if (items.Length == Num)
                         {
+                            bool matchingLoglevel = false;
+                            try
+                            {
+                                var itemLevel = _levelIndex >= 0 ? items[_levelIndex] : string.Empty;
+                                var itemLevelOrd = NLog.LogLevel.FromString(itemLevel).Ordinal;
+                                var referenceLevelOrd = NLog.LogLevel.FromString(level).Ordinal;
+                                matchingLoglevel = (itemLevelOrd >= referenceLevelOrd);
+                            } catch 
+                            {
+                                // Could not match - allow
+                                matchingLoglevel = true;
+                            }
+
                             LastId++;
 
-                            if (LastId > minId)
+                            if (LastId > minId && matchingLoglevel)
                             {
                                 logItem = new List<string>(items);
                                 Items.Insert(0, logItem);
@@ -85,6 +98,7 @@ namespace NLog.WebViewer
                             else
                             {
                                 logItem = null;
+                                // break; only if we read reverse
                             }
                         }
                         else if (logItem != null)
@@ -103,33 +117,72 @@ namespace NLog.WebViewer
 
         public string GetHtmlToolbar(HttpRequest request)
         {
-            var path = request.Path + "?date=";
+            string dateFilter = request.QueryString["date"];
+            string logLevel = request.QueryString["logLevel"];
+            string url = request.Path;
+
+            string pathWithLogLevel, pathWithDate, datePrefix, logLevelPrefix;
+            if (logLevel != null)
+            {
+                pathWithLogLevel = $"{url}?logLevel={logLevel}";
+                datePrefix = "&date=";
+            } 
+            else
+            {
+                pathWithLogLevel = $"{url}";
+                datePrefix = "?date=";
+            }
+            
+            if (dateFilter != null)
+            {
+                pathWithDate = $"{url}?date={dateFilter}";
+                logLevelPrefix = "&logLevel=";
+            } else
+            {
+                pathWithDate = url;
+                logLevelPrefix = "?logLevel=";
+            }
+
             var builder = new StringBuilder();
 
-            builder.AppendFormat("<a href='{1}{0:yyyy-MM-dd}'>&lt;&lt;</a>", Date.AddDays(-1), path);
+            // Date part
+            builder.AppendFormat("<a href='{1}{2}{0:yyyy-MM-dd}'>&lt;&lt;</a>", Date.AddDays(-1), pathWithLogLevel, datePrefix);
             builder.AppendFormat("<span>{0:dd.MM.yyyy}</span>", Date);
 
             if (Date < DateTime.Today.AddDays(-2))
             {
-                builder.AppendFormat("<a href='{1}{0:yyyy-MM-dd}'>&gt;&gt;</a>", Date.AddDays(1), path);
+                builder.AppendFormat("<a href='{1}{2}{0:yyyy-MM-dd}'>&gt;&gt;</a>", Date.AddDays(1), pathWithLogLevel, datePrefix);
             }
 
             if (Date < DateTime.Today && Date != DateTime.Today.AddDays(-1))
             {
-                builder.AppendFormat("<a href='{1}{0:yyyy-MM-dd}'>Yesterday</a>", DateTime.Today.AddDays(-1), path);
+                builder.AppendFormat("<a href='{1}{2}{0:yyyy-MM-dd}'>Yesterday</a>", DateTime.Today.AddDays(-1), pathWithLogLevel, datePrefix);
             }
 
             if (Date < DateTime.Today)
             {
-                builder.AppendFormat("<a href='{0}'>Today</a>", request.Path);
+                builder.AppendFormat("<a href='{0}'>Today</a>", pathWithLogLevel);
             }
 
             if (Date == DateTime.Today)
             {
                 builder.Append("<span>Today</span>");
-                builder.Append("<label><input type='checkbox' data-bind='checked: isAutoRefresh' />Auto refresh</label>");
-                builder.Append("<button data-bind='click: updateLogs, enable: !isAutoRefresh()'>Refresh</button>");
             }
+
+            // Log level
+            string[] logLevels = new string[] {"TRACE","DEBUG","INFO","WARNING","ERROR","CRITICAL"};
+            builder.Append("<label for='logLevel'>Loglevel</label>" +
+                    "<select name='logLevel' onchange='location = this.value;'>");
+            foreach (var level in NLog.LogLevel.AllLoggingLevels)
+            {
+                string selected = (string.Equals(logLevel, level.Name, StringComparison.OrdinalIgnoreCase)) ? " selected " : string.Empty;
+                builder.AppendFormat("<option {3} value='{0}{1}{2}'>{2}</option>", pathWithDate, logLevelPrefix, level.Name, selected);
+            }
+            builder.Append("</select>");
+
+            // Refresh
+            builder.Append("<label><input type='checkbox' data-bind='checked: isAutoRefresh' />Auto refresh</label>");
+            builder.Append("<button data-bind='click: updateLogs, enable: !isAutoRefresh()'>Refresh</button>");
 
             return builder.ToString();
         }

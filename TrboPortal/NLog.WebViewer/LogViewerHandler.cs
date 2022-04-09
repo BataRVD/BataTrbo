@@ -43,19 +43,20 @@ namespace NLog.WebViewer
                 date = DateTime.Today;
             }
 
+            string logLevel = request.QueryString["logLevel"]; 
             if (request.HttpMethod == "POST")
             {
                 int lastId;
                 int.TryParse(request.Form["lastId"], out lastId);
 
-                model = CreateLogModel(context, date, null, lastId);
+                model = CreateLogModel(context, date, logLevel, lastId);
 
                 response.Write(JsonSerialize(model));
                 
                 return;
             }
 
-            model = CreateLogModel(context, date, null);
+            model = CreateLogModel(context, date, logLevel);
             var html = GetResource("NLog.WebViewer.Logs.html");
 
             html = html.Replace("{toolbar}", model.GetHtmlToolbar(request));
@@ -72,7 +73,7 @@ namespace NLog.WebViewer
 
             string logsPath = Config.Instance.Path.StartsWith("~") ? context.Server.MapPath(Config.Instance.Path) : Config.Instance.Path;
 
-            return new LogModel(logsPath, date.Value, minId);
+            return new LogModel(logsPath, date.Value, level, minId);
         }
 
         /// <summary>
