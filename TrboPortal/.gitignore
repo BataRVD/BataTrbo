@@ -15,7 +15,7 @@
 *.db
 *.db-*
 TrboPortal.log
-App_Data/Logs
+TrboPortal/App_Data/Logs
 # Build results
 [Dd]ebug/
 [Rr]elease/

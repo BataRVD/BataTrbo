@@ -12,7 +12,7 @@ namespace NLog.WebViewer
     public class LogModel
     {
         private readonly string[] _fields;
-        
+
         private readonly int _levelIndex;
 
         public LogModel()
@@ -59,40 +59,43 @@ namespace NLog.WebViewer
 
             List<string> logItem = null;
 
-            using (var stream = new StreamReader(logFile))
+            using (FileStream file = new FileStream(logFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
-                while (!stream.EndOfStream)
+                using (var stream = new StreamReader(file))
                 {
-                    var line = stream.ReadLine();
-                    if (line == null)
+                    while (!stream.EndOfStream)
                     {
-                        continue;
-                    }
-
-                    var items = line.Split(new[] { Config.Instance.Separator }, StringSplitOptions.None);
-
-                    if (items.Length == Num)
-                    {
-                        LastId++;
-
-                        if (LastId > minId)
+                        var line = stream.ReadLine();
+                        if (line == null)
                         {
-                            logItem = new List<string>(items);
-                            Items.Insert(0, logItem);
-                        }
-                        else
-                        {
-                            logItem = null;
-                        }
-                    }
-                    else if (logItem != null)
-                    {
-                        if (logItem.Count == Num)
-                        {
-                            logItem.Add(string.Empty);
+                            continue;
                         }
 
-                        logItem[Num] += line + Environment.NewLine;
+                        var items = line.Split(new[] { Config.Instance.Separator }, StringSplitOptions.None);
+
+                        if (items.Length == Num)
+                        {
+                            LastId++;
+
+                            if (LastId > minId)
+                            {
+                                logItem = new List<string>(items);
+                                Items.Insert(0, logItem);
+                            }
+                            else
+                            {
+                                logItem = null;
+                            }
+                        }
+                        else if (logItem != null)
+                        {
+                            if (logItem.Count == Num)
+                            {
+                                logItem.Add(string.Empty);
+                            }
+
+                            logItem[Num] += line + Environment.NewLine;
+                        }
                     }
                 }
             }
@@ -115,7 +118,7 @@ namespace NLog.WebViewer
             {
                 builder.AppendFormat("<a href='{1}{0:yyyy-MM-dd}'>Yesterday</a>", DateTime.Today.AddDays(-1), path);
             }
-            
+
             if (Date < DateTime.Today)
             {
                 builder.AppendFormat("<a href='{0}'>Today</a>", request.Path);
@@ -166,7 +169,7 @@ namespace NLog.WebViewer
                 {
                     builder.AppendFormat("<td>{0}</td>", item[i]);
                 }
-                
+
                 builder.Append("</tr>");
 
                 if (item.Count > Num)
