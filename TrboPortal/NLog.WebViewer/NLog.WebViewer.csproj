@@ -53,6 +53,7 @@
     <EmbeddedResource Include="Logs.html" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Readme.txt" />
     <EmbeddedResource Include="content\main.css">
       <DependentUpon>main.scss</DependentUpon>
     </EmbeddedResource>
