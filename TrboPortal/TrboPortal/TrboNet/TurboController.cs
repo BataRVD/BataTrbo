@@ -84,7 +84,7 @@ namespace TrboPortal.TrboNet
                 {
                     try
                     {
-                        logger.Debug("The server did a tick");
+                        logger.Trace("The server did a tick");
                         // populate the queue
                         PopulateQueue();
                         // Request info for next device

@@ -67,12 +67,12 @@ namespace TrboPortal.TrboNet
                 if (!IsEmpty())
                 {
                     T peeked = queue.First();
-                    logger.Debug($"Peeked, returning {peeked}");
+                    logger.Trace($"Peeked, returning {peeked}");
                     return peeked;
                 }
             }
 
-            logger.Debug($"Queue is empty, nothing to peek");
+            logger.Trace($"Queue is empty, nothing to peek");
             return default(T);
         }
 
@@ -82,7 +82,7 @@ namespace TrboPortal.TrboNet
         /// <returns></returns>
         public bool IsEmpty()
         {
-            logger.Debug($"Queue count: {Count}");
+            logger.Trace($"Queue count: {Count}");
             return (Count == 0);
         }
 
@@ -103,7 +103,7 @@ namespace TrboPortal.TrboNet
                 }
             }
 
-            logger.Debug($"Nothing to pop");
+            logger.Trace($"Nothing to pop");
             return default(T);
         }
 
@@ -115,7 +115,7 @@ namespace TrboPortal.TrboNet
         {
             lock (queue)
             {
-                logger.Debug("Returning copy of the queue");
+                logger.Trace("Returning copy of the queue");
                 return new List<T>(queue);
             }
         }
