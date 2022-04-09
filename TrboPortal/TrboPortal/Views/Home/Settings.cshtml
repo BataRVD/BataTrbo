@@ -1,8 +1,13 @@
-﻿<div class="container">
+﻿<script type="module" src="/Scripts/settings.js"></script>
+
+<div class="container">
     <div class="jumbotron">
         <h1>Settings</h1>
     </div>
-    <form>
+    <div id="warning-container" class="mx-3 mx-sm-5">
+        <span class="warning warning-text" id="warning-generic" style="display: none;"></span>
+    </div>
+    <form id="SettingsForm" onsubmit="SubmitClicked();">
         <div class="form-group row">
             <label for="ServerInterval" class="col-4 col-form-label">Server Interval</label>
             <div class="col-8">
@@ -12,7 +17,7 @@
                             <i class="fa fa-clock-o"></i>
                         </div>
                     </div>
-                    <input id="ServerInterval" name="ServerInterval" placeholder="0" type="text" class="form-control" aria-describedby="ServerIntervalHelpBlock" required="required">
+                    <input readonly id="ServerInterval" name="ServerInterval" placeholder="0" type="text" class="form-control" aria-describedby="ServerIntervalHelpBlock" required="required">
                 </div>
                 <span id="ServerIntervalHelpBlock" class="form-text text-muted">Server Ticker Interval used for global ratelimitinig</span>
             </div>
@@ -26,7 +31,7 @@
                             <i class="fa fa-location-arrow"></i>
                         </div>
                     </div>
-                    <input id="DefaultGpsMode" name="DefaultGpsMode" placeholder="none" type="text" aria-describedby="DefaultGpsModeHelpBlock" required="required" class="form-control">
+                    <input readonly id="DefaultGpsMode" name="DefaultGpsMode" placeholder="none" type="text" aria-describedby="DefaultGpsModeHelpBlock" required="required" class="form-control">
                 </div>
                 <span id="DefaultGpsModeHelpBlock" class="form-text text-muted">GPS Mode for newly added devices. (none, pull, interval)</span>
             </div>
@@ -40,7 +45,7 @@
                             <i class="fa fa-clock-o"></i>
                         </div>
                     </div>
-                    <input id="DefaultInterval" name="DefaultInterval" placeholder="60" type="text" aria-describedby="DefaultIntervalHelpBlock" required="required" class="form-control">
+                    <input readonly id="DefaultInterval" name="DefaultInterval" placeholder="60" type="text" aria-describedby="DefaultIntervalHelpBlock" required="required" class="form-control">
                 </div>
                 <span id="DefaultIntervalHelpBlock" class="form-text text-muted">Default GPS interval (in seconds) when using GPS Mode 'interval'</span>
             </div>
@@ -54,7 +59,7 @@
                             <i class="fa fa-server"></i>
                         </div>
                     </div>
-                    <input id="TurboNetSettings-Host" name="TurboNetSettings-Host" placeholder="0.0.0.0" type="text" class="form-control" aria-describedby="TurboNetSettings-HostHelpBlock" required="required">
+                    <input readonly id="TurboNetSettings-Host" name="TurboNetSettings-Host" placeholder="0.0.0.0" type="text" class="form-control" aria-describedby="TurboNetSettings-HostHelpBlock" required="required">
                 </div>
                 <span id="TurboNetSettings-HostHelpBlock" class="form-text text-muted">TrboNet host address</span>
             </div>
@@ -68,7 +73,7 @@
                             <i class="fa fa-sort-numeric-asc"></i>
                         </div>
                     </div>
-                    <input id="TurboNetSettings-Port" name="TurboNetSettings-Port" placeholder="4021" type="text" class="form-control" aria-describedby="TurboNetSettings-PortHelpBlock" required="required">
+                    <input readonly id="TurboNetSettings-Port" name="TurboNetSettings-Port" placeholder="4021" type="text" class="form-control" aria-describedby="TurboNetSettings-PortHelpBlock" required="required">
                 </div>
                 <span id="TurboNetSettings-PortHelpBlock" class="form-text text-muted">Trbonet Host port number</span>
             </div>
@@ -82,7 +87,7 @@
                             <i class="fa fa-user-circle"></i>
                         </div>
                     </div>
-                    <input id="TurboNetSettings-User" name="TurboNetSettings-User" placeholder="admin" type="text" class="form-control" aria-describedby="TurboNetSettings-UserHelpBlock" required="required">
+                    <input readonly id="TurboNetSettings-User" name="TurboNetSettings-User" placeholder="admin" type="text" class="form-control" aria-describedby="TurboNetSettings-UserHelpBlock" required="required">
                 </div>
                 <span id="TurboNetSettings-UserHelpBlock" class="form-text text-muted">TrboNet Host username</span>
             </div>
@@ -96,7 +101,7 @@
                             <i class="fa fa-key"></i>
                         </div>
                     </div>
-                    <input id="TurboNetSettings-Password" name="TurboNetSettings-Password" placeholder="xxx" type="text" class="form-control" aria-describedby="TurboNetSettings-PasswordHelpBlock" required="required">
+                    <input readonly id="TurboNetSettings-Password" name="TurboNetSettings-Password" placeholder="xxx" type="text" class="form-control" aria-describedby="TurboNetSettings-PasswordHelpBlock" required="required">
                 </div>
                 <span id="TurboNetSettings-PasswordHelpBlock" class="form-text text-muted">TrboNet Host password</span>
             </div>
@@ -110,13 +115,14 @@
                             <i class="fa fa-map-signs"></i>
                         </div>
                     </div>
-                    <input id="CiaBataSettings-Host" name="CiaBataSettings-Host" type="text" class="form-control" required="required">
+                    <input readonly id="CiaBataSettings-Host" name="CiaBataSettings-Host" type="text" class="form-control" required="required">
                 </div>
             </div>
         </div>
         <div class="form-group row">
             <div class="offset-4 col-8">
-                <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                <!-- This submit button is dual-state Edit/Submit, behaviour handled in settings.js. -->
+                <button disabled id="submit" class="btn btn-primary">Edit</button>
             </div>
         </div>
     </form>
