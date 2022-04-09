@@ -22,5 +22,11 @@ namespace TrboPortal.Model.Api
             ViewBag.Title = "Swagger";
             return View();
         }
+
+        public ActionResult Settings()
+        {
+            ViewBag.Title = "Settings";
+            return View();
+        }
     }
 }
