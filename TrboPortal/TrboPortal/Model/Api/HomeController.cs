@@ -10,5 +10,17 @@ namespace TrboPortal.Model.Api
 
             return View();
         }
+
+        public ActionResult Logs()
+        {
+            ViewBag.Title = "Logs";
+            return View();
+        }
+
+        public ActionResult Swagger()
+        {
+            ViewBag.Title = "Swagger";
+            return View();
+        }
     }
 }
