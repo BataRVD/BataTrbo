@@ -67,6 +67,7 @@ h1 {
     tr {
         border-top: 1px solid gray;
         vertical-align: top;
+
         &:nth-of-type(even) {
             background-color: #F1F1F1;
         }
@@ -81,6 +82,7 @@ h1 {
             td:nth-of-type(1) {
                 display: inline-block;
                 position: relative;
+
                 &:before {
                     position: absolute;
                     top: 7px;
@@ -112,9 +114,14 @@ h1 {
             td {
                 white-space: normal;
                 overflow-x: auto;
-                font-family: Monaco, Menlo, Consolas, "Courier New", monospace;;
+                font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+                ;
             }
         }
+    }
+
+    tr.FATAL {
+        background-color: red;
     }
 
     tr.ERROR {
@@ -126,11 +133,11 @@ h1 {
     }
 
     tr.INFO {
-        //background-color: lightblue;
+        background-color: lightblue;
     }
 
     tr.DEBUG {
-        //background-color: white;
+        background-color: white;
     }
 
     .plus {
