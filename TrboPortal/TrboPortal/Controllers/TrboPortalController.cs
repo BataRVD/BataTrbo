@@ -142,9 +142,5 @@ namespace TrboPortal.Controllers
 
             return TrboPortalHelper.GetLoggingAsync(loglevel, from, through);
         }
-
-        /// <summary>Returns the current working directory</summary>
-        [HttpGet, Route("system/working_directory")]
-        public string GetWorkingDirectory() => Directory.GetCurrentDirectory();
     }
 }

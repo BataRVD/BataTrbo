@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Configuration;
+using System.Data.Entity;
 using System.Data.SQLite;
 using System.IO;
 using SQLite.CodeFirst;
@@ -20,7 +21,18 @@ namespace TrboPortal.Model
             Configure();
         }
 
-        public DatabaseContext() : this(new SQLiteConnection($@"Data Source={Directory.GetCurrentDirectory()}\TrboNet.db"))
+        private static string GetDatabasePath()
+        {
+            var dbPath = ConfigurationManager.AppSettings["DatabasePath"];
+            if (string.IsNullOrEmpty(dbPath))
+            {
+                dbPath = $@"{Directory.GetCurrentDirectory()}\TrboNet.db";
+            }
+            Directory.CreateDirectory(Path.GetDirectoryName(dbPath));
+            return dbPath;
+    }
+
+        public DatabaseContext() : this(new SQLiteConnection($"Data Source={GetDatabasePath()}"))
         {
             //Nothing to do
         }
