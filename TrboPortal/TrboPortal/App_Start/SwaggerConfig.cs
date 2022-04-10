@@ -98,6 +98,7 @@ namespace TrboPortal
                         // more Xml comment files.
                         //
                         //c.IncludeXmlComments(GetXmlCommentsPath());
+                        c.IncludeXmlComments(string.Format(@"{0}\bin\TrboPortal.xml", System.AppDomain.CurrentDomain.BaseDirectory));
 
                         // Swashbuckle makes a best attempt at generating Swagger compliant JSON schemas for the various types
                         // exposed in your API. However, there may be occasions when more control of the output is needed.

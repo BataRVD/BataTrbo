@@ -1,0 +1,677 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TrboPortal</name>
+    </assembly>
+    <members>
+        <member name="M:TrboPortal.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="T:TrboPortal.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="T:TrboPortal.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForMediaType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Sets the sample directly for all actions with the specified media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,TrboPortal.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageConfigurationExtensions.GetModelDescriptionGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the model description generator.
+            </summary>
+            <param name="config">The configuration.</param>
+            <returns>The <see cref="T:TrboPortal.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator"/></returns>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:TrboPortal.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:TrboPortal.Areas.HelpPage.ModelDescriptions.ModelDescription">
+            <summary>
+            Describes a type model.
+            </summary>
+        </member>
+        <member name="T:TrboPortal.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator">
+            <summary>
+            Generates model descriptions for given types.
+            </summary>
+        </member>
+        <member name="T:TrboPortal.Areas.HelpPage.ModelDescriptions.ModelNameAttribute">
+            <summary>
+            Use this attribute to change the name of the <see cref="T:TrboPortal.Areas.HelpPage.ModelDescriptions.ModelDescription"/> generated for a type.
+            </summary>
+        </member>
+        <member name="T:TrboPortal.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TrboPortal.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="P:TrboPortal.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:TrboPortal.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:TrboPortal.Areas.HelpPage.Models.HelpPageApiModel.UriParameters">
+            <summary>
+            Gets or sets the <see cref="T:TrboPortal.Areas.HelpPage.ModelDescriptions.ParameterDescription"/> collection that describes the URI parameters for the API.
+            </summary>
+        </member>
+        <member name="P:TrboPortal.Areas.HelpPage.Models.HelpPageApiModel.RequestDocumentation">
+            <summary>
+            Gets or sets the documentation for the request.
+            </summary>
+        </member>
+        <member name="P:TrboPortal.Areas.HelpPage.Models.HelpPageApiModel.RequestModelDescription">
+            <summary>
+            Gets or sets the <see cref="T:TrboPortal.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the request body.
+            </summary>
+        </member>
+        <member name="P:TrboPortal.Areas.HelpPage.Models.HelpPageApiModel.RequestBodyParameters">
+            <summary>
+            Gets the request body parameter descriptions.
+            </summary>
+        </member>
+        <member name="P:TrboPortal.Areas.HelpPage.Models.HelpPageApiModel.ResourceDescription">
+            <summary>
+            Gets or sets the <see cref="T:TrboPortal.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the resource.
+            </summary>
+        </member>
+        <member name="P:TrboPortal.Areas.HelpPage.Models.HelpPageApiModel.ResourceProperties">
+            <summary>
+            Gets the resource property descriptions.
+            </summary>
+        </member>
+        <member name="P:TrboPortal.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:TrboPortal.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:TrboPortal.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="T:TrboPortal.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TrboPortal.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+        </member>
+        <member name="P:TrboPortal.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:TrboPortal.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:TrboPortal.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="P:TrboPortal.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+            <summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null"/> object.
+            </summary>
+            <remarks>
+            Collection includes just <see cref="M:TrboPortal.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,TrboPortal.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,TrboPortal.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:TrboPortal.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:TrboPortal.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create
+            one using <see cref="M:TrboPortal.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(TrboPortal.Areas.HelpPage.HelpPageSampleGenerator,System.Type)"/> (which wraps an <see cref="T:TrboPortal.Areas.HelpPage.ObjectGenerator"/>) and other
+            factories in <see cref="P:TrboPortal.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageSampleGenerator.ResolveHttpRequestMessageType(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The type.</returns>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},TrboPortal.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TrboPortal.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Creates a new <see cref="T:TrboPortal.Areas.HelpPage.HelpPageSampleKey"/> based on media type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:TrboPortal.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageSampleKey.#ctor(TrboPortal.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:TrboPortal.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:TrboPortal.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:TrboPortal.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,TrboPortal.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:TrboPortal.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:TrboPortal.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:TrboPortal.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:TrboPortal.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:TrboPortal.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:TrboPortal.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:TrboPortal.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:TrboPortal.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:TrboPortal.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:TrboPortal.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TrboPortal.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:TrboPortal.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:TrboPortal.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:TrboPortal.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:TrboPortal.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:TrboPortal.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:TrboPortal.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TrboPortal.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="M:TrboPortal.CiaBata.CiaBata.PostGpsLocation(TrboPortal.CiaBata.GPSLocation)">
+            <summary>
+            Post the current location to ciabata
+            </summary>
+            <param name="gps"></param>
+        </member>
+        <member name="M:TrboPortal.CiaBata.CiaBata.PostDeviceLifeSign(System.Int32,System.String,System.Boolean)">
+            <summary>
+            Post a livesign to the server, for example for a radio or the server
+            </summary>
+            <param name="referenceID"></param>
+            <param name="name"></param>
+            <param name="online"></param>
+        </member>
+        <member name="T:TrboPortal.Model.Api.GpsModeEnum">
+            <summary>GPS polling mode</summary>
+        </member>
+        <member name="T:TrboPortal.Model.Api.Radio">
+            <summary>
+            Class with (only) settings regarding this radio
+            </summary>
+        </member>
+        <member name="P:TrboPortal.Model.Api.Radio.RequestInterval">
+            <summary>GPS request interval in milliseconds</summary>
+        </member>
+        <member name="P:TrboPortal.Model.Api.SystemSettings.DefaultInterval">
+            <example>test</example>
+            <summary>hello</summary>
+        </member>
+        <member name="T:TrboPortal.Model.Db.GpsEntry">
+            <summary>
+            Model used for database storage, when changing please look into the default migration options of entityframework
+            </summary>
+        </member>
+        <member name="T:TrboPortal.Model.Db.Radio">
+            <summary>
+            Model used for database storage, when changing please look into the default migration options of entityframework
+            </summary>
+        </member>
+        <member name="M:TrboPortal.Model.Db.Repository.InsertOrUpdateAsync``1(``0)">
+            <summary>
+            Generic insert or update
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+        </member>
+        <member name="M:TrboPortal.Model.Db.Repository.InsertOrUpdateAsync(System.Collections.Generic.List{TrboPortal.Model.Db.Radio})">
+            <summary>
+            Insert or update Radio (based on key)
+            </summary>
+            <param name="settings"></param>
+        </member>
+        <member name="T:TrboPortal.Model.Db.LogEntry">
+             <summary>
+             Model used for database storage, when changing please look into the default migration options of entityframework
+            </summary>
+        </member>
+        <member name="M:TrboPortal.Controllers.TrboPortalController.GetRadios(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>List of all radios</summary>
+            <param name="radioIds">Tags to filter by</param>
+            <returns>successful operation</returns>
+        </member>
+        <member name="M:TrboPortal.Controllers.TrboPortalController.UpdateRadioSettings(System.Collections.Generic.IEnumerable{TrboPortal.Model.Api.Radio})">
+            <summary>Update gps mode and interval radios</summary>
+            <param name="radioSettings">Radios to update</param>
+        </member>
+        <member name="M:TrboPortal.Controllers.TrboPortalController.GetMostRecentGps(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>Returns last known GPS position of radio(s)</summary>
+            <param name="ids">Radios</param>
+            <returns>successful operation</returns>
+        </member>
+        <member name="M:TrboPortal.Controllers.TrboPortalController.GetGpsHistory(System.Collections.Generic.IEnumerable{System.Int32},System.String,System.String)">
+            <summary>Returns last known GPS position of radio(s)</summary>
+            <param name="id">Radios</param>
+            <param name="from">From TimeStamp for GPS measurements to get</param>
+            <param name="through">Through TimeStamp for GPS measurements to get</param>
+            <returns>successful operation</returns>
+        </member>
+        <member name="M:TrboPortal.Controllers.TrboPortalController.RequestGpsUpdate(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>Request GPS opdate for radio(s)</summary>
+            <param name="id">Radios</param>
+            <returns>successful operation</returns>
+        </member>
+        <member name="M:TrboPortal.Controllers.TrboPortalController.GetMessageQueue">
+            <summary>TrboNet message queue</summary>
+            <returns>Messages in TrboNet queue</returns>
+        </member>
+        <member name="M:TrboPortal.Controllers.TrboPortalController.ClearMessageQueue(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>List of all radios</summary>
+            <param name="id">Tags to filter by</param>
+            <returns>successful operation</returns>
+        </member>
+        <member name="M:TrboPortal.Controllers.TrboPortalController.GetSystemSettings">
+            <summary>System settings</summary>
+            <returns>Blaat</returns>
+        </member>
+        <member name="M:TrboPortal.Controllers.TrboPortalController.SetSystemSettings(TrboPortal.Model.Api.SystemSettings)">
+            <summary>Update System settings</summary>
+            <param name="settings">System settings to store</param>
+        </member>
+        <member name="M:TrboPortal.Controllers.TrboPortalController.GetLogging(System.String,System.String,System.String)">
+            <summary>System logging</summary>
+            <param name="loglevel">Log level filter of logging to return</param>
+            <param name="from">DateTime From filter of logging to return</param>
+            <param name="through">DateTime Through filter of logging to return</param>
+            <returns>Blaat</returns>
+        </member>
+        <member name="M:TrboPortal.Controllers.TrboPortalHelper.GetGpsMeasurementsAsync(System.Collections.Generic.IEnumerable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Returns a list of GpsMeasurements for specified devices. 
+            </summary>
+            <param name="ids">List of DeviceIds</param>
+            <param name="from">Optional from filter</param>
+            <param name="through">Optional through filter</param>
+            <returns></returns>
+        </member>
+        <member name="M:TrboPortal.TrboNet.Queue`1.Remove(`0)">
+            <summary>
+            Remove all occurences of device from the queue
+            </summary>
+            <param name="device"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TrboPortal.TrboNet.Queue`1.Remove(`0,System.Func{`0,`0,System.Boolean})">
+            <summary>
+            Remove all occurences of device from the queue, matched by the compare function
+            </summary>
+            <param name="device"></param>
+            <param name="comperator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TrboPortal.TrboNet.Queue`1.Peek">
+            <summary>
+            See the first item of the queue
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TrboPortal.TrboNet.Queue`1.IsEmpty">
+            <summary>
+            Check if the queue is empty
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TrboPortal.TrboNet.Queue`1.Pop">
+            <summary>
+            Takes and returns the first value from the queue
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TrboPortal.TrboNet.Queue`1.GetQueue">
+            <summary>
+            Returns a copy of the queue
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TrboPortal.TrboNet.Queue`1.Jump(`0[])">
+            <summary>
+            Jump the queue, and add the entries to the beginning
+            </summary>
+            <param name="entries"></param>
+        </member>
+        <member name="M:TrboPortal.TrboNet.Queue`1.Add(`0[])">
+            <summary>
+            Add the entries to the end of the queue
+            </summary>
+            <param name="entries"></param>
+        </member>
+        <member name="T:TrboPortal.TrboNet.TurboController">
+            <summary>
+            Storing and retrieving settings
+            </summary>
+            <summary>
+            TrboNet Specific logic
+            </summary>
+            <summary>
+            Queueing logic
+            </summary>
+            <summary>
+            Note, there are some other partial classes
+            </summary>
+        </member>
+        <member name="M:TrboPortal.TrboNet.TurboController.PopulateQueue">
+            <summary>
+            populates the queue with devices that need an locationUpdate
+            </summary>
+        </member>
+        <member name="M:TrboPortal.TrboNet.TurboController.RemoveDeviceFromQueueByDeviceID(System.Int32[])">
+            <summary>
+            Remove all the entries from the queue with the given deviceID
+            </summary>
+            <param name="deviceID"></param>
+        </member>
+    </members>
+</doc>

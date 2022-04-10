@@ -10,6 +10,8 @@
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public GpsModeEnum? DefaultGpsMode { get; set; }
 
+        /// <example>test</example>
+        /// <summary>hello</summary>
         [Newtonsoft.Json.JsonProperty("DefaultInterval", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? DefaultInterval { get; set; }
 
