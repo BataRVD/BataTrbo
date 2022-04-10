@@ -64,6 +64,7 @@ function processGetResponse(json) {
  */
 function EnterEditMode(invokeEditMode) {
     $("#SettingsForm input").prop("readonly", !invokeEditMode);
+    $("#SettingsForm select").prop("disabled", !invokeEditMode);
 }
 
 /**
@@ -87,7 +88,7 @@ function Post() {
 function getJsonFromForm() {
     return {
         ServerInterval: $('#ServerInterval').val(),
-        DefaultGpsMode: $('#DefaultGpsMode').val(),
+        DefaultGpsMode: $('#DefaultGpsMode :selected').val(),
         DefaultInterval: $('#DefaultInterval').val(),
         TurboNetSettings: {
             Host: $('#TurboNetSettings-Host').val(),
