@@ -34,7 +34,7 @@ namespace TrboPortal.TrboNet
         private static void LoadDefaultSettings()
         {
             var settings = new SystemSettings();
-            serverInterval = Math.Max(250, settings.ServerInterval ?? 0);
+            serverInterval = Math.Max(1, settings.ServerInterval ?? 15);
             ciaBataUrl = settings.CiaBataSettings?.Host;
 
             turboNetUrl = settings.TurboNetSettings?.Host;
@@ -42,8 +42,8 @@ namespace TrboPortal.TrboNet
             turboNetUser = settings.TurboNetSettings?.User;
             turboNetPassword = settings.TurboNetSettings?.Password;
 
-            defaultGpsMode = GpsModeEnum.None;
-            defaultRequestInterval = 60;
+            defaultGpsMode = settings.DefaultGpsMode ?? GpsModeEnum.None;
+            defaultRequestInterval = settings.DefaultInterval ?? 60;
         }
 
         private async Task LoadSettingsFromDatabaseAsync()
@@ -66,7 +66,7 @@ namespace TrboPortal.TrboNet
                 var settings = await Repository.GetLatestSystemSettingsAsync();
                 if (settings != null)
                 {
-                    serverInterval = Math.Max(250, settings.ServerInterval);
+                    serverInterval = Math.Max(1, settings.ServerInterval);
                     ciaBataUrl = settings.CiaBataHost;
 
                     turboNetUrl = settings.TrboNetHost;

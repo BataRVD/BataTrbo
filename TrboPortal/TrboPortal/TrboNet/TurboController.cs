@@ -48,7 +48,7 @@ namespace TrboPortal.TrboNet
             ciaBataController = new CiaBata.CiaBata(ciaBataUrl);
             // Start HeartBeat
             heartBeat = new System.Timers.Timer();
-            heartBeat.Interval = serverInterval;
+            heartBeat.Interval = 1000 * serverInterval;
             heartBeat.Elapsed += TheServerDidATick;
             heartBeat.AutoReset = true;
             heartBeat.Enabled = true;
