@@ -24,7 +24,10 @@ function RefreshData() {
             processGetResponse(json);
             $('#preloader').hide();
         }),
-        (response) => showApiErrorWarning("#warning-generic", response));
+        (response) => Promise.resolve(response.text())
+            .then(JSON.parse)
+            .then(resp_data => showApiErrorWarning("Unable to load data", api.getValidationErrors(resp_data)))
+    );
 }
 
 /**
@@ -32,16 +35,10 @@ function RefreshData() {
  * */
 window.SubmitClicked = function SubmitClicked() {
     if (inEditMode) {
-        // We're going to post, set submit text to back 'Edit', disable and post.
-        $('#submit').html("Edit");
-        $('#submit').prop('disabled', true);
         Post();
     } else {
-        // We're going to edit, change submit text to 'Submit'
-        $('#submit').html("Submit");
+        EnterEditMode(true);
     }
-    inEditMode = !inEditMode
-    EnterEditMode(inEditMode);
 }
 
 /**
@@ -63,6 +60,12 @@ function processGetResponse(json) {
  * @param {any} invokeEditMode
  */
 function EnterEditMode(invokeEditMode) {
+    inEditMode = invokeEditMode
+    if (inEditMode){
+        $('#submit').html("Submit");
+    } else {
+        $('#submit').html("Edit");
+    }
     $("#SettingsForm input").prop("readonly", !invokeEditMode);
     $("#SettingsForm select").prop("disabled", !invokeEditMode);
 }
@@ -71,6 +74,9 @@ function EnterEditMode(invokeEditMode) {
  * Posts validated form data to server.
  * */
 function Post() {
+    // Disable input before posting
+    $('#submit').prop('disabled', true);
+
     //TODO Validation
     const data = getJsonFromForm();
 
@@ -80,9 +86,16 @@ function Post() {
             console.log("Patch successfull!")
             console.log(response);
             //Refresh to get latest data from server.
+            EnterEditMode(false);
+            clearErrorWarning();
             RefreshData();
         },
-        (response) => showApiErrorWarning("#warning-generic", response));
+        (response) => {
+            $('#submit').prop('disabled', false);
+            Promise.resolve(response.text())
+                .then(JSON.parse)
+                .then(resp_data => showApiErrorWarning("Unable to save SystemSettings.", api.getValidationErrors(resp_data)));
+        });
 }
 
 function getJsonFromForm() {
@@ -113,16 +126,16 @@ function setFormFromJson(json) {
     $('#CiaBataSettings-Host').val(json['CiaBataSettings']['Host'])
 }
 
-/**
- * Parse API error message and display into warningElement for 5 seconds
- */
-function showApiErrorWarning(warningElement, response) {
-    api.parseErrorMessagePromise(response).then((msg) => {
-        $(warningElement).html('<i class="fas fa-exclamation-triangle"></i> ' + msg);
-        $(warningElement).dequeue();
-        $(warningElement).show(400);
-        $(warningElement).delay(5000).hide(400).promise().done(function () {
-            $(warningElement).text("");
-        });
-    });
+function showApiErrorWarning(message, errors) {
+    $('#alertMessage').html(message);
+    $('#validationErrorList').html(errors.map(e => `<li>${e}</li>\r\n`))
+    $('#validationErrorContainer').show();
+
 }
+
+function clearErrorWarning() {
+    $('#alertMessage').html("");
+    $('#validationErrorList').html("")
+    $('#validationErrorContainer').hide();
+}
+

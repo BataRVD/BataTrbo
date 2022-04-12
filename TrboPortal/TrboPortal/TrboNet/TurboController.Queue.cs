@@ -54,7 +54,7 @@ namespace TrboPortal.TrboNet
                     continue;
                 }
 
-                var requestMessage = CreateGpsRequestMessage(deviceID);
+                var requestMessage = CreateGpsRequestMessage(device.Value);
                 // if device in queue --> continue
 
                 deviceInfo.LastUpdateRequest = DateTime.Now;
@@ -94,7 +94,7 @@ namespace TrboPortal.TrboNet
                         // Since we are going to jump the queue, remove all existing requests
                         RemoveDeviceFromQueueByDeviceID(deviceID);
                         // Jump the queue
-                        var requestMessage = CreateGpsRequestMessage(deviceID);
+                        var requestMessage = CreateGpsRequestMessage(deviceInfo);
                         deviceInfo.LastUpdateRequest = DateTime.Now;
                         pollQueue.Jump(requestMessage);
                         // also remove all other requests for this device from the queue, you jumped, you didn'magically duplicate yourself, what are you a gremlin?
@@ -117,15 +117,16 @@ namespace TrboPortal.TrboNet
         /// <param name="deviceID"></param>
         private void RemoveDeviceFromQueueByDeviceID(params int[] deviceIDs)
         {
+
             foreach (int deviceId in deviceIDs)
             {
-                pollQueue.Remove(new RequestMessage(deviceId, RequestMessage.RequestType.Gps), (deviceA, deviceB) => { return (deviceA?.deviceID == deviceB?.deviceID); });
+                pollQueue.Remove(new RequestMessage(deviceId, -1, RequestMessage.RequestType.Gps), (deviceA, deviceB) => { return (deviceA?.deviceID == deviceB?.deviceID); });
             }
         }
 
-        private RequestMessage CreateGpsRequestMessage(int deviceID)
+        private RequestMessage CreateGpsRequestMessage(DeviceInfo device)
         {
-            return new RequestMessage(deviceID, RequestMessage.RequestType.Gps);
+            return new RequestMessage(device, RequestMessage.RequestType.Gps);
         }
 
         public List<RequestMessage> GetRequestQueue()

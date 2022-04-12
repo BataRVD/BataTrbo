@@ -9,12 +9,18 @@ namespace TrboPortal.TrboNet
             Gps
         }
         public int deviceID { get; private set; }
+        public int radioID { get; private set; }
         public RequestType Type { get; private set; }
         public DateTime TimeQueued { get; private set; }
 
-        public RequestMessage(int deviceID, RequestType requestType)
+        public RequestMessage(DeviceInfo device, RequestType requestType) : this(device.DeviceID, device.RadioID, requestType)
         {
-            this.deviceID = deviceID;
+        }
+
+        public RequestMessage(int deviceId, int radioId, RequestType requestType)
+        {
+            this.deviceID = deviceId;
+            this.radioID = radioId;
             TimeQueued = DateTime.Now;
             Type = requestType;
         }
