@@ -9,7 +9,7 @@ namespace TrboPortal.Mappers
         {
             return new MessageQueueItem
             {
-                RadioID = 666, // TODO "maak er wat van"
+                RadioID = rm.radioID,
                 Timestamp = DateTimeMapper.ToString(rm.TimeQueued)
             };
         }
