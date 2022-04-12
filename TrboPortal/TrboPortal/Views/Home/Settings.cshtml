@@ -4,9 +4,6 @@
     <div class="jumbotron">
         <h1>Settings</h1>
     </div>
-    <div id="warning-container" class="mx-3 mx-sm-5">
-        <span class="warning warning-text" id="warning-generic" style="display: none;"></span>
-    </div>
     <form id="SettingsForm" onsubmit="SubmitClicked();">
         <div class="form-group row">
             <label for="ServerInterval" class="col-4 col-form-label">Server Interval</label>
@@ -121,6 +118,14 @@
                     </div>
                     <input readonly id="CiaBataSettings-Host" name="CiaBataSettings-Host" type="text" class="form-control" required="required">
                 </div>
+            </div>
+        </div>
+        <div id="validationErrorContainer" class="form-group row" style="display: none;">
+            <div class="alert alert-danger" role="alert">
+                <div id="alertMessage">
+                    Unable to save SystemSettings.
+                </div>
+                <ul id="validationErrorList" class="navbar-nav mr-auto"></ul>
             </div>
         </div>
         <div class="form-group row">

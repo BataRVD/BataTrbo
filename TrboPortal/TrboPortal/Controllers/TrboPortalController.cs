@@ -116,15 +116,21 @@ namespace TrboPortal.Controllers
         /// <summary>Update System settings</summary>
         /// <param name="settings">System settings to store</param>
         [HttpPatch, Route("system/settings")]
-        public Task SetSystemSettings([FromBody] [Required] SystemSettings settings)
+        public Task<HttpResponseMessage> SetSystemSettings([FromBody] [Required] SystemSettings settings)
         {
-            if (settings == null)
+            return Task.Run(() =>
             {
-                var message = "Settings need to be supplied";
-                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, message));
-            }
-
-            return TrboPortalHelper.UpdateSystemSettingsAsync(settings);
+                if (ModelState.IsValid)
+                {
+                    // Do something with the product (not shown).
+                    _ = TrboPortalHelper.UpdateSystemSettingsAsync(settings);
+                    return new HttpResponseMessage(HttpStatusCode.OK);
+                }
+                else
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+            });
         }
 
         /// <summary>System logging</summary>

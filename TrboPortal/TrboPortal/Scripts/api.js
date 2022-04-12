@@ -12,6 +12,28 @@ export function performApiCall(request, method, data, onSuccess, onFailed, onFin
   internalPerformApiCall(request, method, true, data, onSuccess, onFailed, onFinished);
 }
 
+export function getValidationErrors(response) {
+    var errors = [];
+    try {
+        var modelState = response.ModelState;
+        for (var key in modelState) {
+            if (modelState.hasOwnProperty(key)) {
+                for (var i = 0; i < modelState[key].length; i++) {
+                    var errorString = modelState[key][i];
+                    console.log(errorString);
+                    errors.push(errorString);
+                }
+            }
+        }
+    } catch (e) {
+        console.log(e);
+        errors.push("Unknown error!");
+    }
+
+    return errors;
+}
+
+
 function internalPerformApiCall(request, method, asJson, data, onSuccess, onFailed, onFinished = null) {
   // This function implements the actual api call
   const headers = new Headers();
