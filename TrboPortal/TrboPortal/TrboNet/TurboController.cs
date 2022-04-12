@@ -153,16 +153,17 @@ namespace TrboPortal.TrboNet
         private void QueryLocation(RequestMessage rm)
         {
             int deviceID = rm.deviceID;
-            logger.Info($"Getting location for device with deviceID {deviceID}");
+            int radioID = rm.radioID;
+            logger.Info($"Getting location for device with DeviceID: {deviceID}, RadioID: {radioID}");
             if (GetDeviceInfoByDeviceID(deviceID, out DeviceInfo deviceInfo) && deviceInfo?.Device != null)
             {
                 Connect();
                 trboNetClient.QueryDeviceLocation(deviceInfo.Device, "", out DeviceCommand cmd);
-                logger.Debug($"response from querydevicelocation {cmd}");
+                logger.Debug($"response from querydevicelocation DeviceID: {deviceID}, RadioID: {radioID}, cmd: {cmd}");
             }
             else
             {
-                logger.Warn($"Could not query location for device with deviceID {rm.deviceID}");
+                logger.Warn($"Could not query location for device with DeviceID: {deviceID}, RadioID: {radioID}");
             }
         }
 
