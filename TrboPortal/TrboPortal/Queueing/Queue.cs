@@ -151,5 +151,27 @@ namespace TrboPortal.TrboNet
                 }
             }
         }
+
+        /// <summary>
+        /// Add the entries to the end of the queue, if it is not already in the queue
+        /// </summary>
+        /// <param name="entries"></param>
+        public void AddIfNotExists(params T[] entries)
+        {
+            lock (queue)
+            {
+                foreach (T entry in entries)
+                {
+                    if (queue.Contains(entry))
+                    {
+                        logger.Info($"Did not add to the end of the queue, since it already is in the queue {entry}");
+                    } else
+                    {
+                        queue.AddLast(entry);
+                        logger.Debug($"Added to the end of the queue {entry}");
+                    }
+                }
+            }
+        }
     }
 }

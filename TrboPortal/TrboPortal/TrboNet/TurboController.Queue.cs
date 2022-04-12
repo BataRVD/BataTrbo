@@ -58,7 +58,7 @@ namespace TrboPortal.TrboNet
                 // if device in queue --> continue
 
                 deviceInfo.LastUpdateRequest = DateTime.Now;
-                pollQueue.Add(requestMessage);
+                pollQueue.AddIfNotExists(requestMessage);
             }
 
         }

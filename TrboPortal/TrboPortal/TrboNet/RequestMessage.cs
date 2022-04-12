@@ -23,5 +23,23 @@ namespace TrboPortal.TrboNet
         {
             return $"[{deviceID}] {Type.ToString()} - {TimeQueued.ToString()}";
         }
+
+        public override bool Equals(object obj)
+        {
+            //return (obj as RequestMessage)?.deviceID == this.deviceID;
+            if (obj != null)
+            {
+                if (obj is RequestMessage otherDevice)
+                {
+                    return otherDevice.deviceID == this.deviceID;
+                }
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.deviceID;
+        }
     }
 }
