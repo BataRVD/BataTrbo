@@ -27,7 +27,7 @@ namespace TrboPortal.TrboNet
 
         public override string ToString()
         {
-            return $"[{deviceID}][{radioID}] {Type.ToString()} - {TimeQueued.ToString()}";
+            return $"[Did:{deviceID}][Rid:{radioID}] {Type.ToString()} - {TimeQueued.ToString()}";
         }
 
         public override bool Equals(object obj)

@@ -148,7 +148,7 @@ namespace TrboPortal.TrboNet
                     int deviceID = radio.DeviceId;
                     if (GetDeviceInfoByDeviceID(deviceID, out DeviceInfo deviceInfo))
                     {
-                        logger.Info($"DeviceStateChanged [{deviceInfo.RadioID}]: {radio.State.ToString()}");
+                        logger.Info($"DeviceStateChanged [Did:{deviceID}][Rid:{deviceInfo.RadioID}]: {radio.State.ToString()}");
                         Device device = deviceInfo?.Device;
                         if (device != null)
                         {
@@ -253,6 +253,7 @@ namespace TrboPortal.TrboNet
                 logger.Info("DevicesChanged");
                 Device device = e.ChangedObject;
                 int deviceID = e.ChangedObject.ID;
+                logger.Info($"DevicesChanged, deviceID {deviceID}");
                 switch (e.Action)
                 {
                     case NS.Shared.Common.ChangeAction.Add:
@@ -282,7 +283,7 @@ namespace TrboPortal.TrboNet
             if (!devices.TryRemove(deviceID, out DeviceInfo deviceInfo))
             {
                 //TODO
-                logger.Error("PANIEK!");
+                logger.Error($"PANIEK! DeviceID {deviceID}");
                 return;
             }
             logger.Info($"Remove device for deviceID {deviceID} radio {deviceInfo?.RadioID}");
