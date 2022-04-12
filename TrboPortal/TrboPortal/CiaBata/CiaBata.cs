@@ -38,7 +38,7 @@ namespace TrboPortal.CiaBata
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var result = await httpClient.PostAsync(url, content);
 
-                logger.Info("PostObject :" + result.StatusCode);
+                logger.Debug("PostGpsLocation result:" + result.StatusCode);
 
                 if (result.StatusCode != System.Net.HttpStatusCode.OK)
                 {
@@ -86,7 +86,7 @@ namespace TrboPortal.CiaBata
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var result = await httpClient.PostAsync(url, content);
 
-                logger.Info("PostObject :" + result.StatusCode);
+                logger.Debug("PostDeviceLifeSign result :" + result.StatusCode);
                 
                 if (result.StatusCode != System.Net.HttpStatusCode.OK)
                 {
