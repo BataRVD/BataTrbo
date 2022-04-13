@@ -27,7 +27,11 @@ namespace TrboPortal.Controllers
         public static async Task<ICollection<GpsMeasurement>> GetGpsMeasurementsAsync(IEnumerable<int> ids,
             DateTime? from, DateTime? through)
         {
-            var hasNoIds = (ids == null || !ids.Any());
+            if (ids == null)
+            {
+                ids = Enumerable.Empty<int>();
+            }
+            var hasNoIds = !ids.Any();
             using (var context = new DatabaseContext())
             {
                 var dbResults = await context.GpsEntries

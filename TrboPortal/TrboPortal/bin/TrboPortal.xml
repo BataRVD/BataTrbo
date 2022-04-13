@@ -648,6 +648,12 @@
             </summary>
             <param name="entries"></param>
         </member>
+        <member name="M:TrboPortal.TrboNet.Queue`1.AddIfNotExists(`0[])">
+            <summary>
+            Add the entries to the end of the queue, if it is not already in the queue
+            </summary>
+            <param name="entries"></param>
+        </member>
         <member name="T:TrboPortal.TrboNet.TurboController">
             <summary>
             Storing and retrieving settings

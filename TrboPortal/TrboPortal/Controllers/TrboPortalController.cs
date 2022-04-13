@@ -20,7 +20,7 @@ namespace TrboPortal.Controllers
         /// <param name="radioIds">Tags to filter by</param>
         /// <returns>successful operation</returns>
         [HttpGet, Route("radio")]
-        public Task<ICollection<Model.Api.Radio>> GetRadios([FromUri] IEnumerable<int> radioIds)
+        public Task<ICollection<Model.Api.Radio>> GetRadios([FromUri] IEnumerable<int> radioIds = null)
         {
             return Task.FromResult<ICollection<Model.Api.Radio>>(TurboController.Instance.GetRadioSettings(radioIds));
         }
@@ -43,7 +43,7 @@ namespace TrboPortal.Controllers
         /// <param name="ids">Radios</param>
         /// <returns>successful operation</returns>
         [HttpGet, Route("gps")]
-        public Task<ICollection<GpsMeasurement>> GetMostRecentGps([FromUri] IEnumerable<int> ids)
+        public Task<ICollection<GpsMeasurement>> GetMostRecentGps([FromUri] IEnumerable<int> ids = null)
         {
             return TrboPortalHelper.GetGpsMeasurementsAsync(ids, null, null);
         }
@@ -54,7 +54,7 @@ namespace TrboPortal.Controllers
         /// <param name="through">Through TimeStamp for GPS measurements to get</param>
         /// <returns>successful operation</returns>
         [HttpGet, Route("gps/history")]
-        public Task<ICollection<GpsMeasurement>> GetGpsHistory([FromUri] IEnumerable<int> id, [FromUri] string from, [FromUri] string through)
+        public Task<ICollection<GpsMeasurement>> GetGpsHistory([FromUri] IEnumerable<int> id = null, [FromUri] string from = null, [FromUri] string through = null)
         {
             var f = DateTimeMapper.ToDateTime(from);
             var t = DateTimeMapper.ToDateTime(through);
@@ -72,7 +72,7 @@ namespace TrboPortal.Controllers
         /// <param name="id">Radios</param>
         /// <returns>successful operation</returns>
         [HttpGet, Route("gps/update")]
-        public Task RequestGpsUpdate([FromUri] IEnumerable<int> radioIds)
+        public Task RequestGpsUpdate([FromUri] IEnumerable<int> radioIds) 
         {
             if (radioIds == null || radioIds.Count() == 0)
             {
@@ -99,7 +99,7 @@ namespace TrboPortal.Controllers
         /// <param name="id">Tags to filter by</param>
         /// <returns>successful operation</returns>
         [HttpGet, Route("system/clearQueue")]
-        public Task ClearMessageQueue([FromUri] IEnumerable<int> id)
+        public Task ClearMessageQueue([FromUri] IEnumerable<int> id = null)
         {
             return Task.Run(() => TurboController.Instance.ClearRequestQueue(id));
         }
@@ -139,7 +139,7 @@ namespace TrboPortal.Controllers
         /// <param name="through">DateTime Through filter of logging to return</param>
         /// <returns>Blaat</returns>
         [HttpGet, Route("system/logs")]
-        public Task<ICollection<LogMessage>> GetLogging([Required] string loglevel, [FromUri] string from = null, [FromUri] string through = null)
+        public Task<ICollection<LogMessage>> GetLogging([Required] string loglevel = "Info", [FromUri] string from = null, [FromUri] string through = null)
         {
             if (string.IsNullOrEmpty(loglevel))
             {

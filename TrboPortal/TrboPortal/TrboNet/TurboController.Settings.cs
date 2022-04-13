@@ -137,8 +137,12 @@ namespace TrboPortal.TrboNet
 
         public List<Radio> GetRadioSettings(IEnumerable<int> radioIds)
         {
+            if (radioIds == null)
+            {
+                radioIds = Enumerable.Empty<int>();
+            }
             var selectedRadios =
-                radios.Values.Where(r => (radioIds == null || !radioIds.Any()) || radioIds.Contains(r.RadioId));
+                radios.Values.Where(r => (!radioIds.Any()) || radioIds.Contains(r.RadioId));
             return new List<Radio>(selectedRadios);
         }
     }
