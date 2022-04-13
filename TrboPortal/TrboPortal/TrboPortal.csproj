@@ -101,6 +101,9 @@
     <PackageReference Include="WebGrease" version="1.6.0" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\ApiController.cs" />
+    <Compile Include="Api\ApiHelper.cs" />
+    <Compile Include="Api\ValuesController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -144,11 +147,8 @@
     <Compile Include="Model\Api\MessageQueueItem.cs" />
     <Compile Include="Model\Api\Radio.cs" />
     <Compile Include="Model\Api\SystemSettings.cs" />
-    <Compile Include="Controllers\TrboPortalController.cs" />
-    <Compile Include="Controllers\TrboPortalHelper.cs" />
     <Compile Include="Model\Api\LogMessage.cs" />
     <Compile Include="Model\Api\TurboNetSettings.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

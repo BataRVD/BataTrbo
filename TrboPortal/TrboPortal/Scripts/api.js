@@ -1,15 +1,23 @@
+// Base URL for API. If we ever going to make a v2 we'll just move it then.
+const apiBase = '/api/v1'
+
+window.getApiBaseUrl = function getApiBaseUrl() {
+    return apiBase;
+}
+
 /**
  * Generic method for performing an api call
  *
- * @param request:      The request object
+ * @param request:      The request url used (not prepended with base url).
  * @param method:       The method to use (GET, POST, PUT, DELETE)
  * @param data:         The data to send
  * @param onSuccess:    The callback to call on success
  * @param onFailed:     The callback to call on error
  * @param onFinished:   (Optional) callback to call after request finished, always called.
  */
-export function performApiCall(request, method, data, onSuccess, onFailed, onFinished = null) {
-  internalPerformApiCall(request, method, true, data, onSuccess, onFailed, onFinished);
+export function performApiCall(request_url, method, data, onSuccess, onFailed, onFinished = null) {
+    const request = new Request(`${apiBase}/${request_url}`);
+    internalPerformApiCall(request, method, true, data, onSuccess, onFailed, onFinished);
 }
 
 export function getValidationErrors(response) {

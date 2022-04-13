@@ -18,8 +18,7 @@ $("#SettingsForm").submit(function (e) {
  * Perform GET request to get values from server
  * */
 function RefreshData() {
-    const request = new Request("/TrboPortal/v1/system/settings");
-    api.performApiCall(request, 'GET', null,
+    api.performApiCall("system/settings", 'GET', null,
         (response) => response.json().then(json => {
             processGetResponse(json);
             $('#preloader').hide();
@@ -80,8 +79,7 @@ function Post() {
     //TODO Validation
     const data = getJsonFromForm();
 
-    const request = new Request("/TrboPortal/v1/system/settings");
-    api.performApiCall(request, 'PATCH', data,
+    api.performApiCall("system/settings", request, 'PATCH', data,
         (response) => {
             console.log("Patch successfull!")
             console.log(response);

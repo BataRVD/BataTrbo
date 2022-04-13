@@ -35,7 +35,6 @@
        data-page-list="[all]"
        data-show-footer="true"
        data-side-pagination="client"
-       data-url="/TrboPortal/v1/radio"
        data-response-handler="responseHandler">
 </table>
 
@@ -89,6 +88,8 @@
 
     function initTable() {
         $table.bootstrapTable('destroy').bootstrapTable({
+            // Defines the URL to get table data from.
+            url: `${getApiBaseUrl()}/radio`,
             height: 800,
             locale: 'en-US',
             columns: [

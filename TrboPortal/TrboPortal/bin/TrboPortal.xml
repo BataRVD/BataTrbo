@@ -4,6 +4,65 @@
         <name>TrboPortal</name>
     </assembly>
     <members>
+        <member name="M:TrboPortal.Controllers.ApiController.GetRadios(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>List of all radios</summary>
+            <param name="radioIds">Tags to filter by</param>
+            <returns>successful operation</returns>
+        </member>
+        <member name="M:TrboPortal.Controllers.ApiController.UpdateRadioSettings(System.Collections.Generic.IEnumerable{TrboPortal.Model.Api.Radio})">
+            <summary>Update gps mode and interval radios</summary>
+            <param name="radioSettings">Radios to update</param>
+        </member>
+        <member name="M:TrboPortal.Controllers.ApiController.GetMostRecentGps(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>Returns last known GPS position of radio(s)</summary>
+            <param name="ids">Radios</param>
+            <returns>successful operation</returns>
+        </member>
+        <member name="M:TrboPortal.Controllers.ApiController.GetGpsHistory(System.Collections.Generic.IEnumerable{System.Int32},System.String,System.String)">
+            <summary>Returns last known GPS position of radio(s)</summary>
+            <param name="id">Radios</param>
+            <param name="from">From TimeStamp for GPS measurements to get</param>
+            <param name="through">Through TimeStamp for GPS measurements to get</param>
+            <returns>successful operation</returns>
+        </member>
+        <member name="M:TrboPortal.Controllers.ApiController.RequestGpsUpdate(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>Request GPS opdate for radio(s)</summary>
+            <param name="id">Radios</param>
+            <returns>successful operation</returns>
+        </member>
+        <member name="M:TrboPortal.Controllers.ApiController.GetMessageQueue">
+            <summary>TrboNet message queue</summary>
+            <returns>Messages in TrboNet queue</returns>
+        </member>
+        <member name="M:TrboPortal.Controllers.ApiController.ClearMessageQueue(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>List of all radios</summary>
+            <param name="id">Tags to filter by</param>
+            <returns>successful operation</returns>
+        </member>
+        <member name="M:TrboPortal.Controllers.ApiController.GetSystemSettings">
+            <summary>System settings</summary>
+            <returns>Blaat</returns>
+        </member>
+        <member name="M:TrboPortal.Controllers.ApiController.SetSystemSettings(TrboPortal.Model.Api.SystemSettings)">
+            <summary>Update System settings</summary>
+            <param name="settings">System settings to store</param>
+        </member>
+        <member name="M:TrboPortal.Controllers.ApiController.GetLogging(System.String,System.String,System.String)">
+            <summary>System logging</summary>
+            <param name="loglevel">Log level filter of logging to return</param>
+            <param name="from">DateTime From filter of logging to return</param>
+            <param name="through">DateTime Through filter of logging to return</param>
+            <returns>Blaat</returns>
+        </member>
+        <member name="M:TrboPortal.Controllers.TrboPortalHelper.GetGpsMeasurementsAsync(System.Collections.Generic.IEnumerable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Returns a list of GpsMeasurements for specified devices. 
+            </summary>
+            <param name="ids">List of DeviceIds</param>
+            <param name="from">Optional from filter</param>
+            <param name="through">Optional through filter</param>
+            <returns></returns>
+        </member>
         <member name="M:TrboPortal.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
             <summary>
             Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
@@ -537,65 +596,6 @@
              <summary>
              Model used for database storage, when changing please look into the default migration options of entityframework
             </summary>
-        </member>
-        <member name="M:TrboPortal.Controllers.TrboPortalController.GetRadios(System.Collections.Generic.IEnumerable{System.Int32})">
-            <summary>List of all radios</summary>
-            <param name="radioIds">Tags to filter by</param>
-            <returns>successful operation</returns>
-        </member>
-        <member name="M:TrboPortal.Controllers.TrboPortalController.UpdateRadioSettings(System.Collections.Generic.IEnumerable{TrboPortal.Model.Api.Radio})">
-            <summary>Update gps mode and interval radios</summary>
-            <param name="radioSettings">Radios to update</param>
-        </member>
-        <member name="M:TrboPortal.Controllers.TrboPortalController.GetMostRecentGps(System.Collections.Generic.IEnumerable{System.Int32})">
-            <summary>Returns last known GPS position of radio(s)</summary>
-            <param name="ids">Radios</param>
-            <returns>successful operation</returns>
-        </member>
-        <member name="M:TrboPortal.Controllers.TrboPortalController.GetGpsHistory(System.Collections.Generic.IEnumerable{System.Int32},System.String,System.String)">
-            <summary>Returns last known GPS position of radio(s)</summary>
-            <param name="id">Radios</param>
-            <param name="from">From TimeStamp for GPS measurements to get</param>
-            <param name="through">Through TimeStamp for GPS measurements to get</param>
-            <returns>successful operation</returns>
-        </member>
-        <member name="M:TrboPortal.Controllers.TrboPortalController.RequestGpsUpdate(System.Collections.Generic.IEnumerable{System.Int32})">
-            <summary>Request GPS opdate for radio(s)</summary>
-            <param name="id">Radios</param>
-            <returns>successful operation</returns>
-        </member>
-        <member name="M:TrboPortal.Controllers.TrboPortalController.GetMessageQueue">
-            <summary>TrboNet message queue</summary>
-            <returns>Messages in TrboNet queue</returns>
-        </member>
-        <member name="M:TrboPortal.Controllers.TrboPortalController.ClearMessageQueue(System.Collections.Generic.IEnumerable{System.Int32})">
-            <summary>List of all radios</summary>
-            <param name="id">Tags to filter by</param>
-            <returns>successful operation</returns>
-        </member>
-        <member name="M:TrboPortal.Controllers.TrboPortalController.GetSystemSettings">
-            <summary>System settings</summary>
-            <returns>Blaat</returns>
-        </member>
-        <member name="M:TrboPortal.Controllers.TrboPortalController.SetSystemSettings(TrboPortal.Model.Api.SystemSettings)">
-            <summary>Update System settings</summary>
-            <param name="settings">System settings to store</param>
-        </member>
-        <member name="M:TrboPortal.Controllers.TrboPortalController.GetLogging(System.String,System.String,System.String)">
-            <summary>System logging</summary>
-            <param name="loglevel">Log level filter of logging to return</param>
-            <param name="from">DateTime From filter of logging to return</param>
-            <param name="through">DateTime Through filter of logging to return</param>
-            <returns>Blaat</returns>
-        </member>
-        <member name="M:TrboPortal.Controllers.TrboPortalHelper.GetGpsMeasurementsAsync(System.Collections.Generic.IEnumerable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
-            <summary>
-            Returns a list of GpsMeasurements for specified devices. 
-            </summary>
-            <param name="ids">List of DeviceIds</param>
-            <param name="from">Optional from filter</param>
-            <param name="through">Optional through filter</param>
-            <returns></returns>
         </member>
         <member name="M:TrboPortal.Mappers.CiaBataMapper.ToGpsLocation(TrboPortal.Model.Api.GpsMeasurement)">
             <summary>

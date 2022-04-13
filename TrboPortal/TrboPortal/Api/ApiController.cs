@@ -13,8 +13,8 @@ using GpsMeasurement = TrboPortal.Model.Api.GpsMeasurement;
 
 namespace TrboPortal.Controllers
 {
-    [RoutePrefix("TrboPortal/v1")]
-    public class TrboPortalController : ApiController
+    [RoutePrefix("api/v1")]
+    public class ApiController : System.Web.Http.ApiController
     {
         /// <summary>List of all radios</summary>
         /// <param name="radioIds">Tags to filter by</param>
