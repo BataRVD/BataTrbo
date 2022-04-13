@@ -597,6 +597,13 @@
             <param name="through">Optional through filter</param>
             <returns></returns>
         </member>
+        <member name="M:TrboPortal.Mappers.CiaBataMapper.ToGpsLocation(TrboPortal.Model.Api.GpsMeasurement)">
+            <summary>
+            Maps API GpsMeasurement to CiaBata GPSLocation
+            </summary>
+            <param name="gpsMeasurement"></param>
+            <returns></returns>
+        </member>
         <member name="M:TrboPortal.TrboNet.Queue`1.Remove(`0)">
             <summary>
             Remove all occurences of device from the queue

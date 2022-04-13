@@ -11,6 +11,7 @@ namespace TrboPortal.Mappers
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
+        # region ==================== API -> DB Mappers ====================
         public static Model.Db.Radio Map(Radio radio)
         {
             Model.Db.Radio radioSettings = new Model.Db.Radio
@@ -39,6 +40,9 @@ namespace TrboPortal.Mappers
             return entry;
         }
 
+        #endregion ==================== API -> DB Mappers ====================
+
+        #region ==================== DB -> API Mappers ====================
 
         public static Radio Map(Model.Db.Radio radioSettings)
         {
@@ -90,5 +94,8 @@ namespace TrboPortal.Mappers
 
             return systemSettings;
         }
+
+        #endregion ==================== DB -> API Mappers ====================
+
     }
 }

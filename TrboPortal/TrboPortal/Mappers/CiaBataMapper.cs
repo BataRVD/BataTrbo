@@ -6,8 +6,11 @@ namespace TrboPortal.Mappers
 {
     public static class CiaBataMapper
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
-
+        /// <summary>
+        /// Maps API GpsMeasurement to CiaBata GPSLocation
+        /// </summary>
+        /// <param name="gpsMeasurement"></param>
+        /// <returns></returns>
         public static GPSLocation ToGpsLocation(GpsMeasurement gpsMeasurement)
         {
             return new GPSLocation
