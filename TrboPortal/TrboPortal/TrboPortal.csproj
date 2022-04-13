@@ -223,6 +223,7 @@
     <Content Include="Scripts\api.js" />
     <Content Include="Views\Home\Radios.cshtml" />
     <Content Include="Views\Home\Playground.cshtml" />
+    <Content Include="Views\Home\MessageQueue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

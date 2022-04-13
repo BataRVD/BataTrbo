@@ -22,6 +22,13 @@ namespace TrboPortal.Model.Api
             ViewBag.Title = "Radios";
             return View();
         }
+
+        public ActionResult MessageQueue()
+        {
+            ViewBag.Title = "MessageQueue";
+            return View();
+        }
+
         public ActionResult Playground()
         {
             ViewBag.Title = "Playground";

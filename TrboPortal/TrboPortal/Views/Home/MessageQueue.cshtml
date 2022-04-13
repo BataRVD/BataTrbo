@@ -89,53 +89,22 @@
     function initTable() {
         $table.bootstrapTable('destroy').bootstrapTable({
             // Defines the URL to get table data from.
-            url: `${getApiBaseUrl()}/radio`,
+            url: `${getApiBaseUrl()}/system/queue`,
             height: 800,
             locale: 'en-US',
             columns: [
-                [{
-                    field: 'state',
-                    checkbox: true,
-                    rowspan: 2,
-                    align: 'center',
-                    valign: 'middle'
-                },
                 {
-                    title: 'Radio ID',
-                    field: 'radioId',
-                    rowspan: 2,
+                    title: 'Timestamp',
+                    field: 'Timestamp',
                     align: 'center',
                     valign: 'middle',
                     sortable: true,
                 }, {
-                    title: 'Item Detail',
-                    colspan: 4,
-                    align: 'center'
-                }],
-                [{
-                    field: 'name',
-                    title: 'Radio Name',
+                    title: 'Radio ID',
+                    field: 'Radio ID',
+                    align: 'center',
                     sortable: true,
-                    align: 'center'
-                }, {
-                    field: 'GpsMode',
-                    title: 'GPS Mode',
-                    sortable: true,
-                    align: 'center',
-                }, {
-                    field: 'requestInterval',
-                    title: 'Request Interval',
-                    align: 'center',
-                    clickToSelect: false,
-                    events: window.operateEvents,
-                }, {
-                    field: 'operate',
-                    title: 'Actions',
-                    align: 'center',
-                    clickToSelect: false,
-                    events: window.operateEvents,
-                    formatter: operateFormatter
-                }]
+                }
             ]
         })
         $table.on('check.bs.table uncheck.bs.table ' +
