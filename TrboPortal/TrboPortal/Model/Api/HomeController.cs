@@ -17,6 +17,17 @@ namespace TrboPortal.Model.Api
             return View();
         }
 
+        public ActionResult Radios()
+        {
+            ViewBag.Title = "Radios";
+            return View();
+        }
+        public ActionResult Playground()
+        {
+            ViewBag.Title = "Playground";
+            return View();
+        }
+
         public ActionResult Swagger()
         {
             ViewBag.Title = "Swagger";

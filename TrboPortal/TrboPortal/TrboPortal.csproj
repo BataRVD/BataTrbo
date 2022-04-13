@@ -169,7 +169,6 @@
     <Compile Include="TrboNet\Client\TrboTestClient.cs" />
     <Compile Include="TrboNet\DeviceInfo.cs" />
     <Compile Include="Queueing\Queue.cs" />
-    <Compile Include="TrboNet\Radio.cs" />
     <Compile Include="TrboNet\RequestMessage.cs" />
     <Compile Include="TrboNet\TrboNetInterface.cs" />
     <Compile Include="TrboNet\TurboController.Settings.cs" />
@@ -184,20 +183,10 @@
     </Content>
     <Content Include="Content\3rdparty\bootstrap\bootstrap-grid.css" />
     <Content Include="Content\3rdparty\bootstrap\bootstrap-grid.min.css" />
-    <Content Include="Content\3rdparty\bootstrap\bootstrap-grid.rtl.css" />
-    <Content Include="Content\3rdparty\bootstrap\bootstrap-grid.rtl.min.css" />
     <Content Include="Content\3rdparty\bootstrap\bootstrap-reboot.css" />
     <Content Include="Content\3rdparty\bootstrap\bootstrap-reboot.min.css" />
-    <Content Include="Content\3rdparty\bootstrap\bootstrap-reboot.rtl.css" />
-    <Content Include="Content\3rdparty\bootstrap\bootstrap-reboot.rtl.min.css" />
-    <Content Include="Content\3rdparty\bootstrap\bootstrap-utilities.css" />
-    <Content Include="Content\3rdparty\bootstrap\bootstrap-utilities.min.css" />
-    <Content Include="Content\3rdparty\bootstrap\bootstrap-utilities.rtl.css" />
-    <Content Include="Content\3rdparty\bootstrap\bootstrap-utilities.rtl.min.css" />
     <Content Include="Content\3rdparty\bootstrap\bootstrap.css" />
     <Content Include="Content\3rdparty\bootstrap\bootstrap.min.css" />
-    <Content Include="Content\3rdparty\bootstrap\bootstrap.rtl.css" />
-    <Content Include="Content\3rdparty\bootstrap\bootstrap.rtl.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -239,35 +228,21 @@
     <Content Include="NLog.config" />
     <Content Include="Content\3rdparty\bootstrap\bootstrap-grid.css.map" />
     <Content Include="Content\3rdparty\bootstrap\bootstrap-grid.min.css.map" />
-    <Content Include="Content\3rdparty\bootstrap\bootstrap-grid.rtl.css.map" />
-    <Content Include="Content\3rdparty\bootstrap\bootstrap-grid.rtl.min.css.map" />
     <Content Include="Content\3rdparty\bootstrap\bootstrap-reboot.css.map" />
     <Content Include="Content\3rdparty\bootstrap\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\3rdparty\bootstrap\bootstrap-reboot.rtl.css.map" />
-    <Content Include="Content\3rdparty\bootstrap\bootstrap-reboot.rtl.min.css.map" />
-    <Content Include="Content\3rdparty\bootstrap\bootstrap-utilities.css.map" />
-    <Content Include="Content\3rdparty\bootstrap\bootstrap-utilities.min.css.map" />
-    <Content Include="Content\3rdparty\bootstrap\bootstrap-utilities.rtl.css.map" />
-    <Content Include="Content\3rdparty\bootstrap\bootstrap-utilities.rtl.min.css.map" />
     <Content Include="Content\3rdparty\bootstrap\bootstrap.css.map" />
     <Content Include="Content\3rdparty\bootstrap\bootstrap.min.css.map" />
-    <Content Include="Content\3rdparty\bootstrap\bootstrap.rtl.css.map" />
-    <Content Include="Content\3rdparty\bootstrap\bootstrap.rtl.min.css.map" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
     <None Include="Properties\PublishProfiles\IISProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\IISProfile2.pubxml" />
     <Content Include="Scripts\3rdparty\bootstrap\bootstrap.bundle.js.map" />
     <Content Include="Scripts\3rdparty\bootstrap\bootstrap.bundle.min.js.map" />
-    <Content Include="Scripts\3rdparty\bootstrap\bootstrap.esm.js.map" />
-    <Content Include="Scripts\3rdparty\bootstrap\bootstrap.esm.min.js.map" />
     <Content Include="Scripts\3rdparty\bootstrap\bootstrap.js.map" />
     <Content Include="Scripts\3rdparty\bootstrap\bootstrap.min.js.map" />
     <None Include="Scripts\3rdparty\jquery\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\3rdparty\bootstrap\bootstrap.bundle.js" />
     <Content Include="Scripts\3rdparty\bootstrap\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\3rdparty\bootstrap\bootstrap.esm.js" />
-    <Content Include="Scripts\3rdparty\bootstrap\bootstrap.esm.min.js" />
     <Content Include="Scripts\3rdparty\bootstrap\bootstrap.js" />
     <Content Include="Scripts\3rdparty\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\3rdparty\jquery\jquery-3.4.1.js" />
@@ -276,6 +251,7 @@
     <Content Include="Scripts\3rdparty\jquery\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\3rdparty\jquery\jquery-3.6.0.min.js" />
     <Content Include="Scripts\3rdparty\modernizr-2.8.3.js" />
+    <Content Include="Scripts\radios.js" />
     <Content Include="Scripts\settings.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -295,6 +271,8 @@
     <Content Include="Views\Home\Swagger.cshtml" />
     <Content Include="Views\Home\Settings.cshtml" />
     <Content Include="Scripts\api.js" />
+    <Content Include="Views\Home\Radios.cshtml" />
+    <Content Include="Views\Home\Playground.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -28,22 +28,17 @@
             <ul class="navbar-nav mr-auto">
                 <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 <li>@Html.ActionLink("Settings", "Settings", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Radios", "Radios", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 <li>@Html.ActionLink("Logs", "Logs", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 <li>@Html.ActionLink("Swagger", "Swagger", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>
-                    <a class="nav-link" href="/swagger/ui/index">Swagger (Redirect)</a>
-                </li>
-                <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, new { @class = "nav-link" })</li>
-
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                        Dropdown
+                        More
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="/swagger/ui/index">Swagger (Redirect)</a>
+                        @Html.ActionLink("API", "Index", "Help", new { area = "" }, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Playground", "Playground", "Home", new { area = "" }, new { @class = "dropdown-item" })
                     </div>
                 </li>
             </ul>
