@@ -1,6 +1,8 @@
 ﻿namespace TrboPortal.Model.Api
 {
-    
+    /// <summary>
+    /// Class with (only) settings regarding this radio
+    /// </summary>
     public partial class Radio
     {
         [Newtonsoft.Json.JsonProperty("radioId", Required = Newtonsoft.Json.Required.Always)]
@@ -20,8 +22,9 @@
 
         public Radio()
         {
-
+            // Constructor needed for (de)serialisation.
         }
+
         public Radio(int radioID, GpsModeEnum defaultGpsMode, int defaultInterval) : this()
         {
             Name = $"Radio {radioID}";
