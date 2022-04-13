@@ -18,6 +18,16 @@
         [Newtonsoft.Json.JsonProperty("requestInterval", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? RequestInterval { get; set; }
 
+        public Radio()
+        {
 
+        }
+        public Radio(int radioID, GpsModeEnum defaultGpsMode, int defaultInterval) : this()
+        {
+            Name = $"Radio {radioID}";
+            RadioId = radioID;
+            GpsMode = defaultGpsMode;
+            RequestInterval = defaultInterval;
+        }
     }
 }
