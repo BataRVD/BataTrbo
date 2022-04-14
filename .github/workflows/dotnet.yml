@@ -50,6 +50,8 @@ jobs:
           path: C:\inetpub\wwwroot\
       # Ensure proper rights (subinacl.exe /service w3svc  /grant="Network Service"=PTO)
       # Source: http://woshub.com/set-permissions-on-windows-service/#h2_2
-      - name: Restart IIS
-        run: NET STOP w3svc "&" NET START w3svc
+      - name: Stop IIS
+        run: NET STOP w3svc
+      - name: Start IIS
+        run: NET START w3svc
       
