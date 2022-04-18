@@ -326,20 +326,23 @@ namespace TrboPortal.TrboNet
                     oldInfo.UpdateDevice(device);
                     return oldInfo;
                 });
-
-                var radio = new Model.Db.Radio
+                
+                // Add RadioSettings if not already exists.
+                if (!GetRadioByRadioID(radioID, out Radio radio))
                 {
-                    RadioId = radioID,
-                    Name = $"Radio - {radioID}",
-                    GpsMode = defaultRequestInterval.ToString(),
-                    RequestInterval = defaultRequestInterval
-                };
-
-                var result = Repository.InsertOrUpdateRadios(new List<Radio> { radio }).Result;
-                // Assume default settings were added if insert or update returns context modification
-                if (result != 0)
-                {
-                    logger.Info($"Created standard settings for Radio with radioID {radioID}");
+                    radio = new Model.Db.Radio
+                    {
+                        RadioId = radioID,
+                        Name = $"Radio - {radioID}",
+                        GpsMode = defaultGpsMode.ToString(),
+                        RequestInterval = defaultRequestInterval
+                    };
+                    var result = Repository.InsertOrUpdateRadios(new List<Radio> { radio }).Result;
+                    // Assume default settings were added if insert or update returns context modification
+                    if (result != 0)
+                    {
+                        logger.Info($"Created standard settings for Radio with radioID {radioID}");
+                    }
                 }
             }
             else
