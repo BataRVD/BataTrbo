@@ -46,22 +46,25 @@ namespace TrboPortal.Mappers
 
         public static Radio Map(Model.Db.Radio radioSettings)
         {
-            if (!Enum.TryParse(radioSettings.GpsMode, true, out GpsModeEnum gpsMode))
-            {
-                gpsMode = GpsModeEnum.None;
-                logger.Warn($"Could not parse GpsEnum value '{radioSettings.GpsMode}', defaulted to {gpsMode.ToString()}");
-            }
-
             Radio radio = new Radio
             {
                 Name = radioSettings.Name,
                 RadioId = radioSettings.RadioId,
-                GpsMode = gpsMode,
+                GpsMode = MapGpsMode(radioSettings.GpsMode),
                 RequestInterval = radioSettings.RequestInterval
-                
             };
 
             return radio;
+        }
+
+        public static GpsModeEnum MapGpsMode(string gpsModeString)
+        {
+            if (!Enum.TryParse(gpsModeString, true, out GpsModeEnum gpsMode))
+            {
+                gpsMode = GpsModeEnum.None;
+                logger.Warn($"Could not parse GpsEnum value '{gpsModeString}', defaulted to {gpsMode}");
+            }
+            return gpsMode;
         }
 
         internal static SystemSettings Map(Settings settings)

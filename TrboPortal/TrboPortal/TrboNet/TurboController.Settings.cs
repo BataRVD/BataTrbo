@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
-using TrboPortal.Mappers;
-using TrboPortal.Model;
 using TrboPortal.Model.Api;
 using TrboPortal.Model.Db;
-using Radio = TrboPortal.Model.Api.Radio;
+using Radio = TrboPortal.Model.Db.Radio;
 
 namespace TrboPortal.TrboNet
 {
@@ -26,10 +20,6 @@ namespace TrboPortal.TrboNet
         private static string turboNetPassword;
         private static GpsModeEnum defaultGpsMode;
         private static int defaultRequestInterval;
-
-        // In memory state of the server
-        // This is a dictionary with RadioID --> Settings
-        private static ConcurrentDictionary<int, Radio> radios = new ConcurrentDictionary<int, Radio>();
 
         private static void LoadDefaultSettings()
         {
@@ -50,7 +40,6 @@ namespace TrboPortal.TrboNet
         {
             try
             {
-                await LoadRadioSettingsFromDatabaseAsync();
                 await LoadGenericSettingsFromDatabaseAsync();
             }
             catch (Exception ex)
@@ -100,50 +89,22 @@ namespace TrboPortal.TrboNet
             }
         }
 
-
-        public async Task LoadRadioSettingsFromDatabaseAsync()
-        {
-            try
-            {
-                Dictionary<int, Radio> radiosFromSettings;
-                using (var context = new DatabaseContext())
-                {
-                    var dbSettings = await context.RadioSettings.ToListAsync(); // Execute query
-                    radiosFromSettings = dbSettings
-                        .Select(rs => DatabaseMapper.Map(rs))
-                        .ToDictionary(r => r.RadioId, r => r);
-                }
-                foreach (var radio in radiosFromSettings)
-                {
-                    radios.AddOrUpdate(radio.Key, radio.Value, (rid, oldvalue) => { return radio.Value; });
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, "Could not load the radio settings from the database");
-            }
-        }
-
         private bool GetRadioByRadioID(int radioID, out Radio radio)
         {
-            bool radioFound = radios.TryGetValue(radioID, out radio);
-            if (!radioFound)
-            {
-                logger.Warn($"Can't find radio settings for radioID {radioID}");
-            }
-
-            return radioFound;
+            radio = Repository.GetRadioById(radioID).Result;
+            return radio != null;
         }
 
-        public List<Radio> GetRadioSettings(IEnumerable<int> radioIds)
+        /*public List<Radio> GetRadioSettings(IEnumerable<int> radioIds)
         {
             if (radioIds == null)
             {
                 radioIds = Enumerable.Empty<int>();
             }
+            return Repository.GetRadiosById(radioIds);
             var selectedRadios =
                 radios.Values.Where(r => (!radioIds.Any()) || radioIds.Contains(r.RadioId));
             return new List<Radio>(selectedRadios);
-        }
+        }*/
     }
 }

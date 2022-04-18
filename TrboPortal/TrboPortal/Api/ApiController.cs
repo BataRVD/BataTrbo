@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.ModelBinding;
 using TrboPortal.Mappers;
 using TrboPortal.Model.Api;
 using TrboPortal.TrboNet;
@@ -20,9 +23,15 @@ namespace TrboPortal.Controllers
         /// <param name="radioIds">Tags to filter by</param>
         /// <returns>successful operation</returns>
         [HttpGet, Route("radio")]
-        public Task<ICollection<Model.Api.Radio>> GetRadios([FromUri] IEnumerable<int> radioIds = null)
+        public Task<IEnumerable<Model.Api.Radio>> GetRadios([ModelBinder(typeof(CommaDelimitedArrayModelBinder))] int[] radioIds = null)
         {
-            return Task.FromResult<ICollection<Model.Api.Radio>>(TurboController.Instance.GetRadioSettings(radioIds));
+            return ApiHelper.GetRadioSettingsAsync(radioIds);
+        }
+
+        [HttpDelete, Route("radio")]
+        public Task DeleteRadios([ModelBinder(typeof(CommaDelimitedArrayModelBinder))]int[] radioIds = null)
+        {
+            return ApiHelper.DeleteRadioSettings(radioIds);
         }
 
         /// <summary>Update gps mode and interval radios</summary>
@@ -36,16 +45,16 @@ namespace TrboPortal.Controllers
                 throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, message));
             }
 
-            return TrboPortalHelper.UpdateRadioSettingsAsync(radioSettings);
+            return ApiHelper.UpdateRadioSettingsAsync(radioSettings);
         }
 
         /// <summary>Returns last known GPS position of radio(s)</summary>
         /// <param name="ids">Radios</param>
         /// <returns>successful operation</returns>
         [HttpGet, Route("gps")]
-        public Task<ICollection<GpsMeasurement>> GetMostRecentGps([FromUri] IEnumerable<int> ids = null)
+        public Task<ICollection<GpsMeasurement>> GetMostRecentGps([ModelBinder(typeof(CommaDelimitedArrayModelBinder))]int[]  ids = null)
         {
-            return TrboPortalHelper.GetGpsMeasurementsAsync(ids, null, null);
+            return ApiHelper.GetGpsMeasurementsAsync(ids, null, null);
         }
 
         /// <summary>Returns last known GPS position of radio(s)</summary>
@@ -54,7 +63,7 @@ namespace TrboPortal.Controllers
         /// <param name="through">Through TimeStamp for GPS measurements to get</param>
         /// <returns>successful operation</returns>
         [HttpGet, Route("gps/history")]
-        public Task<ICollection<GpsMeasurement>> GetGpsHistory([FromUri] IEnumerable<int> id = null, [FromUri] string from = null, [FromUri] string through = null)
+        public Task<ICollection<GpsMeasurement>> GetGpsHistory([ModelBinder(typeof(CommaDelimitedArrayModelBinder))]int[]  id = null, [FromUri] string from = null, [FromUri] string through = null)
         {
             var f = DateTimeMapper.ToDateTime(from);
             var t = DateTimeMapper.ToDateTime(through);
@@ -65,22 +74,26 @@ namespace TrboPortal.Controllers
             }
 
 
-            return TrboPortalHelper.GetGpsMeasurementsAsync(id, f, t);
+            return ApiHelper.GetGpsMeasurementsAsync(id, f, t);
         }
 
         /// <summary>Request GPS opdate for radio(s)</summary>
         /// <param name="id">Radios</param>
         /// <returns>successful operation</returns>
         [HttpGet, Route("gps/update")]
-        public Task RequestGpsUpdate([FromUri] IEnumerable<int> radioIds) 
+        public HttpResponseMessage RequestGpsUpdate([ModelBinder(typeof(CommaDelimitedArrayModelBinder))]int[]  radioIds) 
         {
-            if (radioIds == null || radioIds.Count() == 0)
+            var errors = ApiHelper.RequestGpsUpdate(radioIds);
+            if (errors.Any())
             {
-                var message = "RadioIds are required";
-                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, message));
+                List<string> messages = new List<string> { "Failed to request one or more GPS updates!" };
+                messages.AddRange(errors.Select(e => e.ToString()).ToList());
+                var errorResponse = Request.CreateResponse(HttpStatusCode.InternalServerError);
+                errorResponse.ReasonPhrase = "Failed to request one or more GPS updates!";
+                errorResponse.Content = new StringContent(JsonConvert.SerializeObject(messages), Encoding.UTF8, "application/json");
+                return errorResponse;
             }
-
-            return Task.Run(() => TurboController.Instance.PollForGps(radioIds));
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         /// <summary>TrboNet message queue</summary>
@@ -99,7 +112,7 @@ namespace TrboPortal.Controllers
         /// <param name="id">Tags to filter by</param>
         /// <returns>successful operation</returns>
         [HttpGet, Route("system/clearQueue")]
-        public Task ClearMessageQueue([FromUri] IEnumerable<int> id = null)
+        public Task ClearMessageQueue([ModelBinder(typeof(CommaDelimitedArrayModelBinder))]int[]  id = null)
         {
             return Task.Run(() => TurboController.Instance.ClearRequestQueue(id));
         }
@@ -110,7 +123,7 @@ namespace TrboPortal.Controllers
         [HttpGet, Route("system/settings")]
         public Task<SystemSettings> GetSystemSettings()
         {
-            return TrboPortalHelper.GetSystemSettings();
+            return ApiHelper.GetSystemSettings();
         }
 
         /// <summary>Update System settings</summary>
@@ -123,7 +136,7 @@ namespace TrboPortal.Controllers
                 if (ModelState.IsValid)
                 {
                     // Do something with the product (not shown).
-                    _ = TrboPortalHelper.UpdateSystemSettingsAsync(settings);
+                    _ = ApiHelper.UpdateSystemSettingsAsync(settings);
                     return new HttpResponseMessage(HttpStatusCode.OK);
                 }
                 else
@@ -146,7 +159,7 @@ namespace TrboPortal.Controllers
                 throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Should supply loglevel value"));
             }
 
-            return TrboPortalHelper.GetLoggingAsync(loglevel, from, through);
+            return ApiHelper.GetLoggingAsync(loglevel, from, through);
         }
     }
 }

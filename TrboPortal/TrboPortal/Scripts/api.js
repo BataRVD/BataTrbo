@@ -24,14 +24,10 @@ export function getValidationErrors(response) {
     var errors = [];
     try {
         var modelState = response.ModelState;
-        for (var key in modelState) {
-            if (modelState.hasOwnProperty(key)) {
-                for (var i = 0; i < modelState[key].length; i++) {
-                    var errorString = modelState[key][i];
-                    console.log(errorString);
-                    errors.push(errorString);
-                }
-            }
+        if (typeof modelState !== 'undefined') {
+            errors = parseModelStateErrors(modelState);
+        } else {
+            errors.push("Unknown error!");
         }
     } catch (e) {
         console.log(e);
@@ -41,6 +37,43 @@ export function getValidationErrors(response) {
     return errors;
 }
 
+export function getResponseErrors(response, response_text) {
+    var errors = [];
+    if (response.status < 400) {
+        return errros;
+    }
+    else if (response.status >= 500) {
+        errors = response_text;
+    }
+    if (errors.length == 0) {
+        errors.push("Unknown error!");
+        console.log(`Unknown error in reponse: ${response} | ${response_text}`)
+    }
+    console.log(errors);
+    return errors;
+}
+
+export function showGenericErrors(message, errors, hideTimer = 3000) {
+    console.log(`${message}: ${errors}`);
+
+    $('#genericAlertMessage').html(message + "<br>-----<br>");
+    $('#genericErrorList').html(errors.map(e => `<li>${e}</li>\r\n`))
+    $('#genericErrorContainer').show().delay(hideTimer).fadeOut(500);
+}
+
+function parseModelStateErrors(modelState) {
+    var errors = [];
+    for (var key in modelState) {
+        if (modelState.hasOwnProperty(key)) {
+            for (var i = 0; i < modelState[key].length; i++) {
+                var errorString = modelState[key][i];
+                console.log(errorString);
+                errors.push(errorString);
+            }
+        }
+    }
+    return errors;
+}
 
 function internalPerformApiCall(request, method, asJson, data, onSuccess, onFailed, onFinished = null) {
   // This function implements the actual api call
@@ -67,7 +100,7 @@ function internalPerformApiCall(request, method, asJson, data, onSuccess, onFail
       onFailed(response);
     } else if (response.status > 400) {
       // something unexpected happened. Although onFailed proably wouln't be able to parse response message wouldn't b
-      console.log(`Some unexpected error happened! (${response.status})`);
+      console.log(`Error happened! (${response.status})`);
       onFailed(response);
     } else {
       console.log(`Some unexpected non-error happened! (${response.status})`);

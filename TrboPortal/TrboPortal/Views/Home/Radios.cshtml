@@ -3,7 +3,7 @@
 <script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script>
 
-<script type="module" src="/Scripts/api.js"></script>
+<script type="module" src="/Scripts/radios.js"></script>
 
 <style>
     .select,
@@ -11,12 +11,92 @@
         margin-right: 10px;
     }
 </style>
-<div id="toolbar">
-    <!--<button id="remove" class="btn btn-danger" disabled>
-        <i class="fa fa-trash"></i> Delete
-    </button>-->
+<div class="jumbotron">
+    <h1>Radios</h1>
 </div>
-<table id="table"
+<div id="toolbar">
+    <button id="addRadio" class="btn btn-success" onclick="toggleRadioEditForm()">
+        <i class="fa fa-plus"></i> Add
+    </button>
+    <button id="remove" class="btn btn-danger" disabled>
+        <i class="fa fa-trash"></i> Delete
+    </button>
+</div>
+
+<div id="radioEditContainer" style="display: none;" onsubmit="SubmitClicked()">
+    <div>
+        <h2>Add / Edit Radio</h2>
+    </div>
+    <form id="radioEditForm">
+        <div class="form-group row">
+            <label for="radioId" class="col-4 col-form-label">Radio ID</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-sort-numeric-asc"></i>
+                        </div>
+                    </div>
+                    <input id="radioId" name="radioId" required="required" placeholder="1" type="number" min="1" class="form-control" aria-describedby="RadioIdHelpBlock">
+                </div>
+                <span id="RadioIdHelpBlock" class="form-text text-muted">Radio ID, identifier of this radio.</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="name" class="col-4 col-form-label">Friendly name</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-address-card"></i>
+                        </div>
+                    </div>
+                    <input id="name" name="name" required="required" placeholder="Radio 1" type="text" class="form-control" aria-describedby="FriendlyNameHelpBlock">
+                </div>
+                <span id="FriendlyNameHelpBlock" class="form-text text-muted">Friendly name to identify this device. Not used for any logic</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="gpsMode" class="col-4 col-form-label">GPS Mode</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-location-arrow"></i>
+                        </div>
+                    </div>
+                    <select id="gpsMode" name="GPS Mode" required="required" placeholder="none" type="text" aria-describedby="GpsModeHelpBlock" class="form-control">
+                        <option value="none">none (No GPS at all)</option>
+                        <option value="pull">pull (Only get GPS when actively requested)</option>
+                        <option value="interval">interval (Get GPS at default interval, and allow pulling)</option>
+                    </select>
+                </div>
+                <span id="GpsModeHelpBlock" class="form-text text-muted">GPS Mode for this device. (none, pull, interval)</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="gpsInterval" class="col-4 col-form-label">GPS Interval</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                    </div>
+                    <input id="requestInterval" name="requestInterval" required="required" placeholder="60" type="number" min="1" class="form-control" aria-describedby="IntervalHelpBlock">
+                </div>
+                <span id="IntervalHelpBlock" class="form-text text-muted">GPS interval (in seconds) when using GPS Mode 'interval'</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="offset-4 col-8">
+                <button id="submit" name="submit" type="submit" class="btn btn-primary">Submit</button>
+                <button id="cancel" class="btn btn-secondary" onclick="showRadioEditForm(false)">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>
+<table id="radiosTable"
        data-toolbar="#toolbar"
        data-search="true"
        data-show-refresh="true"
@@ -39,9 +119,10 @@
 </table>
 
 
+
 <!-- Bootstrap-Table Magic -->
 <script>
-    var $table = $('#table')
+    var $table = $('#radiosTable')
     var $remove = $('#remove')
     var selections = []
 
@@ -68,21 +149,22 @@
 
     function operateFormatter(value, row, index) {
         return [
-            '<a class="request_gps" href="javascript:void(0)" title="Request GPS">',
-            '<i class="fa fa-location-arrow"></i>',
-            '</a>  ',
-            '<a class="remove" href="javascript:void(0)" title="Remove">',
-            '<i class="fa fa-trash"></i>',
-            '</a>'
+            '<a class="request_gps" href="javascript:void(0)" title="Request GPS"><i class="fa fa-location-arrow"></i>     </a>',
+            '<a class="edit" href="javascript:void(0)" title="Edit"><i class="fa fa-pen"></i>     </a>',
+            '<a class="remove" href="javascript:void(0)" title="Remove"><i class="fa fa-trash"></i>     </a>',
         ].join('')
     }
 
     window.operateEvents = {
         'click .request_gps': function (e, value, row, index) {
-            alert('Requesting GPS for: ' + JSON.stringify(row))
+            //alert('Requesting GPS for: ' + row['radioId'] + JSON.stringify(row))
+            refreshGps(row['radioId']);
+        },
+        'click .edit': function (e, value, row, index) {
+            editRadio(row['radioId'], row['name'], row['GpsMode'], row['requestInterval']);
         },
         'click .remove': function (e, value, row, index) {
-            alert(`Delete clicked for: ${row['radioId']}`)
+            deleteRadio(row['radioId']);
         },
     }
 

@@ -4,7 +4,7 @@
         <name>TrboPortal</name>
     </assembly>
     <members>
-        <member name="M:TrboPortal.Controllers.ApiController.GetRadios(System.Collections.Generic.IEnumerable{System.Int32})">
+        <member name="M:TrboPortal.Controllers.ApiController.GetRadios(System.Int32[])">
             <summary>List of all radios</summary>
             <param name="radioIds">Tags to filter by</param>
             <returns>successful operation</returns>
@@ -13,19 +13,19 @@
             <summary>Update gps mode and interval radios</summary>
             <param name="radioSettings">Radios to update</param>
         </member>
-        <member name="M:TrboPortal.Controllers.ApiController.GetMostRecentGps(System.Collections.Generic.IEnumerable{System.Int32})">
+        <member name="M:TrboPortal.Controllers.ApiController.GetMostRecentGps(System.Int32[])">
             <summary>Returns last known GPS position of radio(s)</summary>
             <param name="ids">Radios</param>
             <returns>successful operation</returns>
         </member>
-        <member name="M:TrboPortal.Controllers.ApiController.GetGpsHistory(System.Collections.Generic.IEnumerable{System.Int32},System.String,System.String)">
+        <member name="M:TrboPortal.Controllers.ApiController.GetGpsHistory(System.Int32[],System.String,System.String)">
             <summary>Returns last known GPS position of radio(s)</summary>
             <param name="id">Radios</param>
             <param name="from">From TimeStamp for GPS measurements to get</param>
             <param name="through">Through TimeStamp for GPS measurements to get</param>
             <returns>successful operation</returns>
         </member>
-        <member name="M:TrboPortal.Controllers.ApiController.RequestGpsUpdate(System.Collections.Generic.IEnumerable{System.Int32})">
+        <member name="M:TrboPortal.Controllers.ApiController.RequestGpsUpdate(System.Int32[])">
             <summary>Request GPS opdate for radio(s)</summary>
             <param name="id">Radios</param>
             <returns>successful operation</returns>
@@ -34,7 +34,7 @@
             <summary>TrboNet message queue</summary>
             <returns>Messages in TrboNet queue</returns>
         </member>
-        <member name="M:TrboPortal.Controllers.ApiController.ClearMessageQueue(System.Collections.Generic.IEnumerable{System.Int32})">
+        <member name="M:TrboPortal.Controllers.ApiController.ClearMessageQueue(System.Int32[])">
             <summary>List of all radios</summary>
             <param name="id">Tags to filter by</param>
             <returns>successful operation</returns>
@@ -54,7 +54,7 @@
             <param name="through">DateTime Through filter of logging to return</param>
             <returns>Blaat</returns>
         </member>
-        <member name="M:TrboPortal.Controllers.TrboPortalHelper.GetGpsMeasurementsAsync(System.Collections.Generic.IEnumerable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:TrboPortal.Controllers.ApiHelper.GetGpsMeasurementsAsync(System.Collections.Generic.IEnumerable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <summary>
             Returns a list of GpsMeasurements for specified devices. 
             </summary>
@@ -109,11 +109,20 @@
             <typeparam name="T"></typeparam>
             <param name="entity"></param>
         </member>
-        <member name="M:TrboPortal.Model.Db.Repository.InsertOrUpdateAsync(System.Collections.Generic.List{TrboPortal.Model.Db.Radio})">
+        <member name="M:TrboPortal.Model.Db.Repository.InsertOrUpdateRadios(System.Collections.Generic.List{TrboPortal.Model.Db.Radio})">
             <summary>
             Insert or update Radio (based on key)
             </summary>
             <param name="settings"></param>
+            <returns>Result of SaveChangesAsync</returns>
+        </member>
+        <member name="M:TrboPortal.Model.Db.Repository.GetRadiosById(System.Int32[])">
+            <summary>
+            Returns RadioSettings from DB for specified Radio ids. If list is empty, will return all Radios.
+            Prints waring for all radio's that can't be found.
+            </summary>
+            <param name="radioIds">Ids to return, if empty, returns all radios</param>
+            <returns></returns>
         </member>
         <member name="T:TrboPortal.Model.Db.LogEntry">
              <summary>
@@ -203,11 +212,28 @@
             populates the queue with devices that need an locationUpdate
             </summary>
         </member>
+        <member name="M:TrboPortal.TrboNet.TurboController.PollForGps(System.Int32)">
+            <summary>
+            Bump the supplied radioID to the top of the queue, ensuring this Radio's GPS is polled next.
+            </summary>
+            <param name="radioID"></param>
+            <exception cref="T:RadioNotFoundException"></exception>
+            <exception cref="T:DeviceNotFoundException"></exception>
+            <exception cref="T:InvalidGpsModeException">When Radio's GPS Mode is set to None</exception>
+        </member>
         <member name="M:TrboPortal.TrboNet.TurboController.RemoveDeviceFromQueueByDeviceID(System.Int32[])">
             <summary>
             Remove all the entries from the queue with the given deviceID
             </summary>
             <param name="deviceID"></param>
+        </member>
+        <member name="M:CommaDelimitedArrayModelBinder.BindModel(System.Web.Http.Controllers.HttpActionContext,System.Web.Http.ModelBinding.ModelBindingContext)">
+            <summary>
+            Borrowed from https://stackoverflow.com/a/19107738
+            </summary>
+            <param name="actionContext"></param>
+            <param name="bindingContext"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

@@ -103,6 +103,7 @@
   <ItemGroup>
     <Compile Include="Api\ApiController.cs" />
     <Compile Include="Api\ApiHelper.cs" />
+    <Compile Include="Api\CommaDelimitedArrayModelBinder.cs" />
     <Compile Include="Api\ValuesController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -140,6 +141,10 @@
     <Compile Include="TrboNet\Client\TrboClient.cs" />
     <Compile Include="TrboNet\Client\TrboTestClient.cs" />
     <Compile Include="TrboNet\DeviceInfo.cs" />
+    <Compile Include="TrboNet\Exceptions\DeviceNotFoundException.cs" />
+    <Compile Include="TrboNet\Exceptions\RadioNotFoundException.cs" />
+    <Compile Include="TrboNet\Exceptions\RadioException.cs" />
+    <Compile Include="TrboNet\Exceptions\InvalidGpsModeException.cs" />
     <Compile Include="TrboNet\Queueing\Queue.cs" />
     <Compile Include="TrboNet\RequestMessage.cs" />
     <Compile Include="TrboNet\TrboNetInterface.cs" />

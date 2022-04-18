@@ -9,9 +9,10 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TrboPortal.Model.Db;
 using Device = NS.Enterprise.Objects.Devices.Device;
 using GpsMeasurement = TrboPortal.Model.Api.GpsMeasurement;
-using Radio = TrboPortal.Model.Api.Radio;
+using Radio = TrboPortal.Model.Db.Radio;
 
 namespace TrboPortal.TrboNet
 {
@@ -326,8 +327,17 @@ namespace TrboPortal.TrboNet
                     return oldInfo;
                 });
 
-                // Add settings
-                if (radios.TryAdd(radioID, new Radio(radioID, defaultGpsMode, defaultRequestInterval)))
+                var radio = new Model.Db.Radio
+                {
+                    RadioId = radioID,
+                    Name = $"Radio - {radioID}",
+                    GpsMode = defaultRequestInterval.ToString(),
+                    RequestInterval = defaultRequestInterval
+                };
+
+                var result = Repository.InsertOrUpdateRadios(new List<Radio> { radio }).Result;
+                // Assume default settings were added if insert or update returns context modification
+                if (result != 0)
                 {
                     logger.Info($"Created standard settings for Radio with radioID {radioID}");
                 }

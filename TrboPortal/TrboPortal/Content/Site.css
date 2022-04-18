@@ -14,3 +14,20 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+#genericErrorContainer {
+    padding-left: 10%;
+    padding-right: 10%;
+    width: 100%;
+    align-content: center;
+    text-align: center;
+}
+
+#genericInnerErrorContainer {
+    padding-left: 10%;
+    padding-right: 10%;
+    width: 100%;
+    align-content: center;
+    text-align: center;
+}

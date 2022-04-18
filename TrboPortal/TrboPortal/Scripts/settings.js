@@ -79,7 +79,7 @@ function Post() {
     //TODO Validation
     const data = getJsonFromForm();
 
-    api.performApiCall("system/settings", request, 'PATCH', data,
+    api.performApiCall("system/settings", 'PATCH', data,
         (response) => {
             console.log("Patch successfull!")
             console.log(response);
@@ -91,8 +91,7 @@ function Post() {
         (response) => {
             $('#submit').prop('disabled', false);
             Promise.resolve(response.text())
-                .then(JSON.parse)
-                .then(resp_data => showApiErrorWarning("Unable to save SystemSettings.", api.getValidationErrors(resp_data)));
+                .then(resp_data => showApiErrorWarning("Unable to save SystemSettings.", api.getResponseErrors(resp_data)));
         });
 }
 

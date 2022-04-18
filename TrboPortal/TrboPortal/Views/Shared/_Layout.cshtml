@@ -11,7 +11,8 @@
     <script src="/Scripts/3rdparty/bootstrap/bootstrap.bundle.min.js"></script>
     <!-- FontsAwesome Icons -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    
+    <link href="/Content/Site.css" rel="stylesheet">
 
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
@@ -46,6 +47,14 @@
         </div>
     </nav>
     <div class="container-fluid">
+        <div id="genericErrorContainer" class="form-group row" style="display: none;">
+            <div id="genericInnerErrorContainer" class="alert alert-danger" role="alert">
+                <div id="genericAlertMessage">
+                    Unable to save SystemSettings.
+                </div>
+                <ul id="genericErrorList" class="navbar-nav mr-auto"></ul>
+            </div>
+        </div>
         @RenderBody()
 
         @RenderSection("scripts", required: false)

@@ -13,7 +13,7 @@ using GpsMeasurement = TrboPortal.Model.Api.GpsMeasurement;
 
 namespace TrboPortal.Controllers
 {
-    public class TrboPortalHelper
+    public class ApiHelper
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
@@ -45,13 +45,22 @@ namespace TrboPortal.Controllers
             }
         }
 
+        internal static async Task<IEnumerable<Model.Api.Radio>> GetRadioSettingsAsync(int[] radioIds)
+        {
+            var dbRadios = await Repository.GetRadiosById(radioIds);
+            var apiRadios = dbRadios.Select(dbr => DatabaseMapper.Map(dbr));
+            return apiRadios;
+        }
+
         public static async Task UpdateRadioSettingsAsync(IEnumerable<Model.Api.Radio> radioSettings)
         {
             //Store the settings
-            await Repository.InsertOrUpdateAsync(radioSettings.ToList().Select(RadioMapper.MapRadioSettings).ToList());
+            await Repository.InsertOrUpdateRadios(radioSettings.ToList().Select(RadioMapper.MapRadioSettings).ToList());
+        }
 
-            // How is this for an "event driven" system? =)
-            await TurboController.Instance.LoadRadioSettingsFromDatabaseAsync();
+        public static async Task DeleteRadioSettings(IEnumerable<int> radioIds)
+        {
+            await Repository.DeleteRadios(radioIds);
         }
 
         internal static async Task<SystemSettings> GetSystemSettings()
@@ -85,6 +94,23 @@ namespace TrboPortal.Controllers
             }
         }
 
+        internal static List<RadioException> RequestGpsUpdate(int[] radioIds)
+        {
+            var errors = new List<RadioException>();
+            foreach (int radioID in radioIds)
+            {
+                try
+                {
+                    TurboController.Instance.PollForGps(radioID);
+                }
+                catch (RadioException ex)
+                {
+                    errors.Add(ex);
+                }
+            }
+            return errors;
+        }
+
         public static async Task<ICollection<LogMessage>> GetLoggingAsync(string loglevel, string from, string through)
         {
             var fromUnixMs = DateTimeMapper.ToUnixMs(from);
@@ -92,5 +118,6 @@ namespace TrboPortal.Controllers
             var result = await Repository.GetLogging(loglevel, fromUnixMs, throughUnixMs);
             return result.Select(l => new LogMessage(l)).ToList();
         }
+
     }
 }

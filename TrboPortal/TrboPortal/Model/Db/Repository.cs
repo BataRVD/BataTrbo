@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -8,6 +9,8 @@ namespace TrboPortal.Model.Db
 {
     public class Repository
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// Generic insert or update
         /// </summary>
@@ -30,7 +33,8 @@ namespace TrboPortal.Model.Db
         /// Insert or update Radio (based on key)
         /// </summary>
         /// <param name="settings"></param>
-        public static async Task InsertOrUpdateAsync(List<Radio> settings)
+        /// <returns>Result of SaveChangesAsync</returns>
+        public static async Task<int> InsertOrUpdateRadios(List<Radio> settings)
         {
             using (var context = new DatabaseContext())
             {
@@ -40,7 +44,7 @@ namespace TrboPortal.Model.Db
                     context.Entry(s).State = radioExists ? EntityState.Modified : EntityState.Added;
                 }
 
-                await context.SaveChangesAsync();
+                return await context.SaveChangesAsync();
             }
         }
 
@@ -62,6 +66,43 @@ namespace TrboPortal.Model.Db
                         && through == null || through > l.Timestamp
                     )
                     .ToListAsync();
+            }
+        }
+
+        /// <summary>
+        /// Returns RadioSettings from DB for specified Radio ids. If list is empty, will return all Radios.
+        /// Prints waring for all radio's that can't be found.
+        /// </summary>
+        /// <param name="radioIds">Ids to return, if empty, returns all radios</param>
+        /// <returns></returns>
+        internal static async Task<List<Radio>> GetRadiosById(int[] radioIds)
+        {
+            radioIds = radioIds ?? new int[0];
+            using (var context = new DatabaseContext())
+            {
+                var results =  await context.RadioSettings.Where(r=> radioIds.Count() == 0 || radioIds.Contains(r.RadioId)).ToListAsync();
+                var missing = radioIds.Except(results.Select(r => r.RadioId)).ToList();
+                if (missing.Any())
+                {
+                    logger.Warn($"GetRadiosById: Couldn't find RadioSettings for Radio with id(s): {string.Join(",", missing)}");
+                }
+                return results;
+            }
+        }
+
+        internal static async Task<Radio> GetRadioById(int radioId)
+        {
+            var result = await GetRadiosById(new int[] { radioId });
+            return result.SingleOrDefault();
+        }
+
+        public static Task DeleteRadios(IEnumerable<int> radioIds)
+        {
+            logger.Info($"Deleting RadioSettings for Radio IDs: {string.Join(",", radioIds)}.");
+            using (var context = new DatabaseContext())
+            {
+                context.RadioSettings.RemoveRange(context.RadioSettings.Where(r => radioIds.Contains(r.RadioId)));
+                return context.SaveChangesAsync();
             }
         }
     }

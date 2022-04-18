@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TrboPortal.Mappers;
 using TrboPortal.Model.Api;
-using Radio = TrboPortal.Model.Api.Radio;
+using Radio = TrboPortal.Model.Db.Radio;
 
 namespace TrboPortal.TrboNet
 {
@@ -37,8 +38,8 @@ namespace TrboPortal.TrboNet
                     continue;
                 }
 
-                bool isInterval = radio.GpsMode == GpsModeEnum.Interval;
-                int minimumInterval = (radio.RequestInterval ?? 0);
+                bool isInterval = DatabaseMapper.MapGpsMode(radio.GpsMode) == GpsModeEnum.Interval;
+                int minimumInterval = radio.RequestInterval;
                 bool hasValidInterval = minimumInterval > 0;
                 if (!isInterval || !hasValidInterval)
                 {
@@ -81,34 +82,39 @@ namespace TrboPortal.TrboNet
             }
         }
 
-        public void PollForGps(IEnumerable<int> radioIds)
+        /// <summary>
+        /// Bump the supplied radioID to the top of the queue, ensuring this Radio's GPS is polled next.
+        /// </summary>
+        /// <param name="radioID"></param>
+        /// <exception cref="RadioNotFoundException"></exception>
+        /// <exception cref="DeviceNotFoundException"></exception>
+        /// <exception cref="InvalidGpsModeException">When Radio's GPS Mode is set to None</exception>
+        public void PollForGps(int radioID)
         {
-            foreach (int radioID in radioIds)
+            if (!GetRadioByRadioID(radioID, out Radio radio))
             {
-                if (GetDeviceInfoByRadioID(radioID, out DeviceInfo deviceInfo) && GetRadioByRadioID(radioID, out Radio radio))
-                {
-                    GpsModeEnum gpsMode = radio?.GpsMode ?? GpsModeEnum.None;
-                    if (gpsMode != GpsModeEnum.None)
-                    {
-                        int deviceID = deviceInfo.DeviceID;
-                        // Since we are going to jump the queue, remove all existing requests
-                        RemoveDeviceFromQueueByDeviceID(deviceID);
-                        // Jump the queue
-                        var requestMessage = CreateGpsRequestMessage(deviceInfo);
-                        deviceInfo.LastUpdateRequest = DateTime.Now;
-                        pollQueue.Jump(requestMessage);
-                        // also remove all other requests for this device from the queue, you jumped, you didn'magically duplicate yourself, what are you a gremlin?
-                    }
-                    else
-                    {
-                        logger.Info($"Could not poll info for radioID {radioID} since GpsMode is none");
-                    }
-                }
-                else
-                {
-                    logger.Info($"Could not poll info for radioID {radioID} since there was no deviceInfo or RadioSettings available");
-                }
+                throw new RadioNotFoundException(radioID, $"Could not poll info for radioID {radioID} since there was no RadioSettings available");
             }
+            if (!GetDeviceInfoByRadioID(radioID, out DeviceInfo deviceInfo))
+            {
+                throw new DeviceNotFoundException(radioID, $"Could not poll info for radioID {radioID} since there was no DeviceInfo available");
+            }
+
+            GpsModeEnum gpsMode = DatabaseMapper.MapGpsMode(radio.GpsMode);
+
+            if (gpsMode == GpsModeEnum.None)
+            {
+                throw new InvalidGpsModeException(radioID, $"Could not poll info for radioID {radioID} since GpsMode is none");
+            }
+
+            int deviceID = deviceInfo.DeviceID;
+            // Since we are going to jump the queue, remove all existing requests
+            RemoveDeviceFromQueueByDeviceID(deviceID);
+            // Jump the queue
+            var requestMessage = CreateGpsRequestMessage(deviceInfo);
+            deviceInfo.LastUpdateRequest = DateTime.Now;
+            pollQueue.Jump(requestMessage);
+            // also remove all other requests for this device from the queue, you jumped, you didn'magically duplicate yourself, what are you a gremlin?
         }
 
         /// <summary>
