@@ -48,5 +48,10 @@ jobs:
         with:
           name: TrboPortal
           path: C:\inetpub\wwwroot\
-      
+      # Ensure proper rights (subinacl.exe /service w3svc  /grant="Network Service"=PTO)
+      # Source: http://woshub.com/set-permissions-on-windows-service/#h2_2
+      - name: Stop IIS
+        run: NET STOP w3svc
+      - name: Start IIS
+        run: NET START w3svc
       
