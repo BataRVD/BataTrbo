@@ -58,27 +58,9 @@ namespace TrboPortal.Controllers
             if(TurboController.Instance.GetDeviceInfoByRadioID(radio.RadioId, out DeviceInfo deviceInfo)) {
                 radio.LastGpsRequested = deviceInfo.LastUpdateRequest;
                 // Add most recent 10 GPS Measurements
-                // TODO EH: remove this.
                 radio.GpsMeasurements = deviceInfo.GpsLocations?.Skip(Math.Max(0, deviceInfo.GpsLocations.Count() - 10)).ToList() ?? new List<GpsMeasurement>();
                 radio.Status = deviceInfo.Device?.DeviceState.ToString() ?? "Unknown";
                 radio.LastSeen = deviceInfo.LastMessageReceived;
-            }
-            else
-            {
-                var fakeGps = new GpsMeasurement()
-                {
-                    RadioID = 666,
-                    DeviceID = 666,
-                    Latitude = -1,
-                    Longitude = -1,
-                    Timestamp = DateTime.Now.ToString(),
-                    Rssi = 9001
-                };
-                radio.Status = "YOLO";
-                radio.LastSeen = DateTime.Now;
-                radio.LastGpsRequested = DateTime.Today;
-                radio.GpsMeasurements = new List<GpsMeasurement>() { fakeGps };
-
             }
             return radio;
         }

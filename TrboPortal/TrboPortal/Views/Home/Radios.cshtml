@@ -171,15 +171,18 @@
                 html.push('<p><b>' + key + ':</b> ' + value + '</p>')
             }
         })
-        html.push('<h3>GPS Measurements</h3>');
         html.push(getGpsMeasurementTable(row['GpsMeasurements']));
         return html.join('')
     }
 
-    function getGpsMeasurementTable(gspMeasurements){
+    function getGpsMeasurementTable(gpsMeasurements){
         var html = []
+        if (gpsMeasurements == null || gpsMeasurements.length == 0) {
+            return html;
+        }
+        html.push('<h3>GPS Measurements</h3>');
         html.push("<table><tr><th>TimeStamp</th><th>Latitude</th><th>Longitude</th></tr>");
-        $.each(gspMeasurements, function (index, m) {
+        $.each(gpsMeasurements, function (index, m) {
             var row = `<tr><td>${m['Timestamp']}</td><td>${m['Latitude']}</td><td>${m['Longitude']}</td></tr>`;
             html.push(row);
         })
