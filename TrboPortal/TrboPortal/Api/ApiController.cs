@@ -52,7 +52,7 @@ namespace TrboPortal.Controllers
         /// <param name="ids">Radios</param>
         /// <returns>successful operation</returns>
         [HttpGet, Route("gps")]
-        public Task<ICollection<GpsMeasurement>> GetMostRecentGps([ModelBinder(typeof(CommaDelimitedArrayModelBinder))]int[]  ids = null)
+        public Task<List<GpsMeasurement>> GetMostRecentGps([ModelBinder(typeof(CommaDelimitedArrayModelBinder))]int[]  ids = null)
         {
             return ApiHelper.GetGpsMeasurementsAsync(ids, null, null);
         }
@@ -63,7 +63,7 @@ namespace TrboPortal.Controllers
         /// <param name="through">Through TimeStamp for GPS measurements to get</param>
         /// <returns>successful operation</returns>
         [HttpGet, Route("gps/history")]
-        public Task<ICollection<GpsMeasurement>> GetGpsHistory([ModelBinder(typeof(CommaDelimitedArrayModelBinder))]int[]  id = null, [FromUri] string from = null, [FromUri] string through = null)
+        public Task<List<GpsMeasurement>> GetGpsHistory([ModelBinder(typeof(CommaDelimitedArrayModelBinder))]int[]  id = null, [FromUri] string from = null, [FromUri] string through = null)
         {
             var f = DateTimeMapper.ToDateTime(from);
             var t = DateTimeMapper.ToDateTime(through);
