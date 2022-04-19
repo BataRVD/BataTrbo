@@ -94,6 +94,7 @@ namespace TrboPortal.TrboNet
                 logger.Info($"WorkflowCommandFinished for deviceID {deviceID}, state: {e.RequestId.ToString()}, state: {e.Result.ToString()}");
                 if (GetDeviceInfoByDeviceID(deviceID, out DeviceInfo deviceInfo) && deviceInfo.Device != null)
                 {
+                    deviceInfo.LastMessageReceived = DateTime.Now;
                     ciaBataController.PostDeviceLifeSign(deviceInfo.RadioID, deviceInfo.Device.Name, true);
                 }
             }
@@ -111,6 +112,7 @@ namespace TrboPortal.TrboNet
                 logger.Info($"DeviceTelemetryChanged for deviceID {deviceID}");
                 if (GetDeviceInfoByDeviceID(deviceID, out DeviceInfo deviceInfo) && deviceInfo.Device != null)
                 {
+                    deviceInfo.LastMessageReceived = DateTime.Now;
                     ciaBataController.PostDeviceLifeSign(deviceInfo.RadioID, deviceInfo.Device.Name, true);
                 }
             }
@@ -128,6 +130,7 @@ namespace TrboPortal.TrboNet
                 logger.Info($"TransmitReceiveChanged for deviceID {deviceID}");
                 if (GetDeviceInfoByDeviceID(deviceID, out DeviceInfo deviceInfo) && deviceInfo.Device != null)
                 {
+                    deviceInfo.LastMessageReceived = DateTime.Now;
                     ciaBataController.PostDeviceLifeSign(deviceInfo.RadioID, deviceInfo.Device.Name, true);
                 }
             }
@@ -150,6 +153,7 @@ namespace TrboPortal.TrboNet
                     if (GetDeviceInfoByDeviceID(deviceID, out DeviceInfo deviceInfo))
                     {
                         logger.Info($"DeviceStateChanged [Did:{deviceID}][Rid:{deviceInfo.RadioID}]: {radio.State.ToString()}");
+                        deviceInfo.LastMessageReceived = DateTime.Now;
                         Device device = deviceInfo?.Device;
                         if (device != null)
                         {
@@ -165,7 +169,7 @@ namespace TrboPortal.TrboNet
         }
 
 
-        private bool GetDeviceInfoByRadioID(int radioID, out DeviceInfo deviceInfo)
+        public bool GetDeviceInfoByRadioID(int radioID, out DeviceInfo deviceInfo)
         {
             deviceInfo = devices.Where(d => d.Value.RadioID == radioID).FirstOrDefault().Value;
             return deviceInfo != null;
@@ -209,6 +213,7 @@ namespace TrboPortal.TrboNet
                             devices.TryAdd(deviceID, deviceInfo);
                         }
 
+                        deviceInfo.LastMessageReceived = DateTime.Now;
                         int radioID = deviceInfo.RadioID;
                         gpsMeasurement.RadioID = radioID;
                         deviceInfo.GpsLocations.Push(gpsMeasurement);
