@@ -16,7 +16,8 @@ window.getApiBaseUrl = function getApiBaseUrl() {
  * @param onFinished:   (Optional) callback to call after request finished, always called.
  */
 export function performApiCall(request_url, method, data, onSuccess, onFailed, onFinished = null) {
-    const request = new Request(`${apiBase}/${request_url}`);
+    var host = window.location.protocol + "//" + window.location.host;
+    const request = new Request(`${host}/${apiBase}/${request_url}`);
     internalPerformApiCall(request, method, true, data, onSuccess, onFailed, onFinished);
 }
 
