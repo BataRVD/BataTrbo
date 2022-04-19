@@ -1,4 +1,7 @@
-﻿namespace TrboPortal.Model.Api
+﻿using TrboPortal.Mappers;
+using TrboPortal.Model.Db;
+
+namespace TrboPortal.Model.Api
 {
     
     public partial class GpsMeasurement
@@ -22,6 +25,14 @@
         [Newtonsoft.Json.JsonProperty("Rssi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Rssi { get; set; }
 
-
+        public GpsMeasurement() { }
+        public GpsMeasurement(GpsEntry g)
+        {
+            RadioID = g.RadioId ?? -1;
+            Timestamp = DateTimeMapper.ToString(g.Timestamp);
+            Latitude = g.Latitude;
+            Longitude = g.Longitude;
+            Rssi = g.Rssi;
+        }
     }
 }

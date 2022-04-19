@@ -161,12 +161,30 @@
         return res
     }
 
+    
     function detailFormatter(index, row) {
+        var detailsToHide = ['state', 'radioId', 'Status', 'LastSeen', 'LastGpsRequested', 'LastGpsTimeStamp', 'GpsMeasurements'];
         var html = []
+        html.push('<h3>Info</h3>')
         $.each(row, function (key, value) {
-            html.push('<p><b>' + key + ':</b> ' + value + '</p>')
+            if (!detailsToHide.includes(key)) {
+                html.push('<p><b>' + key + ':</b> ' + value + '</p>')
+            }
         })
+        html.push('<h3>GPS Measurements</h3>');
+        html.push(getGpsMeasurementTable(row['GpsMeasurements']));
         return html.join('')
+    }
+
+    function getGpsMeasurementTable(gspMeasurements){
+        var html = []
+        html.push("<table><tr><th>TimeStamp</th><th>Latitude</th><th>Longitude</th></tr>");
+        $.each(gspMeasurements, function (index, m) {
+            var row = `<tr><td>${m['Timestamp']}</td><td>${m['Latitude']}</td><td>${m['Longitude']}</td></tr>`;
+            html.push(row);
+        })
+        html.push("</table>");
+        return html;
     }
 
     function operateFormatter(value, row, index) {
@@ -175,6 +193,13 @@
             '<a class="edit" href="javascript:void(0)" title="Edit"><i class="fa fa-pen"></i>     </a>',
             '<a class="remove" href="#genericModal" title="Remove" data-toggle="modal" data-target="#genericModal" data-radioid="' + row['radioId']+'"><i class="fa fa-trash"></i>     </a>',
         ].join('')
+    }
+
+    function dateFormatter(value, row, index) {
+        if (typeof(value) == 'undefined') {
+            return 'N/A';
+        }
+        return moment(value).format("dddd HH:mm:ss");
     }
 
     $("#genericModal").on('show.bs.modal', function (e) {
@@ -198,6 +223,7 @@
         },
     }
 
+    
     function initTable() {
         $table.bootstrapTable('destroy').bootstrapTable({
             // Defines the URL to get table data from.
@@ -221,33 +247,44 @@
                     sortable: true,
                 }, {
                     title: 'Item Detail',
-                    colspan: 4,
+                    colspan: 5,
                     align: 'center'
                 }],
                 [{
-                    field: 'name',
-                    title: 'Radio Name',
+                    field: 'Status',
+                    title: 'Status',
                     sortable: true,
                     align: 'center'
-                }, {
-                    field: 'GpsMode',
-                    title: 'GPS Mode',
-                    sortable: true,
-                    align: 'center',
-                }, {
-                    field: 'requestInterval',
-                    title: 'Request Interval',
-                    align: 'center',
-                    clickToSelect: false,
-                    events: window.operateEvents,
-                }, {
-                    field: 'operate',
-                    title: 'Actions',
-                    align: 'center',
-                    clickToSelect: false,
-                    events: window.operateEvents,
-                    formatter: operateFormatter
-                }]
+                },
+                    {
+                        field: 'LastSeen',
+                        title: 'Last Seen',
+                        sortable: true,
+                        align: 'center',
+                        formatter: dateFormatter
+                    },
+                    {
+                        field: 'LastGpsRequested',
+                        title: 'Last GPS Request',
+                        align: 'center',
+                        clickToSelect: false,
+                        formatter: dateFormatter
+                    },
+                    {
+                        field: 'LastGpsTimeStamp',
+                        title: 'Last GPS Received',
+                        align: 'center',
+                        clickToSelect: false,
+                        formatter: dateFormatter
+                    },
+                    {
+                        field: 'operate',
+                        title: 'Actions',
+                        align: 'center',
+                        clickToSelect: false,
+                        events: window.operateEvents,
+                        formatter: operateFormatter
+                    }]
             ]
         })
         $table.on('check.bs.table uncheck.bs.table ' +

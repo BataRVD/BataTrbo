@@ -132,7 +132,6 @@
     <Compile Include="Mappers\RadioMapper.cs" />
     <Compile Include="Model\DatabaseContext .cs" />
     <Compile Include="Model\Db\GpsEntry.cs" />
-    <Compile Include="Model\Db\GpsMeasurement.cs" />
     <Compile Include="Model\Db\Radio.cs" />
     <Compile Include="Model\Db\Repository.cs" />
     <Compile Include="Model\Db\Settings.cs" />
