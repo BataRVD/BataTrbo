@@ -147,7 +147,6 @@
     <Compile Include="TrboNet\Exceptions\InvalidGpsModeException.cs" />
     <Compile Include="TrboNet\Queueing\Queue.cs" />
     <Compile Include="TrboNet\RequestMessage.cs" />
-    <Compile Include="TrboNet\TrboNetInterface.cs" />
     <Compile Include="TrboNet\TurboController.Settings.cs" />
     <Compile Include="TrboNet\TurboController.TrboNet.cs" />
     <Compile Include="TrboNet\TurboController.Queue.cs" />
