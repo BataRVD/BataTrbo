@@ -104,7 +104,6 @@
     <Compile Include="Api\ApiController.cs" />
     <Compile Include="Api\ApiHelper.cs" />
     <Compile Include="Api\CommaDelimitedArrayModelBinder.cs" />
-    <Compile Include="Api\ValuesController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
