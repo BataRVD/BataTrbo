@@ -67,6 +67,8 @@ namespace TrboPortal.Controllers
                 radio.LastSeen = deviceInfo.LastMessageReceived;
             }
             var result = GetGpsMeasurementsAsync(new List<int>() { radio.RadioId }, null, null, 10).Result;
+            var latest_timestamp = result.FirstOrDefault()?.Timestamp;
+            radio.LastGpsTimeStamp = latest_timestamp != null ? DateTime.Parse(latest_timestamp) : DateTime.MinValue;
             radio.GpsMeasurements = result;
             return radio;
         }

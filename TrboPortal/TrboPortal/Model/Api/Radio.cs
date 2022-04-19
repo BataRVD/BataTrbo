@@ -31,9 +31,11 @@ namespace TrboPortal.Model.Api
         
         public string Status { get; set; }
         public DateTime LastSeen { get; set; }    
-        public DateTime LastGpsRequested { get; set; }  
+        public DateTime LastGpsRequested { get; set; }
+        public DateTime LastGpsTimeStamp { get; internal set; }
         public List<GpsMeasurement> GpsMeasurements { get; set; }
         
+
         #endregion ========== Result Data (volatile) ========== 
         public Radio()
         {
