@@ -104,7 +104,6 @@
     <Compile Include="Api\ApiController.cs" />
     <Compile Include="Api\ApiHelper.cs" />
     <Compile Include="Api\CommaDelimitedArrayModelBinder.cs" />
-    <Compile Include="Api\ValuesController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -206,6 +205,7 @@
     <Content Include="Scripts\3rdparty\jquery\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\3rdparty\jquery\jquery-3.6.0.min.js" />
     <Content Include="Scripts\3rdparty\modernizr-2.8.3.js" />
+    <Content Include="Scripts\3rdparty\moment.js" />
     <Content Include="Scripts\radios.js" />
     <Content Include="Scripts\settings.js" />
     <Content Include="Web.config" />
