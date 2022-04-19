@@ -206,6 +206,7 @@
     <Content Include="Scripts\3rdparty\jquery\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\3rdparty\jquery\jquery-3.6.0.min.js" />
     <Content Include="Scripts\3rdparty\modernizr-2.8.3.js" />
+    <Content Include="Scripts\3rdparty\moment.js" />
     <Content Include="Scripts\radios.js" />
     <Content Include="Scripts\settings.js" />
     <Content Include="Web.config" />
