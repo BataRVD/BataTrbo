@@ -118,6 +118,28 @@
        data-response-handler="responseHandler">
 </table>
 
+<!-- Modal for conformation -->
+<div class="modal fade" id="genericModal" tabindex="-1" role="dialog" aria-labelledby="labeltje, waarom kijk jij hier naar?" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Hé jij daar!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Weet jij dat, heul, heul, heul zeker?!</p>
+                <p>Je verwijderd nu <strong>radio <em class="title"></em></strong></p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Nope</button>
+                <button type="button" class="btn btn-primary btn-ok" data-dismiss="modal">Zeker weten!</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!-- Bootstrap-Table Magic -->
@@ -169,7 +191,7 @@
         return [
             '<a class="request_gps" href="javascript:void(0)" title="Request GPS"><i class="fa fa-location-arrow"></i>     </a>',
             '<a class="edit" href="javascript:void(0)" title="Edit"><i class="fa fa-pen"></i>     </a>',
-            '<a class="remove" href="javascript:void(0)" title="Remove"><i class="fa fa-trash"></i>     </a>',
+            '<a class="remove" href="#genericModal" title="Remove" data-toggle="modal" data-target="#genericModal" data-radioid="' + row['radioId']+'"><i class="fa fa-trash"></i>     </a>',
         ].join('')
     }
 
@@ -180,6 +202,17 @@
         return moment(value).format("dddd HH:mm:ss");
     }
 
+    $("#genericModal").on('show.bs.modal', function (e) {
+        var data = $(e.relatedTarget).data();
+        $('.title', this).text(data.radioid);
+        $('.btn-ok', this).data('radioid', data.radioid);
+    });
+
+    $('#genericModal').on('click', '.btn-ok', function (e) {
+        var radioid = $(this).data('radioid');
+        deleteRadio(radioid);
+    });
+
     window.operateEvents = {
         'click .request_gps': function (e, value, row, index) {
             //alert('Requesting GPS for: ' + row['radioId'] + JSON.stringify(row))
@@ -187,9 +220,6 @@
         },
         'click .edit': function (e, value, row, index) {
             editRadio(row['radioId'], row['name'], row['GpsMode'], row['requestInterval']);
-        },
-        'click .remove': function (e, value, row, index) {
-            deleteRadio(row['radioId']);
         },
     }
 
