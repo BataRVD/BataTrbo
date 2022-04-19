@@ -54,13 +54,14 @@
             <param name="through">DateTime Through filter of logging to return</param>
             <returns>Blaat</returns>
         </member>
-        <member name="M:TrboPortal.Controllers.ApiHelper.GetGpsMeasurementsAsync(System.Collections.Generic.IEnumerable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:TrboPortal.Controllers.ApiHelper.GetGpsMeasurementsAsync(System.Collections.Generic.IEnumerable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32)">
             <summary>
             Returns a list of GpsMeasurements for specified devices. 
             </summary>
             <param name="ids">List of DeviceIds</param>
             <param name="from">Optional from filter</param>
             <param name="through">Optional through filter</param>
+            <param name="limit">Limit to x amount of most recent GPSMeasurements</param>
             <returns></returns>
         </member>
         <member name="M:TrboPortal.CiaBata.CiaBata.PostGpsLocation(TrboPortal.CiaBata.GPSLocation)">

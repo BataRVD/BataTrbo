@@ -23,9 +23,10 @@ namespace TrboPortal.Controllers
         /// <param name="ids">List of DeviceIds</param>
         /// <param name="from">Optional from filter</param>
         /// <param name="through">Optional through filter</param>
+        /// <param name="limit">Limit to x amount of most recent GPSMeasurements</param>
         /// <returns></returns>
-        public static async Task<ICollection<GpsMeasurement>> GetGpsMeasurementsAsync(IEnumerable<int> ids,
-            DateTime? from, DateTime? through)
+        public static async Task<List<GpsMeasurement>> GetGpsMeasurementsAsync(IEnumerable<int> ids,
+            DateTime? from, DateTime? through, int limit = int.MaxValue)
         {
             if (ids == null)
             {
@@ -39,6 +40,8 @@ namespace TrboPortal.Controllers
                                 (hasNoIds || ids.Contains(g.RadioId.Value)) &&
                                 (from == null || from < g.Timestamp) &&
                                 (through == null || through > g.Timestamp))
+                    .OrderByDescending(g=> g.Timestamp)
+                    .Take(limit)
                     .ToListAsync();
 
                 return dbResults.Select(g => new GpsMeasurement(g)).ToList();
@@ -48,20 +51,23 @@ namespace TrboPortal.Controllers
         internal static async Task<IEnumerable<Model.Api.Radio>> GetRadioSettingsAsync(int[] radioIds)
         {
             var dbRadios = await Repository.GetRadiosById(radioIds);
-            var apiRadios = dbRadios.Select(dbr => EnrichRadioWithResults(DatabaseMapper.Map(dbr)));
+            var apiRadios = dbRadios.Select(dbr => EnrichRadioWithResultsAsync(DatabaseMapper.Map(dbr)));
 
             return apiRadios;
         }
 
-        internal static Model.Api.Radio EnrichRadioWithResults(Model.Api.Radio radio)
+        internal static Model.Api.Radio EnrichRadioWithResultsAsync(Model.Api.Radio radio)
         {
             if(TurboController.Instance.GetDeviceInfoByRadioID(radio.RadioId, out DeviceInfo deviceInfo)) {
                 radio.LastGpsRequested = deviceInfo.LastUpdateRequest;
                 // Add most recent 10 GPS Measurements
+
                 radio.GpsMeasurements = deviceInfo.GpsLocations?.Skip(Math.Max(0, deviceInfo.GpsLocations.Count() - 10)).ToList() ?? new List<GpsMeasurement>();
                 radio.Status = deviceInfo.Device?.DeviceState.ToString() ?? "Unknown";
                 radio.LastSeen = deviceInfo.LastMessageReceived;
             }
+            var result = GetGpsMeasurementsAsync(new List<int>() { radio.RadioId }, null, null, 10).Result;
+            radio.GpsMeasurements = result;
             return radio;
         }
 
