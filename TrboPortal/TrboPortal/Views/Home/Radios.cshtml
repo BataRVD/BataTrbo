@@ -107,7 +107,7 @@
        data-detail-view="true"
        data-show-export="false"
        data-click-to-select="true"
-       data-detail-formatter="detailFormatter"
+       data-detail-formatter="tableDetailFormatter"
        data-minimum-count-columns="2"
        data-show-pagination-switch="false"
        data-pagination="false"
@@ -115,7 +115,7 @@
        data-page-list="[all]"
        data-show-footer="true"
        data-side-pagination="client"
-       data-response-handler="responseHandler">
+       data-response-handler="tableDataHandler">
 </table>
 
 <!-- Modal for conformation -->
@@ -140,172 +140,3 @@
         </div>
     </div>
 </div>
-
-
-<!-- Bootstrap-Table Magic -->
-<script>
-    var $table = $('#radiosTable')
-    var $remove = $('#remove')
-    var selections = []
-
-    function getIdSelections() {
-        return $.map($table.bootstrapTable('getSelections'), function (row) {
-            return row.id
-        })
-    }
-
-    function responseHandler(res) {
-        $.each(res.rows, function (i, row) {
-            row.state = $.inArray(row.id, selections) !== -1
-        })
-        return res
-    }
-
-    
-    function detailFormatter(index, row) {
-        var detailsToHide = ['state', 'radioId', 'Status', 'LastSeen', 'LastGpsRequested', 'LastGpsTimeStamp', 'GpsMeasurements'];
-        var html = []
-        html.push('<h3>Info</h3>')
-        $.each(row, function (key, value) {
-            if (!detailsToHide.includes(key)) {
-                html.push('<p><b>' + key + ':</b> ' + value + '</p>')
-            }
-        })
-        html.push(getGpsMeasurementTable(row['GpsMeasurements']));
-        return html.join('')
-    }
-
-    function getGpsMeasurementTable(gpsMeasurements){
-        var html = []
-        if (gpsMeasurements == null || gpsMeasurements.length == 0) {
-            return html;
-        }
-        html.push('<h3>GPS Measurements</h3>');
-        html.push("<table><tr><th>TimeStamp</th><th>Latitude</th><th>Longitude</th></tr>");
-        $.each(gpsMeasurements, function (index, m) {
-            var row = `<tr><td>${m['Timestamp']}</td><td>${m['Latitude']}</td><td>${m['Longitude']}</td></tr>`;
-            html.push(row);
-        })
-        html.push("</table>");
-        return html;
-    }
-
-    function operateFormatter(value, row, index) {
-        return [
-            '<a class="request_gps" href="javascript:void(0)" title="Request GPS"><i class="fa fa-location-arrow"></i>     </a>',
-            '<a class="edit" href="javascript:void(0)" title="Edit"><i class="fa fa-pen"></i>     </a>',
-            '<a class="remove" href="#genericModal" title="Remove" data-toggle="modal" data-target="#genericModal" data-radioid="' + row['radioId']+'"><i class="fa fa-trash"></i>     </a>',
-        ].join('')
-    }
-
-    function dateFormatter(value, row, index) {
-        if (typeof(value) == 'undefined') {
-            return 'N/A';
-        }
-        return moment(value).format("dddd HH:mm:ss");
-    }
-
-    $("#genericModal").on('show.bs.modal', function (e) {
-        var data = $(e.relatedTarget).data();
-        $('.title', this).text(data.radioid);
-        $('.btn-ok', this).data('radioid', data.radioid);
-    });
-
-    $('#genericModal').on('click', '.btn-ok', function (e) {
-        var radioid = $(this).data('radioid');
-        deleteRadio(radioid);
-    });
-
-    window.operateEvents = {
-        'click .request_gps': function (e, value, row, index) {
-            //alert('Requesting GPS for: ' + row['radioId'] + JSON.stringify(row))
-            refreshGps(row['radioId']);
-        },
-        'click .edit': function (e, value, row, index) {
-            editRadio(row['radioId'], row['name'], row['GpsMode'], row['requestInterval']);
-        },
-    }
-
-    
-    function initTable() {
-        $table.bootstrapTable('destroy').bootstrapTable({
-            // Defines the URL to get table data from.
-            url: `${getApiBaseUrl()}/radio`,
-            height: 800,
-            locale: 'en-US',
-            columns: [
-                [{
-                    field: 'state',
-                    checkbox: true,
-                    rowspan: 2,
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    title: 'Radio ID',
-                    field: 'radioId',
-                    rowspan: 2,
-                    align: 'center',
-                    valign: 'middle',
-                    sortable: true,
-                }, {
-                    title: 'Item Detail',
-                    colspan: 5,
-                    align: 'center'
-                }],
-                [{
-                    field: 'Status',
-                    title: 'Status',
-                    sortable: true,
-                    align: 'center'
-                },
-                    {
-                        field: 'LastSeen',
-                        title: 'Last Seen',
-                        sortable: true,
-                        align: 'center',
-                        formatter: dateFormatter
-                    },
-                    {
-                        field: 'LastGpsRequested',
-                        title: 'Last GPS Request',
-                        align: 'center',
-                        clickToSelect: false,
-                        formatter: dateFormatter
-                    },
-                    {
-                        field: 'LastGpsTimeStamp',
-                        title: 'Last GPS Received',
-                        align: 'center',
-                        clickToSelect: false,
-                        formatter: dateFormatter
-                    },
-                    {
-                        field: 'operate',
-                        title: 'Actions',
-                        align: 'center',
-                        clickToSelect: false,
-                        events: window.operateEvents,
-                        formatter: operateFormatter
-                    }]
-            ]
-        })
-        $table.on('check.bs.table uncheck.bs.table ' +
-            'check-all.bs.table uncheck-all.bs.table',
-            function () {
-                $remove.prop('disabled', !$table.bootstrapTable('getSelections').length)
-
-                // save your data, here just save the current page
-                selections = getIdSelections()
-                // push or splice the selections if you want to save all data selections
-            })
-        $table.on('all.bs.table', function (e, name, args) {
-            console.log(name, args)
-        })
-
-    }
-
-    $(function () {
-        initTable()
-    })
-</script>
