@@ -82,6 +82,7 @@ namespace TrboPortal.Mappers
                 DefaultInterval = settings.DefaultInterval,
                 DefaultGpsMode = gpsMode,
                 ServerInterval = settings.ServerInterval,
+                GoogleMapsApiKey = settings.GoogleMapsApiKey,
                 CiaBataSettings = new CiaBataSettings
                 {
                     Host = settings.CiaBataHost

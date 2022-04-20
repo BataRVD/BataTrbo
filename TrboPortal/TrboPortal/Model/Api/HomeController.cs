@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using TrboPortal.Model.Db;
 
 namespace TrboPortal.Model.Api
 {
@@ -20,6 +21,7 @@ namespace TrboPortal.Model.Api
         public ActionResult Radios()
         {
             ViewBag.Title = "Radios";
+            ViewBag.GoogleMapsApiKey = Repository.GetLatestSystemSettingsAsync().Result?.GoogleMapsApiKey ?? "DEFINE_API_KEY_IN_SETTINGS_MENU";
             return View();
         }
 

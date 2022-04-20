@@ -27,5 +27,8 @@ namespace TrboPortal.Model.Api
         [Required]
         public CiaBataSettings CiaBataSettings { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("GoogleMapsApiKey", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string GoogleMapsApiKey { get; set; }
+
     }
 }

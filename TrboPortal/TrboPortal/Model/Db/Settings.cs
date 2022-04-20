@@ -18,5 +18,7 @@ namespace TrboPortal.Model.Db
         public string TrboNetPassword { get; set; }
         public string CiaBataHost { get; set; }
 
+        public string GoogleMapsApiKey { get; set; }
+
     }
 }

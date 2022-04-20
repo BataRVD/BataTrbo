@@ -104,6 +104,7 @@ namespace TrboPortal.Controllers
                     TrboNetPassword = body.TurboNetSettings?.Password,
                     TrboNetUser = body.TurboNetSettings?.User,
                     CiaBataHost = body.CiaBataSettings?.Host,
+                    GoogleMapsApiKey = body.GoogleMapsApiKey?.ToString(),
                 };
 
                 //Store the settings
