@@ -85,7 +85,7 @@ window.tableDetailFormatter = function tableDetailFormatter(index, row) {
             html.push('<p><b>' + key + ':</b> ' + value + '</p>')
         }
     })
-    html.push(gpsMeasurementsFormatter(row['GpsMeasurements']));
+    html.push(gpsMeasurementsFormatter(index, row['GpsMeasurements']));
     return html.join('')
 }
 
@@ -123,19 +123,76 @@ function operateFormatter(value, row, index) {
  * Renders part of DetailFormatter's view for expaned row containing table of most recent GPS measurements of said row.
  * @param {any} gpsMeasurements
  */
-function gpsMeasurementsFormatter(gpsMeasurements) {
+function gpsMeasurementsFormatter(rowIndex, gpsMeasurements) {
     var html = []
     if (gpsMeasurements == null || gpsMeasurements.length == 0) {
         return html;
     }
+    const mapsCoordinates = [];
     html.push('<h3>GPS Measurements</h3>');
-    html.push("<table><tr><th>TimeStamp</th><th>Latitude</th><th>Longitude</th></tr>");
+    html.push('<div class="GpsContainer">');
+    html.push('<div class="GpsRow">');
+    html.push("<div class='table-cell GpsRowTable'><table><tr><th>TimeStamp</th><th>Latitude</th><th>Longitude</th></tr>");
     $.each(gpsMeasurements, function (index, m) {
-        var row = `<tr><td>${m['Timestamp']}</td><td>${m['Latitude']}</td><td>${m['Longitude']}</td></tr>`;
+        const friendlyTimestamp = moment(m['Timestamp']).format("yyyy-MM-DD HH:mm:ss")
+        var row = "<tr><td>" + friendlyTimestamp + "</td><td>" + m['Latitude'] + "</td><td>" + m['Longitude'] + "</td></tr>";
         html.push(row);
+        mapsCoordinates.push({ ts: friendlyTimestamp, lat: m['Latitude'], lng: m['Longitude'] })
     })
-    html.push("</table>");
-    return html;
+    html.push("</table></div>");
+    const mapDivId = `map-${rowIndex}`;
+    html.push(`<div id='${mapDivId}' class='table-cell GpsRowMap'>Test</div>`);
+    html.push('</div></div>');
+
+    // Call renderRadioGpsMap after 100ms as this HTML needs to be added first before map div can be found.
+    setTimeout(function () { renderRadioGpsMap(mapDivId, mapsCoordinates); }, 100);
+
+    return html.join('\r\n');
+}
+
+/**
+ * Renders Google Maps drawing a line between GPS points using PolyLine.
+ * Assumed coordinates are ordered descending in time (newest on top).
+ * Map is centered on newest GPS coordinate.
+ * @param {any} divId Div id to render map in
+ * @param {any} coordinates Coordinates to render.
+ */
+function renderRadioGpsMap(divId, mapsCoordinates) {
+    const centerLat = mapsCoordinates[0].lat
+    const centerLong = mapsCoordinates[0].lng
+    console.log(`Rendering RadioGpsMap for div ${divId}, centering on ${centerLat}, ${centerLong}`)
+    const map = new google.maps.Map(document.getElementById(divId), {
+        zoom: 15,
+        center: { lat: centerLat, lng: centerLong  },
+        mapTypeId: "terrain",
+    });
+    console.log(map);
+    const polyLineCoordinatesLine = new google.maps.Polyline({
+        path: mapsCoordinates,
+        geodesic: true,
+        strokeColor: "#FF0000",
+        strokeOpacity: 1.0,
+        strokeWeight: 2,
+    });
+    polyLineCoordinatesLine.setMap(map);
+    renderMapMarkers(map, mapsCoordinates)
+}
+
+/**
+ * Adds red markers with hover-over with GPS timestamp on Google Maps.
+ * @param {any} map Map to render markers on
+ * @param {any} mapsCoordinates The markers to render.
+ */
+function renderMapMarkers(map, mapsCoordinates) {
+    for (let i = 0; i < mapsCoordinates.length; i++) {
+        const measurement = mapsCoordinates[i];
+
+        new google.maps.Marker({
+            position: { lat: measurement.lat, lng: measurement.lng },
+            map,
+            title: measurement.ts,
+        });
+    }
 }
 
 /**
@@ -287,7 +344,7 @@ function initTable() {
                 valign: 'middle',
                 sortable: true,
             }, {
-                title: 'Item Detail',
+                title: 'Details',
                 colspan: 5,
                 align: 'center'
             }],

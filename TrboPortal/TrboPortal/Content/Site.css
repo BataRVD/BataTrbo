@@ -31,3 +31,25 @@ textarea {
     align-content: center;
     text-align: center;
 }
+
+
+.GpsWrapper {
+    display: table;
+}
+
+.GpsRow {
+    display: table-row;
+}
+
+.table-cell {
+    border: 1px solid;
+    display: table-cell;
+    padding: 2px;
+}
+
+.GpsRowTable {
+    width: 50%;
+}
+.GpsRowMap {
+    width: 50%;
+}
