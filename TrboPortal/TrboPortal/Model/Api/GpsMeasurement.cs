@@ -28,7 +28,8 @@ namespace TrboPortal.Model.Api
         public GpsMeasurement() { }
         public GpsMeasurement(GpsEntry g)
         {
-            RadioID = g.RadioId ?? -1;
+            RadioID = g.RadioId;
+            DeviceID = g.DeviceId;
             Timestamp = DateTimeMapper.ToString(g.Timestamp);
             Latitude = g.Latitude;
             Longitude = g.Longitude;

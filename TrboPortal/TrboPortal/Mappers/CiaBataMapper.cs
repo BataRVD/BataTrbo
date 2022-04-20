@@ -1,5 +1,4 @@
-﻿using NLog;
-using TrboPortal.CiaBata;
+﻿using TrboPortal.CiaBata;
 using GpsMeasurement = TrboPortal.Model.Api.GpsMeasurement;
 
 namespace TrboPortal.Mappers

@@ -36,8 +36,7 @@ namespace TrboPortal.Controllers
             using (var context = new DatabaseContext())
             {
                 var dbResults = await context.GpsEntries
-                    .Where(g => g.RadioId.HasValue &&
-                                (hasNoIds || ids.Contains(g.RadioId.Value)) &&
+                    .Where(g => (hasNoIds || ids.Contains(g.RadioId)) &&
                                 (from == null || from < g.Timestamp) &&
                                 (through == null || through > g.Timestamp))
                     .OrderByDescending(g=> g.Timestamp)

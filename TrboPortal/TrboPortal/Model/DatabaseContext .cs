@@ -53,6 +53,8 @@ namespace TrboPortal.Model
         private void ConfigureModels(DbModelBuilder mb)
         {
             mb.Entity<GpsEntry>().ToTable("GpsEntry");
+            // Add Index (and Unique Constraint) on (RadioId, Timestamp), preventing duplicate inserts of same GpsMeasurement.
+            mb.Entity<GpsEntry>().HasIndex(entity => new { entity.RadioId, entity.Timestamp }).IsUnique();
             mb.Entity<Radio>().ToTable("Radio");
             mb.Entity<Settings>().ToTable("Settings");
             mb.Entity<LogEntry>().ToTable("LogEntry");

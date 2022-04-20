@@ -1,5 +1,4 @@
 ﻿using NLog;
-using NS.Enterprise.ClientAPI;
 using NS.Enterprise.Objects;
 using NS.Enterprise.Objects.Devices;
 using NS.Enterprise.Objects.Event_args;
@@ -12,7 +11,6 @@ using System.Text;
 using TrboPortal.Model.Db;
 using Device = NS.Enterprise.Objects.Devices.Device;
 using GpsMeasurement = TrboPortal.Model.Api.GpsMeasurement;
-using Radio = TrboPortal.Model.Db.Radio;
 
 namespace TrboPortal.TrboNet
 {

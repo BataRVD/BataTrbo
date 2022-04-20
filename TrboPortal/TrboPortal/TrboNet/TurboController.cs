@@ -139,13 +139,22 @@ namespace TrboPortal.TrboNet
             try
             {
                 // Send to CiaBatac
+                // TODO TBD: We may want to post to CiaBata after inserting to DB to prevent reporting duplicates
                 await ciaBataController.PostGpsLocation(CiaBataMapper.ToGpsLocation(gpsMeasurement));
                 // Save to database
                 await Repository.InsertOrUpdateAsync(DatabaseMapper.Map(gpsMeasurement));
-
             }
             catch (Exception ex)
             {
+                var innerException = ex.InnerException?.InnerException;
+                if (innerException != null && innerException.GetType() == typeof(System.Data.SQLite.SQLiteException))
+                {
+                    var errorCode = ((System.Data.SQLite.SQLiteException)innerException).ResultCode;
+                    if (errorCode.HasFlag(System.Data.SQLite.SQLiteErrorCode.Constraint))
+                    {
+                        logger.Trace($"Not storing (duplicate) GpsMeasurement for RadioID '{gpsMeasurement.RadioID}' and Timestamp '{gpsMeasurement.Timestamp}'.");
+                    }
+                }
                 logger.Error(ex, "Error posting gps");
             }
         }
