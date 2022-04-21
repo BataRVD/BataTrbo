@@ -153,9 +153,10 @@ namespace TrboPortal.TrboNet
                     if (errorCode.HasFlag(System.Data.SQLite.SQLiteErrorCode.Constraint))
                     {
                         logger.Trace($"Not storing (duplicate) GpsMeasurement for RadioID '{gpsMeasurement.RadioID}' and Timestamp '{gpsMeasurement.Timestamp}'.");
+                        return;
                     }
                 }
-                logger.Error(ex, "Error posting gps");
+                logger.Error(ex, "Error posting (or saving) gps.");
             }
         }
 
