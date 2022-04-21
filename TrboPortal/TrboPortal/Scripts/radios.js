@@ -366,6 +366,7 @@ function initTable() {
                 title: 'Last GPS Request',
                 align: 'center',
                 clickToSelect: false,
+                sortable: true,
                 formatter: dateFormatter
             },
             {
@@ -373,6 +374,7 @@ function initTable() {
                 title: 'Last GPS Received',
                 align: 'center',
                 clickToSelect: false,
+                sortable: true,
                 formatter: dateFormatter
             },
             {
