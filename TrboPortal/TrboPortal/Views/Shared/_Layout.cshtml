@@ -31,7 +31,6 @@
                 <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 <li>@Html.ActionLink("Settings", "Settings", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 <li>@Html.ActionLink("Radios", "Radios", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("Map", "Map", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 <li>@Html.ActionLink("Queue", "MessageQueue", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 <li>@Html.ActionLink("Logs", "Logs", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 <li>@Html.ActionLink("Swagger", "Swagger", "Home", new { area = "" }, new { @class = "nav-link" })</li>
@@ -42,6 +41,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/swagger/ui/index">Swagger (Redirect)</a>
                         @Html.ActionLink("API", "Index", "Help", new { area = "" }, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Map", "Map", "Home", new { area = "" }, new { @class = "dropdown-item" })
                         @Html.ActionLink("Playground", "Playground", "Home", new { area = "" }, new { @class = "dropdown-item" })
                         <a class="dropdown-item" target="_blank" href="https://github.com/BataRVD/BataTrbo">Source</a>
                     </div>
