@@ -208,6 +208,7 @@
     <Content Include="Scripts\3rdparty\moment.js" />
     <Content Include="Scripts\map.js" />
     <Content Include="Scripts\maps-helper.js" />
+    <Content Include="Scripts\message-queue.js" />
     <Content Include="Scripts\radios.js" />
     <Content Include="Scripts\settings.js" />
     <Content Include="Web.config" />
