@@ -21,39 +21,12 @@ function getIdSelections() {
     })
 }
 
-function responseHandler(res) {
-    $.each(res.rows, function (i, row) {
-        row.state = $.inArray(row.id, selections) !== -1
-    })
-    return res
-}
-
 function detailFormatter(index, row) {
     var html = []
     $.each(row, function (key, value) {
         html.push('<p><b>' + key + ':</b> ' + value + '</p>')
     })
     return html.join('')
-}
-
-function operateFormatter(value, row, index) {
-    return [
-        '<a class="request_gps" href="javascript:void(0)" title="Request GPS">',
-        '<i class="fa fa-location-arrow"></i>',
-        '</a>  ',
-        '<a class="remove" href="javascript:void(0)" title="Remove">',
-        '<i class="fa fa-trash"></i>',
-        '</a>'
-    ].join('')
-}
-
-window.operateEvents = {
-    'click .request_gps': function (e, value, row, index) {
-        alert('Requesting GPS for: ' + JSON.stringify(row))
-    },
-    'click .remove': function (e, value, row, index) {
-        alert(`Delete clicked for: ${row['radioId']}`)
-    },
 }
 
 function initTable() {
