@@ -25,6 +25,13 @@ namespace TrboPortal.Model.Api
             return View();
         }
 
+        public ActionResult Map()
+        {
+            ViewBag.Title = "Radios";
+            ViewBag.GoogleMapsApiKey = Repository.GetLatestSystemSettingsAsync().Result?.GoogleMapsApiKey ?? "DEFINE_API_KEY_IN_SETTINGS_MENU";
+            return View();
+        }
+
         public ActionResult MessageQueue()
         {
             ViewBag.Title = "MessageQueue";

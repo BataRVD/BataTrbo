@@ -1,0 +1,28 @@
+﻿<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css">
+<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<!-- Radio GPS Map rendering. Maps API Key is 'borrowed' from BataPanini -->
+@if (ViewBag.GoogleMapsApiKey != null)
+{
+    <script src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleMapsApiKey&libraries=visualization&v=weekly" defer></script>
+
+}
+
+
+<script type="module" src="/Scripts/map.js"></script>
+
+<style>
+    .select,
+    .like {
+        margin-right: 10px;
+    }
+</style>
+
+<div id="MapContainer" style="display: none;">
+
+</div>
+
+<div id="Map" style="min-height: 90vh;"></div>

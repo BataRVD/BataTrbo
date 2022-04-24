@@ -206,6 +206,8 @@
     <Content Include="Scripts\3rdparty\jquery\jquery-3.6.0.min.js" />
     <Content Include="Scripts\3rdparty\modernizr-2.8.3.js" />
     <Content Include="Scripts\3rdparty\moment.js" />
+    <Content Include="Scripts\map.js" />
+    <Content Include="Scripts\maps-helper.js" />
     <Content Include="Scripts\radios.js" />
     <Content Include="Scripts\settings.js" />
     <Content Include="Web.config" />
@@ -228,6 +230,7 @@
     <Content Include="Views\Home\Radios.cshtml" />
     <Content Include="Views\Home\Playground.cshtml" />
     <Content Include="Views\Home\MessageQueue.cshtml" />
+    <Content Include="Views\Home\Map.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

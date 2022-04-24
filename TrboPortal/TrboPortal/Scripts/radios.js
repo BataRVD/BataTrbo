@@ -1,4 +1,6 @@
 import * as api from './api.js';
+import * as mapsHelper from './maps-helper.js';
+import MapProperties from './maps-helper.js';
 var $table = $('#radiosTable');
 var $remove = $('#remove');
 var selections = [];
@@ -144,56 +146,14 @@ function gpsMeasurementsFormatter(rowIndex, gpsMeasurements) {
     html.push(`<div id='${mapDivId}' class='table-cell GpsRowMap'>Test</div>`);
     html.push('</div></div>');
 
-    // Call renderRadioGpsMap after 100ms as this HTML needs to be added first before map div can be found.
-    setTimeout(function () { renderRadioGpsMap(mapDivId, mapsCoordinates); }, 100);
+    const mapProperties = new MapProperties(mapDivId, gpsMeasurements);
+    mapProperties.renderLines = true;
+
+    mapsHelper.showMap(mapProperties);
 
     return html.join('\r\n');
 }
 
-/**
- * Renders Google Maps drawing a line between GPS points using PolyLine.
- * Assumed coordinates are ordered descending in time (newest on top).
- * Map is centered on newest GPS coordinate.
- * @param {any} divId Div id to render map in
- * @param {any} coordinates Coordinates to render.
- */
-function renderRadioGpsMap(divId, mapsCoordinates) {
-    const centerLat = mapsCoordinates[0].lat
-    const centerLong = mapsCoordinates[0].lng
-    console.log(`Rendering RadioGpsMap for div ${divId}, centering on ${centerLat}, ${centerLong}`)
-    const map = new google.maps.Map(document.getElementById(divId), {
-        zoom: 15,
-        center: { lat: centerLat, lng: centerLong  },
-        mapTypeId: "terrain",
-    });
-    console.log(map);
-    const polyLineCoordinatesLine = new google.maps.Polyline({
-        path: mapsCoordinates,
-        geodesic: true,
-        strokeColor: "#FF0000",
-        strokeOpacity: 1.0,
-        strokeWeight: 2,
-    });
-    polyLineCoordinatesLine.setMap(map);
-    renderMapMarkers(map, mapsCoordinates)
-}
-
-/**
- * Adds red markers with hover-over with GPS timestamp on Google Maps.
- * @param {any} map Map to render markers on
- * @param {any} mapsCoordinates The markers to render.
- */
-function renderMapMarkers(map, mapsCoordinates) {
-    for (let i = 0; i < mapsCoordinates.length; i++) {
-        const measurement = mapsCoordinates[i];
-
-        new google.maps.Marker({
-            position: { lat: measurement.lat, lng: measurement.lng },
-            map,
-            title: measurement.ts,
-        });
-    }
-}
 
 /**
  * Renders friendly DateTime representation for use in BootstrapTable columns
