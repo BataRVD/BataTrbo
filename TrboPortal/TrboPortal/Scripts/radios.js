@@ -162,7 +162,7 @@ function gpsMeasurementsFormatter(rowIndex, gpsMeasurements) {
  * @param {any} index index of row.
  */
 function dateFormatter(value, row, index) {
-    if (typeof (value) == 'undefined') {
+    if (typeof (value) == 'undefined' || value === "0001-01-01T00:00:00") {
         return 'N/A';
     }
     return moment(value).format("dddd HH:mm:ss");
