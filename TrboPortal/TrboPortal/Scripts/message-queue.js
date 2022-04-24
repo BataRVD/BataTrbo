@@ -1,13 +1,19 @@
 import * as api from './api.js';
 
-var $table = $('#table')
+var $table = $('#messageQueueTable')
 var $remove = $('#remove')
 var selections = []
 
 // Initial data load.
 jQuery(document).ready(function (_$) {
     initTable();
+    autoRefresh();
 });
+
+function autoRefresh() {
+    $table.bootstrapTable('refresh');
+    setTimeout(function () { autoRefresh(); }, 2000);
+}
 
 function getIdSelections() {
     return $.map($table.bootstrapTable('getSelections'), function (row) {
