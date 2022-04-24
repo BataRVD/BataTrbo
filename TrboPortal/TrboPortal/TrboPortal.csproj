@@ -116,7 +116,7 @@
     <Compile Include="Model\Api\GpsMeasurement.cs" />
     <Compile Include="Model\Api\GpsModeEnum.cs" />
     <Compile Include="Model\Api\HomeController.cs" />
-    <Compile Include="Model\Api\MessageQueueItem.cs" />
+    <Compile Include="Model\Api\QueueInfo.cs" />
     <Compile Include="Model\Api\Radio.cs" />
     <Compile Include="Model\Api\SystemSettings.cs" />
     <Compile Include="Model\Api\LogMessage.cs" />

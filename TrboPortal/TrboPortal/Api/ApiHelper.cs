@@ -140,5 +140,14 @@ namespace TrboPortal.Controllers
             return result.Select(l => new LogMessage(l)).ToList();
         }
 
+
+        public static QueueInfo GetQueueInfo()
+        {
+            var messageQueuItems = TurboController.Instance.GetRequestQueue()
+                .Select(rqi => MessageQueueMapper.Map(rqi))
+                .OrderBy(i => i.Timestamp)
+                .ToList();
+            return new QueueInfo(messageQueuItems, TurboController.LocationRequestCounter, TurboController.LocationResponseCounter);
+        }
     }
 }

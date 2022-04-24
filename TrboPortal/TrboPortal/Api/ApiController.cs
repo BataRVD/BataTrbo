@@ -99,13 +99,9 @@ namespace TrboPortal.Controllers
         /// <summary>TrboNet message queue</summary>
         /// <returns>Messages in TrboNet queue</returns>
         [HttpGet, Route("system/queue")]
-        public Task<ICollection<MessageQueueItem>> GetMessageQueue()
+        public Task<QueueInfo> GetMessageQueue()
         {
-            return Task.FromResult<ICollection<MessageQueueItem>>(TurboController.Instance.GetRequestQueue()
-                .Select(rqi => MessageQueueMapper.Map(rqi))
-                .OrderBy(i => i.Timestamp)
-                .ToList()
-            );
+            return Task.FromResult<QueueInfo>(ApiHelper.GetQueueInfo());
         }
 
         /// <summary>List of all radios</summary>

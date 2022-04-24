@@ -21,6 +21,11 @@ namespace TrboPortal.TrboNet
         private static TurboController instance;
         private static readonly object LockObject = new object();
 
+        // Total number of location request messages sent to MotoTrboServer since startup
+        public static long LocationRequestCounter { get; private set; } = 0;
+        // Total number of location response messages received from MotoTrboServer since startup
+        public static long LocationResponseCounter { get; private set; } = 0;
+
         // some clients
         private static CiaBata.CiaBata ciaBataController;
 
@@ -169,6 +174,7 @@ namespace TrboPortal.TrboNet
             {
                 Connect();
                 trboNetClient.QueryDeviceLocation(deviceInfo.Device, "", out DeviceCommand cmd);
+                LocationRequestCounter++;
                 logger.Debug($"response from querydevicelocation DeviceID: {deviceID}, RadioID: {radioID}, cmd: {cmd}");
             }
             else

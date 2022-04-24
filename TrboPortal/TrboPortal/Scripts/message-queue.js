@@ -37,7 +37,7 @@ function initTable() {
         locale: 'en-US',
         columns: [{
             title: 'Timestamp',
-            field: 'Timestamp',
+            field: 'MessageQueueItems.Timestamp',
             align: 'center',
             valign: 'middle',
             sortable: true,
@@ -46,7 +46,12 @@ function initTable() {
             field: 'RadioID',
             align: 'center',
             sortable: true,
-        }]
+            }],
+        responseHandler: function (res) {
+            $("#queueCounter").html(`Location requests sent: ${res.LocationRequestCounter}</br>Location responses received: ${res.LocationResponseCounter}`);
+            return res.MessageQueueItems;
+            
+        }
     })
     $table.on('check.bs.table uncheck.bs.table ' +
         'check-all.bs.table uncheck-all.bs.table',
