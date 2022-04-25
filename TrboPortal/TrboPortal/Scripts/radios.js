@@ -305,12 +305,18 @@ function initTable() {
                 sortable: true,
             }, {
                 title: 'Details',
-                colspan: 5,
+                colspan: 6,
                 align: 'center'
             }],
             [{
                 field: 'Status',
                 title: 'Status',
+                sortable: true,
+                align: 'center'
+            },
+            {
+                field: 'requestInterval',
+                title: 'Interval (s)',
                 sortable: true,
                 align: 'center'
             },
