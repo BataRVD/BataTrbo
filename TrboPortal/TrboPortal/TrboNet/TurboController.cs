@@ -152,11 +152,12 @@ namespace TrboPortal.TrboNet
         {
             try
             {
-                // Send to CiaBatac
-                // TODO TBD: We may want to post to CiaBata after inserting to DB to prevent reporting duplicates
-                await ciaBataController.PostGpsLocation(CiaBataMapper.ToGpsLocation(gpsMeasurement));
-                // Save to database
+                // Save to database (Note: Throws exception on duplicates, index on Timestamp,RadioID)
                 await Repository.InsertOrUpdateAsync(DatabaseMapper.Map(gpsMeasurement));
+                // Increment Counter if insert succeeded.
+                LocationResponseCounter++;
+                // Send to CiaBata
+                await ciaBataController.PostGpsLocation(CiaBataMapper.ToGpsLocation(gpsMeasurement));
             }
             catch (Exception ex)
             {

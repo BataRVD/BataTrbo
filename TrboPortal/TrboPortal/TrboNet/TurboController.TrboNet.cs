@@ -193,8 +193,6 @@ namespace TrboPortal.TrboNet
                 {
                     try
                     {
-                        LocationResponseCounter++;
-
                         int deviceID = gpsInfo.DeviceID;
 
                         GpsMeasurement gpsMeasurement = new GpsMeasurement
