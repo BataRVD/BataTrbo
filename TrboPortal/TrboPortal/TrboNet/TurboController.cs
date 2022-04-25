@@ -69,7 +69,6 @@ namespace TrboPortal.TrboNet
         private void CreateTrboClient()
         {
             trboNetClient = new Client.TrboClient();
-
             trboNetClient.DevicesChanged(DevicesChanged);
             trboNetClient.DeviceLocationChanged(DeviceLocationChanged);
             trboNetClient.DeviceStateChanged(DeviceStateChanged);
@@ -137,6 +136,11 @@ namespace TrboPortal.TrboNet
             }
         }
 
+        public long GetInternalTrboNetQueueSize()
+        {
+            return trboNetClient.GetInternalQueueCount();
+        }
+
         #endregion
 
         private async Task PostGpsLocation(GpsMeasurement gpsMeasurement)
@@ -165,6 +169,7 @@ namespace TrboPortal.TrboNet
             }
         }
 
+
         private void QueryLocation(RequestMessage rm)
         {
             int deviceID = rm.deviceID;
@@ -173,9 +178,13 @@ namespace TrboPortal.TrboNet
             if (GetDeviceInfoByDeviceID(deviceID, out DeviceInfo deviceInfo) && deviceInfo?.Device != null)
             {
                 Connect();
-                trboNetClient.QueryDeviceLocation(deviceInfo.Device, "", out DeviceCommand cmd);
-                LocationRequestCounter++;
-                logger.Debug($"response from querydevicelocation DeviceID: {deviceID}, RadioID: {radioID}, cmd: {cmd}");
+                for (int i = 0; i < 1000; i++)
+                {
+                    trboNetClient.QueryDeviceLocation(deviceInfo.Device, "", out DeviceCommand cmd);
+                    LocationRequestCounter++;
+                    logger.Debug($"response from querydevicelocation DeviceID: {deviceID}, RadioID: {radioID}, cmd: {cmd}");
+                }
+                
             }
             else
             {

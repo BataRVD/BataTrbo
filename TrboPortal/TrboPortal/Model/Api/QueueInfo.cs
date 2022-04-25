@@ -12,16 +12,21 @@ namespace TrboPortal.Model.Api
         // Total number of location response messages received from MotoTrboServer since startup
         [Newtonsoft.Json.JsonProperty("LocationResponseCounter", Required = Newtonsoft.Json.Required.Always)]
         long LocationResponseCounter;
-        
+
+        // Total number of location response messages received from MotoTrboServer since startup
+        [Newtonsoft.Json.JsonProperty("InternalTrboNetQueueSize", Required = Newtonsoft.Json.Required.Always)]
+        long InternalTrboNetQueueSize;
+
         [Newtonsoft.Json.JsonProperty("MessageQueueItems", Required = Newtonsoft.Json.Required.Always)]
         ICollection<MessageQueueItem> MessageQueueItems;
 
         public QueueInfo() { }
-        public QueueInfo(List<MessageQueueItem> messageQueueItems, long locationRequestCounter, long locationResponseCounter)
+        public QueueInfo(List<MessageQueueItem> messageQueueItems, long locationRequestCounter, long locationResponseCounter, long internalTrboNetQueueSize)
         {
             MessageQueueItems = messageQueueItems;
             LocationRequestCounter = locationRequestCounter;
             LocationResponseCounter = locationResponseCounter;
+            InternalTrboNetQueueSize = internalTrboNetQueueSize;
         }
     }
 

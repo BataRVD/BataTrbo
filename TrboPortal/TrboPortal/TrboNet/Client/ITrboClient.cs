@@ -26,5 +26,8 @@ namespace TrboPortal.TrboNet.Client
         void DeviceTelemetryChanged(EventHandler<DeviceTelemetryChangedEventArgs> deviceTelemetryChanged);
         void WorkflowCommandFinished(EventHandler<WorkflowCommandFinishedEventArgs> workflowCommandFinished);
         int QueryDeviceLocation(Device device, string v, out DeviceCommand cmd);
+        long GetInternalQueueCount();
+
+        bool ClearInternalQueue();
     }
 }

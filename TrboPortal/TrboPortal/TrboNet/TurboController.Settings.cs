@@ -69,7 +69,7 @@ namespace TrboPortal.TrboNet
                     ciaBataController.url = ciaBataUrl;
 
                     // update heartbeat
-                    heartBeat.Interval = serverInterval * 1000;
+                    heartBeat.Interval = serverInterval;
 
                     if (!Enum.TryParse(settings.DefaultGpsMode, out defaultGpsMode))
                     {

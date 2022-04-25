@@ -48,7 +48,7 @@ function initTable() {
             sortable: true,
             }],
         responseHandler: function (res) {
-            $("#queueCounter").html(`Location requests sent: ${res.LocationRequestCounter}</br>Location responses received: ${res.LocationResponseCounter}`);
+            $("#queueCounter").html(`Location requests sent: ${res.LocationRequestCounter}</br>Location responses received: ${res.LocationResponseCounter}</br>Internal Queue Size: ${res.InternalTrboNetQueueSize}`);
             return res.MessageQueueItems;
             
         }

@@ -12,6 +12,11 @@ namespace TrboPortal.TrboNet.Client
     {
         public bool IsStarted => throw new NotImplementedException();
 
+        public bool ClearInternalQueue()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Connect(NetworkConnectionParam networkConnectionParam, UserInfo userInfo, ClientInitFlags empty)
         {
             throw new NotImplementedException();
@@ -43,6 +48,11 @@ namespace TrboPortal.TrboNet.Client
         }
 
         public List<DeviceCommand> GetAllWorkflowCommands()
+        {
+            throw new NotImplementedException();
+        }
+
+        public long GetInternalQueueCount()
         {
             throw new NotImplementedException();
         }

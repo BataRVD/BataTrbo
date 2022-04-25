@@ -137,6 +137,24 @@
             <param name="gpsMeasurement"></param>
             <returns></returns>
         </member>
+        <member name="M:TrboPortal.TrboNet.Client.TrboClient.GetInternalQueueCount">
+            <summary>
+            Returns TrboNet internal DataQueue sizer (using reflection)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TrboPortal.TrboNet.Client.TrboClient.ClearInternalQueue">
+            <summary>
+            Clear internal DataQueue (using reflection) 
+            </summary>
+            <returns>Success or not</returns>
+        </member>
+        <member name="M:TrboPortal.TrboNet.Client.TrboClient.GetDataQueue">
+            <summary>
+            Get TrboNet internal DataQueue using reflection
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:TrboPortal.TrboNet.Queue`1.Remove(`0)">
             <summary>
             Remove all occurences of device from the queue

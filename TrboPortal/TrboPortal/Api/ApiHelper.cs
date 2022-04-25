@@ -147,7 +147,7 @@ namespace TrboPortal.Controllers
                 .Select(rqi => MessageQueueMapper.Map(rqi))
                 .OrderBy(i => i.Timestamp)
                 .ToList();
-            return new QueueInfo(messageQueuItems, TurboController.LocationRequestCounter, TurboController.LocationResponseCounter);
+            return new QueueInfo(messageQueuItems, TurboController.LocationRequestCounter, TurboController.LocationResponseCounter, TurboController.Instance.GetInternalTrboNetQueueSize());
         }
     }
 }
