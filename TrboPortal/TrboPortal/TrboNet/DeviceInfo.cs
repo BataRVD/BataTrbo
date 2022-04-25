@@ -18,6 +18,8 @@ namespace TrboPortal.TrboNet
 
         public DateTime LastMessageReceived { get; set; }
 
+        public DateTime LastGpsUpdateReceived { get; internal set; }
+
         public ConcurrentStack<GpsMeasurement> GpsLocations { get; }
         public Device Device { get; set; }
         public int DeviceID { get; internal set; }

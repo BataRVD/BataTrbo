@@ -41,7 +41,6 @@
         </member>
         <member name="M:TrboPortal.Controllers.ApiController.ClearTrboNetQueue">
             <summary>List of all radios</summary>
-            <param name="id">Tags to filter by</param>
             <returns>successful operation</returns>
         </member>
         <member name="M:TrboPortal.Controllers.ApiController.GetSystemSettings">

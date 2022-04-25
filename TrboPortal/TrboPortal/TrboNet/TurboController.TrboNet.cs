@@ -214,6 +214,7 @@ namespace TrboPortal.TrboNet
                         }
 
                         deviceInfo.LastMessageReceived = DateTime.Now;
+                        deviceInfo.LastGpsUpdateReceived = DateTime.Now;
                         int radioID = deviceInfo.RadioID;
                         gpsMeasurement.RadioID = radioID;
                         deviceInfo.GpsLocations.Push(gpsMeasurement);

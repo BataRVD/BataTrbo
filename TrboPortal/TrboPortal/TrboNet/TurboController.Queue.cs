@@ -47,9 +47,15 @@ namespace TrboPortal.TrboNet
                     continue;
                 }
 
-                double secondsSinceUpdate = (DateTime.Now - deviceInfo.LastUpdateRequest).TotalSeconds;
-                double secondsTillUpdate = minimumInterval - secondsSinceUpdate;
-                if (secondsTillUpdate > 0)
+                double secondsSinceUpdateRequest = (DateTime.Now - deviceInfo.LastUpdateRequest).TotalSeconds;
+                double secondsTillUpdateRequest = minimumInterval - secondsSinceUpdateRequest;
+                double secondsSinceGpsUpdate = (DateTime.Now - deviceInfo.LastGpsUpdateReceived).TotalSeconds;
+                double secondsTillGpsUpdate = minimumInterval - secondsSinceGpsUpdate;
+
+                // We're not going to queue GPS update request if:
+                // - Last update request is less then minimumInterval ago.
+                // - Last GPS update (response) is less then minimumInterval ago.
+                if (secondsTillUpdateRequest > 0 && secondsTillGpsUpdate > 0)
                 {
                     // Not ready for update
                     continue;
