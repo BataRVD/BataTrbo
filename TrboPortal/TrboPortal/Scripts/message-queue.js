@@ -10,6 +10,38 @@ jQuery(document).ready(function (_$) {
     autoRefresh();
 });
 
+
+window.clearBataTrboQueue=function clearBataTrboQueue() {
+    $('#clearBataTrboQueue').prop("disabled", true)
+    api.performApiCall(`system/clearQueue`, 'GET', null,
+        (response) => {
+            console.log(`Cleared BataTrbo Queue!`)
+            $('#clearBataTrboQueue').prop("disabled", false)
+        },
+        (response) => {
+            $('#clearBataTrboQueue').prop("disabled", false)
+            Promise.resolve(response.text())
+                .then(JSON.parse)
+                .then(resp_data => api.showGenericErrors(`Failed to clear BataTrboQueue`, api.getValidationErrors(resp_data)));
+        });
+}
+
+
+window.clearInternalQueue = function clearInternalQueue() {
+    $('#clearInternalQueue').prop("disabled", true)
+    api.performApiCall(`system/clearTrboNetQueue`, 'GET', null,
+        (response) => {
+            console.log(`Cleared BataTrbo Queue!`)
+            $('#clearInternalQueue').prop("disabled", false)
+        },
+        (response) => {
+            $('#clearInternalQueue').prop("disabled", false)
+            Promise.resolve(response.text())
+                .then(JSON.parse)
+                .then(resp_data => api.showGenericErrors(`Failed to clear Internal TrboNet Queue`, api.getValidationErrors(resp_data)));
+        });
+}
+
 function autoRefresh() {
     $table.bootstrapTable('refresh');
     setTimeout(function () { autoRefresh(); }, 2000);

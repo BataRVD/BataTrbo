@@ -113,6 +113,22 @@ namespace TrboPortal.Controllers
             return Task.Run(() => TurboController.Instance.ClearRequestQueue(id));
         }
 
+        /// <summary>List of all radios</summary>
+        /// <returns>successful operation</returns>
+        [HttpGet, Route("system/clearTrboNetQueue")]
+        public HttpResponseMessage ClearTrboNetQueue()
+        {
+            var result = TurboController.Instance.ClearInternalTrboNetQueue();
+            if (result)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            List<string> messages = new List<string> { "Failed to clear internal TrboNet Queue!" };
+            var errorResponse = Request.CreateResponse(HttpStatusCode.InternalServerError);
+            errorResponse.ReasonPhrase = "Failed to clear internal TrboNet Queue!";
+            errorResponse.Content = new StringContent(JsonConvert.SerializeObject(messages), Encoding.UTF8, "application/json");
+            return errorResponse;
+        }
 
         /// <summary>System settings</summary>
         /// <returns>Blaat</returns>

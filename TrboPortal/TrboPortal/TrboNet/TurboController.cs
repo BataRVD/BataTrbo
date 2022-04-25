@@ -141,6 +141,11 @@ namespace TrboPortal.TrboNet
             return trboNetClient.GetInternalQueueCount();
         }
 
+        public bool ClearInternalTrboNetQueue()
+        {
+            return trboNetClient.ClearInternalQueue();
+        }
+
         #endregion
 
         private async Task PostGpsLocation(GpsMeasurement gpsMeasurement)

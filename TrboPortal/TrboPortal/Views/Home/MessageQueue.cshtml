@@ -12,9 +12,12 @@
 </style>
 <div id="toolbar">
     <div id="queueCounter">Location requests sent: ??</br>Location responses received: ??</br>Internal Queue Size: ??</div>
-    <!--<button id="remove" class="btn btn-danger" disabled>
-        <i class="fa fa-trash"></i> Delete
-    </button>-->
+    <button id="clearBataTrboQueue" class="btn btn-danger" onclick="clearBataTrboQueue()">
+        <i class="fa fa-trash"></i> Clear BataTrbo Queue
+    </button>
+    <button id="clearInternalQueue" class="btn btn-danger" onclick="clearInternalQueue()">
+        <i class="fa fa-trash"></i> Clear Internal Queue
+    </button>
 </div>
 <table id="messageQueueTable"
        data-toolbar="#toolbar"
