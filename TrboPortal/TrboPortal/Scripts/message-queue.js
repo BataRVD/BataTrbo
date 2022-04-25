@@ -53,7 +53,7 @@ function getIdSelections() {
     })
 }
 
-function detailFormatter(index, row) {
+window.detailFormatter = function detailFormatter(index, row) {
     var html = []
     $.each(row, function (key, value) {
         html.push('<p><b>' + key + ':</b> ' + value + '</p>')
@@ -69,7 +69,7 @@ function initTable() {
         locale: 'en-US',
         columns: [{
             title: 'Timestamp',
-            field: 'MessageQueueItems.Timestamp',
+            field: 'Timestamp',
             align: 'center',
             valign: 'middle',
             sortable: true,
