@@ -178,13 +178,9 @@ namespace TrboPortal.TrboNet
             if (GetDeviceInfoByDeviceID(deviceID, out DeviceInfo deviceInfo) && deviceInfo?.Device != null)
             {
                 Connect();
-                for (int i = 0; i < 1000; i++)
-                {
-                    trboNetClient.QueryDeviceLocation(deviceInfo.Device, "", out DeviceCommand cmd);
-                    LocationRequestCounter++;
-                    logger.Debug($"response from querydevicelocation DeviceID: {deviceID}, RadioID: {radioID}, cmd: {cmd}");
-                }
-                
+                trboNetClient.QueryDeviceLocation(deviceInfo.Device, "", out DeviceCommand cmd);
+                LocationRequestCounter++;
+                logger.Debug($"response from querydevicelocation DeviceID: {deviceID}, RadioID: {radioID}, cmd: {cmd}");
             }
             else
             {
