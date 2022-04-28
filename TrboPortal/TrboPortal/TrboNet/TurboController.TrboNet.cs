@@ -253,17 +253,15 @@ namespace TrboPortal.TrboNet
         {
             try
             {
-                logger.Info("DevicesChanged");
-                Device device = e.ChangedObject;
-                int deviceID = e.ChangedObject.ID;
-                logger.Info($"DevicesChanged, deviceID {deviceID}");
+                var device = e.ChangedObject;
+                logger.Info($"DevicesChanged[{e.Action}]: DeviceID: '{device?.ID}'.");
                 switch (e.Action)
                 {
                     case NS.Shared.Common.ChangeAction.Add:
                         AddOrUpdateDevice(device);
                         break;
                     case NS.Shared.Common.ChangeAction.Remove:
-                        RemoveDevice(deviceID);
+                        RemoveDevice(device?.ID);
                         break;
                     case NS.Shared.Common.ChangeAction.ItemChanged:
                         AddOrUpdateDevice(device);
@@ -281,15 +279,20 @@ namespace TrboPortal.TrboNet
             }
         }
 
-        private void RemoveDevice(int deviceID)
+        private void RemoveDevice(int? deviceID)
         {
-            if (!devices.TryRemove(deviceID, out DeviceInfo deviceInfo))
+            if (deviceID == null)
             {
-                //TODO
-                logger.Error($"PANIEK! DeviceID {deviceID}");
+                logger.Error("Can't remove device null!");
                 return;
             }
-            logger.Info($"Remove device for deviceID {deviceID} radio {deviceInfo?.RadioID}");
+
+            if (!devices.TryRemove((int)deviceID, out DeviceInfo deviceInfo))
+            {
+                logger.Error($"Can't remove Device with DeviceID: '{deviceID}'.");
+                return;
+            }
+            logger.Info($"Remove device for deviceID {deviceID} radio {deviceInfo?.RadioID}.");
         }
 
 
