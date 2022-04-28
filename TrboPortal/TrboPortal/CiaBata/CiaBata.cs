@@ -80,17 +80,17 @@ namespace TrboPortal.CiaBata
                     gps.status = "offline";
                 }
 
-                string json = JsonConvert.SerializeObject(gps, Formatting.None);
-                logger.Info("PostDeviceLifeSign " + json);
+                string request = JsonConvert.SerializeObject(gps, Formatting.None);
+                logger.Info("PostDeviceLifeSign " + request);
 
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var content = new StringContent(request, Encoding.UTF8, "application/json");
                 var result = await httpClient.PostAsync(url, content);
 
                 logger.Debug("PostDeviceLifeSign result :" + result.StatusCode);
                 
                 if (result.StatusCode != System.Net.HttpStatusCode.OK)
                 {
-                    logger.Info("Error with PostDeviceLifeSign " + json);
+                    logger.Error($"Error with PostDeviceLifeSign for device '{gps.deviceName}'! {Environment.NewLine}Request: '{request}'. {Environment.NewLine}Response: '{result.Content}'.");
                 }
             }
             catch (Exception ex)
