@@ -134,10 +134,10 @@ function gpsMeasurementsFormatter(rowIndex, gpsMeasurements) {
     html.push('<h3>GPS Measurements</h3>');
     html.push('<div class="GpsContainer">');
     html.push('<div class="GpsRow">');
-    html.push("<div class='table-cell GpsRowTable'><table><tr><th>TimeStamp</th><th>Latitude</th><th>Longitude</th></tr>");
+    html.push("<div class='table-cell GpsRowTable'><table><tr><th>TimeStamp</th><th>Latitude</th><th>Longitude</th><th>Rssi</th></tr>");
     $.each(gpsMeasurements, function (index, m) {
         const friendlyTimestamp = moment(m['Timestamp']).format("yyyy-MM-DD HH:mm:ss")
-        var row = "<tr><td>" + friendlyTimestamp + "</td><td>" + m['Latitude'] + "</td><td>" + m['Longitude'] + "</td></tr>";
+        var row = "<tr><td>" + friendlyTimestamp + "</td><td>" + m['Latitude'] + "</td><td>" + m['Longitude'] + "</td><td>" + m['Rssi'].toFixed(2); + "</td></tr>";
         html.push(row);
         mapsCoordinates.push({ ts: friendlyTimestamp, lat: m['Latitude'], lng: m['Longitude'] })
     })
