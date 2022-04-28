@@ -84,13 +84,13 @@ namespace TrboPortal.CiaBata
                 logger.Info("PostDeviceLifeSign " + request);
 
                 var content = new StringContent(request, Encoding.UTF8, "application/json");
-                var result = await httpClient.PostAsync(url, content);
+                var response = await httpClient.PostAsync(url, content);
 
-                logger.Debug("PostDeviceLifeSign result :" + result.StatusCode);
-                
-                if (result.StatusCode != System.Net.HttpStatusCode.OK)
+                logger.Debug("PostDeviceLifeSign result :" + response.StatusCode);
+                if (response.StatusCode != System.Net.HttpStatusCode.OK)
                 {
-                    logger.Error($"Error with PostDeviceLifeSign for device '{gps.deviceName}'! {Environment.NewLine}Request: '{request}'. {Environment.NewLine}Response: '{result.Content}'.");
+                    logger.Error($"Error with PostDeviceLifeSign for device '{gps.deviceName}' ({response.StatusCode})!" +
+                        $"{Environment.NewLine}Request: '{request}'. {Environment.NewLine}Response: '{response}'.");
                 }
             }
             catch (Exception ex)
