@@ -63,8 +63,6 @@ namespace TrboPortal.TrboNet
                     turboNetUser = settings.TrboNetUser;
                     turboNetPassword = settings.TrboNetPassword;
 
-                    // Invalidate connection to make TrboNet use new config
-                    Connected = false;
                     // Update Ciabata
                     ciaBataController.url = ciaBataUrl;
 

@@ -25,9 +25,7 @@ namespace TrboPortal.TrboNet
         // This is a dictionary with DeviceID --> Operational info
         private static ConcurrentDictionary<int, DeviceInfo> devices = new ConcurrentDictionary<int, DeviceInfo>();
 
-        private bool Connected = false;
         private object ConnectLock = new object();
-
 
         private void Connect()
         {
@@ -35,9 +33,9 @@ namespace TrboPortal.TrboNet
             {
                 lock (ConnectLock)
                 {
-                    if (!Connected)
+                    if (!trboNetClient.IsStarted)
                     {
-                        Connected = ConnectToTurboNet();
+                        ConnectToTurboNet();
                     }
                 }
             }
