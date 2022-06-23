@@ -78,7 +78,7 @@
     <PackageReference Include="Microsoft.Extensions.Primitives" version="3.1.2" />
     <PackageReference Include="Microsoft.Web.Infrastructure" version="1.0.0.0" />
     <PackageReference Include="Modernizr" version="2.8.3" />
-    <PackageReference Include="Newtonsoft.Json" version="12.0.2" />
+    <PackageReference Include="Newtonsoft.Json" version="13.0.1" />
     <PackageReference Include="NLog" version="4.7.15" />
     <PackageReference Include="NSwag.MSBuild" version="13.2.3" developmentDependency="true" />
     <PackageReference Include="SQLite.CodeFirst" version="1.5.3.29" />
