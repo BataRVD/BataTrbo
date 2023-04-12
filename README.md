@@ -24,3 +24,6 @@ Waar mogelijk hebben wij zoveel mogelijk beunskills gecombineerd met enterprise-
 Dit hele verhaal is om te zorgen dat we voertuigen in de race kunnen volgen. De GPS-coördinaten worden hiervoor automagisch doorgezet naar het systeem waar we dit kunnen volgen. Dit systeem heet Batapanini.
 
 [Ga naar BataPanini »](https://www.batavierenrace.nl/nl/50/ciabata/)
+
+## De architectuurplaat
+![image](https://user-images.githubusercontent.com/878795/231572822-fdd5e7ce-8415-4804-a0b2-e11f314f385a.png)
