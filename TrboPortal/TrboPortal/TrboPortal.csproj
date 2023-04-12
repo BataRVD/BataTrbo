@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -83,7 +83,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Web.Infrastructure" version="1.0.0.0" />
     <PackageReference Include="Modernizr" version="2.8.3" />
-    <PackageReference Include="Newtonsoft.Json" version="12.0.2" />
+    <PackageReference Include="Newtonsoft.Json" version="13.0.1" />
     <PackageReference Include="NLog" version="4.7.15" />
     <PackageReference Include="NSwag.MSBuild" version="13.2.3" developmentDependency="true" />
     <PackageReference Include="SQLite.CodeFirst" version="1.5.3.29" />
