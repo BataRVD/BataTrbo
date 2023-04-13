@@ -67,10 +67,6 @@ namespace TrboPortal.TrboNet.Client
             throw new NotImplementedException();
         }
 
-        public void TransmitReceiveChanged(EventHandler<TransmitReceiveArgs> transmitReceiveChanged)
-        {
-            throw new NotImplementedException();
-        }
 
         public void WorkflowCommandFinished(EventHandler<WorkflowCommandFinishedEventArgs> workflowCommandFinished)
         {

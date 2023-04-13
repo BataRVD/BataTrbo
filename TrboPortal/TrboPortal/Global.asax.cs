@@ -65,7 +65,6 @@ namespace TrboPortal
                 m_client.DevicesChanged += DevicesChanged;
                 m_client.DeviceLocationChanged += DeviceLocationChanged;
                 m_client.DeviceStateChanged += M_client_DeviceStateChanged;
-                m_client.TransmitReceiveChanged += M_client_TransmitReceiveChanged;
                 m_client.DeviceTelemetryChanged += M_client_DeviceTelemetryChanged;
                 m_client.WorkflowCommandFinished += M_client_WorkflowCommandFinished;
 

@@ -75,11 +75,6 @@ namespace TrboPortal.TrboNet.Client
             return returnVal;
         }
 
-        public void TransmitReceiveChanged(EventHandler<TransmitReceiveArgs> transmitReceiveChanged)
-        {
-            client.TransmitReceiveChanged += transmitReceiveChanged;
-        }
-
         public void WorkflowCommandFinished(EventHandler<WorkflowCommandFinishedEventArgs> workflowCommandFinished)
         {
             client.WorkflowCommandFinished += workflowCommandFinished;

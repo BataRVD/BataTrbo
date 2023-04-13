@@ -22,7 +22,6 @@ namespace TrboPortal.TrboNet.Client
         void DevicesChanged(EventHandler<BindableCollectionEventArgs2<Device>> devicesChanged);
         void DeviceLocationChanged(EventHandler<DeviceLocationChangedEventArgs> deviceLocationChanged);
         void DeviceStateChanged(EventHandler<DeviceStateChangedEventArgs> deviceStateChanged);
-        void TransmitReceiveChanged(EventHandler<TransmitReceiveArgs> transmitReceiveChanged);
         void DeviceTelemetryChanged(EventHandler<DeviceTelemetryChangedEventArgs> deviceTelemetryChanged);
         void WorkflowCommandFinished(EventHandler<WorkflowCommandFinishedEventArgs> workflowCommandFinished);
         int QueryDeviceLocation(Device device, string v, out DeviceCommand cmd);

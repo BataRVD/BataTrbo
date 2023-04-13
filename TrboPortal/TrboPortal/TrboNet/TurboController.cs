@@ -72,7 +72,6 @@ namespace TrboPortal.TrboNet
             trboNetClient.DevicesChanged(DevicesChanged);
             trboNetClient.DeviceLocationChanged(DeviceLocationChanged);
             trboNetClient.DeviceStateChanged(DeviceStateChanged);
-            trboNetClient.TransmitReceiveChanged(TransmitReceiveChanged);
             trboNetClient.DeviceTelemetryChanged(DeviceTelemetryChanged);
             trboNetClient.WorkflowCommandFinished(WorkflowCommandFinished);
 

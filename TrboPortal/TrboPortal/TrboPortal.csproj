@@ -250,8 +250,80 @@
     <Content Include="Scripts\3rdparty\jquery\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="NS.3DViewer">
+      <HintPath>Resources\NS.3DViewer.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.AppFramework">
+      <HintPath>Resources\NS.AppFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Common.UI">
+      <HintPath>Resources\NS.Common.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Common.WPF">
+      <HintPath>Resources\NS.Common.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.CompositeConsole">
+      <HintPath>Resources\NS.CompositeConsole.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Controls">
+      <HintPath>Resources\NS.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Controls.DevExpress">
+      <HintPath>Resources\NS.Controls.DevExpress.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Description">
+      <HintPath>Resources\NS.Description.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Enterprise.ImagesDict">
+      <HintPath>Resources\NS.Enterprise.ImagesDict.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Enterprise.Reports">
+      <HintPath>Resources\NS.Enterprise.Reports.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Enterprise.UI">
+      <HintPath>Resources\NS.Enterprise.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Enterprise.WidgetFactory">
+      <HintPath>Resources\NS.Enterprise.WidgetFactory.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Grid.WPF">
+      <HintPath>Resources\NS.Grid.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.GsmModemCinterion">
+      <HintPath>Resources\NS.GsmModemCinterion.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.HardwareDevices">
+      <HintPath>Resources\NS.HardwareDevices.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.HotSos">
+      <HintPath>Resources\NS.HotSos.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Map.Common">
+      <HintPath>Resources\NS.Map.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Map.WF">
+      <HintPath>Resources\NS.Map.WF.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Map.Wpf">
+      <HintPath>Resources\NS.Map.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Recorders">
+      <HintPath>Resources\NS.Recorders.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.ScriptEngine">
+      <HintPath>Resources\NS.ScriptEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.TemplateMaker">
+      <HintPath>Resources\NS.TemplateMaker.dll</HintPath>
+    </Reference>
     <Reference Include="NS.Time">
       <HintPath>Resources\NS.Time.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Tree.Model">
+      <HintPath>Resources\NS.Tree.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="NS.Tree.WPF">
+      <HintPath>Resources\NS.Tree.WPF.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="NS.Audio.Enterprise, Version=5.4.0.2220, Culture=neutral, PublicKeyToken=5fc871ad184a138c, processorArchitecture=MSIL">

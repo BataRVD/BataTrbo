@@ -118,25 +118,6 @@ namespace TrboPortal.TrboNet
             }
         }
 
-        private void TransmitReceiveChanged(object sender, TransmitReceiveArgs e)
-        {
-            try
-            {
-                int deviceID = e.Info.TransmitDeviceID;
-                logger.Info($"TransmitReceiveChanged for deviceID {deviceID}");
-                if (GetDeviceInfoByDeviceID(deviceID, out DeviceInfo deviceInfo) && deviceInfo.Device != null)
-                {
-                    deviceInfo.LastMessageReceived = DateTime.Now;
-                    ciaBataController.PostDeviceLifeSign(deviceInfo.RadioID, deviceInfo.Device.Name, true);
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, "An error occured at the TransmitReceiveChanged event");
-            }
-
-        }
-
         private void DeviceStateChanged(object sender, DeviceStateChangedEventArgs e)
         {
             try
