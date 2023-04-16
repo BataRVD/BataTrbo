@@ -53,3 +53,8 @@ textarea {
 .GpsRowMap {
     width: 50%;
 }
+
+.fa-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

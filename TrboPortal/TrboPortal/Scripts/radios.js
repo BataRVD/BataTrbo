@@ -49,13 +49,17 @@ window.SubmitClicked = function SubmitClicked() {
 }
 
 /**
+ * BootstrapTable onClick handler for 'Refresh GPS' column
+*/
+window.refreshGPSTableOperationEvents = {
+    'click .request_gps': function (e, value, row, index) {
+        refreshGps(row['radioId']);
+    },
+}
+/**
  * BootstrapTable onClick handlers for 'Actions' column.
  */
 window.tableOperationEvents = {
-    'click .request_gps': function (e, value, row, index) {
-        //alert('Requesting GPS for: ' + row['radioId'] + JSON.stringify(row))
-        refreshGps(row['radioId']);
-    },
     'click .edit': function (e, value, row, index) {
         editRadio(row['radioId'], row['name'], row['GpsMode'], row['requestInterval']);
     },
@@ -107,6 +111,14 @@ function editRadio(radioId, name, GpsMode, requestInterval) {
     $('#requestInterval').val(requestInterval);
 }
 
+function requestGpsFormatter(value, row, index) {
+    if (row['GpsMode'] == 'none') {
+        return '<a class="request_gps_disabled" href="javascript:void(0)" title="Request GPS"><i id="radio-request-gps-' + row['radioId'] + '" class="fa fa-location-arrow fa-2x fa-disabled" style="--fa-animation-duration: 2s" title="GPS Refresh disabled for radio" ></i>     </a>';
+        }
+    return '<a class="request_gps" href="javascript:void(0)" title="Request GPS"><i id="radio-request-gps-' + row['radioId'] + '" class="fa fa-location-arrow fa-2x" style="--fa-animation-duration: 2s" ></i>     </a>';
+    
+}
+
 /**
  * Renders column "Actions" of BootstrapTable containing clickable buttons for modifcation edits on said Radio's row.
  * @param {any} value ???
@@ -115,7 +127,6 @@ function editRadio(radioId, name, GpsMode, requestInterval) {
  */
 function operateFormatter(value, row, index) {
     return [
-        '<a class="request_gps" href="javascript:void(0)" title="Request GPS"><i id="radio-request-gps-' + row['radioId'] + '" class="fa fa-location-arrow fa-2x" style="--fa-animation-duration: 2s" ></i>     </a>',
         '<a class="edit" href="javascript:void(0)" title="Edit"><i class="fa fa-pen fa-2x"></i>     </a>',
         '<a class="remove" href="#genericModal" title="Remove" data-toggle="modal" data-target="#genericModal" data-radioid="' + row['radioId'] + '"><i class="fa fa-trash fa-2x"></i>     </a>',
     ].join('')
@@ -200,7 +211,9 @@ function deleteRadio(radioId) {
  * Invokes GPS Refresh on server for said radioId
  * @param {any} radioId
  */
-function refreshGps(radioId) {
+function refreshGps
+    (radioId) {
+    console.log(`Refresh GPS ${radioId}`)
     const data = null;
     document.getElementById(`radio-request-gps-${radioId}`).classList.add('fa-spin')
     setTimeout(()=>document.getElementById(`radio-request-gps-${radioId}`).classList.remove('fa-spin'),2000)
@@ -306,10 +319,20 @@ function initTable() {
                 sortable: true,
             }, {
                 title: 'Details',
-                colspan: 6,
+                colspan: 7,
                 align: 'center'
             }],
             [{
+                title: 'Refresh GPS',
+                field: 'request_gps',
+                align: 'center',
+                valign: 'middle',
+                clickToSelect: false,
+                formatter: requestGpsFormatter,
+                events: window.refreshGPSTableOperationEvents
+
+            },
+            {
                 field: 'Status',
                 title: 'Status',
                 sortable: true,
