@@ -115,9 +115,9 @@ function editRadio(radioId, name, GpsMode, requestInterval) {
  */
 function operateFormatter(value, row, index) {
     return [
-        '<a class="request_gps" href="javascript:void(0)" title="Request GPS"><i class="fa fa-location-arrow"></i>     </a>',
-        '<a class="edit" href="javascript:void(0)" title="Edit"><i class="fa fa-pen"></i>     </a>',
-        '<a class="remove" href="#genericModal" title="Remove" data-toggle="modal" data-target="#genericModal" data-radioid="' + row['radioId'] + '"><i class="fa fa-trash"></i>     </a>',
+        '<a class="request_gps" href="javascript:void(0)" title="Request GPS"><i id="radio-request-gps-' + row['radioId'] + '" class="fa fa-location-arrow fa-2x" style="--fa-animation-duration: 2s" ></i>     </a>',
+        '<a class="edit" href="javascript:void(0)" title="Edit"><i class="fa fa-pen fa-2x"></i>     </a>',
+        '<a class="remove" href="#genericModal" title="Remove" data-toggle="modal" data-target="#genericModal" data-radioid="' + row['radioId'] + '"><i class="fa fa-trash fa-2x"></i>     </a>',
     ].join('')
 }
 
@@ -202,7 +202,8 @@ function deleteRadio(radioId) {
  */
 function refreshGps(radioId) {
     const data = null;
-
+    document.getElementById(`radio-request-gps-${radioId}`).classList.add('fa-spin')
+    setTimeout(()=>document.getElementById(`radio-request-gps-${radioId}`).classList.remove('fa-spin'),2000)
     api.performApiCall(`gps/update?radioIds=${radioId}`, 'GET', data,
         (response) => {
             console.log(`Refresh ${radioId} successfull!`)
