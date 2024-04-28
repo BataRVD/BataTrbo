@@ -78,7 +78,7 @@ namespace TrboPortal.TrboNet
                 logger.Warn("Turbonet server not configured");
             }
 
-            ciaBataController.PostDeviceLifeSign(0, Environment.MachineName, connected);
+            ciaBataController.PutDeviceLifeSign(0, Environment.MachineName, connected, DateTime.Now);
             return connected;
         }
 
@@ -91,7 +91,7 @@ namespace TrboPortal.TrboNet
                 if (GetDeviceInfoByDeviceID(deviceID, out DeviceInfo deviceInfo) && deviceInfo.Device != null)
                 {
                     deviceInfo.LastMessageReceived = DateTime.Now;
-                    ciaBataController.PostDeviceLifeSign(deviceInfo.RadioID, deviceInfo.Device.Name, true);
+                    ciaBataController.PutDeviceLifeSign(deviceInfo.RadioID, deviceInfo.Device.Name, true, deviceInfo.LastMessageReceived);
                 }
             }
             catch (Exception ex)
@@ -109,7 +109,7 @@ namespace TrboPortal.TrboNet
                 if (GetDeviceInfoByDeviceID(deviceID, out DeviceInfo deviceInfo) && deviceInfo.Device != null)
                 {
                     deviceInfo.LastMessageReceived = DateTime.Now;
-                    ciaBataController.PostDeviceLifeSign(deviceInfo.RadioID, deviceInfo.Device.Name, true);
+                    ciaBataController.PutDeviceLifeSign(deviceInfo.RadioID, deviceInfo.Device.Name, true, deviceInfo.LastMessageReceived);
                 }
             }
             catch (Exception ex)
@@ -134,7 +134,7 @@ namespace TrboPortal.TrboNet
                         Device device = deviceInfo?.Device;
                         if (device != null)
                         {
-                            ciaBataController.PostDeviceLifeSign(device.RadioID, device.Name, (radio.State & DeviceState.Active) == DeviceState.Active);
+                            ciaBataController.PutDeviceLifeSign(device.RadioID, device.Name, (radio.State & DeviceState.Active) == DeviceState.Active, deviceInfo.LastMessageReceived);
                         }
                     }
                 }
@@ -293,7 +293,7 @@ namespace TrboPortal.TrboNet
 
             registeredDevices.ForEach(d => AddOrUpdateDevice(d));
             // post all devices
-            registeredDevices.ForEach(d => ciaBataController.PostDeviceLifeSign(d.RadioID, d.Name, false));
+            registeredDevices.ForEach(d => ciaBataController.PutDeviceLifeSign(d.RadioID, d.Name, false, DateTime.Now));
             // unregisteredDevices.ForEach(d => AddOrUpdateDevice(d));
         }
 

@@ -2,9 +2,10 @@
 {
     internal class DeviceLifeSign
     {
-        public string messageType = "Lifesign";
-        public string deviceName;
-        public int RadioID;
-        public string status;
+        public string edition;
+        public string name;
+        public int externalID;
+        public bool isActive;
+        public string timestampActive;
     }
 }

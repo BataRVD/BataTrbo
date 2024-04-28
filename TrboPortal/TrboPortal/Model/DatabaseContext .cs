@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Data.Entity;
 using System.Data.SQLite;
 using System.IO;
@@ -26,9 +27,13 @@ namespace TrboPortal.Model
             var dbPath = ConfigurationManager.AppSettings["DatabasePath"];
             if (string.IsNullOrEmpty(dbPath))
             {
-                dbPath = $@"{Directory.GetCurrentDirectory()}\TrboNet.db";
+                dbPath = $@"{AppDomain.CurrentDomain.BaseDirectory}\TrboPortal.db";
             }
             Directory.CreateDirectory(Path.GetDirectoryName(dbPath));
+            if (!File.Exists(dbPath))
+            {
+                SQLiteConnection.CreateFile(dbPath);
+            }
             return dbPath;
     }
 

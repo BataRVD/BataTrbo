@@ -28,12 +28,12 @@
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerLaunchUrl>http://{ServiceIPAddress}</DockerLaunchUrl>
   </PropertyGroup>
-	<PropertyGroup>
-		<ContentSQLiteInteropFiles>true</ContentSQLiteInteropFiles>
-		<CopySQLiteInteropFiles>false</CopySQLiteInteropFiles>
-		<CleanSQLiteInteropFiles>false</CleanSQLiteInteropFiles>
-		<CollectSQLiteInteropFiles>false</CollectSQLiteInteropFiles>
-	</PropertyGroup>
+  <PropertyGroup>
+    <ContentSQLiteInteropFiles>true</ContentSQLiteInteropFiles>
+    <CopySQLiteInteropFiles>false</CopySQLiteInteropFiles>
+    <CleanSQLiteInteropFiles>false</CleanSQLiteInteropFiles>
+    <CollectSQLiteInteropFiles>false</CollectSQLiteInteropFiles>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -135,7 +135,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Mappers\CiaBataMapper.cs" />
     <Compile Include="Mappers\DatabaseMapper.cs" />
     <Compile Include="Mappers\DateTimeMapper.cs" />
     <Compile Include="Mappers\MessageQueueMapper.cs" />

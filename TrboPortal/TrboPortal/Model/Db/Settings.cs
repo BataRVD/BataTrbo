@@ -5,6 +5,8 @@ namespace TrboPortal.Model.Db
     public class Settings
     {
         [Key] public int SettingsId { get; set; }
+
+        public int BataEdition { get; set; }
         public int ServerInterval { get; set; }
 
         public string DefaultGpsMode { get; set; }
@@ -17,6 +19,8 @@ namespace TrboPortal.Model.Db
 
         public string TrboNetPassword { get; set; }
         public string CiaBataHost { get; set; }
+
+        public string CiaBataToken { get; set; }
 
         public string GoogleMapsApiKey { get; set; }
 

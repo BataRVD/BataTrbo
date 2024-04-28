@@ -4,26 +4,32 @@ using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using TrboPortal.Model.Api;
 
 namespace TrboPortal.CiaBata
 {
     public class CiaBata
     {
+        public int edition { get; set; } 
         public string url { get; set; }
+        public string token { get; set; }
         private static Logger logger = LogManager.GetCurrentClassLogger();
         private static HttpClient httpClient = new HttpClient();
 
 
-        public CiaBata(string url)
+        public CiaBata(string url, string token, int edition)
         {
             this.url = url;
+            this.token = token;
+            this.edition = edition;
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
         }
 
         /// <summary>
         /// Post the current location to ciabata
         /// </summary>
         /// <param name="gps"></param>
-        public async Task PostGpsLocation(GPSLocation gps)
+        public async Task PostGpsLocation(GpsMeasurement measurement)
         {
             if (string.IsNullOrEmpty(url))
             {
@@ -32,11 +38,20 @@ namespace TrboPortal.CiaBata
             }
             try
             {
+                var gps = new GPSLocation
+                {
+                    edition = $"api/editions/{edition}",
+                    latitude = measurement.Latitude,
+                    longitude = measurement.Longitude,
+                    externalId = measurement.RadioID,
+                    rssid = (float)(measurement.Rssi ?? 0)
+                };
+
                 string json = JsonConvert.SerializeObject(gps, Formatting.None);
                 logger.Info("PostGpsLocation " + json);
                 
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var result = await httpClient.PostAsync(url, content);
+                var content = new StringContent(json, Encoding.UTF8, "application/ld+json");
+                var result = await httpClient.PostAsync($"{url}/logistics/positions", content);
 
                 logger.Debug("PostGpsLocation result:" + result.StatusCode);
 
@@ -58,7 +73,8 @@ namespace TrboPortal.CiaBata
         /// <param name="referenceID"></param>
         /// <param name="name"></param>
         /// <param name="online"></param>
-        public async void PostDeviceLifeSign(int referenceID, string name, bool online)
+        /// <param name="lastSeen"></param>
+        public async void PutDeviceLifeSign(int referenceID, string name, bool online, DateTime lastSeen)
         {
             if (string.IsNullOrEmpty(url))
             {
@@ -67,29 +83,25 @@ namespace TrboPortal.CiaBata
             }
             try
             {
-                DeviceLifeSign gps = new DeviceLifeSign();
-                gps.deviceName = name;
-                gps.RadioID = referenceID;
-
-                if (online)
+                DeviceLifeSign gps = new DeviceLifeSign
                 {
-                    gps.status = "online";
-                }
-                else
-                {
-                    gps.status = "offline";
-                }
+                    edition = $"api/editions/{edition}",
+                    name = name,
+                    externalID = referenceID,
+                    isActive = online,
+                    timestampActive = lastSeen.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+                };
 
-                string request = JsonConvert.SerializeObject(gps, Formatting.None);
-                logger.Info("PostDeviceLifeSign " + request);
+                var request = JsonConvert.SerializeObject(gps, Formatting.None);
+                logger.Info("PutDeviceLifeSign " + request);
 
-                var content = new StringContent(request, Encoding.UTF8, "application/json");
-                var response = await httpClient.PostAsync(url, content);
+                var content = new StringContent(request, Encoding.UTF8, "application/ld+json");
+                var response = await httpClient.PutAsync($"{url}/logistics/trackers", content);
 
-                logger.Debug("PostDeviceLifeSign result :" + response.StatusCode);
+                logger.Debug("PutDeviceLifeSign result :" + response.StatusCode);
                 if (response.StatusCode != System.Net.HttpStatusCode.OK)
                 {
-                    logger.Error($"Error with PostDeviceLifeSign for device '{gps.deviceName}' ({response.StatusCode})!" +
+                    logger.Error($"Error with PutDeviceLifeSign for device '{gps.name}' ({response.StatusCode})!" +
                         $"{Environment.NewLine}Request: '{request}'. {Environment.NewLine}Response: '{response}'.");
                 }
             }

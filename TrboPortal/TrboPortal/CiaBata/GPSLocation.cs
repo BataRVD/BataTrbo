@@ -2,11 +2,10 @@
 {
     public class GPSLocation
     {
-        public string messageType = "Location";
-        public string deviceName;
-        public int RadioID;
-        public double Latitude;
-        public double Longitude;
-        public float Rssi;
+        public string edition;
+        public int externalId;
+        public double latitude;
+        public double longitude;
+        public float rssid;
     }
 }

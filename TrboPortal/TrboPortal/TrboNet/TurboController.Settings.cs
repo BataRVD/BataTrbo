@@ -12,7 +12,9 @@ namespace TrboPortal.TrboNet
     public sealed partial class TurboController
     {
         // Config section
+        private static int ciabataEdition;
         private static string ciaBataUrl;
+        private static string ciaBataToken;
         private static int serverInterval;
         private static string turboNetUrl;
         private static int turboNetPort;
@@ -25,7 +27,9 @@ namespace TrboPortal.TrboNet
         {
             var settings = new SystemSettings();
             serverInterval = Math.Max(1, settings.ServerInterval ?? 15);
+            ciabataEdition = settings.CiaBataSettings?.Edition ?? 52;
             ciaBataUrl = settings.CiaBataSettings?.Host;
+            ciaBataToken = settings.CiaBataSettings?.Token;
 
             turboNetUrl = settings.TurboNetSettings?.Host;
             turboNetPort = settings.TurboNetSettings?.Port ?? 0;
@@ -56,7 +60,9 @@ namespace TrboPortal.TrboNet
                 if (settings != null)
                 {
                     serverInterval = Math.Max(1, settings.ServerInterval);
+                    ciabataEdition = settings.BataEdition;
                     ciaBataUrl = settings.CiaBataHost;
+                    ciaBataToken = settings.CiaBataToken;
 
                     turboNetUrl = settings.TrboNetHost;
                     turboNetPort = settings.TrboNetPort;
@@ -64,7 +70,9 @@ namespace TrboPortal.TrboNet
                     turboNetPassword = settings.TrboNetPassword;
 
                     // Update Ciabata
+                    ciaBataController.edition = ciabataEdition;
                     ciaBataController.url = ciaBataUrl;
+                    ciaBataController.token = ciaBataToken;
 
                     // update heartbeat
                     heartBeat.Interval = serverInterval * 1000;

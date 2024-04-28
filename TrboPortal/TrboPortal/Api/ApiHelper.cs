@@ -96,6 +96,7 @@ namespace TrboPortal.Controllers
             {
                 var newSettings = new Settings
                 {
+                    BataEdition = body.CiaBataSettings.Edition,
                     DefaultGpsMode = body.DefaultGpsMode?.ToString(),
                     DefaultInterval = body.DefaultInterval ?? 60,
                     ServerInterval = body.ServerInterval ?? 15,
@@ -104,6 +105,7 @@ namespace TrboPortal.Controllers
                     TrboNetPassword = body.TurboNetSettings?.Password,
                     TrboNetUser = body.TurboNetSettings?.User,
                     CiaBataHost = body.CiaBataSettings?.Host,
+                    CiaBataToken = body.CiaBataSettings?.Token,
                     GoogleMapsApiKey = body.GoogleMapsApiKey?.ToString(),
                 };
 

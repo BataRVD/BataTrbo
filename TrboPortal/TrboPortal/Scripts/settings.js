@@ -107,14 +107,16 @@ function getJsonFromForm() {
             Password: $('#TurboNetSettings-Password').val(),
         },
         CiaBataSettings: {
-            Host: $('#CiaBataSettings-Host').val()
+            Host: $('#CiaBataSettings-Host').val(),
+            Token: $('#CiaBataSettings-Token').val(),
+            Edition: $('#CiaBataSettings-Edition').val()
         },
         GoogleMapsApiKey: $("#GoogleMapsApiKey").val()
     };
 }
 
 function setFormFromJson(json) {
-    if (typeof(json) == 'undefined') {
+    if (json == null || typeof(json) == 'undefined') {
         // Probably empty DB
         console.log("Json undefined, is this an empty db?");
         return;
@@ -127,6 +129,8 @@ function setFormFromJson(json) {
     $('#TurboNetSettings-User').val(json['TurboNetSettings']['User'])
     $('#TurboNetSettings-Password').val(json['TurboNetSettings']['Password'])
     $('#CiaBataSettings-Host').val(json['CiaBataSettings']['Host'])
+    $('#CiaBataSettings-Token').val(json['CiaBataSettings']['Token'])
+    $('#CiaBataSettings-Edition').val(json['CiaBataSettings']['Edition'])
     $('#GoogleMapsApiKey').val(json['GoogleMapsApiKey'])
 }
 
