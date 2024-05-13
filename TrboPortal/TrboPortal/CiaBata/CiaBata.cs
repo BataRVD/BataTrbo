@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using NLog;
+using NS.Enterprise.ClientAPI;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -45,11 +46,11 @@ namespace TrboPortal.CiaBata
             {
                 var gps = new GPSLocation
                 {
-                    edition = $"api/editions/{edition}",
+                    edition = $"/api/editions/{edition}",
                     latitude = measurement.Latitude,
                     longitude = measurement.Longitude,
                     externalId = measurement.RadioID,
-                    rssid = (float)(measurement.Rssi ?? 0)
+                    rssid = (measurement.Rssi ?? 0).ToString()
                 };
 
                 string json = JsonConvert.SerializeObject(gps, Formatting.None);
@@ -90,9 +91,9 @@ namespace TrboPortal.CiaBata
             {
                 DeviceLifeSign gps = new DeviceLifeSign
                 {
-                    edition = $"api/editions/{edition}",
+                    edition = $"/api/editions/{edition}",
                     name = name,
-                    externalID = referenceID,
+                    externalId = referenceID,
                     isActive = online,
                     timestampActive = lastSeen.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
                 };

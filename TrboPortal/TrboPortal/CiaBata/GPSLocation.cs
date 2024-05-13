@@ -6,6 +6,6 @@
         public int externalId;
         public double latitude;
         public double longitude;
-        public float rssid;
+        public string rssid;
     }
 }

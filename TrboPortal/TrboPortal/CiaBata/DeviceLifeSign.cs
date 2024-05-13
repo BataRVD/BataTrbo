@@ -3,8 +3,8 @@
     internal class DeviceLifeSign
     {
         public string edition;
+        public int externalId;
         public string name;
-        public int externalID;
         public bool isActive;
         public string timestampActive;
     }
