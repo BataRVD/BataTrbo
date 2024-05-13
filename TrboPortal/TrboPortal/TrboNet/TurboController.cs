@@ -50,7 +50,7 @@ namespace TrboPortal.TrboNet
 
             // fallback - load defaults
             LoadDefaultSettings();
-            ciaBataController = new CiaBata.CiaBata(ciaBataUrl);
+            ciaBataController = new CiaBata.CiaBata(ciaBataUrl, ciaBataToken, ciabataEdition);
             // Start HeartBeat
             heartBeat = new System.Timers.Timer();
             heartBeat.Interval = serverInterval;
@@ -97,7 +97,7 @@ namespace TrboPortal.TrboNet
                         if ((DateTime.Now - lastLifeSign).TotalMinutes > 1)
                         {
                             lastLifeSign = DateTime.Now;
-                            ciaBataController.PostDeviceLifeSign(0, Environment.MachineName, true);
+                            ciaBataController.PutDeviceLifeSign(0, Environment.MachineName, true, DateTime.Now);
                         }
                     }
                     catch (Exception ex)
@@ -156,7 +156,7 @@ namespace TrboPortal.TrboNet
                 // Increment Counter if insert succeeded.
                 LocationResponseCounter++;
                 // Send to CiaBata
-                await ciaBataController.PostGpsLocation(CiaBataMapper.ToGpsLocation(gpsMeasurement));
+                await ciaBataController.PostGpsLocation(gpsMeasurement);
             }
             catch (Exception ex)
             {

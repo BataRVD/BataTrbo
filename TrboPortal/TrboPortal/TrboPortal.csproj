@@ -135,7 +135,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Mappers\CiaBataMapper.cs" />
     <Compile Include="Mappers\DatabaseMapper.cs" />
     <Compile Include="Mappers\DateTimeMapper.cs" />
     <Compile Include="Mappers\MessageQueueMapper.cs" />

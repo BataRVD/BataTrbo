@@ -68,19 +68,20 @@
             <param name="limit">Limit to x amount of most recent GPSMeasurements</param>
             <returns></returns>
         </member>
-        <member name="M:TrboPortal.CiaBata.CiaBata.PostGpsLocation(TrboPortal.CiaBata.GPSLocation)">
+        <member name="M:TrboPortal.CiaBata.CiaBata.PostGpsLocation(TrboPortal.Model.Api.GpsMeasurement)">
             <summary>
             Post the current location to ciabata
             </summary>
             <param name="gps"></param>
         </member>
-        <member name="M:TrboPortal.CiaBata.CiaBata.PostDeviceLifeSign(System.Int32,System.String,System.Boolean)">
+        <member name="M:TrboPortal.CiaBata.CiaBata.PutDeviceLifeSign(System.Int32,System.String,System.Boolean,System.DateTime)">
             <summary>
             Post a livesign to the server, for example for a radio or the server
             </summary>
             <param name="referenceID"></param>
             <param name="name"></param>
             <param name="online"></param>
+            <param name="lastSeen"></param>
         </member>
         <member name="T:TrboPortal.Model.Api.GpsModeEnum">
             <summary>GPS polling mode</summary>
@@ -133,13 +134,6 @@
              <summary>
              Model used for database storage, when changing please look into the default migration options of entityframework
             </summary>
-        </member>
-        <member name="M:TrboPortal.Mappers.CiaBataMapper.ToGpsLocation(TrboPortal.Model.Api.GpsMeasurement)">
-            <summary>
-            Maps API GpsMeasurement to CiaBata GPSLocation
-            </summary>
-            <param name="gpsMeasurement"></param>
-            <returns></returns>
         </member>
         <member name="M:TrboPortal.TrboNet.Client.TrboClient.GetInternalQueueCount">
             <summary>

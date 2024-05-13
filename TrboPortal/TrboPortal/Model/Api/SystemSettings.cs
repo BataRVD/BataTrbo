@@ -5,6 +5,10 @@ namespace TrboPortal.Model.Api
 
     public partial class SystemSettings
     {
+        [Newtonsoft.Json.JsonProperty("BataEdition", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Range(1, 100)]
+        public int? BataEdition { get; set; }
+
         [Newtonsoft.Json.JsonProperty("ServerInterval", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Range(1, 3600000)]
         public int? ServerInterval { get; set; }

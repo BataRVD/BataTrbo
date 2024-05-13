@@ -6,6 +6,20 @@
     </div>
     <form id="SettingsForm" onsubmit="SubmitClicked();">
         <div class="form-group row">
+            <label for="CiaBataSettings-Edition" class="col-4 col-form-label">Bata Edition</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-map-signs"></i>
+                        </div>
+                    </div>
+                    <input readonly id="CiaBataSettings-Edition" name="CiaBataSettings-Edition" placeholder="52" type="text" class="form-control" required="required">
+                </div>
+                <span id="CiaBataSettings-HelpBlock" class="form-text text-muted">Bata Edition (number), used for CiaBata.</span>
+            </div>
+        </div>
+        <div class="form-group row">
             <label for="ServerInterval" class="col-4 col-form-label">Server Interval</label>
             <div class="col-8">
                 <div class="input-group">
@@ -116,9 +130,23 @@
                             <i class="fa fa-map-signs"></i>
                         </div>
                     </div>
-                    <input readonly id="CiaBataSettings-Host" name="CiaBataSettings-Host" type="text" class="form-control" required="required">
+                    <input readonly id="CiaBataSettings-Host" name="CiaBataSettings-Host" placeholder="https://test.batavierenrace.nl/api" type="text" class="form-control" required="required">
                 </div>
                 <span id="CiaBataSettings-HelpBlock" class="form-text text-muted">CiaBata EndPoint (HTTPS) to report to.</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="CiaBataSettings-Token" class="col-4 col-form-label">CiaBata Token</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-map-signs"></i>
+                        </div>
+                    </div>
+                    <input readonly id="CiaBataSettings-Token" name="CiaBataSettings-Token" placeholder="xxx" type="text" class="form-control" required="required">
+                </div>
+                <span id="CiaBataSettings-HelpBlock" class="form-text text-muted">CiaBata Token to Authorise against EndPoint.</span>
             </div>
         </div>
         <div class="form-group row">

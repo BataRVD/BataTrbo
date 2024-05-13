@@ -85,7 +85,9 @@ namespace TrboPortal.Mappers
                 GoogleMapsApiKey = settings.GoogleMapsApiKey,
                 CiaBataSettings = new CiaBataSettings
                 {
-                    Host = settings.CiaBataHost
+                    Edition = settings.BataEdition,
+                    Host = settings.CiaBataHost,
+                    Token = settings.CiaBataToken
                 },
                 TurboNetSettings = new TurboNetSettings
                 {
