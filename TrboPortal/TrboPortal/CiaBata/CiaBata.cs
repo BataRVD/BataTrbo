@@ -95,7 +95,7 @@ namespace TrboPortal.CiaBata
                     name = name,
                     externalId = referenceID,
                     isActive = online,
-                    timestampActive = lastSeen.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+                    timestampActive = lastSeen.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
                 };
 
                 var request = JsonConvert.SerializeObject(gps, Formatting.None);
