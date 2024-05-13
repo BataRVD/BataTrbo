@@ -2,6 +2,7 @@
 using NLog;
 using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using TrboPortal.Model.Api;
@@ -12,7 +13,12 @@ namespace TrboPortal.CiaBata
     {
         public int edition { get; set; } 
         public string url { get; set; }
-        public string token { get; set; }
+
+        public string token
+        {
+            set => httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", value);
+        }
+
         private static Logger logger = LogManager.GetCurrentClassLogger();
         private static HttpClient httpClient = new HttpClient();
 
@@ -22,7 +28,6 @@ namespace TrboPortal.CiaBata
             this.url = url;
             this.token = token;
             this.edition = edition;
-            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
         }
 
         /// <summary>
